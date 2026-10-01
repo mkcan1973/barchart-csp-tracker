@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSP Tracker</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          margin: 0; padding: 16px; max-width: 900px; margin-inline: auto;
+          background: #0b0e14; color: #e6e9ef; }
+  h1 { font-size: 1.4rem; margin-bottom: 0; }
+  h2 { font-size: 1.1rem; margin-top: 28px; border-top: 1px solid #2a2f3a; padding-top: 16px; }
+  .updated { color: #9aa4b2; font-size: 0.85rem; margin-top: 2px; margin-bottom: 20px; }
+  .totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 8px; }
+  .totals .box { background: #161b25; border-radius: 10px; padding: 12px 14px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  .card { background: #161b25; border-radius: 12px; padding: 14px 16px; }
+  .card-head { display: flex; align-items: baseline; gap: 8px; font-weight: 600; }
+  .card-head .sym { font-size: 1.15rem; }
+  .card-head .strike { color: #9aa4b2; }
+  .card-head .exp { margin-left: auto; color: #9aa4b2; font-weight: 400; font-size: 0.9rem; }
+  .sub { color: #9aa4b2; font-size: 0.82rem; margin-top: 4px; }
+  .sub2 { color: #9aa4b2; font-size: 0.78rem; margin-top: 2px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .box { background: #0f131b; border-radius: 8px; padding: 8px 10px; }
+  .label { font-size: 0.72rem; letter-spacing: 0.04em; color: #9aa4b2; }
+  .val { font-size: 1.15rem; font-weight: 700; }
+  .pos { color: #3ddc84; }
+  .neg { color: #ff6b6b; }
+  .empty { color: #9aa4b2; font-style: italic; }
+  .chart { width: 100%; height: auto; border-radius: 10px; margin-top: 10px; background: white; }
+  @media (prefers-color-scheme: light) {
+    body { background: #f5f6f8; color: #1a1d23; }
+    .totals .box, .card, .box { background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .label, .sub, .sub2, .updated, .card-head .exp, .card-head .strike { color: #6b7280; }
+  }
+</style>
+</head>
+<body>
+  <h1>Barchart CSP Tracker</h1>
+  <div class="updated">Last updated 2026-10-01 &middot; 68 open &middot; 0 closed</div>
+
+  <div class="totals">
+    <div class="box">
+      <div class="label">UNREALIZED (open, normalized $1000/position)</div>
+      <div class="val pos">Short $2,660.25</div>
+      <div class="val neg">Long $-51,498.25</div>
+      <div class="sub2">avg ROI: short +3.9% / long -75.7%</div>
+      <div class="sub2">avg ann. ROI: short +634.0% / long -11098.6%</div>
+    </div>
+    <div class="box">
+      <div class="label">REALIZED (0 settled, normalized $1000/position)</div>
+      <div class="val pos">Short $0.00</div>
+      <div class="val pos">Long $0.00</div>
+      <div class="sub2">avg ROI: short -- / long --</div>
+      <div class="sub2">avg ann. ROI: short -- / long --</div>
+    </div>
+  </div>
+
+  
+
+  <h2>Open positions (68)</h2>
+  <div class="cards">
+  
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">MNOV</span>
+            <span class="strike">$2.5P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 2.80 &middot; Now 1.68
+            &middot; bid 0.30/yahoo &middot; ask 0.35/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +216.4%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val neg">$-52.00</div>
+              <div class="sub2">ROI -20.8% &middot; ann -949.0%</div>
+              <div class="sub2">norm (1000 risk): $-208.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val pos">$47.00</div>
+              <div class="sub2">ROI +134.3% &middot; ann +6127.0%</div>
+              <div class="sub2">norm (1000 risk): $1,342.86</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">ALHC</span>
+            <span class="strike">$7.5P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 7.86 &middot; Now 8.16
+            &middot; bid 0.55/yahoo &middot; ask 0.75/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +125.6%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$55.00</div>
+              <div class="sub2">ROI +7.3% &middot; ann +334.4%</div>
+              <div class="sub2">norm (1000 risk): $73.33</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-75.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -4562.5%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">PENG</span>
+            <span class="strike">$50P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 53.88 &middot; Now 54.69
+            &middot; bid 3.50/yahoo &middot; ask 3.90/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +119.4%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$350.00</div>
+              <div class="sub2">ROI +7.0% &middot; ann +319.4%</div>
+              <div class="sub2">norm (1000 risk): $70.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-390.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -4562.5%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">EOSE</span>
+            <span class="strike">$3.5P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 3.58 &middot; Now 3.07
+            &middot; bid 0.53/yahoo &middot; ask 0.55/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +112.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$9.50</div>
+              <div class="sub2">ROI +2.7% &middot; ann +123.6%</div>
+              <div class="sub2">norm (1000 risk): $27.14</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-11.50</div>
+              <div class="sub2">ROI -20.9% &middot; ann -954.0%</div>
+              <div class="sub2">norm (1000 risk): $-209.09</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">ARCT</span>
+            <span class="strike">$12.5P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 13.30 &middot; Now 13.69
+            &middot; bid 0.80/yahoo &middot; ask 0.90/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +108.5%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$80.00</div>
+              <div class="sub2">ROI +6.4% &middot; ann +292.0%</div>
+              <div class="sub2">norm (1000 risk): $64.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-90.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -4562.5%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">NBIS</span>
+            <span class="strike">$220P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 226.61 &middot; Now 235.88
+            &middot; bid 14.05/yahoo &middot; ask 14.50/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +108.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$1,405.00</div>
+              <div class="sub2">ROI +6.4% &middot; ann +291.5%</div>
+              <div class="sub2">norm (1000 risk): $63.86</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-1,450.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -4562.5%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CRML</span>
+            <span class="strike">$7.5P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 7.72 &middot; Now 7.26
+            &middot; bid 1.10/yahoo &middot; ask 1.30/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +108.2%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$86.00</div>
+              <div class="sub2">ROI +11.5% &middot; ann +523.3%</div>
+              <div class="sub2">norm (1000 risk): $114.67</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-106.00</div>
+              <div class="sub2">ROI -81.5% &middot; ann -3720.3%</div>
+              <div class="sub2">norm (1000 risk): $-815.38</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">GLXY</span>
+            <span class="strike">$25P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 25.79 &middot; Now 22.74
+            &middot; bid 1.58/yahoo &middot; ask 1.88/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +107.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val neg">$-68.00</div>
+              <div class="sub2">ROI -2.7% &middot; ann -124.1%</div>
+              <div class="sub2">norm (1000 risk): $-27.20</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val pos">$38.00</div>
+              <div class="sub2">ROI +20.2% &middot; ann +922.1%</div>
+              <div class="sub2">norm (1000 risk): $202.13</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">BB</span>
+            <span class="strike">$8P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 8.38 &middot; Now 9.04
+            &middot; bid 0.48/yahoo &middot; ask 0.58/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +101.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$48.00</div>
+              <div class="sub2">ROI +6.0% &middot; ann +273.8%</div>
+              <div class="sub2">norm (1000 risk): $60.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-58.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -4562.5%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">WOLF</span>
+            <span class="strike">$25P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 27.14 &middot; Now 28.13
+            &middot; bid 1.45/yahoo &middot; ask 1.74/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +97.7%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$145.00</div>
+              <div class="sub2">ROI +5.8% &middot; ann +264.6%</div>
+              <div class="sub2">norm (1000 risk): $58.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-174.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -4562.5%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">LCID</span>
+            <span class="strike">$4P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 4.16 &middot; Now 4.07
+            &middot; bid 0.23/yahoo &middot; ask 0.29/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +96.8%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$23.00</div>
+              <div class="sub2">ROI +5.8% &middot; ann +262.3%</div>
+              <div class="sub2">norm (1000 risk): $57.50</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-29.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -4562.5%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">APLD</span>
+            <span class="strike">$25P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 27.23 &middot; Now 24.37
+            &middot; bid 1.41/yahoo &middot; ask 1.50/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +94.9%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$78.00</div>
+              <div class="sub2">ROI +3.1% &middot; ann +142.3%</div>
+              <div class="sub2">norm (1000 risk): $31.20</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-87.00</div>
+              <div class="sub2">ROI -58.0% &middot; ann -2646.2%</div>
+              <div class="sub2">norm (1000 risk): $-580.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">IREN</span>
+            <span class="strike">$45P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 47.05 &middot; Now 40.88
+            &middot; bid 2.52/yahoo &middot; ask 2.64/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +94.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val neg">$-160.00</div>
+              <div class="sub2">ROI -3.6% &middot; ann -162.4%</div>
+              <div class="sub2">norm (1000 risk): $-35.56</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val pos">$148.00</div>
+              <div class="sub2">ROI +56.1% &middot; ann +2557.7%</div>
+              <div class="sub2">norm (1000 risk): $560.61</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">AAOI</span>
+            <span class="strike">$95P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 101.06 &middot; Now 99.26
+            &middot; bid 5.30/yahoo &middot; ask 5.60/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +93.8%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$530.00</div>
+              <div class="sub2">ROI +5.6% &middot; ann +254.6%</div>
+              <div class="sub2">norm (1000 risk): $55.79</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-560.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -4562.5%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">FRVO</span>
+            <span class="strike">$15P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 16.35 &middot; Now 13.59
+            &middot; bid 0.80/yahoo &middot; ask 0.95/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +89.4%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val neg">$-61.00</div>
+              <div class="sub2">ROI -4.1% &middot; ann -185.7%</div>
+              <div class="sub2">norm (1000 risk): $-40.67</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val pos">$46.00</div>
+              <div class="sub2">ROI +48.4% &middot; ann +2209.2%</div>
+              <div class="sub2">norm (1000 risk): $484.21</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">SMCI</span>
+            <span class="strike">$40P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 41.44 &middot; Now 41.07
+            &middot; bid 2.13/yahoo &middot; ask 2.18/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +89.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$213.00</div>
+              <div class="sub2">ROI +5.3% &middot; ann +243.2%</div>
+              <div class="sub2">norm (1000 risk): $53.25</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-218.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -4562.5%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CIFR</span>
+            <span class="strike">$17P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 18.35 &middot; Now 15.82
+            &middot; bid 2.10/yahoo &middot; ask 2.16/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +88.7%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$92.50</div>
+              <div class="sub2">ROI +5.4% &middot; ann +248.2%</div>
+              <div class="sub2">norm (1000 risk): $54.41</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-98.50</div>
+              <div class="sub2">ROI -45.6% &middot; ann -2080.5%</div>
+              <div class="sub2">norm (1000 risk): $-456.02</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">PCT</span>
+            <span class="strike">$5P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 5.15 &middot; Now 4.41
+            &middot; bid 0.60/yahoo &middot; ask 0.75/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +85.8%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$1.00</div>
+              <div class="sub2">ROI +0.2% &middot; ann +9.1%</div>
+              <div class="sub2">norm (1000 risk): $2.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-16.00</div>
+              <div class="sub2">ROI -21.3% &middot; ann -973.2%</div>
+              <div class="sub2">norm (1000 risk): $-213.33</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">MARA</span>
+            <span class="strike">$12.5P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 13.35 &middot; Now 11.33
+            &middot; bid 0.64/yahoo &middot; ask 0.68/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +85.6%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val neg">$-53.00</div>
+              <div class="sub2">ROI -4.2% &middot; ann -193.4%</div>
+              <div class="sub2">norm (1000 risk): $-42.40</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val pos">$49.00</div>
+              <div class="sub2">ROI +72.1% &middot; ann +3287.7%</div>
+              <div class="sub2">norm (1000 risk): $720.59</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">SECZ</span>
+            <span class="strike">$15P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 15.56 &middot; Now 14.59
+            &middot; bid 1.75/yahoo &middot; ask 2.25/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +191.2%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$134.00</div>
+              <div class="sub2">ROI +8.9% &middot; ann +465.6%</div>
+              <div class="sub2">norm (1000 risk): $89.33</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-184.00</div>
+              <div class="sub2">ROI -81.8% &middot; ann -4264.2%</div>
+              <div class="sub2">norm (1000 risk): $-817.78</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">GLND</span>
+            <span class="strike">$3P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 4.75 &middot; Now 5.13
+            &middot; bid 0.25/yahoo &middot; ask 0.35/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +184.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$25.00</div>
+              <div class="sub2">ROI +8.3% &middot; ann +434.4%</div>
+              <div class="sub2">norm (1000 risk): $83.33</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-35.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">MSTR</span>
+            <span class="strike">$155P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 162.69 &middot; Now 153.09
+            &middot; bid 7.30/yahoo &middot; ask 7.40/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +85.5%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$539.00</div>
+              <div class="sub2">ROI +3.5% &middot; ann +181.5%</div>
+              <div class="sub2">norm (1000 risk): $34.77</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-549.00</div>
+              <div class="sub2">ROI -74.2% &middot; ann -3868.5%</div>
+              <div class="sub2">norm (1000 risk): $-741.89</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">BMNR</span>
+            <span class="strike">$26P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 27.82 &middot; Now 26.43
+            &middot; bid 1.16/yahoo &middot; ask 1.29/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +85.2%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$116.00</div>
+              <div class="sub2">ROI +4.5% &middot; ann +232.6%</div>
+              <div class="sub2">norm (1000 risk): $44.62</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-129.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">INTC</span>
+            <span class="strike">$121P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 124.05 &middot; Now 120.23
+            &middot; bid 5.75/yahoo &middot; ask 5.90/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +82.8%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$498.00</div>
+              <div class="sub2">ROI +4.1% &middot; ann +214.8%</div>
+              <div class="sub2">norm (1000 risk): $41.16</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-513.00</div>
+              <div class="sub2">ROI -87.0% &middot; ann -4533.8%</div>
+              <div class="sub2">norm (1000 risk): $-869.49</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">MRNA</span>
+            <span class="strike">$170P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 186.34 &middot; Now 192.57
+            &middot; bid 6.65/yahoo &middot; ask 6.90/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +79.2%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$665.00</div>
+              <div class="sub2">ROI +3.9% &middot; ann +203.9%</div>
+              <div class="sub2">norm (1000 risk): $39.12</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-690.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">ONDS</span>
+            <span class="strike">$7P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 7.45 &middot; Now 7.33
+            &middot; bid 0.32/yahoo &middot; ask 0.34/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +74.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$32.00</div>
+              <div class="sub2">ROI +4.6% &middot; ann +238.3%</div>
+              <div class="sub2">norm (1000 risk): $45.71</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-34.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">BE</span>
+            <span class="strike">$240P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 257.77 &middot; Now 276.98
+            &middot; bid 10.40/yahoo &middot; ask 11.65/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +69.9%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$1,040.00</div>
+              <div class="sub2">ROI +4.3% &middot; ann +225.8%</div>
+              <div class="sub2">norm (1000 risk): $43.33</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-1,165.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">MU</span>
+            <span class="strike">$990P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 1052.27 &middot; Now 1065.11
+            &middot; bid 36.75/yahoo &middot; ask 36.95/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +61.4%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$3,675.00</div>
+              <div class="sub2">ROI +3.7% &middot; ann +193.4%</div>
+              <div class="sub2">norm (1000 risk): $37.12</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-3,695.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">AXTI</span>
+            <span class="strike">$60P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 73.17 &middot; Now 77.41
+            &middot; bid 5.70/yahoo &middot; ask 6.20/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +60.8%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$570.00</div>
+              <div class="sub2">ROI +9.5% &middot; ann +495.4%</div>
+              <div class="sub2">norm (1000 risk): $95.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-620.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">PLTR</span>
+            <span class="strike">$185P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 191.01 &middot; Now 187.05
+            &middot; bid 5.85/yahoo &middot; ask 6.10/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +59.0%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$585.00</div>
+              <div class="sub2">ROI +3.2% &middot; ann +164.8%</div>
+              <div class="sub2">norm (1000 risk): $31.62</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-610.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">USAR</span>
+            <span class="strike">$14P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 15.33 &middot; Now 14.08
+            &middot; bid 1.16/yahoo &middot; ask 1.19/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +57.9%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$116.00</div>
+              <div class="sub2">ROI +8.3% &middot; ann +432.3%</div>
+              <div class="sub2">norm (1000 risk): $82.86</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-119.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">AMD</span>
+            <span class="strike">$600P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 615.73 &middot; Now 611.76
+            &middot; bid 22.65/yahoo &middot; ask 23.10/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +57.8%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$2,265.00</div>
+              <div class="sub2">ROI +3.8% &middot; ann +196.6%</div>
+              <div class="sub2">norm (1000 risk): $37.75</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-2,310.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">U</span>
+            <span class="strike">$40P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 43.31 &middot; Now 40.93
+            &middot; bid 0.96/yahoo &middot; ask 1.13/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +53.5%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$96.00</div>
+              <div class="sub2">ROI +2.4% &middot; ann +125.1%</div>
+              <div class="sub2">norm (1000 risk): $24.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-113.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -5214.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">WULF</span>
+            <span class="strike">$15P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 15.62 &middot; Now 14.80
+            &middot; bid 0.75/yahoo &middot; ask 0.78/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +99.2%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$55.00</div>
+              <div class="sub2">ROI +3.7% &middot; ann +223.3%</div>
+              <div class="sub2">norm (1000 risk): $36.67</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-58.00</div>
+              <div class="sub2">ROI -74.4% &middot; ann -4523.6%</div>
+              <div class="sub2">norm (1000 risk): $-743.59</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CLSK</span>
+            <span class="strike">$13P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 13.70 &middot; Now 12.88
+            &middot; bid 0.62/yahoo &middot; ask 0.71/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +95.9%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$50.00</div>
+              <div class="sub2">ROI +3.9% &middot; ann +234.2%</div>
+              <div class="sub2">norm (1000 risk): $38.46</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-59.00</div>
+              <div class="sub2">ROI -83.1% &middot; ann -5055.2%</div>
+              <div class="sub2">norm (1000 risk): $-830.99</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">RKLB</span>
+            <span class="strike">$71P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 73.19 &middot; Now 69.68
+            &middot; bid 3.40/yahoo &middot; ask 3.65/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +92.8%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$208.00</div>
+              <div class="sub2">ROI +2.9% &middot; ann +178.2%</div>
+              <div class="sub2">norm (1000 risk): $29.30</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-233.00</div>
+              <div class="sub2">ROI -63.8% &middot; ann -3883.6%</div>
+              <div class="sub2">norm (1000 risk): $-638.36</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">HOOD</span>
+            <span class="strike">$115P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 118.62 &middot; Now 112.50
+            &middot; bid 4.80/yahoo &middot; ask 4.95/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +76.5%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$230.00</div>
+              <div class="sub2">ROI +2.0% &middot; ann +121.7%</div>
+              <div class="sub2">norm (1000 risk): $20.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-245.00</div>
+              <div class="sub2">ROI -49.5% &middot; ann -3010.6%</div>
+              <div class="sub2">norm (1000 risk): $-494.95</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">P</span>
+            <span class="strike">$120P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 124.59 &middot; Now 130.78
+            &middot; bid 4.70/yahoo &middot; ask 5.20/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +72.4%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$470.00</div>
+              <div class="sub2">ROI +3.9% &middot; ann +238.5%</div>
+              <div class="sub2">norm (1000 risk): $39.17</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-520.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -6083.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">MRVL</span>
+            <span class="strike">$245P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 262.15 &middot; Now 264.21
+            &middot; bid 8.85/yahoo &middot; ask 9.20/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +69.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$885.00</div>
+              <div class="sub2">ROI +3.6% &middot; ann +219.6%</div>
+              <div class="sub2">norm (1000 risk): $36.12</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-920.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -6083.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CRWD</span>
+            <span class="strike">$250P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 256.89 &middot; Now 264.75
+            &middot; bid 9.95/yahoo &middot; ask 10.40/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +69.0%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$995.00</div>
+              <div class="sub2">ROI +4.0% &middot; ann +242.1%</div>
+              <div class="sub2">norm (1000 risk): $39.80</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-1,040.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -6083.3%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">QURE</span>
+            <span class="strike">$35P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 37.68 &middot; Now 24.16
+            &middot; bid 4.00/yahoo &middot; ask 4.40/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +261.6%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val neg">$-684.00</div>
+              <div class="sub2">ROI -19.5% &middot; ann -2377.4%</div>
+              <div class="sub2">norm (1000 risk): $-195.43</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val pos">$644.00</div>
+              <div class="sub2">ROI +146.4% &middot; ann +17807.1%</div>
+              <div class="sub2">norm (1000 risk): $1,463.64</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">IONQ</span>
+            <span class="strike">$45P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 46.07 &middot; Now 43.86
+            &middot; bid 2.37/yahoo &middot; ask 2.54/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +102.7%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$123.00</div>
+              <div class="sub2">ROI +2.7% &middot; ann +332.1%</div>
+              <div class="sub2">norm (1000 risk): $27.33</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-140.00</div>
+              <div class="sub2">ROI -55.1% &middot; ann -6706.3%</div>
+              <div class="sub2">norm (1000 risk): $-551.18</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">ARM</span>
+            <span class="strike">$270P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 283.32 &middot; Now 289.66
+            &middot; bid 11.10/yahoo &middot; ask 11.30/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +89.8%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$1,110.00</div>
+              <div class="sub2">ROI +4.1% &middot; ann +500.1%</div>
+              <div class="sub2">norm (1000 risk): $41.11</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-1,130.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -12166.7%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">SNDK</span>
+            <span class="strike">$1600P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 1686.85 &middot; Now 1739.89
+            &middot; bid 64.90/yahoo &middot; ask 66.30/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +85.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$6,490.00</div>
+              <div class="sub2">ROI +4.1% &middot; ann +494.0%</div>
+              <div class="sub2">norm (1000 risk): $40.56</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-6,630.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -12166.7%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CRWV</span>
+            <span class="strike">$80P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 84.14 &middot; Now 87.12
+            &middot; bid 3.15/yahoo &middot; ask 3.35/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +80.4%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$315.00</div>
+              <div class="sub2">ROI +3.9% &middot; ann +479.4%</div>
+              <div class="sub2">norm (1000 risk): $39.38</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-335.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -12166.7%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">SPCE</span>
+            <span class="strike">$3P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 3.19 &middot; Now 2.99
+            &middot; bid 0.11/yahoo &middot; ask 0.14/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +77.2%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$10.00</div>
+              <div class="sub2">ROI +3.3% &middot; ann +405.1%</div>
+              <div class="sub2">norm (1000 risk): $33.33</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-13.00</div>
+              <div class="sub2">ROI -92.9% &middot; ann -11298.0%</div>
+              <div class="sub2">norm (1000 risk): $-928.57</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">PSKY</span>
+            <span class="strike">$10P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 10.15 &middot; Now 10.33
+            &middot; bid 0.36/yahoo &middot; ask 0.44/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +75.7%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$36.00</div>
+              <div class="sub2">ROI +3.6% &middot; ann +438.0%</div>
+              <div class="sub2">norm (1000 risk): $36.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-44.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -12166.7%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">LUNR</span>
+            <span class="strike">$14P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 14.90 &middot; Now 14.24
+            &middot; bid 0.58/yahoo &middot; ask 0.69/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +96.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$58.00</div>
+              <div class="sub2">ROI +4.1% &middot; ann +755.5%</div>
+              <div class="sub2">norm (1000 risk): $41.43</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-69.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -18250.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">FCEL</span>
+            <span class="strike">$16P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 17.30 &middot; Now 16.42
+            &middot; bid 0.70/yahoo &middot; ask 0.90/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +90.9%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$70.00</div>
+              <div class="sub2">ROI +4.4% &middot; ann +799.4%</div>
+              <div class="sub2">norm (1000 risk): $43.75</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-90.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -18250.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">FLEX</span>
+            <span class="strike">$110P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 113.09 &middot; Now 109.99
+            &middot; bid 4.40/yahoo &middot; ask 4.70/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +89.5%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$439.00</div>
+              <div class="sub2">ROI +4.0% &middot; ann +728.2%</div>
+              <div class="sub2">norm (1000 risk): $39.91</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-469.00</div>
+              <div class="sub2">ROI -99.8% &middot; ann -18211.7%</div>
+              <div class="sub2">norm (1000 risk): $-997.87</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">NVTS</span>
+            <span class="strike">$11P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 11.91 &middot; Now 11.61
+            &middot; bid 0.41/yahoo &middot; ask 0.47/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +85.2%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$41.00</div>
+              <div class="sub2">ROI +3.7% &middot; ann +680.7%</div>
+              <div class="sub2">norm (1000 risk): $37.27</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-47.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -18250.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">ACHR</span>
+            <span class="strike">$5P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 5.25 &middot; Now 4.97
+            &middot; bid 0.16/yahoo &middot; ask 0.18/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +80.2%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$13.00</div>
+              <div class="sub2">ROI +2.6% &middot; ann +474.5%</div>
+              <div class="sub2">norm (1000 risk): $26.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-15.00</div>
+              <div class="sub2">ROI -83.3% &middot; ann -15207.7%</div>
+              <div class="sub2">norm (1000 risk): $-833.33</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">NKE</span>
+            <span class="strike">$35P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 36.12 &middot; Now 35.40
+            &middot; bid 1.20/yahoo &middot; ask 1.26/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +76.9%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$120.00</div>
+              <div class="sub2">ROI +3.4% &middot; ann +626.0%</div>
+              <div class="sub2">norm (1000 risk): $34.29</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-126.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -18250.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CORZ</span>
+            <span class="strike">$16P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 16.99 &middot; Now 15.98
+            &middot; bid 1.41/yahoo &middot; ask 1.46/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +74.2%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$139.00</div>
+              <div class="sub2">ROI +8.7% &middot; ann +1585.9%</div>
+              <div class="sub2">norm (1000 risk): $86.88</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-144.00</div>
+              <div class="sub2">ROI -98.6% &middot; ann -18000.0%</div>
+              <div class="sub2">norm (1000 risk): $-986.30</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">NOW</span>
+            <span class="strike">$128P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 131.88 &middot; Now 134.01
+            &middot; bid 3.75/yahoo &middot; ask 4.00/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +72.8%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$375.00</div>
+              <div class="sub2">ROI +2.9% &middot; ann +534.7%</div>
+              <div class="sub2">norm (1000 risk): $29.30</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-400.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -18250.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">QBTS</span>
+            <span class="strike">$16P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 16.67 &middot; Now 16.57
+            &middot; bid 1.52/yahoo &middot; ask 1.56/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +71.0%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$152.00</div>
+              <div class="sub2">ROI +9.5% &middot; ann +1733.8%</div>
+              <div class="sub2">norm (1000 risk): $95.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-156.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -18250.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">BW</span>
+            <span class="strike">$5P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 5.84 &middot; Now 5.84
+            &middot; bid 0.45/yahoo &middot; ask 0.55/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +69.4%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$45.00</div>
+              <div class="sub2">ROI +9.0% &middot; ann +1642.5%</div>
+              <div class="sub2">norm (1000 risk): $90.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-55.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -18250.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">LPTH</span>
+            <span class="strike">$10P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 10.40 &middot; Now 10.31
+            &middot; bid 0.50/yahoo &middot; ask 0.60/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +120.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$50.00</div>
+              <div class="sub2">ROI +5.0% &middot; ann +1825.0%</div>
+              <div class="sub2">norm (1000 risk): $50.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-60.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -36500.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">AMC</span>
+            <span class="strike">$3P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 3.13 &middot; Now 3.00
+            &middot; bid 0.15/yahoo &middot; ask 0.17/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +120.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$15.00</div>
+              <div class="sub2">ROI +5.0% &middot; ann +1825.0%</div>
+              <div class="sub2">norm (1000 risk): $50.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-17.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -36500.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">ASTS</span>
+            <span class="strike">$60P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 62.15 &middot; Now 58.86
+            &middot; bid 2.74/yahoo &middot; ask 2.88/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +113.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$160.00</div>
+              <div class="sub2">ROI +2.7% &middot; ann +974.5%</div>
+              <div class="sub2">norm (1000 risk): $26.67</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-174.00</div>
+              <div class="sub2">ROI -60.4% &middot; ann -22053.3%</div>
+              <div class="sub2">norm (1000 risk): $-604.17</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CYPH</span>
+            <span class="strike">$2.5P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 3.40 &middot; Now 3.33
+            &middot; bid 0.30/yahoo &middot; ask 0.35/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +97.6%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$30.00</div>
+              <div class="sub2">ROI +12.0% &middot; ann +4380.0%</div>
+              <div class="sub2">norm (1000 risk): $120.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-35.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -36500.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CSIQ</span>
+            <span class="strike">$11P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 11.48 &middot; Now 11.52
+            &middot; bid 0.45/yahoo &middot; ask 0.55/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +97.3%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$45.00</div>
+              <div class="sub2">ROI +4.1% &middot; ann +1492.8%</div>
+              <div class="sub2">norm (1000 risk): $40.91</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-55.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -36500.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">FWDI</span>
+            <span class="strike">$7.5P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 7.99 &middot; Now 7.80
+            &middot; bid 0.30/yahoo &middot; ask 0.55/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +95.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$30.00</div>
+              <div class="sub2">ROI +4.0% &middot; ann +1460.0%</div>
+              <div class="sub2">norm (1000 risk): $40.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-55.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -36500.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CNXC</span>
+            <span class="strike">$25P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 26.59 &middot; Now 24.95
+            &middot; bid 0.95/yahoo &middot; ask 1.25/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +95.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$90.00</div>
+              <div class="sub2">ROI +3.6% &middot; ann +1314.0%</div>
+              <div class="sub2">norm (1000 risk): $36.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-120.00</div>
+              <div class="sub2">ROI -96.0% &middot; ann -35040.0%</div>
+              <div class="sub2">norm (1000 risk): $-960.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">CMPX</span>
+            <span class="strike">$1P</span>
+            <span class="exp">2026-11-20</span>
+          </div>
+          <div class="sub">50d left &middot; Entry 1.04 &middot; Now 1.04
+            &middot; bid 0.20/yahoo &middot; ask 0.25/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +178.9%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$20.00</div>
+              <div class="sub2">ROI +20.0% &middot; ann +7300.0%</div>
+              <div class="sub2">norm (1000 risk): $200.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-25.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -36500.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">SGML</span>
+            <span class="strike">$9P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 9.40 &middot; Now 9.40
+            &middot; bid 0.45/yahoo &middot; ask 0.60/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +120.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$45.00</div>
+              <div class="sub2">ROI +5.0% &middot; ann +1825.0%</div>
+              <div class="sub2">norm (1000 risk): $50.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-60.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -36500.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">IBRX</span>
+            <span class="strike">$9P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 9.44 &middot; Now 9.44
+            &middot; bid 0.45/yahoo &middot; ask 0.60/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +120.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$45.00</div>
+              <div class="sub2">ROI +5.0% &middot; ann +1825.0%</div>
+              <div class="sub2">norm (1000 risk): $50.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-60.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -36500.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="sym">LQDA</span>
+            <span class="strike">$25P</span>
+            <span class="exp">2026-10-16</span>
+          </div>
+          <div class="sub">15d left &middot; Entry 30.26 &middot; Now 30.26
+            &middot; bid 1.25/yahoo &middot; ask 1.70/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +120.1%</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val pos">$125.00</div>
+              <div class="sub2">ROI +5.0% &middot; ann +1825.0%</div>
+              <div class="sub2">norm (1000 risk): $50.00</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val neg">$-170.00</div>
+              <div class="sub2">ROI -100.0% &middot; ann -36500.0%</div>
+              <div class="sub2">norm (1000 risk): $-1,000.00</div>
+            </div>
+          </div>
+        </div>
+  </div>
+
+  <h2>Closed positions (0)</h2>
+  <div class="cards">
+  <p class="empty">No closed positions yet.</p>
+  </div>
+</body>
+</html>
