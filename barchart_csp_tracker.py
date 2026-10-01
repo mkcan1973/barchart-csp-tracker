@@ -26,11 +26,18 @@ Each run:
      ask = bid * 1.2 (also flagged).
   4. Adds them to a small local JSON position store, then rebuilds a summary
      CSV covering EVERY open (unexpired) tracked position - not just the new
-     ones - with entry vs. current stock price and unrealized P&L for both
-     the CSP-seller and long-put-buyer side, computed off intrinsic value at
-     the CURRENT stock price (a mark-to-market approximation, not a real
-     option repricing - there's no live premium source here to do better
-     without IBKR, which this script deliberately avoids).
+     ones - with entry vs. current stock price, and TWO unrealized P&L
+     readings for both the CSP-seller and long-put-buyer side:
+       - "fictional": off intrinsic value at the CURRENT stock price only -
+         i.e. what settlement P&L would be if the option expired right now.
+         Ignores time value entirely, so it's not a real closing price.
+       - "actual": what you'd really get closing the position today, crossing
+         the spread against yourself the way a real exit would - selling a
+         long put at the current BID, buying back a short put at the current
+         ASK. Requires a fresh live option-chain requote per position (not
+         just the stock price), rate-limited to avoid hammering yfinance.
+     Realized (settled) P&L doesn't need this distinction - by expiration,
+     time value has decayed to zero, so there's only one real number.
 
 Usage:
   python barchart_csp_tracker.py
@@ -64,6 +71,29 @@ YAHOO_APPROX_ASK_MULTIPLIER = 1.2
 # comparable. Risk basis: CSP seller = cash-secured collateral (strike x
 # 100); long put buyer = premium paid, their actual max loss (ask x 100).
 NORMALIZED_RISK_USD = 1000.0
+
+# "Actual" unrealized P&L requotes the live option chain for every open
+# position, every run - with the tracked list only growing (no cap), that's
+# real traffic against yfinance's free, rate-limit-sensitive feed. A fixed
+# minimum gap between requests keeps runs well-behaved instead of firing
+# everything back to back.
+YF_MIN_REQUEST_INTERVAL_SECONDS = 0.3
+
+
+class _RateLimiter:
+    def __init__(self, min_interval_seconds):
+        self.min_interval = min_interval_seconds
+        self.last_call = 0.0
+
+    def wait(self):
+        now = time.time()
+        remaining = self.min_interval - (now - self.last_call)
+        if remaining > 0:
+            time.sleep(remaining)
+        self.last_call = time.time()
+
+
+_yf_rate_limiter = _RateLimiter(YF_MIN_REQUEST_INTERVAL_SECONDS)
 
 
 def _install(pkg):
@@ -186,6 +216,7 @@ def get_yahoo_quote(symbol, expiration, strike):
     """(bid, ask) for the exact put contract, or (None, None) if yfinance has
     no usable quote for it (expiration not listed, strike not found, or
     bid/ask are NaN - all common on thinner names)."""
+    _yf_rate_limiter.wait()
     try:
         t = yf.Ticker(symbol)
         if expiration not in t.options:
@@ -205,6 +236,7 @@ def get_yahoo_quote(symbol, expiration, strike):
 
 
 def get_current_stock_price(symbol):
+    _yf_rate_limiter.wait()
     try:
         return float(yf.Ticker(symbol).fast_info["last_price"])
     except Exception:
@@ -214,6 +246,7 @@ def get_current_stock_price(symbol):
 def get_price_at(symbol, target_date_str):
     """First available close on/after target_date - used to settle a
     position once its expiration has passed."""
+    _yf_rate_limiter.wait()
     try:
         td = datetime.strptime(target_date_str, "%Y-%m-%d").date()
         end = td + timedelta(days=5)
@@ -268,19 +301,36 @@ def calc_pnl_at_price(strike, bid, ask, price):
     return round(seller_pnl, 2), round(buyer_pnl, 2)
 
 
+def calc_actual_close_pnl(entry_bid, entry_ask, current_bid, current_ask):
+    """What you'd really get closing the position today, crossing the spread
+    against yourself the way a real exit would - this is the "actual" side,
+    as opposed to calc_pnl_at_price's intrinsic-only "fictional" side.
+
+    Seller (short put): closing means BUYING it back - you pay the ask.
+    Buyer (long put): closing means SELLING it - you receive the bid.
+    Either side returns None if no live quote exists for that leg (illiquid
+    contract) - callers should show that as unavailable, not fall back
+    silently, since mixing an approximation into the "actual" column would
+    defeat the point of distinguishing it from "fictional"."""
+    seller_pnl = round((entry_bid - current_ask) * 100, 2) if current_ask is not None else None
+    buyer_pnl = round((current_bid - entry_ask) * 100, 2) if current_bid is not None else None
+    return seller_pnl, buyer_pnl
+
+
 def normalize_pnl(seller_pnl, buyer_pnl, strike, ask):
     """Scale a position's actual-dollar PnL to what it would've been sized at
     NORMALIZED_RISK_USD capital at risk, so positions on different-priced
-    stocks (and therefore wildly different position sizes) are comparable."""
+    stocks (and therefore wildly different position sizes) are comparable.
+    Either side may be None (e.g. no live quote for an "actual" leg)."""
     seller_risk = strike * 100
     buyer_risk = ask * 100
-    norm_seller = round(seller_pnl * (NORMALIZED_RISK_USD / seller_risk), 2) if seller_risk > 0 else None
-    norm_buyer = round(buyer_pnl * (NORMALIZED_RISK_USD / buyer_risk), 2) if buyer_risk > 0 else None
+    norm_seller = round(seller_pnl * (NORMALIZED_RISK_USD / seller_risk), 2) if seller_pnl is not None and seller_risk > 0 else None
+    norm_buyer = round(buyer_pnl * (NORMALIZED_RISK_USD / buyer_risk), 2) if buyer_pnl is not None and buyer_risk > 0 else None
     return norm_seller, norm_buyer
 
 
 def calc_roi_pct(pnl, risk):
-    return round(pnl / risk * 100, 2) if risk > 0 else None
+    return round(pnl / risk * 100, 2) if pnl is not None and risk > 0 else None
 
 
 def annualize_roi_pct(roi_pct, days_held):
@@ -431,14 +481,55 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     chart if one exists. No build step, no external assets - just open it in
     a browser (or serve it as-is via GitHub Pages)."""
 
+    def pnl_row(label, seller_pnl, buyer_pnl, seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi, norm_seller, norm_buyer):
+        return f"""
+          <div class="rowlabel">{label}</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP)</div>
+              <div class="val {_pnl_class(seller_pnl)}">{_fmt_money(seller_pnl)}</div>
+              <div class="sub2">ROI {_fmt_pct(seller_roi)} &middot; ann {_fmt_pct(ann_seller_roi)}</div>
+              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_seller)}</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put)</div>
+              <div class="val {_pnl_class(buyer_pnl)}">{_fmt_money(buyer_pnl)}</div>
+              <div class="sub2">ROI {_fmt_pct(buyer_roi)} &middot; ann {_fmt_pct(ann_buyer_roi)}</div>
+              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_buyer)}</div>
+            </div>
+          </div>"""
+
     def position_card(r, closed):
-        norm_seller_key = f"NORM P/L IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
-        norm_buyer_key = f"NORM P/L IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
-        seller_pnl = r["REALIZED P/L IF SOLD (CSP)"] if closed else r["UNREALIZED P/L IF SOLD (CSP)"]
-        buyer_pnl = r["REALIZED P/L IF BOUGHT (long put)"] if closed else r["UNREALIZED P/L IF BOUGHT (long put)"]
+        fict_norm_seller_key = f"NORM P/L (FICTIONAL) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
+        fict_norm_buyer_key = f"NORM P/L (FICTIONAL) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
+        actual_norm_seller_key = f"NORM P/L (ACTUAL) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
+        actual_norm_buyer_key = f"NORM P/L (ACTUAL) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
+        realized_norm_seller_key = f"NORM P/L IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
+        realized_norm_buyer_key = f"NORM P/L IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
+
         price_line = (f"Final {r['FINAL STOCK PRICE']:.2f}" if closed
                       else f"Now {r['CURRENT STOCK PRICE']:.2f}" if r["CURRENT STOCK PRICE"] is not None else "Now --")
         days_line = f"Settled {r['SETTLED AT']}" if closed else f"{r['DAYS LEFT']}d left"
+
+        if closed:
+            rows_html = pnl_row("REALIZED", r["REALIZED P/L IF SOLD (CSP)"], r["REALIZED P/L IF BOUGHT (long put)"],
+                                 r["ROI % IF SOLD (CSP)"], r["ROI % IF BOUGHT (long put)"],
+                                 r["ANNUALIZED ROI % IF SOLD (CSP)"], r["ANNUALIZED ROI % IF BOUGHT (long put)"],
+                                 r[realized_norm_seller_key], r[realized_norm_buyer_key])
+        else:
+            rows_html = (
+                pnl_row("FICTIONAL (intrinsic value only - if expiring today)",
+                        r["UNREALIZED P/L (FICTIONAL) IF SOLD (CSP)"], r["UNREALIZED P/L (FICTIONAL) IF BOUGHT (long put)"],
+                        r["ROI % (FICTIONAL) IF SOLD (CSP)"], r["ROI % (FICTIONAL) IF BOUGHT (long put)"],
+                        r["ANNUALIZED ROI % (FICTIONAL) IF SOLD (CSP)"], r["ANNUALIZED ROI % (FICTIONAL) IF BOUGHT (long put)"],
+                        r[fict_norm_seller_key], r[fict_norm_buyer_key])
+                + pnl_row("ACTUAL (real quote, crossing the spread to close now)",
+                          r["UNREALIZED P/L (ACTUAL) IF SOLD (CSP)"], r["UNREALIZED P/L (ACTUAL) IF BOUGHT (long put)"],
+                          r["ROI % (ACTUAL) IF SOLD (CSP)"], r["ROI % (ACTUAL) IF BOUGHT (long put)"],
+                          r["ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)"], r["ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)"],
+                          r[actual_norm_seller_key], r[actual_norm_buyer_key])
+            )
+
         return f"""
         <div class="card">
           <div class="card-head">
@@ -449,20 +540,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
           <div class="sub">{days_line} &middot; Entry {r['ENTRY STOCK PRICE']:.2f} &middot; {price_line}
             &middot; bid {r['BID']:.2f}/{r['BID SOURCE']} &middot; ask {r['ASK']:.2f}/{r['ASK SOURCE']}</div>
           <div class="sub">Barchart ann. return at selection: {_fmt_pct(r.get('BARCHART ANNUALIZED RETURN % (at selection)'))}</div>
-          <div class="grid2">
-            <div class="box">
-              <div class="label">SHORT (sold CSP)</div>
-              <div class="val {_pnl_class(seller_pnl)}">{_fmt_money(seller_pnl)}</div>
-              <div class="sub2">ROI {_fmt_pct(r['ROI % IF SOLD (CSP)'])} &middot; ann {_fmt_pct(r['ANNUALIZED ROI % IF SOLD (CSP)'])}</div>
-              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(r[norm_seller_key])}</div>
-            </div>
-            <div class="box">
-              <div class="label">LONG (bought put)</div>
-              <div class="val {_pnl_class(buyer_pnl)}">{_fmt_money(buyer_pnl)}</div>
-              <div class="sub2">ROI {_fmt_pct(r['ROI % IF BOUGHT (long put)'])} &middot; ann {_fmt_pct(r['ANNUALIZED ROI % IF BOUGHT (long put)'])}</div>
-              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(r[norm_buyer_key])}</div>
-            </div>
-          </div>
+          {rows_html}
         </div>"""
 
     open_cards = "\n".join(position_card(r, closed=False) for r in open_rows) or '<p class="empty">No open positions.</p>'
@@ -496,6 +574,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
   .card-head .exp {{ margin-left: auto; color: #9aa4b2; font-weight: 400; font-size: 0.9rem; }}
   .sub {{ color: #9aa4b2; font-size: 0.82rem; margin-top: 4px; }}
   .sub2 {{ color: #9aa4b2; font-size: 0.78rem; margin-top: 2px; }}
+  .rowlabel {{ font-size: 0.72rem; letter-spacing: 0.03em; color: #9aa4b2; margin-top: 10px; }}
   .grid2 {{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }}
   .box {{ background: #0f131b; border-radius: 8px; padding: 8px 10px; }}
   .label {{ font-size: 0.72rem; letter-spacing: 0.04em; color: #9aa4b2; }}
@@ -507,7 +586,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
   @media (prefers-color-scheme: light) {{
     body {{ background: #f5f6f8; color: #1a1d23; }}
     .totals .box, .card, .box {{ background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }}
-    .label, .sub, .sub2, .updated, .card-head .exp, .card-head .strike {{ color: #6b7280; }}
+    .label, .sub, .sub2, .rowlabel, .updated, .card-head .exp, .card-head .strike {{ color: #6b7280; }}
   }}
 </style>
 </head>
@@ -517,11 +596,18 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
   <div class="totals">
     <div class="box">
-      <div class="label">UNREALIZED (open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
-      <div class="val {_pnl_class(totals['unrealized_seller_total'])}">Short {_fmt_money(totals['unrealized_seller_total'])}</div>
-      <div class="val {_pnl_class(totals['unrealized_buyer_total'])}">Long {_fmt_money(totals['unrealized_buyer_total'])}</div>
-      <div class="sub2">avg ROI: short {_fmt_pct(totals['avg_unrealized_seller_roi'])} / long {_fmt_pct(totals['avg_unrealized_buyer_roi'])}</div>
-      <div class="sub2">avg ann. ROI: short {_fmt_pct(totals['avg_unrealized_seller_ann_roi'])} / long {_fmt_pct(totals['avg_unrealized_buyer_ann_roi'])}</div>
+      <div class="label">UNREALIZED - FICTIONAL (open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
+      <div class="val {_pnl_class(totals['unrealized_fict_seller_total'])}">Short {_fmt_money(totals['unrealized_fict_seller_total'])}</div>
+      <div class="val {_pnl_class(totals['unrealized_fict_buyer_total'])}">Long {_fmt_money(totals['unrealized_fict_buyer_total'])}</div>
+      <div class="sub2">avg ROI: short {_fmt_pct(totals['avg_unrealized_fict_seller_roi'])} / long {_fmt_pct(totals['avg_unrealized_fict_buyer_roi'])}</div>
+      <div class="sub2">avg ann. ROI: short {_fmt_pct(totals['avg_unrealized_fict_seller_ann_roi'])} / long {_fmt_pct(totals['avg_unrealized_fict_buyer_ann_roi'])}</div>
+    </div>
+    <div class="box">
+      <div class="label">UNREALIZED - ACTUAL (open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
+      <div class="val {_pnl_class(totals['unrealized_actual_seller_total'])}">Short {_fmt_money(totals['unrealized_actual_seller_total'])}</div>
+      <div class="val {_pnl_class(totals['unrealized_actual_buyer_total'])}">Long {_fmt_money(totals['unrealized_actual_buyer_total'])}</div>
+      <div class="sub2">avg ROI: short {_fmt_pct(totals['avg_unrealized_actual_seller_roi'])} / long {_fmt_pct(totals['avg_unrealized_actual_buyer_roi'])}</div>
+      <div class="sub2">avg ann. ROI: short {_fmt_pct(totals['avg_unrealized_actual_seller_ann_roi'])} / long {_fmt_pct(totals['avg_unrealized_actual_buyer_ann_roi'])}</div>
     </div>
     <div class="box">
       <div class="label">REALIZED ({totals['settled_count']} settled, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
@@ -552,24 +638,42 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
 def build_summary(positions, today):
     open_rows = []
-    open_roi = []  # (seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi) per open position
+    open_roi_fict = []    # (seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi) per open position
+    open_roi_actual = []  # same, for the "actual" (live requote) side
     for p in positions:
         exp_date = datetime.strptime(p["expiration"], "%Y-%m-%d").date()
         if exp_date < today:
             continue  # expired - handled by settle_expired_positions() instead
+        days_held = (today - datetime.strptime(p["added_date"], "%Y-%m-%d").date()).days
         current_px = get_current_stock_price(p["symbol"])
-        seller_pnl, buyer_pnl = (None, None)
-        norm_seller, norm_buyer = (None, None)
-        seller_roi = buyer_roi = ann_seller_roi = ann_buyer_roi = None
+
+        # "Fictional": intrinsic value at today's stock price only - ignores
+        # time value, so it's what settlement would be if expiring right now.
+        fict_seller_pnl = fict_buyer_pnl = None
+        fict_norm_seller = fict_norm_buyer = None
+        fict_seller_roi = fict_buyer_roi = fict_ann_seller_roi = fict_ann_buyer_roi = None
         if current_px is not None:
-            seller_pnl, buyer_pnl = calc_pnl_at_price(p["strike"], p["bid"], p["ask"], current_px)
-            norm_seller, norm_buyer = normalize_pnl(seller_pnl, buyer_pnl, p["strike"], p["ask"])
-            seller_roi = calc_roi_pct(seller_pnl, p["strike"] * 100)
-            buyer_roi = calc_roi_pct(buyer_pnl, p["ask"] * 100)
-            days_held = (today - datetime.strptime(p["added_date"], "%Y-%m-%d").date()).days
-            ann_seller_roi = annualize_roi_pct(seller_roi, days_held)
-            ann_buyer_roi = annualize_roi_pct(buyer_roi, days_held)
-        open_roi.append((seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi))
+            fict_seller_pnl, fict_buyer_pnl = calc_pnl_at_price(p["strike"], p["bid"], p["ask"], current_px)
+            fict_norm_seller, fict_norm_buyer = normalize_pnl(fict_seller_pnl, fict_buyer_pnl, p["strike"], p["ask"])
+            fict_seller_roi = calc_roi_pct(fict_seller_pnl, p["strike"] * 100)
+            fict_buyer_roi = calc_roi_pct(fict_buyer_pnl, p["ask"] * 100)
+            fict_ann_seller_roi = annualize_roi_pct(fict_seller_roi, days_held)
+            fict_ann_buyer_roi = annualize_roi_pct(fict_buyer_roi, days_held)
+        open_roi_fict.append((fict_seller_roi, fict_buyer_roi, fict_ann_seller_roi, fict_ann_buyer_roi))
+
+        # "Actual": what closing the position today would really cost/pay,
+        # crossing the spread - a fresh live option-chain requote, not just
+        # the stock price. None on either leg if no live quote exists (an
+        # illiquid contract) - no silent fallback, so as not to blur the two.
+        current_bid, current_ask = get_yahoo_quote(p["symbol"], p["expiration"], p["strike"])
+        actual_seller_pnl, actual_buyer_pnl = calc_actual_close_pnl(p["bid"], p["ask"], current_bid, current_ask)
+        actual_norm_seller, actual_norm_buyer = normalize_pnl(actual_seller_pnl, actual_buyer_pnl, p["strike"], p["ask"])
+        actual_seller_roi = calc_roi_pct(actual_seller_pnl, p["strike"] * 100)
+        actual_buyer_roi = calc_roi_pct(actual_buyer_pnl, p["ask"] * 100)
+        actual_ann_seller_roi = annualize_roi_pct(actual_seller_roi, days_held)
+        actual_ann_buyer_roi = annualize_roi_pct(actual_buyer_roi, days_held)
+        open_roi_actual.append((actual_seller_roi, actual_buyer_roi, actual_ann_seller_roi, actual_ann_buyer_roi))
+
         open_rows.append({
             "SYMBOL": p["symbol"],
             "STRIKE": p["strike"],
@@ -584,14 +688,24 @@ def build_summary(positions, today):
             "BID SOURCE": "approx (barchart)" if p["bid_is_approx"] else "yahoo",
             "ASK": p["ask"],
             "ASK SOURCE": "approx (bid x 1.2)" if p["ask_is_approx"] else "yahoo",
-            "UNREALIZED P/L IF SOLD (CSP)": seller_pnl,
-            "UNREALIZED P/L IF BOUGHT (long put)": buyer_pnl,
-            f"NORM P/L IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)": norm_seller,
-            f"NORM P/L IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)": norm_buyer,
-            "ROI % IF SOLD (CSP)": seller_roi,
-            "ROI % IF BOUGHT (long put)": buyer_roi,
-            "ANNUALIZED ROI % IF SOLD (CSP)": ann_seller_roi,
-            "ANNUALIZED ROI % IF BOUGHT (long put)": ann_buyer_roi,
+            "CURRENT OPTION BID": current_bid,
+            "CURRENT OPTION ASK": current_ask,
+            "UNREALIZED P/L (FICTIONAL) IF SOLD (CSP)": fict_seller_pnl,
+            "UNREALIZED P/L (FICTIONAL) IF BOUGHT (long put)": fict_buyer_pnl,
+            f"NORM P/L (FICTIONAL) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)": fict_norm_seller,
+            f"NORM P/L (FICTIONAL) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)": fict_norm_buyer,
+            "ROI % (FICTIONAL) IF SOLD (CSP)": fict_seller_roi,
+            "ROI % (FICTIONAL) IF BOUGHT (long put)": fict_buyer_roi,
+            "ANNUALIZED ROI % (FICTIONAL) IF SOLD (CSP)": fict_ann_seller_roi,
+            "ANNUALIZED ROI % (FICTIONAL) IF BOUGHT (long put)": fict_ann_buyer_roi,
+            "UNREALIZED P/L (ACTUAL) IF SOLD (CSP)": actual_seller_pnl,
+            "UNREALIZED P/L (ACTUAL) IF BOUGHT (long put)": actual_buyer_pnl,
+            f"NORM P/L (ACTUAL) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)": actual_norm_seller,
+            f"NORM P/L (ACTUAL) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)": actual_norm_buyer,
+            "ROI % (ACTUAL) IF SOLD (CSP)": actual_seller_roi,
+            "ROI % (ACTUAL) IF BOUGHT (long put)": actual_buyer_roi,
+            "ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)": actual_ann_seller_roi,
+            "ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)": actual_ann_buyer_roi,
             "ADDED": p["added_date"],
         })
 
@@ -650,18 +764,28 @@ def build_summary(positions, today):
         vals = [v for v in vals if v is not None]
         return round(sum(vals) / len(vals), 2) if vals else None
 
-    norm_seller_col = f"NORM P/L IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
-    norm_buyer_col = f"NORM P/L IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
+    fict_norm_seller_col = f"NORM P/L (FICTIONAL) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
+    fict_norm_buyer_col = f"NORM P/L (FICTIONAL) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
+    actual_norm_seller_col = f"NORM P/L (ACTUAL) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
+    actual_norm_buyer_col = f"NORM P/L (ACTUAL) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
+    realized_norm_seller_col = f"NORM P/L IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
+    realized_norm_buyer_col = f"NORM P/L IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
 
-    unrealized_seller_total = round(sum(r[norm_seller_col] or 0 for r in open_rows), 2)
-    unrealized_buyer_total = round(sum(r[norm_buyer_col] or 0 for r in open_rows), 2)
+    unrealized_fict_seller_total = round(sum(r[fict_norm_seller_col] or 0 for r in open_rows), 2)
+    unrealized_fict_buyer_total = round(sum(r[fict_norm_buyer_col] or 0 for r in open_rows), 2)
+    unrealized_actual_seller_total = round(sum(r[actual_norm_seller_col] or 0 for r in open_rows), 2)
+    unrealized_actual_buyer_total = round(sum(r[actual_norm_buyer_col] or 0 for r in open_rows), 2)
     realized_seller_total = cum_seller  # last row's cumulative == grand total
     realized_buyer_total = cum_buyer
 
-    avg_unrealized_seller_roi = avg(r[0] for r in open_roi)
-    avg_unrealized_buyer_roi = avg(r[1] for r in open_roi)
-    avg_unrealized_seller_ann_roi = avg(r[2] for r in open_roi)
-    avg_unrealized_buyer_ann_roi = avg(r[3] for r in open_roi)
+    avg_unrealized_fict_seller_roi = avg(r[0] for r in open_roi_fict)
+    avg_unrealized_fict_buyer_roi = avg(r[1] for r in open_roi_fict)
+    avg_unrealized_fict_seller_ann_roi = avg(r[2] for r in open_roi_fict)
+    avg_unrealized_fict_buyer_ann_roi = avg(r[3] for r in open_roi_fict)
+    avg_unrealized_actual_seller_roi = avg(r[0] for r in open_roi_actual)
+    avg_unrealized_actual_buyer_roi = avg(r[1] for r in open_roi_actual)
+    avg_unrealized_actual_seller_ann_roi = avg(r[2] for r in open_roi_actual)
+    avg_unrealized_actual_buyer_ann_roi = avg(r[3] for r in open_roi_actual)
     avg_realized_seller_roi = avg(r["ROI % IF SOLD (CSP)"] for r in closed_rows)
     avg_realized_buyer_roi = avg(r["ROI % IF BOUGHT (long put)"] for r in closed_rows)
     avg_realized_seller_ann_roi = avg(r["ANNUALIZED ROI % IF SOLD (CSP)"] for r in closed_rows)
@@ -682,20 +806,31 @@ def build_summary(positions, today):
         sections.append(blank)
 
         sections.append(pd.DataFrame([{
-            "SYMBOL": f"OPEN P/L - UNREALIZED (normalized to ${NORMALIZED_RISK_USD:.0f} risk each)",
-            norm_seller_col: unrealized_seller_total,
-            norm_buyer_col: unrealized_buyer_total,
-            "ROI % IF SOLD (CSP)": avg_unrealized_seller_roi,
-            "ROI % IF BOUGHT (long put)": avg_unrealized_buyer_roi,
-            "ANNUALIZED ROI % IF SOLD (CSP)": avg_unrealized_seller_ann_roi,
-            "ANNUALIZED ROI % IF BOUGHT (long put)": avg_unrealized_buyer_ann_roi,
+            "SYMBOL": f"OPEN P/L - UNREALIZED, FICTIONAL (normalized to ${NORMALIZED_RISK_USD:.0f} risk each)",
+            fict_norm_seller_col: unrealized_fict_seller_total,
+            fict_norm_buyer_col: unrealized_fict_buyer_total,
+            "ROI % (FICTIONAL) IF SOLD (CSP)": avg_unrealized_fict_seller_roi,
+            "ROI % (FICTIONAL) IF BOUGHT (long put)": avg_unrealized_fict_buyer_roi,
+            "ANNUALIZED ROI % (FICTIONAL) IF SOLD (CSP)": avg_unrealized_fict_seller_ann_roi,
+            "ANNUALIZED ROI % (FICTIONAL) IF BOUGHT (long put)": avg_unrealized_fict_buyer_ann_roi,
+        }]))
+        sections.append(blank)
+
+        sections.append(pd.DataFrame([{
+            "SYMBOL": f"OPEN P/L - UNREALIZED, ACTUAL (normalized to ${NORMALIZED_RISK_USD:.0f} risk each)",
+            actual_norm_seller_col: unrealized_actual_seller_total,
+            actual_norm_buyer_col: unrealized_actual_buyer_total,
+            "ROI % (ACTUAL) IF SOLD (CSP)": avg_unrealized_actual_seller_roi,
+            "ROI % (ACTUAL) IF BOUGHT (long put)": avg_unrealized_actual_buyer_roi,
+            "ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)": avg_unrealized_actual_seller_ann_roi,
+            "ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)": avg_unrealized_actual_buyer_ann_roi,
         }]))
         sections.append(blank)
 
         sections.append(pd.DataFrame([{
             "SYMBOL": f"CLOSED P/L - REALIZED, {len(closed_rows)} settled (normalized to ${NORMALIZED_RISK_USD:.0f} risk each)",
-            norm_seller_col: realized_seller_total,
-            norm_buyer_col: realized_buyer_total,
+            realized_norm_seller_col: realized_seller_total,
+            realized_norm_buyer_col: realized_buyer_total,
             "ROI % IF SOLD (CSP)": avg_realized_seller_roi,
             "ROI % IF BOUGHT (long put)": avg_realized_buyer_roi,
             "ANNUALIZED ROI % IF SOLD (CSP)": avg_realized_seller_ann_roi,
@@ -708,14 +843,20 @@ def build_summary(positions, today):
     png_path = plot_realized_pnl(closed_rows)
 
     totals = {
-        "unrealized_seller_total": unrealized_seller_total,
-        "unrealized_buyer_total": unrealized_buyer_total,
+        "unrealized_fict_seller_total": unrealized_fict_seller_total,
+        "unrealized_fict_buyer_total": unrealized_fict_buyer_total,
+        "unrealized_actual_seller_total": unrealized_actual_seller_total,
+        "unrealized_actual_buyer_total": unrealized_actual_buyer_total,
         "realized_seller_total": realized_seller_total,
         "realized_buyer_total": realized_buyer_total,
-        "avg_unrealized_seller_roi": avg_unrealized_seller_roi,
-        "avg_unrealized_buyer_roi": avg_unrealized_buyer_roi,
-        "avg_unrealized_seller_ann_roi": avg_unrealized_seller_ann_roi,
-        "avg_unrealized_buyer_ann_roi": avg_unrealized_buyer_ann_roi,
+        "avg_unrealized_fict_seller_roi": avg_unrealized_fict_seller_roi,
+        "avg_unrealized_fict_buyer_roi": avg_unrealized_fict_buyer_roi,
+        "avg_unrealized_fict_seller_ann_roi": avg_unrealized_fict_seller_ann_roi,
+        "avg_unrealized_fict_buyer_ann_roi": avg_unrealized_fict_buyer_ann_roi,
+        "avg_unrealized_actual_seller_roi": avg_unrealized_actual_seller_roi,
+        "avg_unrealized_actual_buyer_roi": avg_unrealized_actual_buyer_roi,
+        "avg_unrealized_actual_seller_ann_roi": avg_unrealized_actual_seller_ann_roi,
+        "avg_unrealized_actual_buyer_ann_roi": avg_unrealized_actual_buyer_ann_roi,
         "avg_realized_seller_roi": avg_realized_seller_roi,
         "avg_realized_buyer_roi": avg_realized_buyer_roi,
         "avg_realized_seller_ann_roi": avg_realized_seller_ann_roi,
@@ -780,11 +921,16 @@ def main():
     def pct(x):
         return f"{x:+.2f}%" if x is not None else "--"
 
-    print(f"\n  TOTAL UNREALIZED (open, normalized to ${NORMALIZED_RISK_USD:.0f} risk each): "
-          f"sold {totals['unrealized_seller_total']:+.2f}  bought {totals['unrealized_buyer_total']:+.2f}")
-    print(f"    avg ROI: sold {pct(totals['avg_unrealized_seller_roi'])}  bought {pct(totals['avg_unrealized_buyer_roi'])}"
-          f"   |   avg annualized ROI: sold {pct(totals['avg_unrealized_seller_ann_roi'])}"
-          f"  bought {pct(totals['avg_unrealized_buyer_ann_roi'])}")
+    print(f"\n  TOTAL UNREALIZED - FICTIONAL (open, normalized to ${NORMALIZED_RISK_USD:.0f} risk each): "
+          f"sold {totals['unrealized_fict_seller_total']:+.2f}  bought {totals['unrealized_fict_buyer_total']:+.2f}")
+    print(f"    avg ROI: sold {pct(totals['avg_unrealized_fict_seller_roi'])}  bought {pct(totals['avg_unrealized_fict_buyer_roi'])}"
+          f"   |   avg annualized ROI: sold {pct(totals['avg_unrealized_fict_seller_ann_roi'])}"
+          f"  bought {pct(totals['avg_unrealized_fict_buyer_ann_roi'])}")
+    print(f"\n  TOTAL UNREALIZED - ACTUAL (open, normalized to ${NORMALIZED_RISK_USD:.0f} risk each): "
+          f"sold {totals['unrealized_actual_seller_total']:+.2f}  bought {totals['unrealized_actual_buyer_total']:+.2f}")
+    print(f"    avg ROI: sold {pct(totals['avg_unrealized_actual_seller_roi'])}  bought {pct(totals['avg_unrealized_actual_buyer_roi'])}"
+          f"   |   avg annualized ROI: sold {pct(totals['avg_unrealized_actual_seller_ann_roi'])}"
+          f"  bought {pct(totals['avg_unrealized_actual_buyer_ann_roi'])}")
     print(f"  TOTAL REALIZED ({totals['settled_count']} settled, normalized to ${NORMALIZED_RISK_USD:.0f} risk each): "
           f"sold {totals['realized_seller_total']:+.2f}  bought {totals['realized_buyer_total']:+.2f}")
     print(f"    avg ROI: sold {pct(totals['avg_realized_seller_roi'])}  bought {pct(totals['avg_realized_buyer_roi'])}"
