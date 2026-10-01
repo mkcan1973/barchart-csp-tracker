@@ -2,11 +2,15 @@ name: Run Barchart CSP Tracker
 
 on:
   schedule:
-    # 15:30 UTC = 11:30am EDT / 10:30am EST - mid-morning, inside the
-    # 10am-2pm ET window where bid/ask spreads are reliable (avoids the
-    # open/close volatility windows). Runs every weekday; the script itself
-    # checks the NYSE calendar and exits immediately on market holidays.
+    # Three runs per weekday, 2 hours apart, all within market hours:
+    # 15:30 UTC = 11:30am EDT / 10:30am EST
+    # 17:30 UTC = 1:30pm EDT / 12:30pm EST
+    # 19:30 UTC = 3:30pm EDT / 2:30pm EST
+    # The script itself checks the NYSE calendar and exits immediately on
+    # market holidays, so all three just no-op on non-trading days.
     - cron: "30 15 * * 1-5"
+    - cron: "30 17 * * 1-5"
+    - cron: "30 19 * * 1-5"
   workflow_dispatch: {}  # lets you trigger a run manually from the Actions tab
 
 permissions:
@@ -37,5 +41,5 @@ jobs:
           for f in barchart_csp_positions.json barchart_csp_summary.csv index.html barchart_csp_realized_pnl.png; do
             [ -f "$f" ] && git add "$f"
           done
-          git diff --staged --quiet || git commit -m "Daily run: $(date -u +%Y-%m-%d)"
+          git diff --staged --quiet || git commit -m "Run: $(date -u +%Y-%m-%dT%H:%M)Z"
           git push
