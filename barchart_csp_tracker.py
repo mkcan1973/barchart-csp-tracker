@@ -548,8 +548,10 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                           r[actual_norm_seller_key], r[actual_norm_buyer_key])
             )
 
+        ann_return = r.get('BARCHART ANNUALIZED RETURN % (at selection)')
+        ann_return_attr = "" if ann_return is None else str(ann_return)
         return f"""
-        <div class="card">
+        <div class="card" data-ann-return="{ann_return_attr}">
           <div class="card-head">
             <span class="sym">{_html_escape(r['SYMBOL'])}</span>
             <span class="strike">${r['STRIKE']:g}P</span>
@@ -557,7 +559,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
           </div>
           <div class="sub">{days_line} &middot; Entry {r['ENTRY STOCK PRICE']:.2f} &middot; {price_line}
             &middot; bid {r['BID']:.2f}/{r['BID SOURCE']} &middot; ask {r['ASK']:.2f}/{r['ASK SOURCE']}</div>
-          <div class="sub">Barchart ann. return at selection: {_fmt_pct(r.get('BARCHART ANNUALIZED RETURN % (at selection)'))}</div>
+          <div class="sub">Barchart ann. return at selection: {_fmt_pct(ann_return)}</div>
           {rows_html}
         </div>"""
 
@@ -601,16 +603,36 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
   .neg {{ color: #ff6b6b; }}
   .empty {{ color: #9aa4b2; font-style: italic; }}
   .chart {{ width: 100%; height: auto; border-radius: 10px; margin-top: 10px; background: white; }}
+  .filterbar {{ display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px;
+                background: #161b25; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }}
+  .filterbar label {{ display: flex; flex-direction: column; gap: 3px; font-size: 0.75rem; color: #9aa4b2; }}
+  .filterbar input {{ width: 90px; padding: 7px 8px; border-radius: 6px; border: 1px solid #333a47;
+                       background: #0f131b; color: inherit; font-size: 0.95rem; }}
+  .filterbar button {{ padding: 8px 16px; border-radius: 6px; border: none; background: #3ddc84;
+                        color: #06240f; font-weight: 700; font-size: 0.9rem; cursor: pointer; }}
+  .filterbar .count {{ color: #9aa4b2; font-size: 0.8rem; margin-left: auto; align-self: center; }}
   @media (prefers-color-scheme: light) {{
     body {{ background: #f5f6f8; color: #1a1d23; }}
     .totals .box, .card, .box {{ background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }}
     .label, .sub, .sub2, .rowlabel, .updated, .card-head .exp, .card-head .strike {{ color: #6b7280; }}
+    .filterbar {{ background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }}
+    .filterbar label {{ color: #6b7280; }}
+    .filterbar input {{ background: #f5f6f8; border-color: #d0d5dd; }}
+    .filterbar .count {{ color: #6b7280; }}
   }}
 </style>
 </head>
 <body>
   <h1>Barchart CSP Tracker</h1>
   <div class="updated">Last updated {today.isoformat()} &middot; {len(open_rows)} open &middot; {len(closed_rows)} closed</div>
+
+  <div class="filterbar">
+    <label>Min ROI % <input type="number" id="minRoi" step="any" placeholder="-&infin;" inputmode="decimal"></label>
+    <label>Max ROI % <input type="number" id="maxRoi" step="any" placeholder="&infin;" inputmode="decimal"></label>
+    <button id="applyFilter" type="button">Filter</button>
+    <span class="count" id="filterCount"></span>
+  </div>
+  <div class="updated" style="margin-top:-6px;">Filters on Barchart's annualized return at selection (frozen at entry, always available)</div>
 
   <div class="totals">
     <div class="box">
@@ -648,6 +670,50 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
   <div class="cards">
   {closed_cards}
   </div>
+
+<script>
+(function() {{
+  function applyFilter() {{
+    var minEl = document.getElementById('minRoi');
+    var maxEl = document.getElementById('maxRoi');
+    var minRaw = minEl.value.trim();
+    var maxRaw = maxEl.value.trim();
+    var noFilter = minRaw === '' && maxRaw === '';
+    var minVal = minRaw === '' ? -Infinity : parseFloat(minRaw);
+    var maxVal = maxRaw === '' ? Infinity : parseFloat(maxRaw);
+    var cards = document.querySelectorAll('.card[data-ann-return]');
+    var shown = 0;
+    cards.forEach(function(card) {{
+      var raw = card.getAttribute('data-ann-return');
+      var val = raw === '' ? null : parseFloat(raw);
+      var visible = noFilter || (val !== null && !isNaN(val) && val >= minVal && val <= maxVal);
+      card.style.display = visible ? '' : 'none';
+      if (visible) shown++;
+    }});
+    var countEl = document.getElementById('filterCount');
+    if (countEl) countEl.textContent = shown + ' of ' + cards.length + ' shown';
+    try {{
+      localStorage.setItem('csp_filter_min', minRaw);
+      localStorage.setItem('csp_filter_max', maxRaw);
+    }} catch (e) {{}}
+  }}
+
+  var btn = document.getElementById('applyFilter');
+  if (btn) btn.addEventListener('click', applyFilter);
+  ['minRoi', 'maxRoi'].forEach(function(id) {{
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyFilter(); }});
+  }});
+
+  try {{
+    var savedMin = localStorage.getItem('csp_filter_min');
+    var savedMax = localStorage.getItem('csp_filter_max');
+    if (savedMin) document.getElementById('minRoi').value = savedMin;
+    if (savedMax) document.getElementById('maxRoi').value = savedMax;
+  }} catch (e) {{}}
+  applyFilter();
+}})();
+</script>
 </body>
 </html>
 """
