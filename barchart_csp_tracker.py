@@ -317,6 +317,19 @@ def calc_actual_close_pnl(entry_bid, entry_ask, current_bid, current_ask):
     return seller_pnl, buyer_pnl
 
 
+def calc_mid_close_pnl(entry_bid, entry_ask, current_bid, current_ask):
+    """Companion to calc_actual_close_pnl using the MID price instead of
+    crossing the spread - "actual" is deliberately the worst case (you pay
+    the ask / receive the bid), this is a less pessimistic, more typical
+    reference point using the same live quote, no extra yfinance traffic."""
+    if current_bid is None or current_ask is None:
+        return None, None
+    mid = (current_bid + current_ask) / 2
+    seller_pnl = round((entry_bid - mid) * 100, 2)
+    buyer_pnl = round((mid - entry_ask) * 100, 2)
+    return seller_pnl, buyer_pnl
+
+
 def normalize_pnl(seller_pnl, buyer_pnl, strike, ask):
     """Scale a position's actual-dollar PnL to what it would've been sized at
     NORMALIZED_RISK_USD capital at risk, so positions on different-priced
@@ -475,6 +488,11 @@ def _pnl_class(x):
     return "pos" if x >= 0 else "neg"
 
 
+def _fmt_money_paren(x):
+    """Parenthetical companion figure, e.g. ' (mid: $123.45)' - blank if None."""
+    return f" (mid: {_fmt_money(x)})" if x is not None else ""
+
+
 def generate_html_summary(open_rows, closed_rows, totals, today):
     """Single self-contained HTML file - a card per position (readable on a
     phone, unlike the 20+ column CSV) plus the totals and the realized P&L
@@ -603,11 +621,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       <div class="sub2">avg ann. ROI: short {_fmt_pct(totals['avg_unrealized_fict_seller_ann_roi'])} / long {_fmt_pct(totals['avg_unrealized_fict_buyer_ann_roi'])}</div>
     </div>
     <div class="box">
-      <div class="label">UNREALIZED - ACTUAL (open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
-      <div class="val {_pnl_class(totals['unrealized_actual_seller_total'])}">Short {_fmt_money(totals['unrealized_actual_seller_total'])}</div>
-      <div class="val {_pnl_class(totals['unrealized_actual_buyer_total'])}">Long {_fmt_money(totals['unrealized_actual_buyer_total'])}</div>
+      <div class="label">UNREALIZED - ACTUAL, worst case (open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
+      <div class="val {_pnl_class(totals['unrealized_actual_seller_total'])}">Short {_fmt_money(totals['unrealized_actual_seller_total'])}{_fmt_money_paren(totals['unrealized_mid_seller_total'])}</div>
+      <div class="val {_pnl_class(totals['unrealized_actual_buyer_total'])}">Long {_fmt_money(totals['unrealized_actual_buyer_total'])}{_fmt_money_paren(totals['unrealized_mid_buyer_total'])}</div>
       <div class="sub2">avg ROI: short {_fmt_pct(totals['avg_unrealized_actual_seller_roi'])} / long {_fmt_pct(totals['avg_unrealized_actual_buyer_roi'])}</div>
       <div class="sub2">avg ann. ROI: short {_fmt_pct(totals['avg_unrealized_actual_seller_ann_roi'])} / long {_fmt_pct(totals['avg_unrealized_actual_buyer_ann_roi'])}</div>
+      <div class="sub2">(mid) = less pessimistic reference using the mid price instead of crossing the spread</div>
     </div>
     <div class="box">
       <div class="label">REALIZED ({totals['settled_count']} settled, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
@@ -640,6 +659,7 @@ def build_summary(positions, today):
     open_rows = []
     open_roi_fict = []    # (seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi) per open position
     open_roi_actual = []  # same, for the "actual" (live requote) side
+    open_norm_mid = []    # (norm_seller_mid, norm_buyer_mid) per open position
     for p in positions:
         exp_date = datetime.strptime(p["expiration"], "%Y-%m-%d").date()
         if exp_date < today:
@@ -673,6 +693,13 @@ def build_summary(positions, today):
         actual_ann_seller_roi = annualize_roi_pct(actual_seller_roi, days_held)
         actual_ann_buyer_roi = annualize_roi_pct(actual_buyer_roi, days_held)
         open_roi_actual.append((actual_seller_roi, actual_buyer_roi, actual_ann_seller_roi, actual_ann_buyer_roi))
+
+        # "Mid": same live quote as "actual," but priced at the mid rather
+        # than crossing the spread - a less pessimistic reference figure,
+        # shown only as a parenthetical alongside the "actual" totals.
+        mid_seller_pnl, mid_buyer_pnl = calc_mid_close_pnl(p["bid"], p["ask"], current_bid, current_ask)
+        mid_norm_seller, mid_norm_buyer = normalize_pnl(mid_seller_pnl, mid_buyer_pnl, p["strike"], p["ask"])
+        open_norm_mid.append((mid_norm_seller, mid_norm_buyer))
 
         open_rows.append({
             "SYMBOL": p["symbol"],
@@ -775,6 +802,8 @@ def build_summary(positions, today):
     unrealized_fict_buyer_total = round(sum(r[fict_norm_buyer_col] or 0 for r in open_rows), 2)
     unrealized_actual_seller_total = round(sum(r[actual_norm_seller_col] or 0 for r in open_rows), 2)
     unrealized_actual_buyer_total = round(sum(r[actual_norm_buyer_col] or 0 for r in open_rows), 2)
+    unrealized_mid_seller_total = round(sum(m[0] or 0 for m in open_norm_mid), 2)
+    unrealized_mid_buyer_total = round(sum(m[1] or 0 for m in open_norm_mid), 2)
     realized_seller_total = cum_seller  # last row's cumulative == grand total
     realized_buyer_total = cum_buyer
 
@@ -847,6 +876,8 @@ def build_summary(positions, today):
         "unrealized_fict_buyer_total": unrealized_fict_buyer_total,
         "unrealized_actual_seller_total": unrealized_actual_seller_total,
         "unrealized_actual_buyer_total": unrealized_actual_buyer_total,
+        "unrealized_mid_seller_total": unrealized_mid_seller_total,
+        "unrealized_mid_buyer_total": unrealized_mid_buyer_total,
         "realized_seller_total": realized_seller_total,
         "realized_buyer_total": realized_buyer_total,
         "avg_unrealized_fict_seller_roi": avg_unrealized_fict_seller_roi,
