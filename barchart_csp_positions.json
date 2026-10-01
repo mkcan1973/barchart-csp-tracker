@@ -1090,5 +1090,33 @@
     "potential_return_annual_pct": 101.389,
     "entry_stock_px": 19.584999084472656,
     "added_date": "2026-10-01"
+  },
+  {
+    "symbol": "IRON",
+    "strike": 55.0,
+    "expiration": "2026-11-20",
+    "barchart_bid": 8.1,
+    "bid": 8.1,
+    "bid_is_approx": false,
+    "ask": 9.0,
+    "ask_is_approx": false,
+    "potential_return_pct": 17.2708,
+    "potential_return_annual_pct": 126.077,
+    "entry_stock_px": 64.22000122070312,
+    "added_date": "2026-10-01"
+  },
+  {
+    "symbol": "SAIL",
+    "strike": 20.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.85,
+    "bid": 0.8,
+    "bid_is_approx": false,
+    "ask": 0.9,
+    "ask_is_approx": false,
+    "potential_return_pct": 4.43864,
+    "potential_return_annual_pct": 108.007,
+    "entry_stock_px": 20.59000015258789,
+    "added_date": "2026-10-01"
   }
 ]
