@@ -1230,5 +1230,47 @@
     "potential_return_annual_pct": 96.515,
     "entry_stock_px": 88.34500122070312,
     "added_date": "2026-10-02"
+  },
+  {
+    "symbol": "NUAI",
+    "strike": 6.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.25,
+    "bid": 0.25,
+    "bid_is_approx": false,
+    "ask": 0.4,
+    "ask_is_approx": false,
+    "potential_return_pct": 4.34783,
+    "potential_return_annual_pct": 113.354,
+    "entry_stock_px": 6.275000095367432,
+    "added_date": "2026-10-02"
+  },
+  {
+    "symbol": "ALOY",
+    "strike": 7.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.3,
+    "bid": 0.3,
+    "bid_is_approx": false,
+    "ask": 0.35,
+    "ask_is_approx": false,
+    "potential_return_pct": 4.16667,
+    "potential_return_annual_pct": 108.631,
+    "entry_stock_px": 8.118499755859375,
+    "added_date": "2026-10-02"
+  },
+  {
+    "symbol": "HIMS",
+    "strike": 28.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 1.01,
+    "bid": 1.0,
+    "bid_is_approx": false,
+    "ask": 1.06,
+    "ask_is_approx": false,
+    "potential_return_pct": 3.74213,
+    "potential_return_annual_pct": 97.5626,
+    "entry_stock_px": 29.073299407958984,
+    "added_date": "2026-10-02"
   }
 ]
