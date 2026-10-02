@@ -1188,5 +1188,47 @@
     "potential_return_annual_pct": 97.3622,
     "entry_stock_px": 7.809999942779541,
     "added_date": "2026-10-02"
+  },
+  {
+    "symbol": "FSLY",
+    "strike": 25.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 1.0,
+    "bid": 1.0,
+    "bid_is_approx": false,
+    "ask": 1.15,
+    "ask_is_approx": false,
+    "potential_return_pct": 4.16667,
+    "potential_return_annual_pct": 108.631,
+    "entry_stock_px": 26.219999313354492,
+    "added_date": "2026-10-02"
+  },
+  {
+    "symbol": "CRCL",
+    "strike": 80.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 3.0,
+    "bid": 3.35,
+    "bid_is_approx": false,
+    "ask": 3.45,
+    "ask_is_approx": false,
+    "potential_return_pct": 3.8961,
+    "potential_return_annual_pct": 101.577,
+    "entry_stock_px": 80.80000305175781,
+    "added_date": "2026-10-02"
+  },
+  {
+    "symbol": "HUT",
+    "strike": 85.0,
+    "expiration": "2026-11-20",
+    "barchart_bid": 9.75,
+    "bid": 9.85,
+    "bid_is_approx": false,
+    "ask": 10.3,
+    "ask_is_approx": false,
+    "potential_return_pct": 12.9568,
+    "potential_return_annual_pct": 96.515,
+    "entry_stock_px": 88.34500122070312,
+    "added_date": "2026-10-02"
   }
 ]
