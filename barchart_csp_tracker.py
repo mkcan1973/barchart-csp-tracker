@@ -517,11 +517,17 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
             </div>
           </div>"""
 
+    def attr(x):
+        """None-safe value for an HTML data-* attribute - JS treats "" as missing."""
+        return "" if x is None else str(x)
+
     def position_card(r, closed):
         fict_norm_seller_key = f"NORM P/L (FICTIONAL) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
         fict_norm_buyer_key = f"NORM P/L (FICTIONAL) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
         actual_norm_seller_key = f"NORM P/L (ACTUAL) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
         actual_norm_buyer_key = f"NORM P/L (ACTUAL) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
+        mid_norm_seller_key = f"NORM P/L (MID) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
+        mid_norm_buyer_key = f"NORM P/L (MID) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
         realized_norm_seller_key = f"NORM P/L IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)"
         realized_norm_buyer_key = f"NORM P/L IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)"
 
@@ -534,6 +540,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                                  r["ROI % IF SOLD (CSP)"], r["ROI % IF BOUGHT (long put)"],
                                  r["ANNUALIZED ROI % IF SOLD (CSP)"], r["ANNUALIZED ROI % IF BOUGHT (long put)"],
                                  r[realized_norm_seller_key], r[realized_norm_buyer_key])
+            data_attrs = (
+                f'data-kind="closed" '
+                f'data-norm-rs="{attr(r[realized_norm_seller_key])}" data-norm-rb="{attr(r[realized_norm_buyer_key])}" '
+                f'data-roi-rs="{attr(r["ROI % IF SOLD (CSP)"])}" data-roi-rb="{attr(r["ROI % IF BOUGHT (long put)"])}" '
+                f'data-ann-rs="{attr(r["ANNUALIZED ROI % IF SOLD (CSP)"])}" data-ann-rb="{attr(r["ANNUALIZED ROI % IF BOUGHT (long put)"])}"'
+            )
         else:
             rows_html = (
                 pnl_row("FICTIONAL (intrinsic value only - if expiring today)",
@@ -547,11 +559,20 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                           r["ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)"], r["ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)"],
                           r[actual_norm_seller_key], r[actual_norm_buyer_key])
             )
+            data_attrs = (
+                f'data-kind="open" '
+                f'data-norm-fs="{attr(r[fict_norm_seller_key])}" data-norm-fb="{attr(r[fict_norm_buyer_key])}" '
+                f'data-roi-fs="{attr(r["ROI % (FICTIONAL) IF SOLD (CSP)"])}" data-roi-fb="{attr(r["ROI % (FICTIONAL) IF BOUGHT (long put)"])}" '
+                f'data-ann-fs="{attr(r["ANNUALIZED ROI % (FICTIONAL) IF SOLD (CSP)"])}" data-ann-fb="{attr(r["ANNUALIZED ROI % (FICTIONAL) IF BOUGHT (long put)"])}" '
+                f'data-norm-as="{attr(r[actual_norm_seller_key])}" data-norm-ab="{attr(r[actual_norm_buyer_key])}" '
+                f'data-roi-as="{attr(r["ROI % (ACTUAL) IF SOLD (CSP)"])}" data-roi-ab="{attr(r["ROI % (ACTUAL) IF BOUGHT (long put)"])}" '
+                f'data-ann-as="{attr(r["ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)"])}" data-ann-ab="{attr(r["ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)"])}" '
+                f'data-norm-ms="{attr(r[mid_norm_seller_key])}" data-norm-mb="{attr(r[mid_norm_buyer_key])}"'
+            )
 
         ann_return = r.get('BARCHART ANNUALIZED RETURN % (at selection)')
-        ann_return_attr = "" if ann_return is None else str(ann_return)
         return f"""
-        <div class="card" data-ann-return="{ann_return_attr}">
+        <div class="card" data-ann-return="{attr(ann_return)}" {data_attrs}>
           <div class="card-head">
             <span class="sym">{_html_escape(r['SYMBOL'])}</span>
             <span class="strike">${r['STRIKE']:g}P</span>
@@ -636,28 +657,29 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
   <div class="totals">
     <div class="box">
-      <div class="label">UNREALIZED - FICTIONAL (open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
-      <div class="val {_pnl_class(totals['unrealized_fict_seller_total'])}">Short {_fmt_money(totals['unrealized_fict_seller_total'])}</div>
-      <div class="val {_pnl_class(totals['unrealized_fict_buyer_total'])}">Long {_fmt_money(totals['unrealized_fict_buyer_total'])}</div>
-      <div class="sub2">avg ROI: short {_fmt_pct(totals['avg_unrealized_fict_seller_roi'])} / long {_fmt_pct(totals['avg_unrealized_fict_buyer_roi'])}</div>
-      <div class="sub2">avg ann. ROI: short {_fmt_pct(totals['avg_unrealized_fict_seller_ann_roi'])} / long {_fmt_pct(totals['avg_unrealized_fict_buyer_ann_roi'])}</div>
+      <div class="label">UNREALIZED - FICTIONAL (<span id="openCount">{len(open_rows)}</span> open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
+      <div class="val {_pnl_class(totals['unrealized_fict_seller_total'])}" id="totalFictSeller">Short <span id="totalFictSellerAmt">{_fmt_money(totals['unrealized_fict_seller_total'])}</span></div>
+      <div class="val {_pnl_class(totals['unrealized_fict_buyer_total'])}" id="totalFictBuyer">Long <span id="totalFictBuyerAmt">{_fmt_money(totals['unrealized_fict_buyer_total'])}</span></div>
+      <div class="sub2">avg ROI: short <span id="avgFictSellerRoi">{_fmt_pct(totals['avg_unrealized_fict_seller_roi'])}</span> / long <span id="avgFictBuyerRoi">{_fmt_pct(totals['avg_unrealized_fict_buyer_roi'])}</span></div>
+      <div class="sub2">avg ann. ROI: short <span id="avgFictSellerAnn">{_fmt_pct(totals['avg_unrealized_fict_seller_ann_roi'])}</span> / long <span id="avgFictBuyerAnn">{_fmt_pct(totals['avg_unrealized_fict_buyer_ann_roi'])}</span></div>
     </div>
     <div class="box">
-      <div class="label">UNREALIZED - ACTUAL, worst case (open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
-      <div class="val {_pnl_class(totals['unrealized_actual_seller_total'])}">Short {_fmt_money(totals['unrealized_actual_seller_total'])}{_fmt_money_paren(totals['unrealized_mid_seller_total'])}</div>
-      <div class="val {_pnl_class(totals['unrealized_actual_buyer_total'])}">Long {_fmt_money(totals['unrealized_actual_buyer_total'])}{_fmt_money_paren(totals['unrealized_mid_buyer_total'])}</div>
-      <div class="sub2">avg ROI: short {_fmt_pct(totals['avg_unrealized_actual_seller_roi'])} / long {_fmt_pct(totals['avg_unrealized_actual_buyer_roi'])}</div>
-      <div class="sub2">avg ann. ROI: short {_fmt_pct(totals['avg_unrealized_actual_seller_ann_roi'])} / long {_fmt_pct(totals['avg_unrealized_actual_buyer_ann_roi'])}</div>
+      <div class="label">UNREALIZED - ACTUAL, worst case (<span id="openCount2">{len(open_rows)}</span> open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
+      <div class="val {_pnl_class(totals['unrealized_actual_seller_total'])}" id="totalActualSeller">Short <span id="totalActualSellerAmt">{_fmt_money(totals['unrealized_actual_seller_total'])}</span><span id="totalActualSellerMid">{_fmt_money_paren(totals['unrealized_mid_seller_total'])}</span></div>
+      <div class="val {_pnl_class(totals['unrealized_actual_buyer_total'])}" id="totalActualBuyer">Long <span id="totalActualBuyerAmt">{_fmt_money(totals['unrealized_actual_buyer_total'])}</span><span id="totalActualBuyerMid">{_fmt_money_paren(totals['unrealized_mid_buyer_total'])}</span></div>
+      <div class="sub2">avg ROI: short <span id="avgActualSellerRoi">{_fmt_pct(totals['avg_unrealized_actual_seller_roi'])}</span> / long <span id="avgActualBuyerRoi">{_fmt_pct(totals['avg_unrealized_actual_buyer_roi'])}</span></div>
+      <div class="sub2">avg ann. ROI: short <span id="avgActualSellerAnn">{_fmt_pct(totals['avg_unrealized_actual_seller_ann_roi'])}</span> / long <span id="avgActualBuyerAnn">{_fmt_pct(totals['avg_unrealized_actual_buyer_ann_roi'])}</span></div>
       <div class="sub2">(mid) = less pessimistic reference using the mid price instead of crossing the spread</div>
     </div>
     <div class="box">
-      <div class="label">REALIZED ({totals['settled_count']} settled, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
-      <div class="val {_pnl_class(totals['realized_seller_total'])}">Short {_fmt_money(totals['realized_seller_total'])}</div>
-      <div class="val {_pnl_class(totals['realized_buyer_total'])}">Long {_fmt_money(totals['realized_buyer_total'])}</div>
-      <div class="sub2">avg ROI: short {_fmt_pct(totals['avg_realized_seller_roi'])} / long {_fmt_pct(totals['avg_realized_buyer_roi'])}</div>
-      <div class="sub2">avg ann. ROI: short {_fmt_pct(totals['avg_realized_seller_ann_roi'])} / long {_fmt_pct(totals['avg_realized_buyer_ann_roi'])}</div>
+      <div class="label">REALIZED (<span id="realizedCount">{totals['settled_count']}</span> settled, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
+      <div class="val {_pnl_class(totals['realized_seller_total'])}" id="totalRealizedSeller">Short <span id="totalRealizedSellerAmt">{_fmt_money(totals['realized_seller_total'])}</span></div>
+      <div class="val {_pnl_class(totals['realized_buyer_total'])}" id="totalRealizedBuyer">Long <span id="totalRealizedBuyerAmt">{_fmt_money(totals['realized_buyer_total'])}</span></div>
+      <div class="sub2">avg ROI: short <span id="avgRealizedSellerRoi">{_fmt_pct(totals['avg_realized_seller_roi'])}</span> / long <span id="avgRealizedBuyerRoi">{_fmt_pct(totals['avg_realized_buyer_roi'])}</span></div>
+      <div class="sub2">avg ann. ROI: short <span id="avgRealizedSellerAnn">{_fmt_pct(totals['avg_realized_seller_ann_roi'])}</span> / long <span id="avgRealizedBuyerAnn">{_fmt_pct(totals['avg_realized_buyer_ann_roi'])}</span></div>
     </div>
   </div>
+  <div class="updated" id="filterNote" style="display:none;">Totals above reflect only the positions currently passing the filter.</div>
 
   {chart_html}
 
@@ -673,6 +695,46 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
 <script>
 (function() {{
+  function fmtMoney(x) {{
+    return x === null ? '--' : '$' + x.toLocaleString('en-US', {{minimumFractionDigits: 2, maximumFractionDigits: 2}});
+  }}
+  function fmtMoneyParen(x) {{
+    return x === null ? '' : ' (mid: ' + fmtMoney(x) + ')';
+  }}
+  function fmtPct(x) {{
+    return x === null ? '--' : (x >= 0 ? '+' : '') + x.toFixed(1) + '%';
+  }}
+  function pnlClass(x) {{
+    return x === null ? '' : (x >= 0 ? 'pos' : 'neg');
+  }}
+  function readAttr(card, name) {{
+    var v = card.getAttribute(name);
+    if (v === null || v === '') return null;
+    var f = parseFloat(v);
+    return isNaN(f) ? null : f;
+  }}
+  function sumAttr(cards, name) {{
+    var total = 0;
+    cards.forEach(function(c) {{ total += (readAttr(c, name) || 0); }});
+    return Math.round(total * 100) / 100;
+  }}
+  function avgAttr(cards, name) {{
+    var vals = [];
+    cards.forEach(function(c) {{ var v = readAttr(c, name); if (v !== null) vals.push(v); }});
+    if (!vals.length) return null;
+    return Math.round((vals.reduce(function(a, b) {{ return a + b; }}, 0) / vals.length) * 100) / 100;
+  }}
+  function setMoney(divId, amtId, val) {{
+    var div = document.getElementById(divId);
+    var amt = document.getElementById(amtId);
+    if (div) div.className = 'val ' + pnlClass(val);
+    if (amt) amt.textContent = fmtMoney(val);
+  }}
+  function setPct(id, val) {{
+    var el = document.getElementById(id);
+    if (el) el.textContent = fmtPct(val);
+  }}
+
   function applyFilter() {{
     var minEl = document.getElementById('minRoi');
     var maxEl = document.getElementById('maxRoi');
@@ -683,15 +745,58 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     var maxVal = maxRaw === '' ? Infinity : parseFloat(maxRaw);
     var cards = document.querySelectorAll('.card[data-ann-return]');
     var shown = 0;
+    var openVisible = [];
+    var closedVisible = [];
     cards.forEach(function(card) {{
       var raw = card.getAttribute('data-ann-return');
       var val = raw === '' ? null : parseFloat(raw);
       var visible = noFilter || (val !== null && !isNaN(val) && val >= minVal && val <= maxVal);
       card.style.display = visible ? '' : 'none';
-      if (visible) shown++;
+      if (visible) {{
+        shown++;
+        (card.getAttribute('data-kind') === 'open' ? openVisible : closedVisible).push(card);
+      }}
     }});
     var countEl = document.getElementById('filterCount');
     if (countEl) countEl.textContent = shown + ' of ' + cards.length + ' shown';
+
+    // Recompute every total/average from only the currently-visible cards -
+    // same sum/average math the Python side uses, just run over a subset.
+    setMoney('totalFictSeller', 'totalFictSellerAmt', sumAttr(openVisible, 'data-norm-fs'));
+    setMoney('totalFictBuyer', 'totalFictBuyerAmt', sumAttr(openVisible, 'data-norm-fb'));
+    setPct('avgFictSellerRoi', avgAttr(openVisible, 'data-roi-fs'));
+    setPct('avgFictBuyerRoi', avgAttr(openVisible, 'data-roi-fb'));
+    setPct('avgFictSellerAnn', avgAttr(openVisible, 'data-ann-fs'));
+    setPct('avgFictBuyerAnn', avgAttr(openVisible, 'data-ann-fb'));
+
+    setMoney('totalActualSeller', 'totalActualSellerAmt', sumAttr(openVisible, 'data-norm-as'));
+    setMoney('totalActualBuyer', 'totalActualBuyerAmt', sumAttr(openVisible, 'data-norm-ab'));
+    var midSellerEl = document.getElementById('totalActualSellerMid');
+    var midBuyerEl = document.getElementById('totalActualBuyerMid');
+    if (midSellerEl) midSellerEl.textContent = fmtMoneyParen(sumAttr(openVisible, 'data-norm-ms'));
+    if (midBuyerEl) midBuyerEl.textContent = fmtMoneyParen(sumAttr(openVisible, 'data-norm-mb'));
+    setPct('avgActualSellerRoi', avgAttr(openVisible, 'data-roi-as'));
+    setPct('avgActualBuyerRoi', avgAttr(openVisible, 'data-roi-ab'));
+    setPct('avgActualSellerAnn', avgAttr(openVisible, 'data-ann-as'));
+    setPct('avgActualBuyerAnn', avgAttr(openVisible, 'data-ann-ab'));
+
+    setMoney('totalRealizedSeller', 'totalRealizedSellerAmt', sumAttr(closedVisible, 'data-norm-rs'));
+    setMoney('totalRealizedBuyer', 'totalRealizedBuyerAmt', sumAttr(closedVisible, 'data-norm-rb'));
+    setPct('avgRealizedSellerRoi', avgAttr(closedVisible, 'data-roi-rs'));
+    setPct('avgRealizedBuyerRoi', avgAttr(closedVisible, 'data-roi-rb'));
+    setPct('avgRealizedSellerAnn', avgAttr(closedVisible, 'data-ann-rs'));
+    setPct('avgRealizedBuyerAnn', avgAttr(closedVisible, 'data-ann-rb'));
+
+    ['openCount', 'openCount2'].forEach(function(id) {{
+      var el = document.getElementById(id);
+      if (el) el.textContent = openVisible.length;
+    }});
+    var realizedCountEl = document.getElementById('realizedCount');
+    if (realizedCountEl) realizedCountEl.textContent = closedVisible.length;
+
+    var noteEl = document.getElementById('filterNote');
+    if (noteEl) noteEl.style.display = noFilter ? 'none' : '';
+
     try {{
       localStorage.setItem('csp_filter_min', minRaw);
       localStorage.setItem('csp_filter_max', maxRaw);
@@ -799,6 +904,8 @@ def build_summary(positions, today):
             "ROI % (ACTUAL) IF BOUGHT (long put)": actual_buyer_roi,
             "ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)": actual_ann_seller_roi,
             "ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)": actual_ann_buyer_roi,
+            f"NORM P/L (MID) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)": mid_norm_seller,
+            f"NORM P/L (MID) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)": mid_norm_buyer,
             "ADDED": p["added_date"],
         })
 
