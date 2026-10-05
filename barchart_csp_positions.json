@@ -1272,5 +1272,19 @@
     "potential_return_annual_pct": 97.5626,
     "entry_stock_px": 29.073299407958984,
     "added_date": "2026-10-02"
+  },
+  {
+    "symbol": "TE",
+    "strike": 3.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.15,
+    "bid": 0.15,
+    "bid_is_approx": false,
+    "ask": 0.2,
+    "ask_is_approx": false,
+    "potential_return_pct": 4.47761,
+    "potential_return_annual_pct": 148.575,
+    "entry_stock_px": 3.674999952316284,
+    "added_date": "2026-10-05"
   }
 ]
