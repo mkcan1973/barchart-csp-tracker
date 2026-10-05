@@ -1286,5 +1286,47 @@
     "potential_return_annual_pct": 148.575,
     "entry_stock_px": 3.674999952316284,
     "added_date": "2026-10-05"
+  },
+  {
+    "symbol": "PDSB",
+    "strike": 1.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.1,
+    "bid": 0.05,
+    "bid_is_approx": false,
+    "ask": 0.15,
+    "ask_is_approx": false,
+    "potential_return_pct": 11.1111,
+    "potential_return_annual_pct": 368.687,
+    "entry_stock_px": 1.2800999879837036,
+    "added_date": "2026-10-05"
+  },
+  {
+    "symbol": "AEHR",
+    "strike": 100.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 3.9,
+    "bid": 3.8,
+    "bid_is_approx": false,
+    "ask": 4.6,
+    "ask_is_approx": false,
+    "potential_return_pct": 4.05827,
+    "potential_return_annual_pct": 134.661,
+    "entry_stock_px": 106.72000122070312,
+    "added_date": "2026-10-05"
+  },
+  {
+    "symbol": "KOD",
+    "strike": 90.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 3.1,
+    "bid": 2.8,
+    "bid_is_approx": false,
+    "ask": 3.5,
+    "ask_is_approx": false,
+    "potential_return_pct": 3.56732,
+    "potential_return_annual_pct": 118.37,
+    "entry_stock_px": 94.73999786376953,
+    "added_date": "2026-10-05"
   }
 ]
