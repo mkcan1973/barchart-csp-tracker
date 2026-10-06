@@ -499,21 +499,33 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     chart if one exists. No build step, no external assets - just open it in
     a browser (or serve it as-is via GitHub Pages)."""
 
-    def pnl_row(label, seller_pnl, buyer_pnl, seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi, norm_seller, norm_buyer):
+    def pnl_row(label, seller_pnl, buyer_pnl, seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi, norm_seller, norm_buyer,
+                seller_quote=None, seller_quote_label="", buyer_quote=None, buyer_quote_label="",
+                seller_mid=None, buyer_mid=None, norm_seller_mid=None, norm_buyer_mid=None):
+        # seller_mid/buyer_mid are on the SAME (raw, per-position) basis as
+        # seller_pnl/buyer_pnl; norm_seller_mid/norm_buyer_mid are on the same
+        # normalized basis as norm_seller/norm_buyer - each parenthetical
+        # must sit next to the number it's actually comparable to.
+        seller_quote_html = (f'<div class="sub2">{seller_quote_label}: {_fmt_money(seller_quote)}</div>'
+                              if seller_quote is not None else '')
+        buyer_quote_html = (f'<div class="sub2">{buyer_quote_label}: {_fmt_money(buyer_quote)}</div>'
+                             if buyer_quote is not None else '')
         return f"""
           <div class="rowlabel">{label}</div>
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP)</div>
-              <div class="val {_pnl_class(seller_pnl)}">{_fmt_money(seller_pnl)}</div>
+              <div class="val {_pnl_class(seller_pnl)}">{_fmt_money(seller_pnl)}<span class="{_pnl_class(seller_mid)}">{_fmt_money_paren(seller_mid)}</span></div>
               <div class="sub2">ROI {_fmt_pct(seller_roi)} &middot; ann {_fmt_pct(ann_seller_roi)}</div>
-              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_seller)}</div>
+              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_seller)}<span class="{_pnl_class(norm_seller_mid)}">{_fmt_money_paren(norm_seller_mid)}</span></div>
+              {seller_quote_html}
             </div>
             <div class="box">
               <div class="label">LONG (bought put)</div>
-              <div class="val {_pnl_class(buyer_pnl)}">{_fmt_money(buyer_pnl)}</div>
+              <div class="val {_pnl_class(buyer_pnl)}">{_fmt_money(buyer_pnl)}<span class="{_pnl_class(buyer_mid)}">{_fmt_money_paren(buyer_mid)}</span></div>
               <div class="sub2">ROI {_fmt_pct(buyer_roi)} &middot; ann {_fmt_pct(ann_buyer_roi)}</div>
-              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_buyer)}</div>
+              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_buyer)}<span class="{_pnl_class(norm_buyer_mid)}">{_fmt_money_paren(norm_buyer_mid)}</span></div>
+              {buyer_quote_html}
             </div>
           </div>"""
 
@@ -549,7 +561,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                                  r["UNREALIZED P/L (ACTUAL) IF SOLD (CSP)"], r["UNREALIZED P/L (ACTUAL) IF BOUGHT (long put)"],
                                  r["ROI % (ACTUAL) IF SOLD (CSP)"], r["ROI % (ACTUAL) IF BOUGHT (long put)"],
                                  r["ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)"], r["ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)"],
-                                 r[actual_norm_seller_key], r[actual_norm_buyer_key])
+                                 r[actual_norm_seller_key], r[actual_norm_buyer_key],
+                                 seller_quote=r["CURRENT OPTION ASK"], seller_quote_label="current ask (pay to close)",
+                                 buyer_quote=r["CURRENT OPTION BID"], buyer_quote_label="current bid (receive to close)",
+                                 seller_mid=r["UNREALIZED P/L (MID) IF SOLD (CSP)"],
+                                 buyer_mid=r["UNREALIZED P/L (MID) IF BOUGHT (long put)"],
+                                 norm_seller_mid=r[mid_norm_seller_key], norm_buyer_mid=r[mid_norm_buyer_key])
             data_attrs = (
                 f'data-kind="open" '
                 f'data-norm-as="{attr(r[actual_norm_seller_key])}" data-norm-ab="{attr(r[actual_norm_buyer_key])}" '
@@ -878,6 +895,8 @@ def build_summary(positions, today):
             "ROI % (ACTUAL) IF BOUGHT (long put)": actual_buyer_roi,
             "ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)": actual_ann_seller_roi,
             "ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)": actual_ann_buyer_roi,
+            "UNREALIZED P/L (MID) IF SOLD (CSP)": mid_seller_pnl,
+            "UNREALIZED P/L (MID) IF BOUGHT (long put)": mid_buyer_pnl,
             f"NORM P/L (MID) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)": mid_norm_seller,
             f"NORM P/L (MID) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)": mid_norm_buyer,
             "ADDED": p["added_date"],
