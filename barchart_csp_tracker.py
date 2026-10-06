@@ -280,11 +280,15 @@ def save_positions(positions):
     POSITIONS_FILE.write_text(json.dumps(positions, indent=2))
 
 
-def is_already_open(positions, symbol, today):
-    """True if this SYMBOL has any unexpired tracked position, regardless of
-    strike/expiration - one open name at a time, not one per contract."""
+def is_already_open(positions, symbol, strike, expiration, today):
+    """True if this exact CONTRACT (symbol+strike+expiration) has an
+    unexpired tracked position - dedup is per-contract, not per-symbol, so a
+    genuinely different, later opportunity on the same stock can still be
+    tracked alongside an earlier one that's still open. (The HTML filter's
+    "first signal to qualify" logic is what decides which instance of a
+    symbol actually gets shown/counted for a given ROI threshold.)"""
     for p in positions:
-        if (p["symbol"] == symbol
+        if (p["symbol"] == symbol and abs(p["strike"] - strike) < 0.01 and p["expiration"] == expiration
                 and datetime.strptime(p["expiration"], "%Y-%m-%d").date() >= today):
             return True
     return False
@@ -377,16 +381,22 @@ def settle_expired_positions(positions, today):
 # --- main orchestration --------------------------------------------------------
 
 def pick_new_candidates(barchart_rows, positions, today):
-    """Every ranked candidate whose symbol isn't already an open position -
-    no daily cap. If two rows share a symbol in the same ranked list, only
-    the higher-ranked one is picked (still one open position per symbol)."""
+    """Every ranked candidate whose exact CONTRACT isn't already an open
+    position - no daily cap, and no per-symbol limit either, since a stock
+    can legitimately have more than one distinct opportunity tracked over
+    time (e.g. it first qualified at 55% annualized return, then later a
+    different strike/expiration on the same stock qualified at 150% - both
+    get tracked; which one "counts" for a given viewing threshold is decided
+    at display time, not here). Still dedups identical (symbol, strike,
+    expiration) rows appearing twice within the same ranked list."""
     picked = []
-    staged_symbols = set()
+    staged_contracts = set()
     for row in barchart_rows:
-        if is_already_open(positions, row["symbol"], today) or row["symbol"] in staged_symbols:
+        key = (row["symbol"], row["strike"], row["expiration"])
+        if is_already_open(positions, row["symbol"], row["strike"], row["expiration"], today) or key in staged_contracts:
             continue
         picked.append(row)
-        staged_symbols.add(row["symbol"])
+        staged_contracts.add(key)
     return picked
 
 
@@ -577,7 +587,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
         ann_return = r.get('BARCHART ANNUALIZED RETURN % (at selection)')
         return f"""
-        <div class="card" data-ann-return="{attr(ann_return)}" {data_attrs}>
+        <div class="card" data-ann-return="{attr(ann_return)}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
           <div class="card-head">
             <span class="sym">{_html_escape(r['SYMBOL'])}</span>
             <span class="strike">${r['STRIKE']:g}P</span>
@@ -742,13 +752,44 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     var minVal = minRaw === '' ? -Infinity : parseFloat(minRaw);
     var maxVal = maxRaw === '' ? Infinity : parseFloat(maxRaw);
     var cards = document.querySelectorAll('.card[data-ann-return]');
+
+    // Pass 1: which cards individually clear the ROI range?
+    var passing = [];
+    cards.forEach(function(card) {{
+      var raw = card.getAttribute('data-ann-return');
+      var val = raw === '' ? null : parseFloat(raw);
+      if (noFilter || (val !== null && !isNaN(val) && val >= minVal && val <= maxVal)) {{
+        passing.push(card);
+      }}
+    }});
+
+    // Pass 2: with an actual filter active, only the chronologically FIRST
+    // passing instance per symbol represents "the trade you'd have taken"
+    // on a real entry signal - a later instance of the same symbol that
+    // also clears the bar is suppressed, so one stock can't occupy (or
+    // count toward) the summary more than once at a time.
+    var selected;
+    if (noFilter) {{
+      selected = passing;
+    }} else {{
+      var firstForSymbol = {{}};
+      passing.forEach(function(card) {{
+        var sym = card.getAttribute('data-symbol');
+        var added = card.getAttribute('data-added') || '';
+        var current = firstForSymbol[sym];
+        if (!current || added < current.getAttribute('data-added')) {{
+          firstForSymbol[sym] = card;
+        }}
+      }});
+      selected = Object.keys(firstForSymbol).map(function(sym) {{ return firstForSymbol[sym]; }});
+    }}
+    var selectedSet = new Set(selected);
+
     var shown = 0;
     var openVisible = [];
     var closedVisible = [];
     cards.forEach(function(card) {{
-      var raw = card.getAttribute('data-ann-return');
-      var val = raw === '' ? null : parseFloat(raw);
-      var visible = noFilter || (val !== null && !isNaN(val) && val >= minVal && val <= maxVal);
+      var visible = selectedSet.has(card);
       card.style.display = visible ? '' : 'none';
       if (visible) {{
         shown++;
