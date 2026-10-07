@@ -1986,5 +1986,61 @@
     "potential_return_annual_pct": 122.737,
     "entry_stock_px": 333.8450012207031,
     "added_date": "2026-10-07"
+  },
+  {
+    "symbol": "ABSI",
+    "strike": 9.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.35,
+    "bid": 0.35,
+    "bid_is_approx": false,
+    "ask": 0.45,
+    "ask_is_approx": false,
+    "potential_return_pct": 4.04624,
+    "potential_return_annual_pct": 164.098,
+    "entry_stock_px": 9.158599853515625,
+    "added_date": "2026-10-07"
+  },
+  {
+    "symbol": "MRNA",
+    "strike": 190.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 7.0,
+    "bid": 6.75,
+    "bid_is_approx": false,
+    "ask": 7.3,
+    "ask_is_approx": false,
+    "potential_return_pct": 3.82514,
+    "potential_return_annual_pct": 155.131,
+    "entry_stock_px": 196.25,
+    "added_date": "2026-10-07"
+  },
+  {
+    "symbol": "XRX",
+    "strike": 3.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.1,
+    "bid": 0.1,
+    "bid_is_approx": false,
+    "ask": 0.15,
+    "ask_is_approx": false,
+    "potential_return_pct": 3.44828,
+    "potential_return_annual_pct": 139.847,
+    "entry_stock_px": 3.0220000743865967,
+    "added_date": "2026-10-07"
+  },
+  {
+    "symbol": "WULF",
+    "strike": 14.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.45,
+    "bid": 0.46,
+    "bid_is_approx": false,
+    "ask": 0.49,
+    "ask_is_approx": false,
+    "potential_return_pct": 3.32103,
+    "potential_return_annual_pct": 134.686,
+    "entry_stock_px": 14.375,
+    "added_date": "2026-10-07"
   }
 ]
