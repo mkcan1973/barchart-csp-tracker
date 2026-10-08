@@ -498,9 +498,11 @@ def _pnl_class(x):
     return "pos" if x >= 0 else "neg"
 
 
-def _fmt_money_paren(x):
-    """Parenthetical companion figure, e.g. ' (mid: $123.45)' - blank if None."""
-    return f" (mid: {_fmt_money(x)})" if x is not None else ""
+def _fmt_money_paren(x, label="mid"):
+    """Parenthetical companion figure, e.g. ' (mid: $123.45)' - blank if None.
+    label can be "exe" on individual cards when the figure is actually a
+    guaranteed exercise value rather than a market mid-price estimate."""
+    return f" ({label}: {_fmt_money(x)})" if x is not None else ""
 
 
 def generate_html_summary(open_rows, closed_rows, totals, today):
@@ -511,11 +513,15 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
     def pnl_row(label, seller_pnl, buyer_pnl, seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi, norm_seller, norm_buyer,
                 seller_quote=None, seller_quote_label="", buyer_quote=None, buyer_quote_label="",
-                seller_mid=None, buyer_mid=None, norm_seller_mid=None, norm_buyer_mid=None):
+                seller_mid=None, buyer_mid=None, norm_seller_mid=None, norm_buyer_mid=None,
+                seller_mid_label="mid", buyer_mid_label="mid"):
         # seller_mid/buyer_mid are on the SAME (raw, per-position) basis as
         # seller_pnl/buyer_pnl; norm_seller_mid/norm_buyer_mid are on the same
         # normalized basis as norm_seller/norm_buyer - each parenthetical
         # must sit next to the number it's actually comparable to.
+        # buyer_mid_label switches to "exe" when buyer_mid is actually a
+        # guaranteed exercise value (buy shares + exercise), not a market
+        # mid-price estimate.
         seller_quote_html = (f'<div class="sub2">{seller_quote_label}: {_fmt_money(seller_quote)}</div>'
                               if seller_quote is not None else '')
         buyer_quote_html = (f'<div class="sub2">{buyer_quote_label}: {_fmt_money(buyer_quote)}</div>'
@@ -525,16 +531,16 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP)</div>
-              <div class="val {_pnl_class(seller_pnl)}">{_fmt_money(seller_pnl)}<span class="{_pnl_class(seller_mid)}">{_fmt_money_paren(seller_mid)}</span></div>
+              <div class="val {_pnl_class(seller_pnl)}">{_fmt_money(seller_pnl)}<span class="{_pnl_class(seller_mid)}">{_fmt_money_paren(seller_mid, seller_mid_label)}</span></div>
               <div class="sub2">ROI {_fmt_pct(seller_roi)} &middot; ann {_fmt_pct(ann_seller_roi)}</div>
-              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_seller)}<span class="{_pnl_class(norm_seller_mid)}">{_fmt_money_paren(norm_seller_mid)}</span></div>
+              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_seller)}<span class="{_pnl_class(norm_seller_mid)}">{_fmt_money_paren(norm_seller_mid, seller_mid_label)}</span></div>
               {seller_quote_html}
             </div>
             <div class="box">
               <div class="label">LONG (bought put)</div>
-              <div class="val {_pnl_class(buyer_pnl)}">{_fmt_money(buyer_pnl)}<span class="{_pnl_class(buyer_mid)}">{_fmt_money_paren(buyer_mid)}</span></div>
+              <div class="val {_pnl_class(buyer_pnl)}">{_fmt_money(buyer_pnl)}<span class="{_pnl_class(buyer_mid)}">{_fmt_money_paren(buyer_mid, buyer_mid_label)}</span></div>
               <div class="sub2">ROI {_fmt_pct(buyer_roi)} &middot; ann {_fmt_pct(ann_buyer_roi)}</div>
-              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_buyer)}<span class="{_pnl_class(norm_buyer_mid)}">{_fmt_money_paren(norm_buyer_mid)}</span></div>
+              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_buyer)}<span class="{_pnl_class(norm_buyer_mid)}">{_fmt_money_paren(norm_buyer_mid, buyer_mid_label)}</span></div>
               {buyer_quote_html}
             </div>
           </div>"""
@@ -567,6 +573,19 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                 f'data-ann-rs="{attr(r["ANNUALIZED ROI % IF SOLD (CSP)"])}" data-ann-rb="{attr(r["ANNUALIZED ROI % IF BOUGHT (long put)"])}"'
             )
         else:
+            # Once buying shares at today's price and exercising the put is
+            # already profitable net of the premium paid (pure intrinsic
+            # value, independent of the option's own - possibly thin -
+            # market quotes), that guaranteed value is a more useful
+            # reference than a market mid-price guess - build_summary()
+            # already substituted it into UNREALIZED/NORM P/L (MID) IF
+            # BOUGHT for this position. Relabel it "exe" here so the card
+            # makes clear it's a guaranteed exercise value, not a market
+            # estimate. Doesn't apply to the SHORT side - a seller has no
+            # equivalent voluntary exercise path.
+            buyer_mid_is_exercise = r.get("BUYER MID IS EXERCISE", False)
+            buyer_mid_label = "exe" if buyer_mid_is_exercise else "mid"
+
             rows_html = pnl_row("ACTUAL (real quote, crossing the spread to close now)",
                                  r["UNREALIZED P/L (ACTUAL) IF SOLD (CSP)"], r["UNREALIZED P/L (ACTUAL) IF BOUGHT (long put)"],
                                  r["ROI % (ACTUAL) IF SOLD (CSP)"], r["ROI % (ACTUAL) IF BOUGHT (long put)"],
@@ -576,7 +595,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                                  buyer_quote=r["CURRENT OPTION BID"], buyer_quote_label="current bid (receive to close)",
                                  seller_mid=r["UNREALIZED P/L (MID) IF SOLD (CSP)"],
                                  buyer_mid=r["UNREALIZED P/L (MID) IF BOUGHT (long put)"],
-                                 norm_seller_mid=r[mid_norm_seller_key], norm_buyer_mid=r[mid_norm_buyer_key])
+                                 norm_seller_mid=r[mid_norm_seller_key], norm_buyer_mid=r[mid_norm_buyer_key],
+                                 buyer_mid_label=buyer_mid_label)
+            if buyer_mid_is_exercise:
+                rows_html += ('<div class="sub2">Long "exe" = buy shares + exercise the put '
+                               '(guaranteed, independent of the option\'s own market quotes)</div>')
             data_attrs = (
                 f'data-kind="open" '
                 f'data-norm-as="{attr(r[actual_norm_seller_key])}" data-norm-ab="{attr(r[actual_norm_buyer_key])}" '
@@ -900,8 +923,20 @@ def build_summary(positions, today):
         # "Mid": same live quote as "actual," but priced at the mid rather
         # than crossing the spread - a less pessimistic reference figure,
         # shown only as a parenthetical alongside the "actual" totals.
+        #
+        # LONG/buyer side exception: once buying shares and exercising the
+        # put is already profitable on pure intrinsic value alone, that
+        # guaranteed value is more relevant than a market mid-price guess -
+        # substitute it in here (the aggregate total stays labeled "mid" for
+        # simplicity even though some positions' contribution is really an
+        # exercise value; per-card display relabels those specifically to
+        # "exe" so it's clear what they actually represent).
         mid_seller_pnl, mid_buyer_pnl = calc_mid_close_pnl(p["bid"], p["ask"], current_bid, current_ask)
         mid_norm_seller, mid_norm_buyer = normalize_pnl(mid_seller_pnl, mid_buyer_pnl, p["strike"], p["ask"])
+        buyer_mid_is_exercise = fict_buyer_pnl is not None and fict_buyer_pnl > 0
+        if buyer_mid_is_exercise:
+            mid_buyer_pnl = fict_buyer_pnl
+            mid_norm_buyer = fict_norm_buyer
         open_norm_mid.append((mid_norm_seller, mid_norm_buyer))
 
         open_rows.append({
@@ -940,6 +975,7 @@ def build_summary(positions, today):
             "UNREALIZED P/L (MID) IF BOUGHT (long put)": mid_buyer_pnl,
             f"NORM P/L (MID) IF SOLD (${NORMALIZED_RISK_USD:.0f} risk)": mid_norm_seller,
             f"NORM P/L (MID) IF BOUGHT (${NORMALIZED_RISK_USD:.0f} risk)": mid_norm_buyer,
+            "BUYER MID IS EXERCISE": buyer_mid_is_exercise,
             "ADDED": p["added_date"],
         })
 
