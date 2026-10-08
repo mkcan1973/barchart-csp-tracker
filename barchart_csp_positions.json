@@ -11,7 +11,9 @@
     "potential_return_pct": 13.6364,
     "potential_return_annual_pct": 216.403,
     "entry_stock_px": 2.799999952316284,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ALHC",
@@ -25,7 +27,9 @@
     "potential_return_pct": 7.91367,
     "potential_return_annual_pct": 125.586,
     "entry_stock_px": 7.860000133514404,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": 44.368423,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "PENG",
@@ -39,7 +43,9 @@
     "potential_return_pct": 7.52688,
     "potential_return_annual_pct": 119.448,
     "entry_stock_px": 53.880001068115234,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": 27.815386,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "EOSE",
@@ -53,7 +59,9 @@
     "potential_return_pct": 17.8451,
     "potential_return_annual_pct": 112.301,
     "entry_stock_px": 3.5799999237060547,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ARCT",
@@ -67,7 +75,9 @@
     "potential_return_pct": 6.83761,
     "potential_return_annual_pct": 108.51,
     "entry_stock_px": 13.300000190734863,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "NBIS",
@@ -81,7 +91,9 @@
     "potential_return_pct": 6.82204,
     "potential_return_annual_pct": 108.263,
     "entry_stock_px": 226.61000061035156,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": 177.35938,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CRML",
@@ -95,7 +107,9 @@
     "potential_return_pct": 17.1875,
     "potential_return_annual_pct": 108.163,
     "entry_stock_px": 7.71999979019165,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "GLXY",
@@ -109,7 +123,9 @@
     "potential_return_pct": 6.74637,
     "potential_return_annual_pct": 107.062,
     "entry_stock_px": 25.790000915527344,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "BB",
@@ -123,7 +139,9 @@
     "potential_return_pct": 6.38298,
     "potential_return_annual_pct": 101.295,
     "entry_stock_px": 8.380000114440918,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": 67.5,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "WOLF",
@@ -137,7 +155,9 @@
     "potential_return_pct": 6.15711,
     "potential_return_annual_pct": 97.7107,
     "entry_stock_px": 27.139999389648438,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "LCID",
@@ -151,7 +171,9 @@
     "potential_return_pct": 6.1008,
     "potential_return_annual_pct": 96.817,
     "entry_stock_px": 4.159999847412109,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "APLD",
@@ -165,7 +187,9 @@
     "potential_return_pct": 5.97711,
     "potential_return_annual_pct": 94.8541,
     "entry_stock_px": 27.229999542236328,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "IREN",
@@ -179,7 +203,9 @@
     "potential_return_pct": 5.9322,
     "potential_return_annual_pct": 94.1415,
     "entry_stock_px": 47.04999923706055,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "AAOI",
@@ -193,7 +219,9 @@
     "potential_return_pct": 5.90858,
     "potential_return_annual_pct": 93.7667,
     "entry_stock_px": 101.05999755859375,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "FRVO",
@@ -207,7 +235,9 @@
     "potential_return_pct": 5.6338,
     "potential_return_annual_pct": 89.406,
     "entry_stock_px": 16.350000381469727,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SMCI",
@@ -221,7 +251,9 @@
     "potential_return_pct": 5.62451,
     "potential_return_annual_pct": 89.2584,
     "entry_stock_px": 41.439998626708984,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": 13.125153,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CIFR",
@@ -235,7 +267,9 @@
     "potential_return_pct": 14.094,
     "potential_return_annual_pct": 88.6947,
     "entry_stock_px": 18.350000381469727,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "PCT",
@@ -249,7 +283,9 @@
     "potential_return_pct": 13.6364,
     "potential_return_annual_pct": 85.815,
     "entry_stock_px": 5.150000095367432,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "MARA",
@@ -263,7 +299,9 @@
     "potential_return_pct": 5.39629,
     "potential_return_annual_pct": 85.6368,
     "entry_stock_px": 13.350000381469727,
-    "added_date": "2026-09-23"
+    "added_date": "2026-09-23",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SECZ",
@@ -277,7 +315,9 @@
     "potential_return_pct": 11.5242,
     "potential_return_annual_pct": 191.196,
     "entry_stock_px": 15.5649995803833,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "GLND",
@@ -291,7 +331,9 @@
     "potential_return_pct": 11.1111,
     "potential_return_annual_pct": 184.343,
     "entry_stock_px": 4.749899864196777,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "MSTR",
@@ -305,7 +347,9 @@
     "potential_return_pct": 5.15604,
     "potential_return_annual_pct": 85.5434,
     "entry_stock_px": 162.69000244140625,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "BMNR",
@@ -319,7 +363,9 @@
     "potential_return_pct": 5.13546,
     "potential_return_annual_pct": 85.202,
     "entry_stock_px": 27.815000534057617,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "INTC",
@@ -333,7 +379,9 @@
     "potential_return_pct": 4.98915,
     "potential_return_annual_pct": 82.7746,
     "entry_stock_px": 124.05000305175781,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "MRNA",
@@ -347,7 +395,9 @@
     "potential_return_pct": 4.77658,
     "potential_return_annual_pct": 79.2478,
     "entry_stock_px": 186.33999633789062,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ONDS",
@@ -361,7 +411,9 @@
     "potential_return_pct": 4.47761,
     "potential_return_annual_pct": 74.2877,
     "entry_stock_px": 7.445000171661377,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "BE",
@@ -375,7 +427,9 @@
     "potential_return_pct": 4.2119,
     "potential_return_annual_pct": 69.8792,
     "entry_stock_px": 257.7699890136719,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": 363.57895,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "MU",
@@ -389,7 +443,9 @@
     "potential_return_pct": 3.70293,
     "potential_return_annual_pct": 61.4349,
     "entry_stock_px": 1052.2650146484375,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": 14.335799,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "AXTI",
@@ -403,7 +459,9 @@
     "potential_return_pct": 9.48905,
     "potential_return_annual_pct": 60.7632,
     "entry_stock_px": 73.16500091552734,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": 1839.75,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "PLTR",
@@ -417,7 +475,9 @@
     "potential_return_pct": 3.55444,
     "potential_return_annual_pct": 58.9713,
     "entry_stock_px": 191.0050048828125,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": 171.65517,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "USAR",
@@ -431,7 +491,9 @@
     "potential_return_pct": 9.03427,
     "potential_return_annual_pct": 57.851,
     "entry_stock_px": 15.329999923706055,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "AMD",
@@ -445,7 +507,9 @@
     "potential_return_pct": 3.48396,
     "potential_return_annual_pct": 57.8021,
     "entry_stock_px": 615.72998046875,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": 161.91327,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "U",
@@ -459,7 +523,9 @@
     "potential_return_pct": 3.22581,
     "potential_return_annual_pct": 53.5191,
     "entry_stock_px": 43.30500030517578,
-    "added_date": "2026-09-24"
+    "added_date": "2026-09-24",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "WULF",
@@ -473,7 +539,9 @@
     "potential_return_pct": 5.70825,
     "potential_return_annual_pct": 99.2147,
     "entry_stock_px": 15.625,
-    "added_date": "2026-09-25"
+    "added_date": "2026-09-25",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CLSK",
@@ -487,7 +555,9 @@
     "potential_return_pct": 5.51948,
     "potential_return_annual_pct": 95.9338,
     "entry_stock_px": 13.699999809265137,
-    "added_date": "2026-09-25"
+    "added_date": "2026-09-25",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "RKLB",
@@ -501,7 +571,9 @@
     "potential_return_pct": 5.34125,
     "potential_return_annual_pct": 92.8359,
     "entry_stock_px": 73.18599700927734,
-    "added_date": "2026-09-25"
+    "added_date": "2026-09-25",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "HOOD",
@@ -515,7 +587,9 @@
     "potential_return_pct": 4.40309,
     "potential_return_annual_pct": 76.5298,
     "entry_stock_px": 118.6178970336914,
-    "added_date": "2026-09-25"
+    "added_date": "2026-09-25",
+    "pe_at_entry": 47.361237,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "P",
@@ -529,7 +603,9 @@
     "potential_return_pct": 4.16667,
     "potential_return_annual_pct": 72.4206,
     "entry_stock_px": 124.58999633789062,
-    "added_date": "2026-09-25"
+    "added_date": "2026-09-25",
+    "pe_at_entry": 213.27397,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "MRVL",
@@ -543,7 +619,9 @@
     "potential_return_pct": 3.98981,
     "potential_return_annual_pct": 69.3468,
     "entry_stock_px": 262.1498107910156,
-    "added_date": "2026-09-25"
+    "added_date": "2026-09-25",
+    "pe_at_entry": 90.570724,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CRWD",
@@ -557,7 +635,9 @@
     "potential_return_pct": 3.97172,
     "potential_return_annual_pct": 69.0323,
     "entry_stock_px": 256.8900146484375,
-    "added_date": "2026-09-25"
+    "added_date": "2026-09-25",
+    "pe_at_entry": 5314.0,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "QURE",
@@ -571,7 +651,9 @@
     "potential_return_pct": 12.9032,
     "potential_return_annual_pct": 261.649,
     "entry_stock_px": 37.68000030517578,
-    "added_date": "2026-09-28"
+    "added_date": "2026-09-28",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "IONQ",
@@ -585,7 +667,9 @@
     "potential_return_pct": 5.06654,
     "potential_return_annual_pct": 102.738,
     "entry_stock_px": 46.06999969482422,
-    "added_date": "2026-09-28"
+    "added_date": "2026-09-28",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ARM",
@@ -599,7 +683,9 @@
     "potential_return_pct": 4.42854,
     "potential_return_annual_pct": 89.801,
     "entry_stock_px": 283.32000732421875,
-    "added_date": "2026-09-28"
+    "added_date": "2026-09-28",
+    "pe_at_entry": 289.6804,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SNDK",
@@ -613,7 +699,9 @@
     "potential_return_pct": 4.20737,
     "potential_return_annual_pct": 85.3162,
     "entry_stock_px": 1686.849853515625,
-    "added_date": "2026-09-28"
+    "added_date": "2026-09-28",
+    "pe_at_entry": 22.172585,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CRWV",
@@ -627,7 +715,9 @@
     "potential_return_pct": 3.96361,
     "potential_return_annual_pct": 80.3733,
     "entry_stock_px": 84.1449966430664,
-    "added_date": "2026-09-28"
+    "added_date": "2026-09-28",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SPCE",
@@ -641,7 +731,9 @@
     "potential_return_pct": 3.80623,
     "potential_return_annual_pct": 77.1819,
     "entry_stock_px": 3.194999933242798,
-    "added_date": "2026-09-28"
+    "added_date": "2026-09-28",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "PSKY",
@@ -655,7 +747,9 @@
     "potential_return_pct": 3.73444,
     "potential_return_annual_pct": 75.7261,
     "entry_stock_px": 10.145000457763672,
-    "added_date": "2026-09-28"
+    "added_date": "2026-09-28",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "LUNR",
@@ -669,7 +763,9 @@
     "potential_return_pct": 4.47761,
     "potential_return_annual_pct": 96.137,
     "entry_stock_px": 14.904999732971191,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "FCEL",
@@ -683,7 +779,9 @@
     "potential_return_pct": 4.23453,
     "potential_return_annual_pct": 90.9178,
     "entry_stock_px": 17.295000076293945,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "FLEX",
@@ -697,7 +795,9 @@
     "potential_return_pct": 4.16667,
     "potential_return_annual_pct": 89.4608,
     "entry_stock_px": 113.08999633789062,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": 44.899616,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "NVTS",
@@ -711,7 +811,9 @@
     "potential_return_pct": 3.96975,
     "potential_return_annual_pct": 85.233,
     "entry_stock_px": 11.90999984741211,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ACHR",
@@ -725,7 +827,9 @@
     "potential_return_pct": 3.73444,
     "potential_return_annual_pct": 80.1806,
     "entry_stock_px": 5.245200157165527,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "NKE",
@@ -739,7 +843,9 @@
     "potential_return_pct": 3.58094,
     "potential_return_annual_pct": 76.8849,
     "entry_stock_px": 36.125,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": 16.45678,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CORZ",
@@ -753,7 +859,9 @@
     "potential_return_pct": 10.5736,
     "potential_return_annual_pct": 74.2185,
     "entry_stock_px": 16.989999771118164,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "NOW",
@@ -767,7 +875,9 @@
     "potential_return_pct": 3.39257,
     "potential_return_annual_pct": 72.8404,
     "entry_stock_px": 131.8800048828125,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": 85.1875,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "QBTS",
@@ -781,7 +891,9 @@
     "potential_return_pct": 10.117,
     "potential_return_annual_pct": 71.0135,
     "entry_stock_px": 16.670000076293945,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "BW",
@@ -795,7 +907,9 @@
     "potential_return_pct": 9.89011,
     "potential_return_annual_pct": 69.421,
     "entry_stock_px": 5.840000152587891,
-    "added_date": "2026-09-29"
+    "added_date": "2026-09-29",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "LPTH",
@@ -809,7 +923,9 @@
     "potential_return_pct": 5.26316,
     "potential_return_annual_pct": 120.066,
     "entry_stock_px": 10.395000457763672,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "AMC",
@@ -823,7 +939,9 @@
     "potential_return_pct": 5.26316,
     "potential_return_annual_pct": 120.066,
     "entry_stock_px": 3.134999990463257,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ASTS",
@@ -837,7 +955,9 @@
     "potential_return_pct": 4.96851,
     "potential_return_annual_pct": 113.344,
     "entry_stock_px": 62.150001525878906,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CYPH",
@@ -851,7 +971,9 @@
     "potential_return_pct": 13.6364,
     "potential_return_annual_pct": 97.5936,
     "entry_stock_px": 3.4049999713897705,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": 4.142857,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CSIQ",
@@ -865,7 +987,9 @@
     "potential_return_pct": 4.2654,
     "potential_return_annual_pct": 97.3045,
     "entry_stock_px": 11.479999542236328,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "FWDI",
@@ -879,7 +1003,9 @@
     "potential_return_pct": 4.16667,
     "potential_return_annual_pct": 95.0521,
     "entry_stock_px": 7.989999771118164,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CNXC",
@@ -893,7 +1019,9 @@
     "potential_return_pct": 4.16667,
     "potential_return_annual_pct": 95.0521,
     "entry_stock_px": 26.58530044555664,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CMPX",
@@ -907,7 +1035,9 @@
     "potential_return_pct": 25,
     "potential_return_annual_pct": 178.922,
     "entry_stock_px": 1.0399999618530273,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SGML",
@@ -921,7 +1051,9 @@
     "potential_return_pct": 5.26316,
     "potential_return_annual_pct": 120.066,
     "entry_stock_px": 9.399999618530273,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "IBRX",
@@ -935,7 +1067,9 @@
     "potential_return_pct": 5.26316,
     "potential_return_annual_pct": 120.066,
     "entry_stock_px": 9.4399995803833,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "LQDA",
@@ -949,7 +1083,9 @@
     "potential_return_pct": 5.26316,
     "potential_return_annual_pct": 120.066,
     "entry_stock_px": 30.260000228881836,
-    "added_date": "2026-09-30"
+    "added_date": "2026-09-30",
+    "pe_at_entry": 20.309353,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CLOV",
@@ -963,7 +1099,9 @@
     "potential_return_pct": 4.71204,
     "potential_return_annual_pct": 114.66,
     "entry_stock_px": 4.159999847412109,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "GLAS",
@@ -977,7 +1115,9 @@
     "potential_return_pct": 4.16667,
     "potential_return_annual_pct": 101.389,
     "entry_stock_px": 5.349999904632568,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "RUM",
@@ -991,7 +1131,9 @@
     "potential_return_pct": 3.7037,
     "potential_return_annual_pct": 90.1235,
     "entry_stock_px": 7.525000095367432,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "JBLU",
@@ -1005,7 +1147,9 @@
     "potential_return_pct": 3.62694,
     "potential_return_annual_pct": 88.2556,
     "entry_stock_px": 4.15500020980835,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CBRS",
@@ -1019,7 +1163,9 @@
     "potential_return_pct": 3.57815,
     "potential_return_annual_pct": 87.0684,
     "entry_stock_px": 173.25,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "FHTX",
@@ -1033,7 +1179,9 @@
     "potential_return_pct": 6.38298,
     "potential_return_annual_pct": 155.319,
     "entry_stock_px": 2.7049999237060547,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "BTDR",
@@ -1047,7 +1195,9 @@
     "potential_return_pct": 5.26316,
     "potential_return_annual_pct": 128.07,
     "entry_stock_px": 10.680000305175781,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "TLRY",
@@ -1061,7 +1211,9 @@
     "potential_return_pct": 4.79042,
     "potential_return_annual_pct": 116.567,
     "entry_stock_px": 3.640000104904175,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SHAZ",
@@ -1075,7 +1227,9 @@
     "potential_return_pct": 4.28737,
     "potential_return_annual_pct": 104.326,
     "entry_stock_px": 51.65999984741211,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "RIOT",
@@ -1089,7 +1243,9 @@
     "potential_return_pct": 4.16667,
     "potential_return_annual_pct": 101.389,
     "entry_stock_px": 19.584999084472656,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "IRON",
@@ -1103,7 +1259,9 @@
     "potential_return_pct": 17.2708,
     "potential_return_annual_pct": 126.077,
     "entry_stock_px": 64.22000122070312,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SAIL",
@@ -1117,7 +1275,9 @@
     "potential_return_pct": 4.43864,
     "potential_return_annual_pct": 108.007,
     "entry_stock_px": 20.59000015258789,
-    "added_date": "2026-10-01"
+    "added_date": "2026-10-01",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "GFL",
@@ -1131,7 +1291,9 @@
     "potential_return_pct": 4.84928,
     "potential_return_annual_pct": 126.428,
     "entry_stock_px": 41.4900016784668,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ASST",
@@ -1145,7 +1307,9 @@
     "potential_return_pct": 4.38413,
     "potential_return_annual_pct": 114.301,
     "entry_stock_px": 30.3799991607666,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "WDC",
@@ -1159,7 +1323,9 @@
     "potential_return_pct": 4.02774,
     "potential_return_annual_pct": 105.009,
     "entry_stock_px": 398.3999938964844,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": 14.860513,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "PBF",
@@ -1173,7 +1339,9 @@
     "potential_return_pct": 3.80623,
     "potential_return_annual_pct": 99.2338,
     "entry_stock_px": 79.4000015258789,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": 7.670335,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SMR",
@@ -1187,7 +1355,9 @@
     "potential_return_pct": 3.73444,
     "potential_return_annual_pct": 97.3622,
     "entry_stock_px": 7.809999942779541,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "FSLY",
@@ -1201,7 +1371,9 @@
     "potential_return_pct": 4.16667,
     "potential_return_annual_pct": 108.631,
     "entry_stock_px": 26.219999313354492,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CRCL",
@@ -1215,7 +1387,9 @@
     "potential_return_pct": 3.8961,
     "potential_return_annual_pct": 101.577,
     "entry_stock_px": 80.80000305175781,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": 54.458904,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "HUT",
@@ -1229,7 +1403,9 @@
     "potential_return_pct": 12.9568,
     "potential_return_annual_pct": 96.515,
     "entry_stock_px": 88.34500122070312,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "NUAI",
@@ -1243,7 +1419,9 @@
     "potential_return_pct": 4.34783,
     "potential_return_annual_pct": 113.354,
     "entry_stock_px": 6.275000095367432,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ALOY",
@@ -1257,7 +1435,9 @@
     "potential_return_pct": 4.16667,
     "potential_return_annual_pct": 108.631,
     "entry_stock_px": 8.118499755859375,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "HIMS",
@@ -1271,7 +1451,9 @@
     "potential_return_pct": 3.74213,
     "potential_return_annual_pct": 97.5626,
     "entry_stock_px": 29.073299407958984,
-    "added_date": "2026-10-02"
+    "added_date": "2026-10-02",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "TE",
@@ -1285,7 +1467,9 @@
     "potential_return_pct": 4.47761,
     "potential_return_annual_pct": 148.575,
     "entry_stock_px": 3.674999952316284,
-    "added_date": "2026-10-05"
+    "added_date": "2026-10-05",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "PDSB",
@@ -1299,7 +1483,9 @@
     "potential_return_pct": 11.1111,
     "potential_return_annual_pct": 368.687,
     "entry_stock_px": 1.2800999879837036,
-    "added_date": "2026-10-05"
+    "added_date": "2026-10-05",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "AEHR",
@@ -1313,7 +1499,9 @@
     "potential_return_pct": 4.05827,
     "potential_return_annual_pct": 134.661,
     "entry_stock_px": 106.72000122070312,
-    "added_date": "2026-10-05"
+    "added_date": "2026-10-05",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "KOD",
@@ -1327,7 +1515,9 @@
     "potential_return_pct": 3.56732,
     "potential_return_annual_pct": 118.37,
     "entry_stock_px": 94.73999786376953,
-    "added_date": "2026-10-05"
+    "added_date": "2026-10-05",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "PENG",
@@ -1341,7 +1531,9 @@
     "potential_return_pct": 5.26316,
     "potential_return_annual_pct": 192.105,
     "entry_stock_px": 60.33000183105469,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": 27.811539,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "DNA",
@@ -1355,7 +1547,9 @@
     "potential_return_pct": 4.80349,
     "potential_return_annual_pct": 175.328,
     "entry_stock_px": 13.163100242614746,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "APLD",
@@ -1369,7 +1563,9 @@
     "potential_return_pct": 4.57516,
     "potential_return_annual_pct": 166.993,
     "entry_stock_px": 25.18000030517578,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CIFR",
@@ -1383,7 +1579,9 @@
     "potential_return_pct": 3.9501,
     "potential_return_annual_pct": 144.179,
     "entry_stock_px": 15.600099563598633,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "MRNA",
@@ -1397,7 +1595,9 @@
     "potential_return_pct": 3.84507,
     "potential_return_annual_pct": 140.345,
     "entry_stock_px": 193.09979248046875,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CLOV",
@@ -1411,7 +1611,9 @@
     "potential_return_pct": 3.68664,
     "potential_return_annual_pct": 134.562,
     "entry_stock_px": 4.644999980926514,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "WULF",
@@ -1425,7 +1627,9 @@
     "potential_return_pct": 3.64546,
     "potential_return_annual_pct": 133.059,
     "entry_stock_px": 14.85990047454834,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CLSK",
@@ -1439,7 +1643,9 @@
     "potential_return_pct": 3.27022,
     "potential_return_annual_pct": 119.363,
     "entry_stock_px": 12.470000267028809,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "IBRX",
@@ -1453,7 +1659,9 @@
     "potential_return_pct": 3.26087,
     "potential_return_annual_pct": 119.022,
     "entry_stock_px": 9.96500015258789,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SMCI",
@@ -1467,7 +1675,9 @@
     "potential_return_pct": 3.23051,
     "potential_return_annual_pct": 117.914,
     "entry_stock_px": 43.44499969482422,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": 13.120522,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "BE",
@@ -1481,7 +1691,9 @@
     "potential_return_pct": 3.1861,
     "potential_return_annual_pct": 116.293,
     "entry_stock_px": 295.7099914550781,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": 363.61093,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "APLD",
@@ -1495,7 +1707,9 @@
     "potential_return_pct": 3.13901,
     "potential_return_annual_pct": 114.574,
     "entry_stock_px": 25.18000030517578,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "PURR",
@@ -1509,7 +1723,9 @@
     "potential_return_pct": 3.00429,
     "potential_return_annual_pct": 109.657,
     "entry_stock_px": 12.885000228881836,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": 3.4252336,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ILMN",
@@ -1523,7 +1739,9 @@
     "potential_return_pct": 2.97483,
     "potential_return_annual_pct": 108.581,
     "entry_stock_px": 275.364990234375,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": 48.498135,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "STX",
@@ -1537,7 +1755,9 @@
     "potential_return_pct": 2.9601,
     "potential_return_annual_pct": 108.044,
     "entry_stock_px": 814.5050048828125,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": 56.52739,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CRML",
@@ -1551,7 +1771,9 @@
     "potential_return_pct": 2.94118,
     "potential_return_annual_pct": 107.353,
     "entry_stock_px": 7.510000228881836,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "HTZ",
@@ -1565,7 +1787,9 @@
     "potential_return_pct": 8.69565,
     "potential_return_annual_pct": 317.391,
     "entry_stock_px": 2.050100088119507,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "HTZ",
@@ -1579,7 +1803,9 @@
     "potential_return_pct": 19.0476,
     "potential_return_annual_pct": 154.497,
     "entry_stock_px": 2.050100088119507,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "TWST",
@@ -1593,7 +1819,9 @@
     "potential_return_pct": 3.8485,
     "potential_return_annual_pct": 140.47,
     "entry_stock_px": 172.1199951171875,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "LQDA",
@@ -1607,7 +1835,9 @@
     "potential_return_pct": 3.77358,
     "potential_return_annual_pct": 137.736,
     "entry_stock_px": 26.215999603271484,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": 20.330936,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SMR",
@@ -1621,7 +1851,9 @@
     "potential_return_pct": 3.76135,
     "potential_return_annual_pct": 137.289,
     "entry_stock_px": 8.225000381469727,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "NBIS",
@@ -1635,7 +1867,9 @@
     "potential_return_pct": 3.6379,
     "potential_return_annual_pct": 132.783,
     "entry_stock_px": 253.02000427246094,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": 177.70703,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ABCL",
@@ -1649,7 +1883,9 @@
     "potential_return_pct": 3.58566,
     "potential_return_annual_pct": 130.876,
     "entry_stock_px": 13.194999694824219,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "GLND",
@@ -1663,7 +1899,9 @@
     "potential_return_pct": 22.449,
     "potential_return_annual_pct": 182.086,
     "entry_stock_px": 2.9916999340057373,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "PDSB",
@@ -1677,7 +1915,9 @@
     "potential_return_pct": 17.6471,
     "potential_return_annual_pct": 143.137,
     "entry_stock_px": 1.0549999475479126,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "OKLO",
@@ -1691,7 +1931,9 @@
     "potential_return_pct": 3.48584,
     "potential_return_annual_pct": 127.233,
     "entry_stock_px": 38.582298278808594,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "XE",
@@ -1705,7 +1947,9 @@
     "potential_return_pct": 3.44828,
     "potential_return_annual_pct": 125.862,
     "entry_stock_px": 15.4350004196167,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "TEM",
@@ -1719,7 +1963,9 @@
     "potential_return_pct": 3.38207,
     "potential_return_annual_pct": 123.446,
     "entry_stock_px": 71.89600372314453,
-    "added_date": "2026-10-06"
+    "added_date": "2026-10-06",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "EOSE",
@@ -1733,7 +1979,9 @@
     "potential_return_pct": 3.80623,
     "potential_return_annual_pct": 154.364,
     "entry_stock_px": 3.0850000381469727,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CIFR",
@@ -1747,7 +1995,9 @@
     "potential_return_pct": 3.62694,
     "potential_return_annual_pct": 147.093,
     "entry_stock_px": 14.704999923706055,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "AAOI",
@@ -1761,7 +2011,9 @@
     "potential_return_pct": 3.51035,
     "potential_return_annual_pct": 142.364,
     "entry_stock_px": 121.33999633789062,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "NBIS",
@@ -1775,7 +2027,9 @@
     "potential_return_pct": 3.32435,
     "potential_return_annual_pct": 134.821,
     "entry_stock_px": 236.25,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": 177.70314,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "MARA",
@@ -1789,7 +2043,9 @@
     "potential_return_pct": 3.30579,
     "potential_return_annual_pct": 134.068,
     "entry_stock_px": 10.274999618530273,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "LEVI",
@@ -1803,7 +2059,9 @@
     "potential_return_pct": 3.26087,
     "potential_return_annual_pct": 132.246,
     "entry_stock_px": 19.514999389648438,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": 13.417857,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "CRWV",
@@ -1817,7 +2075,9 @@
     "potential_return_pct": 3.15461,
     "potential_return_annual_pct": 127.937,
     "entry_stock_px": 88.47000122070312,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "IREN",
@@ -1831,7 +2091,9 @@
     "potential_return_pct": 3.14875,
     "potential_return_annual_pct": 127.699,
     "entry_stock_px": 38.900001525878906,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ASTS",
@@ -1845,7 +2107,9 @@
     "potential_return_pct": 3.14779,
     "potential_return_annual_pct": 127.66,
     "entry_stock_px": 59.380001068115234,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SMCI",
@@ -1859,7 +2123,9 @@
     "potential_return_pct": 3.14224,
     "potential_return_annual_pct": 127.435,
     "entry_stock_px": 44.071998596191406,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": 13.121166,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "AXTI",
@@ -1873,7 +2139,9 @@
     "potential_return_pct": 3.09278,
     "potential_return_annual_pct": 125.43,
     "entry_stock_px": 81.53500366210938,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": 1841.5001,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "BE",
@@ -1887,7 +2155,9 @@
     "potential_return_pct": 3.09278,
     "potential_return_annual_pct": 125.43,
     "entry_stock_px": 288.1000061035156,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": 363.48026,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SLS",
@@ -1901,7 +2171,9 @@
     "potential_return_pct": 3.77358,
     "potential_return_annual_pct": 153.04,
     "entry_stock_px": 11.3100004196167,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "FCEL",
@@ -1915,7 +2187,9 @@
     "potential_return_pct": 3.34347,
     "potential_return_annual_pct": 135.596,
     "entry_stock_px": 17.810100555419922,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "APLD",
@@ -1929,7 +2203,9 @@
     "potential_return_pct": 3.14112,
     "potential_return_annual_pct": 127.39,
     "entry_stock_px": 23.885000228881836,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "SMCI",
@@ -1943,7 +2219,9 @@
     "potential_return_pct": 3.12945,
     "potential_return_annual_pct": 126.916,
     "entry_stock_px": 44.64500045776367,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": 13.121166,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "BE",
@@ -1957,7 +2235,9 @@
     "potential_return_pct": 3.12101,
     "potential_return_annual_pct": 126.574,
     "entry_stock_px": 290.07000732421875,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": 363.63156,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "BMNR",
@@ -1971,7 +2251,9 @@
     "potential_return_pct": 3.04852,
     "potential_return_annual_pct": 123.634,
     "entry_stock_px": 24.434999465942383,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "COHR",
@@ -1985,7 +2267,9 @@
     "potential_return_pct": 3.0264,
     "potential_return_annual_pct": 122.737,
     "entry_stock_px": 333.8450012207031,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": 76.3835,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "ABSI",
@@ -1999,7 +2283,9 @@
     "potential_return_pct": 4.04624,
     "potential_return_annual_pct": 164.098,
     "entry_stock_px": 9.158599853515625,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "MRNA",
@@ -2013,7 +2299,9 @@
     "potential_return_pct": 3.82514,
     "potential_return_annual_pct": 155.131,
     "entry_stock_px": 196.25,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "XRX",
@@ -2027,7 +2315,9 @@
     "potential_return_pct": 3.44828,
     "potential_return_annual_pct": 139.847,
     "entry_stock_px": 3.0220000743865967,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
   },
   {
     "symbol": "WULF",
@@ -2041,6 +2331,264 @@
     "potential_return_pct": 3.32103,
     "potential_return_annual_pct": 134.686,
     "entry_stock_px": 14.375,
-    "added_date": "2026-10-07"
+    "added_date": "2026-10-07",
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": true
+  },
+  {
+    "symbol": "CIFR",
+    "strike": 13.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.45,
+    "bid": 0.45,
+    "bid_is_approx": false,
+    "ask": 0.47,
+    "ask_is_approx": false,
+    "potential_return_pct": 3.58566,
+    "potential_return_annual_pct": 163.596,
+    "entry_stock_px": 13.505000114440918,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "AXTI",
+    "strike": 70.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 2.4,
+    "bid": 2.25,
+    "bid_is_approx": false,
+    "ask": 2.65,
+    "ask_is_approx": false,
+    "potential_return_pct": 3.5503,
+    "potential_return_annual_pct": 161.982,
+    "entry_stock_px": 73.6500015258789,
+    "pe_at_entry": 1841.2501,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "WULF",
+    "strike": 13.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.37,
+    "bid": 0.39,
+    "bid_is_approx": false,
+    "ask": 0.4,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.92953,
+    "potential_return_annual_pct": 133.66,
+    "entry_stock_px": 13.414999961853027,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "CRWV",
+    "strike": 82.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 2.3,
+    "bid": 2.23,
+    "bid_is_approx": false,
+    "ask": 2.34,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.86783,
+    "potential_return_annual_pct": 130.845,
+    "entry_stock_px": 84.4135971069336,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "LITE",
+    "strike": 1050.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 28.3,
+    "bid": 28.7,
+    "bid_is_approx": false,
+    "ask": 33.0,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.76989,
+    "potential_return_annual_pct": 126.376,
+    "entry_stock_px": 1069.991943359375,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "BE",
+    "strike": 270.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 7.15,
+    "bid": 7.3,
+    "bid_is_approx": false,
+    "ask": 7.4,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.72018,
+    "potential_return_annual_pct": 124.108,
+    "entry_stock_px": 276.5,
+    "pe_at_entry": 363.8158,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "PENG",
+    "strike": 70.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 1.85,
+    "bid": 2.0,
+    "bid_is_approx": false,
+    "ask": 2.25,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.7146,
+    "potential_return_annual_pct": 123.854,
+    "entry_stock_px": 72.2699966430664,
+    "pe_at_entry": 27.796154,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "AXTI",
+    "strike": 70.0,
+    "expiration": "2026-11-20",
+    "barchart_bid": 8.7,
+    "bid": 8.7,
+    "bid_is_approx": false,
+    "ask": 9.0,
+    "ask_is_approx": false,
+    "potential_return_pct": 14.1925,
+    "potential_return_annual_pct": 120.471,
+    "entry_stock_px": 73.6500015258789,
+    "pe_at_entry": 1841.2501,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "IONQ",
+    "strike": 39.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 1.0,
+    "bid": 1.0,
+    "bid_is_approx": false,
+    "ask": 1.04,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.63158,
+    "potential_return_annual_pct": 120.066,
+    "entry_stock_px": 40.002201080322266,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "MRVL",
+    "strike": 270.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 6.9,
+    "bid": 6.5,
+    "bid_is_approx": false,
+    "ask": 6.75,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.62258,
+    "potential_return_annual_pct": 119.655,
+    "entry_stock_px": 275.7099914550781,
+    "pe_at_entry": 90.69408,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "RKLB",
+    "strike": 68.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 1.72,
+    "bid": 1.81,
+    "bid_is_approx": false,
+    "ask": 1.9,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.59505,
+    "potential_return_annual_pct": 118.399,
+    "entry_stock_px": 68.67990112304688,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "MARA",
+    "strike": 9.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.24,
+    "bid": 0.24,
+    "bid_is_approx": false,
+    "ask": 0.26,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.59179,
+    "potential_return_annual_pct": 118.251,
+    "entry_stock_px": 9.904999732971191,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "QNT",
+    "strike": 40.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 1.0,
+    "bid": 1.0,
+    "bid_is_approx": false,
+    "ask": 1.1,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.5641,
+    "potential_return_annual_pct": 116.987,
+    "entry_stock_px": 41.63999938964844,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "TEM",
+    "strike": 65.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 1.62,
+    "bid": 1.62,
+    "bid_is_approx": false,
+    "ask": 1.82,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.55601,
+    "potential_return_annual_pct": 116.618,
+    "entry_stock_px": 67.61799621582031,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "AAOI",
+    "strike": 105.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 2.6,
+    "bid": 2.7,
+    "bid_is_approx": false,
+    "ask": 2.9,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.53906,
+    "potential_return_annual_pct": 115.845,
+    "entry_stock_px": 111.25,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
+  },
+  {
+    "symbol": "CRWV",
+    "strike": 82.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 2.03,
+    "bid": 2.05,
+    "bid_is_approx": false,
+    "ask": 2.15,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.53845,
+    "potential_return_annual_pct": 115.817,
+    "entry_stock_px": 84.38999938964844,
+    "pe_at_entry": null,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-08"
   }
 ]
