@@ -243,6 +243,19 @@ def get_current_stock_price(symbol):
         return None
 
 
+def get_trailing_pe(symbol):
+    """Trailing P/E at this moment - used both to capture a new position's
+    entry-time PE and, once, to backfill a stand-in for positions tracked
+    before the PE filter existed. None if yfinance has nothing (no/negative
+    earnings, delisted, etc.) - a real, not uncommon case, not an error."""
+    _yf_rate_limiter.wait()
+    try:
+        pe = yf.Ticker(symbol).info.get("trailingPE")
+        return float(pe) if pe is not None else None
+    except Exception:
+        return None
+
+
 def get_price_at(symbol, target_date_str):
     """First available close on/after target_date - used to settle a
     position once its expiration has passed."""
@@ -278,6 +291,22 @@ def load_positions():
 
 def save_positions(positions):
     POSITIONS_FILE.write_text(json.dumps(positions, indent=2))
+
+
+def ensure_pe_at_entry(positions):
+    """One-time backfill: positions tracked before the PE filter existed
+    have no captured entry-time trailing P/E. Fetch today's P/E as an
+    approximate stand-in (flagged), fetched once here and then frozen
+    permanently in the stored record - never re-fetched on later runs, same
+    pattern as the "bid" backward-compat migration. Returns True if any
+    position changed (caller should save_positions() in that case)."""
+    changed = False
+    for p in positions:
+        if "pe_at_entry" not in p:
+            p["pe_at_entry"] = get_trailing_pe(p["symbol"])
+            p["pe_at_entry_is_approx"] = True
+            changed = True
+    return changed
 
 
 def is_already_open(positions, symbol, strike, expiration, today):
@@ -417,6 +446,7 @@ def add_new_position(candidate, today):
     ask = yahoo_ask if yahoo_ask is not None else round(bid * YAHOO_APPROX_ASK_MULTIPLIER, 2)
 
     entry_stock_px = get_current_stock_price(symbol)  # yfinance, not Barchart's snapshot
+    pe_at_entry = get_trailing_pe(symbol)
 
     position = {
         "symbol": symbol,
@@ -430,6 +460,8 @@ def add_new_position(candidate, today):
         "potential_return_pct": candidate.get("potential_return_pct"),
         "potential_return_annual_pct": candidate.get("potential_return_annual_pct"),
         "entry_stock_px": entry_stock_px,
+        "pe_at_entry": pe_at_entry,
+        "pe_at_entry_is_approx": False,
         "added_date": today.isoformat(),
     }
     return position
@@ -609,8 +641,10 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
             )
 
         ann_return = r.get('BARCHART ANNUALIZED RETURN % (at selection)')
+        pe = r.get('PE AT ENTRY')
+        pe_text = f"{pe:.1f}" if pe is not None else "--"
         return f"""
-        <div class="card" data-ann-return="{attr(ann_return)}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
+        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
           <div class="card-head">
             <span class="sym">{_html_escape(r['SYMBOL'])}</span>
             <span class="strike">${r['STRIKE']:g}P</span>
@@ -618,7 +652,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
           </div>
           <div class="sub">{days_line} &middot; Entry {r['ENTRY STOCK PRICE']:.2f} &middot; {price_line}
             &middot; bid {r['BID']:.2f}/{r['BID SOURCE']} &middot; ask {r['ASK']:.2f}/{r['ASK SOURCE']}</div>
-          <div class="sub">Barchart ann. return at selection: {_fmt_pct(ann_return)}</div>
+          <div class="sub">Barchart ann. return at selection: {_fmt_pct(ann_return)} &middot; PE at entry: {pe_text} ({r.get('PE SOURCE', '')})</div>
           {rows_html}
         </div>"""
 
@@ -688,10 +722,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
   <div class="filterbar">
     <label>Min ROI % <input type="number" id="minRoi" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max ROI % <input type="number" id="maxRoi" step="any" placeholder="&infin;" inputmode="decimal"></label>
+    <label>Min PE <input type="number" id="minPe" step="any" placeholder="-&infin;" inputmode="decimal"></label>
+    <label>Max PE <input type="number" id="maxPe" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <button id="applyFilter" type="button">Filter</button>
     <span class="count" id="filterCount"></span>
   </div>
-  <div class="updated" style="margin-top:-6px;">Filters on Barchart's annualized return at selection (frozen at entry, always available)</div>
+  <div class="updated" style="margin-top:-6px;">ROI filters on Barchart's annualized return at selection; PE filters on trailing P/E at entry (both frozen at entry, always available)</div>
 
   <div class="totals">
     <div class="box">
@@ -767,21 +803,34 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
   }}
 
   function applyFilter() {{
-    var minEl = document.getElementById('minRoi');
-    var maxEl = document.getElementById('maxRoi');
-    var minRaw = minEl.value.trim();
-    var maxRaw = maxEl.value.trim();
-    var noFilter = minRaw === '' && maxRaw === '';
-    var minVal = minRaw === '' ? -Infinity : parseFloat(minRaw);
-    var maxVal = maxRaw === '' ? Infinity : parseFloat(maxRaw);
+    var minRoiRaw = document.getElementById('minRoi').value.trim();
+    var maxRoiRaw = document.getElementById('maxRoi').value.trim();
+    var minPeRaw = document.getElementById('minPe').value.trim();
+    var maxPeRaw = document.getElementById('maxPe').value.trim();
+    var noFilter = minRoiRaw === '' && maxRoiRaw === '' && minPeRaw === '' && maxPeRaw === '';
+    var minRoi = minRoiRaw === '' ? -Infinity : parseFloat(minRoiRaw);
+    var maxRoi = maxRoiRaw === '' ? Infinity : parseFloat(maxRoiRaw);
+    var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
+    var maxPe = maxPeRaw === '' ? Infinity : parseFloat(maxPeRaw);
     var cards = document.querySelectorAll('.card[data-ann-return]');
 
-    // Pass 1: which cards individually clear the ROI range?
+    // Pass 1: which cards individually clear BOTH the ROI range and the PE
+    // range? (A range with both bounds blank is treated as "not filtering
+    // on this dimension," so e.g. setting only PE still lets every ROI
+    // value through.)
     var passing = [];
     cards.forEach(function(card) {{
-      var raw = card.getAttribute('data-ann-return');
-      var val = raw === '' ? null : parseFloat(raw);
-      if (noFilter || (val !== null && !isNaN(val) && val >= minVal && val <= maxVal)) {{
+      var roiRaw = card.getAttribute('data-ann-return');
+      var roiVal = roiRaw === '' ? null : parseFloat(roiRaw);
+      var roiOk = (minRoiRaw === '' && maxRoiRaw === '')
+        || (roiVal !== null && !isNaN(roiVal) && roiVal >= minRoi && roiVal <= maxRoi);
+
+      var peRaw = card.getAttribute('data-pe');
+      var peVal = peRaw === '' ? null : parseFloat(peRaw);
+      var peOk = (minPeRaw === '' && maxPeRaw === '')
+        || (peVal !== null && !isNaN(peVal) && peVal >= minPe && peVal <= maxPe);
+
+      if (noFilter || (roiOk && peOk)) {{
         passing.push(card);
       }}
     }});
@@ -853,23 +902,30 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     if (noteEl) noteEl.style.display = noFilter ? 'none' : '';
 
     try {{
-      localStorage.setItem('csp_filter_min', minRaw);
-      localStorage.setItem('csp_filter_max', maxRaw);
+      localStorage.setItem('csp_filter_min_roi', minRoiRaw);
+      localStorage.setItem('csp_filter_max_roi', maxRoiRaw);
+      localStorage.setItem('csp_filter_min_pe', minPeRaw);
+      localStorage.setItem('csp_filter_max_pe', maxPeRaw);
     }} catch (e) {{}}
   }}
 
   var btn = document.getElementById('applyFilter');
   if (btn) btn.addEventListener('click', applyFilter);
-  ['minRoi', 'maxRoi'].forEach(function(id) {{
+  ['minRoi', 'maxRoi', 'minPe', 'maxPe'].forEach(function(id) {{
     var el = document.getElementById(id);
     if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyFilter(); }});
   }});
 
   try {{
-    var savedMin = localStorage.getItem('csp_filter_min');
-    var savedMax = localStorage.getItem('csp_filter_max');
-    if (savedMin) document.getElementById('minRoi').value = savedMin;
-    if (savedMax) document.getElementById('maxRoi').value = savedMax;
+    var saved = {{
+      minRoi: localStorage.getItem('csp_filter_min_roi'),
+      maxRoi: localStorage.getItem('csp_filter_max_roi'),
+      minPe: localStorage.getItem('csp_filter_min_pe'),
+      maxPe: localStorage.getItem('csp_filter_max_pe')
+    }};
+    Object.keys(saved).forEach(function(id) {{
+      if (saved[id]) document.getElementById(id).value = saved[id];
+    }});
   }} catch (e) {{}}
   applyFilter();
 }})();
@@ -949,6 +1005,8 @@ def build_summary(positions, today):
             "BARCHART BID (reference)": p["barchart_bid"],
             "BARCHART RETURN % (at selection)": p.get("potential_return_pct"),
             "BARCHART ANNUALIZED RETURN % (at selection)": p.get("potential_return_annual_pct"),
+            "PE AT ENTRY": p.get("pe_at_entry"),
+            "PE SOURCE": "approx (backfilled)" if p.get("pe_at_entry_is_approx") else "yahoo",
             "BID": p["bid"],
             "BID SOURCE": "approx (barchart)" if p["bid_is_approx"] else "yahoo",
             "ASK": p["ask"],
@@ -1010,6 +1068,8 @@ def build_summary(positions, today):
             "BARCHART BID (reference)": p["barchart_bid"],
             "BARCHART RETURN % (at selection)": p.get("potential_return_pct"),
             "BARCHART ANNUALIZED RETURN % (at selection)": p.get("potential_return_annual_pct"),
+            "PE AT ENTRY": p.get("pe_at_entry"),
+            "PE SOURCE": "approx (backfilled)" if p.get("pe_at_entry_is_approx") else "yahoo",
             "BID": p["bid"],
             "BID SOURCE": "approx (barchart)" if p["bid_is_approx"] else "yahoo",
             "ASK": p["ask"],
@@ -1160,6 +1220,9 @@ def main():
     print(f"  Scraped {len(barchart_rows)} candidates (ranked by annualized potential return desc)")
 
     positions = load_positions()
+
+    if ensure_pe_at_entry(positions):
+        save_positions(positions)
 
     candidates = pick_new_candidates(barchart_rows, positions, today)
     if not candidates:
