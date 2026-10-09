@@ -63,6 +63,11 @@ REALIZED_PNL_PNG = Path("barchart_csp_realized_pnl.png")
 SUMMARY_HTML = Path("index.html")  # repo-root name - GitHub Pages serves this at the clean root URL
 SUMMARY_HTML_URL = "https://mkcan1973.github.io/barchart-csp-tracker/"
 
+# Only ping Discord for new candidates at or above this Barchart annualized
+# return at selection - every new candidate still gets tracked regardless,
+# this only gates the notification.
+DISCORD_NOTIFY_MIN_ANN_RETURN_PCT = 150.0
+
 # If yfinance has no usable bid/ask for the exact contract Barchart
 # surfaced, fall back to Barchart's own bid (flagged) and approximate
 # ask = bid * this multiplier (also flagged) - better than skipping the
@@ -1267,16 +1272,18 @@ def main():
             print(f"      bid: {position['bid']:.2f} ({bid_source})   ask: {position['ask']:.2f} ({ask_source})")
             positions.append(position)
             save_positions(positions)
-            pe_text = f"{position['pe_at_entry']:.1f}" if position.get("pe_at_entry") is not None else "n/a"
-            mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
-            notify_discord(
-                f"**New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
-                f"Barchart ann. return: {candidate.get('potential_return_annual_pct') or 0:.1f}% "
-                f"· PE: {pe_text} · Entry stock px {position['entry_stock_px']:.2f}\n"
-                f"Bid {position['bid']:.2f} ({bid_source})\n"
-                f"```diff\n+ Ask {position['ask']:.2f} ({ask_source})  (mid, buy: {mid_entry:.2f})\n```\n"
-                f"<{SUMMARY_HTML_URL}>"
-            )
+            ann_return = candidate.get("potential_return_annual_pct") or 0
+            if ann_return >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT:
+                pe_text = f"{position['pe_at_entry']:.1f}" if position.get("pe_at_entry") is not None else "n/a"
+                mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
+                notify_discord(
+                    f"**New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
+                    f"Barchart ann. return: {ann_return:.1f}% "
+                    f"· PE: {pe_text} · Entry stock px {position['entry_stock_px']:.2f}\n"
+                    f"Bid {position['bid']:.2f} ({bid_source})\n"
+                    f"```diff\n+ Ask {position['ask']:.2f} ({ask_source})  (mid, buy: {mid_entry:.2f})\n```\n"
+                    f"<{SUMMARY_HTML_URL}>"
+                )
 
     if settle_expired_positions(positions, today):
         save_positions(positions)
