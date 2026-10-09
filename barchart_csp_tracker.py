@@ -129,6 +129,44 @@ def notify_discord(message):
               f"{type(e).__name__}: {e}")
 
 
+def notify_expiration_reminders(positions, open_rows, today):
+    """One-day-ahead heads-up for open positions, sent once per position
+    (flagged on the stored record so it never repeats on a later run that
+    same day, or any day after). The user's actual strategy is going long
+    (buying the put), so the message leads with the LONG-side decision:
+    sell now at the current bid, or exercise if that's already better -
+    reusing the same exercise-vs-mid figure already computed for the card.
+    Returns True if any position was flagged (caller should save_positions())."""
+    changed = False
+    by_key = {(p["symbol"], p["strike"], p["expiration"]): p for p in positions}
+    for r in open_rows:
+        if r["DAYS LEFT"] != 1:
+            continue
+        p = by_key.get((r["SYMBOL"], r["STRIKE"], r["EXPIRATION"]))
+        if p is None or p.get("expiration_reminder_sent"):
+            continue
+
+        stock_px = r.get("CURRENT STOCK PRICE")
+        stock_line = f"Current stock px: {stock_px:.2f}" if stock_px is not None else "Current stock px: no live quote"
+        current_bid = r.get("CURRENT OPTION BID")
+        bid_line = (f"+ Current bid (sell to close): {current_bid:.2f}" if current_bid is not None
+                    else "+ Current bid: no live quote")
+        action_label = "exe" if r.get("BUYER MID IS EXERCISE") else "mid"
+        action_value = r.get("UNREALIZED P/L (MID) IF BOUGHT (long put)")
+        action_line = f"Long P/L ({action_label}): {_fmt_money(action_value)}"
+
+        notify_discord(
+            f"**Expiring tomorrow: {r['SYMBOL']} ${r['STRIKE']:g}P exp {r['EXPIRATION']}**\n"
+            f"{stock_line}\n"
+            f"```diff\n{bid_line}\n```\n"
+            f"{action_line}\n"
+            f"<{SUMMARY_HTML_URL}>"
+        )
+        p["expiration_reminder_sent"] = True
+        changed = True
+    return changed
+
+
 def _install(pkg):
     print(f"  Installing {pkg}...")
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--quiet", pkg])
@@ -1293,6 +1331,9 @@ def main():
     if not open_rows and not totals["settled_count"]:
         print("  No positions to summarize.")
         return
+
+    if notify_expiration_reminders(positions, open_rows, today):
+        save_positions(positions)
 
     if open_rows:
         df = pd.DataFrame(open_rows).sort_values("DAYS LEFT")
