@@ -1268,12 +1268,13 @@ def main():
             positions.append(position)
             save_positions(positions)
             pe_text = f"{position['pe_at_entry']:.1f}" if position.get("pe_at_entry") is not None else "n/a"
+            mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
             notify_discord(
-                f"**New CSP candidate: {position['symbol']} ${position['strike']}P exp {position['expiration']}**\n"
+                f"**New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
                 f"Barchart ann. return: {candidate.get('potential_return_annual_pct') or 0:.1f}% "
-                f"· PE: {pe_text}\n"
-                f"Bid {position['bid']:.2f} ({bid_source}) / Ask {position['ask']:.2f} ({ask_source}) "
-                f"· Entry stock px {position['entry_stock_px']:.2f}\n"
+                f"· PE: {pe_text} · Entry stock px {position['entry_stock_px']:.2f}\n"
+                f"Bid {position['bid']:.2f} ({bid_source})\n"
+                f"```diff\n+ Ask {position['ask']:.2f} ({ask_source})  (mid, buy: {mid_entry:.2f})\n```\n"
                 f"<{SUMMARY_HTML_URL}>"
             )
 
