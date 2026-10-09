@@ -32,6 +32,8 @@ jobs:
           playwright install --with-deps chromium
 
       - name: Run tracker
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: python barchart_csp_tracker.py
 
       - name: Commit and push results

@@ -47,6 +47,8 @@ import subprocess
 import sys
 import time
 import json
+import os
+import urllib.request
 from datetime import datetime, date, timedelta
 from pathlib import Path
 
@@ -59,6 +61,7 @@ POSITIONS_FILE = Path("barchart_csp_positions.json")
 SUMMARY_CSV = Path("barchart_csp_summary.csv")
 REALIZED_PNL_PNG = Path("barchart_csp_realized_pnl.png")
 SUMMARY_HTML = Path("index.html")  # repo-root name - GitHub Pages serves this at the clean root URL
+SUMMARY_HTML_URL = "https://mkcan1973.github.io/barchart-csp-tracker/"
 
 # If yfinance has no usable bid/ask for the exact contract Barchart
 # surfaced, fall back to Barchart's own bid (flagged) and approximate
@@ -94,6 +97,31 @@ class _RateLimiter:
 
 
 _yf_rate_limiter = _RateLimiter(YF_MIN_REQUEST_INTERVAL_SECONDS)
+
+# --- Discord notifications -------------------------------------------------------
+# Same webhook pattern as the tictactoe project's notify.py - URL comes from an
+# env var only (never a committed file), since this repo is public. GitHub
+# Actions supplies it from an encrypted repo secret; set it locally too if you
+# ever want notifications from a manual run.
+
+def notify_discord(message):
+    """Best-effort Discord webhook ping - never raises, silently no-ops if
+    DISCORD_WEBHOOK_URL isn't set."""
+    url = os.environ.get("DISCORD_WEBHOOK_URL")
+    if not url:
+        return
+    try:
+        data = json.dumps({"content": message}).encode("utf-8")
+        # Cloudflare 403s urllib's default User-Agent; use a browser one.
+        req = urllib.request.Request(url, data=data, headers={
+            "Content-Type": "application/json",
+            "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                           "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"),
+        })
+        urllib.request.urlopen(req, timeout=5)
+    except Exception as e:
+        print(f"  [notification] Discord webhook failed (run continues normally): "
+              f"{type(e).__name__}: {e}")
 
 
 def _install(pkg):
@@ -1239,6 +1267,15 @@ def main():
             print(f"      bid: {position['bid']:.2f} ({bid_source})   ask: {position['ask']:.2f} ({ask_source})")
             positions.append(position)
             save_positions(positions)
+            pe_text = f"{position['pe_at_entry']:.1f}" if position.get("pe_at_entry") is not None else "n/a"
+            notify_discord(
+                f"**New CSP candidate: {position['symbol']} ${position['strike']}P exp {position['expiration']}**\n"
+                f"Barchart ann. return: {candidate.get('potential_return_annual_pct') or 0:.1f}% "
+                f"· PE: {pe_text}\n"
+                f"Bid {position['bid']:.2f} ({bid_source}) / Ask {position['ask']:.2f} ({ask_source}) "
+                f"· Entry stock px {position['entry_stock_px']:.2f}\n"
+                f"<{SUMMARY_HTML_URL}>"
+            )
 
     if settle_expired_positions(positions, today):
         save_positions(positions)
