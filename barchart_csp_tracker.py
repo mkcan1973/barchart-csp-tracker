@@ -434,6 +434,21 @@ def calc_mid_close_pnl(entry_bid, entry_ask, current_bid, current_ask):
     return seller_pnl, buyer_pnl
 
 
+def calc_stock_equivalent(entry_px, other_px):
+    """P&L (and % price change) from simply buying NORMALIZED_RISK_USD worth
+    of SHARES at entry and marking to other_px (current price for an open
+    position, settlement price for a closed one) - no options at all. Purely
+    a benchmark: "would I have been better off just trading the stock?"
+    Short is the exact negative of long, so callers only need this once.
+    Returns (long_pnl, pct_change) - short_pnl is -long_pnl, short pct is
+    -pct_change."""
+    if entry_px is None or other_px is None or entry_px == 0:
+        return None, None
+    pct_change = (other_px - entry_px) / entry_px * 100
+    long_pnl = round(NORMALIZED_RISK_USD * pct_change / 100, 2)
+    return long_pnl, round(pct_change, 2)
+
+
 def normalize_pnl(seller_pnl, buyer_pnl, strike, ask):
     """Scale a position's actual-dollar PnL to what it would've been sized at
     NORMALIZED_RISK_USD capital at risk, so positions on different-priced
@@ -673,7 +688,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                 f'data-kind="closed" '
                 f'data-norm-rs="{attr(r[realized_norm_seller_key])}" data-norm-rb="{attr(r[realized_norm_buyer_key])}" '
                 f'data-roi-rs="{attr(r["ROI % IF SOLD (CSP)"])}" data-roi-rb="{attr(r["ROI % IF BOUGHT (long put)"])}" '
-                f'data-ann-rs="{attr(r["ANNUALIZED ROI % IF SOLD (CSP)"])}" data-ann-rb="{attr(r["ANNUALIZED ROI % IF BOUGHT (long put)"])}"'
+                f'data-ann-rs="{attr(r["ANNUALIZED ROI % IF SOLD (CSP)"])}" data-ann-rb="{attr(r["ANNUALIZED ROI % IF BOUGHT (long put)"])}" '
+                f'data-stock-long="{attr(r["STOCK LONG P/L"])}" data-stock-short="{attr(r["STOCK SHORT P/L"])}" '
+                f'data-stock-pct="{attr(r["STOCK PCT CHANGE"])}"'
             )
         else:
             # Once buying shares at today's price and exercising the put is
@@ -708,7 +725,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                 f'data-norm-as="{attr(r[actual_norm_seller_key])}" data-norm-ab="{attr(r[actual_norm_buyer_key])}" '
                 f'data-roi-as="{attr(r["ROI % (ACTUAL) IF SOLD (CSP)"])}" data-roi-ab="{attr(r["ROI % (ACTUAL) IF BOUGHT (long put)"])}" '
                 f'data-ann-as="{attr(r["ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)"])}" data-ann-ab="{attr(r["ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)"])}" '
-                f'data-norm-ms="{attr(r[mid_norm_seller_key])}" data-norm-mb="{attr(r[mid_norm_buyer_key])}"'
+                f'data-norm-ms="{attr(r[mid_norm_seller_key])}" data-norm-mb="{attr(r[mid_norm_buyer_key])}" '
+                f'data-stock-long="{attr(r["STOCK LONG P/L"])}" data-stock-short="{attr(r["STOCK SHORT P/L"])}" '
+                f'data-stock-pct="{attr(r["STOCK PCT CHANGE"])}"'
             )
 
         ann_return = r.get('BARCHART ANNUALIZED RETURN % (at selection)')
@@ -816,6 +835,16 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       <div class="val {_pnl_class(totals['realized_buyer_total'])}" id="totalRealizedBuyer">Long <span id="totalRealizedBuyerAmt">{_fmt_money(totals['realized_buyer_total'])}</span></div>
       <div class="sub2">avg ROI: short <span id="avgRealizedSellerRoi">{_fmt_pct(totals['avg_realized_seller_roi'])}</span> / long <span id="avgRealizedBuyerRoi">{_fmt_pct(totals['avg_realized_buyer_roi'])}</span></div>
       <div class="sub2">avg ann. ROI: short <span id="avgRealizedSellerAnn">{_fmt_pct(totals['avg_realized_seller_ann_roi'])}</span> / long <span id="avgRealizedBuyerAnn">{_fmt_pct(totals['avg_realized_buyer_ann_roi'])}</span></div>
+    </div>
+    <div class="box">
+      <div class="label">STOCK BENCHMARK (no options - buy/short ${NORMALIZED_RISK_USD:.0f} of shares at entry)</div>
+      <div class="val {_pnl_class(totals['stock_unrealized_long_total'])}" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">{_fmt_money(totals['stock_unrealized_long_total'])}</span></div>
+      <div class="val {_pnl_class(totals['stock_unrealized_short_total'])}" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">{_fmt_money(totals['stock_unrealized_short_total'])}</span></div>
+      <div class="sub2">avg price change (open): <span id="avgStockUnrealPct">{_fmt_pct(totals['avg_stock_unrealized_pct'])}</span></div>
+      <div class="val {_pnl_class(totals['stock_realized_long_total'])}" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">{_fmt_money(totals['stock_realized_long_total'])}</span></div>
+      <div class="val {_pnl_class(totals['stock_realized_short_total'])}" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">{_fmt_money(totals['stock_realized_short_total'])}</span></div>
+      <div class="sub2">avg price change (closed): <span id="avgStockRealPct">{_fmt_pct(totals['avg_stock_realized_pct'])}</span></div>
+      <div class="sub2">Indicator only - short assumes unlimited-risk shorting is actually available.</div>
     </div>
   </div>
   <div class="updated" id="filterNote" style="display:none;">Totals above reflect only the positions currently passing the filter.</div>
@@ -965,6 +994,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     setPct('avgRealizedSellerAnn', avgAttr(closedVisible, 'data-ann-rs'));
     setPct('avgRealizedBuyerAnn', avgAttr(closedVisible, 'data-ann-rb'));
 
+    setMoney('totalStockUnrealLong', 'totalStockUnrealLongAmt', sumAttr(openVisible, 'data-stock-long'));
+    setMoney('totalStockUnrealShort', 'totalStockUnrealShortAmt', sumAttr(openVisible, 'data-stock-short'));
+    setPct('avgStockUnrealPct', avgAttr(openVisible, 'data-stock-pct'));
+    setMoney('totalStockRealLong', 'totalStockRealLongAmt', sumAttr(closedVisible, 'data-stock-long'));
+    setMoney('totalStockRealShort', 'totalStockRealShortAmt', sumAttr(closedVisible, 'data-stock-short'));
+    setPct('avgStockRealPct', avgAttr(closedVisible, 'data-stock-pct'));
+
     var openCountEl = document.getElementById('openCount');
     if (openCountEl) openCountEl.textContent = openVisible.length;
     var realizedCountEl = document.getElementById('realizedCount');
@@ -1067,6 +1103,11 @@ def build_summary(positions, today):
             mid_norm_buyer = fict_norm_buyer
         open_norm_mid.append((mid_norm_seller, mid_norm_buyer))
 
+        # Pure stock benchmark, no options: what if you'd just bought (or
+        # shorted) NORMALIZED_RISK_USD of shares at entry instead? Short is
+        # always the exact negative of long.
+        stock_long_pnl, stock_pct_change = calc_stock_equivalent(p["entry_stock_px"], current_px)
+
         open_rows.append({
             "SYMBOL": p["symbol"],
             "STRIKE": p["strike"],
@@ -1074,6 +1115,9 @@ def build_summary(positions, today):
             "DAYS LEFT": (exp_date - today).days,
             "ENTRY STOCK PRICE": p["entry_stock_px"],
             "CURRENT STOCK PRICE": current_px,
+            "STOCK LONG P/L": stock_long_pnl,
+            "STOCK SHORT P/L": None if stock_long_pnl is None else -stock_long_pnl,
+            "STOCK PCT CHANGE": stock_pct_change,
             "BARCHART BID (reference)": p["barchart_bid"],
             "BARCHART RETURN % (at selection)": p.get("potential_return_pct"),
             "BARCHART ANNUALIZED RETURN % (at selection)": p.get("potential_return_annual_pct"),
@@ -1131,12 +1175,18 @@ def build_summary(positions, today):
         # closed trade to date - a running "portfolio ROI so far."
         cum_seller_roi = round(cum_seller / (i * NORMALIZED_RISK_USD) * 100, 2)
         cum_buyer_roi = round(cum_buyer / (i * NORMALIZED_RISK_USD) * 100, 2)
+
+        stock_long_pnl, stock_pct_change = calc_stock_equivalent(p["entry_stock_px"], p["final_stock_px"])
+
         closed_rows.append({
             "SYMBOL": p["symbol"],
             "STRIKE": p["strike"],
             "EXPIRATION": p["expiration"],
             "ENTRY STOCK PRICE": p["entry_stock_px"],
             "FINAL STOCK PRICE": p["final_stock_px"],
+            "STOCK LONG P/L": stock_long_pnl,
+            "STOCK SHORT P/L": None if stock_long_pnl is None else -stock_long_pnl,
+            "STOCK PCT CHANGE": stock_pct_change,
             "BARCHART BID (reference)": p["barchart_bid"],
             "BARCHART RETURN % (at selection)": p.get("potential_return_pct"),
             "BARCHART ANNUALIZED RETURN % (at selection)": p.get("potential_return_annual_pct"),
@@ -1194,6 +1244,15 @@ def build_summary(positions, today):
     avg_realized_buyer_roi = avg(r["ROI % IF BOUGHT (long put)"] for r in closed_rows)
     avg_realized_seller_ann_roi = avg(r["ANNUALIZED ROI % IF SOLD (CSP)"] for r in closed_rows)
     avg_realized_buyer_ann_roi = avg(r["ANNUALIZED ROI % IF BOUGHT (long put)"] for r in closed_rows)
+
+    # Pure stock benchmark totals - no options involved at all, just what
+    # buying/shorting $NORMALIZED_RISK_USD of shares at entry would have done.
+    stock_unrealized_long_total = round(sum(r["STOCK LONG P/L"] or 0 for r in open_rows), 2)
+    stock_unrealized_short_total = round(sum(r["STOCK SHORT P/L"] or 0 for r in open_rows), 2)
+    stock_realized_long_total = round(sum(r["STOCK LONG P/L"] or 0 for r in closed_rows), 2)
+    stock_realized_short_total = round(sum(r["STOCK SHORT P/L"] or 0 for r in closed_rows), 2)
+    avg_stock_unrealized_pct = avg(r["STOCK PCT CHANGE"] for r in open_rows)
+    avg_stock_realized_pct = avg(r["STOCK PCT CHANGE"] for r in closed_rows)
 
     if open_rows or closed_rows:
         blank = pd.DataFrame([{}])
@@ -1267,6 +1326,12 @@ def build_summary(positions, today):
         "avg_realized_buyer_roi": avg_realized_buyer_roi,
         "avg_realized_seller_ann_roi": avg_realized_seller_ann_roi,
         "avg_realized_buyer_ann_roi": avg_realized_buyer_ann_roi,
+        "stock_unrealized_long_total": stock_unrealized_long_total,
+        "stock_unrealized_short_total": stock_unrealized_short_total,
+        "stock_realized_long_total": stock_realized_long_total,
+        "stock_realized_short_total": stock_realized_short_total,
+        "avg_stock_unrealized_pct": avg_stock_unrealized_pct,
+        "avg_stock_realized_pct": avg_stock_realized_pct,
         "settled_count": len(settled),
         "png_path": png_path,
     }
