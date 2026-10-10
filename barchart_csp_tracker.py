@@ -727,7 +727,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
           {rows_html}
         </div>"""
 
-    open_cards = "\n".join(position_card(r, closed=False) for r in open_rows) or '<p class="empty">No open positions.</p>'
+    open_rows_newest_first = sorted(open_rows, key=lambda r: r["ADDED"], reverse=True)
+    open_cards = "\n".join(position_card(r, closed=False) for r in open_rows_newest_first) or '<p class="empty">No open positions.</p>'
     closed_cards = "\n".join(position_card(r, closed=True) for r in reversed(closed_rows)) or '<p class="empty">No closed positions yet.</p>'
 
     chart_html = ""
