@@ -413,9 +413,10 @@ def calc_actual_close_pnl(entry_bid, entry_ask, current_bid, current_ask):
     Seller (short put): closing means BUYING it back - you pay the ask.
     Buyer (long put): closing means SELLING it - you receive the bid.
     Either side returns None if no live quote exists for that leg (illiquid
-    contract) - callers should show that as unavailable, not fall back
-    silently, since mixing an approximation into the "actual" column would
-    defeat the point of distinguishing it from "fictional"."""
+    contract) - callers should treat None as "no live quote," and are
+    expected to fall back to the intrinsic-value ("fictional") estimate
+    themselves and flag it as approximate, rather than let it collapse to
+    an implicit $0 in aggregate totals."""
     seller_pnl = round((entry_bid - current_ask) * 100, 2) if current_ask is not None else None
     buyer_pnl = round((current_bid - entry_ask) * 100, 2) if current_bid is not None else None
     return seller_pnl, buyer_pnl
@@ -720,6 +721,20 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
             if buyer_mid_is_exercise:
                 rows_html += ('<div class="sub2">Long "exe" = buy shares + exercise the put '
                                '(guaranteed, independent of the option\'s own market quotes)</div>')
+            seller_approx_labels = [lbl for lbl, flag in (("ACTUAL", r.get("ACTUAL SELLER IS APPROX")),
+                                                           ("MID", r.get("MID SELLER IS APPROX"))) if flag]
+            buyer_approx_labels = [lbl for lbl, flag in (("ACTUAL", r.get("ACTUAL BUYER IS APPROX")),
+                                                          ("MID", r.get("MID BUYER IS APPROX"))) if flag]
+            if seller_approx_labels and seller_approx_labels == buyer_approx_labels:
+                rows_html += (f'<div class="sub2">Short and Long {" and ".join(seller_approx_labels)} approximated via '
+                               f'intrinsic value - no live option quote (likely far OTM/illiquid)</div>')
+            else:
+                if seller_approx_labels:
+                    rows_html += (f'<div class="sub2">Short {" and ".join(seller_approx_labels)} approximated via '
+                                   f'intrinsic value - no live option quote (likely far OTM/illiquid)</div>')
+                if buyer_approx_labels:
+                    rows_html += (f'<div class="sub2">Long {" and ".join(buyer_approx_labels)} approximated via '
+                                   f'intrinsic value - no live option quote (likely far OTM/illiquid)</div>')
             data_attrs = (
                 f'data-kind="open" '
                 f'data-norm-as="{attr(r[actual_norm_seller_key])}" data-norm-ab="{attr(r[actual_norm_buyer_key])}" '
@@ -1073,10 +1088,23 @@ def build_summary(positions, today):
 
         # "Actual": what closing the position today would really cost/pay,
         # crossing the spread - a fresh live option-chain requote, not just
-        # the stock price. None on either leg if no live quote exists (an
-        # illiquid contract) - no silent fallback, so as not to blur the two.
+        # the stock price.
         current_bid, current_ask = get_yahoo_quote(p["symbol"], p["expiration"], p["strike"])
         actual_seller_pnl, actual_buyer_pnl = calc_actual_close_pnl(p["bid"], p["ask"], current_bid, current_ask)
+        # If no live quote exists at all (common once a contract is deep OTM
+        # and essentially untraded - e.g. the underlying rallied far past the
+        # strike), falling back to None understates the real picture: a
+        # worthless-in-practice option IS close to a total loss for the
+        # long side (and close to max profit for the short side), not an
+        # unknown/neutral zero. Fall back to the intrinsic-value ("fictional")
+        # estimate in that case - flagged, same spirit as the bid/ask
+        # approximation fallbacks used elsewhere in this script.
+        actual_seller_is_approx = actual_seller_pnl is None and fict_seller_pnl is not None
+        actual_buyer_is_approx = actual_buyer_pnl is None and fict_buyer_pnl is not None
+        if actual_seller_is_approx:
+            actual_seller_pnl = fict_seller_pnl
+        if actual_buyer_is_approx:
+            actual_buyer_pnl = fict_buyer_pnl
         actual_norm_seller, actual_norm_buyer = normalize_pnl(actual_seller_pnl, actual_buyer_pnl, p["strike"], p["ask"])
         actual_seller_roi = calc_roi_pct(actual_seller_pnl, p["strike"] * 100)
         actual_buyer_roi = calc_roi_pct(actual_buyer_pnl, p["ask"] * 100)
@@ -1101,6 +1129,19 @@ def build_summary(positions, today):
         if buyer_mid_is_exercise:
             mid_buyer_pnl = fict_buyer_pnl
             mid_norm_buyer = fict_norm_buyer
+        # Same no-live-quote situation as "actual" above - mid needs BOTH
+        # current_bid and current_ask, so it can go missing even on a leg
+        # whose "actual" side didn't (e.g. only the ask is quoted). Fall
+        # back to intrinsic value here too so the mid parenthetical doesn't
+        # silently read as a contradictory $0 next to a real loss/gain.
+        mid_seller_is_approx = mid_seller_pnl is None and fict_seller_pnl is not None
+        mid_buyer_is_approx = (not buyer_mid_is_exercise) and mid_buyer_pnl is None and fict_buyer_pnl is not None
+        if mid_seller_is_approx:
+            mid_seller_pnl = fict_seller_pnl
+            mid_norm_seller = fict_norm_seller
+        if mid_buyer_is_approx:
+            mid_buyer_pnl = fict_buyer_pnl
+            mid_norm_buyer = fict_norm_buyer
         open_norm_mid.append((mid_norm_seller, mid_norm_buyer))
 
         # Pure stock benchmark, no options: what if you'd just bought (or
@@ -1118,6 +1159,10 @@ def build_summary(positions, today):
             "STOCK LONG P/L": stock_long_pnl,
             "STOCK SHORT P/L": None if stock_long_pnl is None else -stock_long_pnl,
             "STOCK PCT CHANGE": stock_pct_change,
+            "ACTUAL SELLER IS APPROX": actual_seller_is_approx,
+            "ACTUAL BUYER IS APPROX": actual_buyer_is_approx,
+            "MID SELLER IS APPROX": mid_seller_is_approx,
+            "MID BUYER IS APPROX": mid_buyer_is_approx,
             "BARCHART BID (reference)": p["barchart_bid"],
             "BARCHART RETURN % (at selection)": p.get("potential_return_pct"),
             "BARCHART ANNUALIZED RETURN % (at selection)": p.get("potential_return_annual_pct"),
