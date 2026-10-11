@@ -866,12 +866,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
   {chart_html}
 
-  <h2>Open positions ({len(open_rows)})</h2>
+  <h2>Open positions (<span id="openSectionCount">{len(open_rows)}</span>)</h2>
   <div class="cards">
   {open_cards}
   </div>
 
-  <h2>Closed positions ({len(closed_rows)})</h2>
+  <h2>Closed positions (<span id="closedSectionCount">{len(closed_rows)}</span>)</h2>
   <div class="cards">
   {closed_cards}
   </div>
@@ -1020,6 +1020,10 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     if (openCountEl) openCountEl.textContent = openVisible.length;
     var realizedCountEl = document.getElementById('realizedCount');
     if (realizedCountEl) realizedCountEl.textContent = closedVisible.length;
+    var openSectionCountEl = document.getElementById('openSectionCount');
+    if (openSectionCountEl) openSectionCountEl.textContent = openVisible.length;
+    var closedSectionCountEl = document.getElementById('closedSectionCount');
+    if (closedSectionCountEl) closedSectionCountEl.textContent = closedVisible.length;
 
     var noteEl = document.getElementById('filterNote');
     if (noteEl) noteEl.style.display = noFilter ? 'none' : '';
