@@ -64,9 +64,12 @@ SUMMARY_HTML = Path("index.html")  # repo-root name - GitHub Pages serves this a
 SUMMARY_HTML_URL = "https://mkcan1973.github.io/barchart-csp-tracker/"
 
 # Only ping Discord for new candidates at or above this Barchart annualized
-# return at selection - every new candidate still gets tracked regardless,
-# this only gates the notification.
+# return at selection, AND below this trailing P/E with positive trailing
+# EPS (excludes unprofitable and richly-valued names from notifications) -
+# every new candidate still gets tracked regardless, this only gates the
+# notification.
 DISCORD_NOTIFY_MIN_ANN_RETURN_PCT = 150.0
+DISCORD_NOTIFY_MAX_PE = 10.0
 
 # If yfinance has no usable bid/ask for the exact contract Barchart
 # surfaced, fall back to Barchart's own bid (flagged) and approximate
@@ -314,17 +317,21 @@ def get_current_stock_price(symbol):
         return None
 
 
-def get_trailing_pe(symbol):
-    """Trailing P/E at this moment - used both to capture a new position's
-    entry-time PE and, once, to backfill a stand-in for positions tracked
-    before the PE filter existed. None if yfinance has nothing (no/negative
+def get_trailing_pe_and_eps(symbol):
+    """Trailing P/E and trailing EPS at this moment, fetched together (one
+    yfinance call) - used both to capture a new position's entry-time
+    values and, once, to backfill a stand-in for positions tracked before
+    this existed. Either can be None if yfinance has nothing (no/negative
     earnings, delisted, etc.) - a real, not uncommon case, not an error."""
     _yf_rate_limiter.wait()
     try:
-        pe = yf.Ticker(symbol).info.get("trailingPE")
-        return float(pe) if pe is not None else None
+        info = yf.Ticker(symbol).info
+        pe = info.get("trailingPE")
+        eps = info.get("trailingEps")
+        return (float(pe) if pe is not None else None,
+                float(eps) if eps is not None else None)
     except Exception:
-        return None
+        return None, None
 
 
 def get_price_at(symbol, target_date_str):
@@ -365,16 +372,18 @@ def save_positions(positions):
 
 
 def ensure_pe_at_entry(positions):
-    """One-time backfill: positions tracked before the PE filter existed
-    have no captured entry-time trailing P/E. Fetch today's P/E as an
-    approximate stand-in (flagged), fetched once here and then frozen
-    permanently in the stored record - never re-fetched on later runs, same
-    pattern as the "bid" backward-compat migration. Returns True if any
-    position changed (caller should save_positions() in that case)."""
+    """One-time backfill: positions tracked before the PE/EPS fields
+    existed have no captured entry-time trailing P/E or EPS. Fetch today's
+    values as an approximate stand-in (flagged), fetched once here and then
+    frozen permanently in the stored record - never re-fetched on later
+    runs, same pattern as the "bid" backward-compat migration. Returns True
+    if any position changed (caller should save_positions() in that case)."""
     changed = False
     for p in positions:
-        if "pe_at_entry" not in p:
-            p["pe_at_entry"] = get_trailing_pe(p["symbol"])
+        if "pe_at_entry" not in p or "eps_at_entry" not in p:
+            pe, eps = get_trailing_pe_and_eps(p["symbol"])
+            p["pe_at_entry"] = pe
+            p["eps_at_entry"] = eps
             p["pe_at_entry_is_approx"] = True
             changed = True
     return changed
@@ -533,7 +542,7 @@ def add_new_position(candidate, today):
     ask = yahoo_ask if yahoo_ask is not None else round(bid * YAHOO_APPROX_ASK_MULTIPLIER, 2)
 
     entry_stock_px = get_current_stock_price(symbol)  # yfinance, not Barchart's snapshot
-    pe_at_entry = get_trailing_pe(symbol)
+    pe_at_entry, eps_at_entry = get_trailing_pe_and_eps(symbol)
 
     position = {
         "symbol": symbol,
@@ -548,6 +557,7 @@ def add_new_position(candidate, today):
         "potential_return_annual_pct": candidate.get("potential_return_annual_pct"),
         "entry_stock_px": entry_stock_px,
         "pe_at_entry": pe_at_entry,
+        "eps_at_entry": eps_at_entry,
         "pe_at_entry_is_approx": False,
         "added_date": today.isoformat(),
     }
@@ -1430,8 +1440,10 @@ def main():
             positions.append(position)
             save_positions(positions)
             ann_return = candidate.get("potential_return_annual_pct") or 0
-            if ann_return >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT:
-                pe_text = f"{position['pe_at_entry']:.1f}" if position.get("pe_at_entry") is not None else "n/a"
+            pe, eps = position.get("pe_at_entry"), position.get("eps_at_entry")
+            passes_pe_filter = pe is not None and pe < DISCORD_NOTIFY_MAX_PE and eps is not None and eps > 0
+            if ann_return >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT and passes_pe_filter:
+                pe_text = f"{pe:.1f}" if pe is not None else "n/a"
                 mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
                 notify_discord(
                     f"**New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
