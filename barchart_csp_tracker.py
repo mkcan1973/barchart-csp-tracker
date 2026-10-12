@@ -1430,6 +1430,15 @@ def main():
             print(f"    {candidate['symbol']} ${candidate['strike']}P exp {candidate['expiration']} "
                   f"(barchart bid {candidate['barchart_bid']:.2f}, annualized return "
                   f"{candidate.get('potential_return_annual_pct') or 0:.1f}%)")
+            # Was this symbol ALREADY good enough to notify on, via any
+            # earlier position (same run or a prior day)? If so this new
+            # contract isn't a fresh signal - same philosophy as the
+            # dashboard's own "first instance to qualify per symbol" filter,
+            # just applied to the notification trigger instead of display.
+            symbol_already_qualified = any(
+                p["symbol"] == candidate["symbol"] and (p.get("potential_return_annual_pct") or 0) >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT
+                for p in positions
+            )
             position = add_new_position(candidate, today)
             bid_source = "approx (barchart)" if position["bid_is_approx"] else "yahoo"
             ask_source = "approx (bid x 1.2)" if position["ask_is_approx"] else "yahoo"
@@ -1437,7 +1446,7 @@ def main():
             positions.append(position)
             save_positions(positions)
             ann_return = candidate.get("potential_return_annual_pct") or 0
-            if ann_return >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT:
+            if ann_return >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT and not symbol_already_qualified:
                 pe = position.get("pe_at_entry")
                 pe_text = f"{pe:.1f}" if pe is not None else "n/a"
                 mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
