@@ -678,7 +678,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
         price_line = (f"Final {r['FINAL STOCK PRICE']:.2f}" if closed
                       else f"Now {r['CURRENT STOCK PRICE']:.2f}" if r["CURRENT STOCK PRICE"] is not None else "Now --")
-        days_line = f"Settled {r['SETTLED AT']}" if closed else f"{r['DAYS LEFT']}d left"
+        if closed:
+            days_line = f"Settled {r['SETTLED AT']}"
+        else:
+            days_active = (today - datetime.strptime(r["ADDED"], "%Y-%m-%d").date()).days
+            days_line = f"{days_active}d active &middot; {r['DAYS LEFT']}d left"
 
         if closed:
             rows_html = pnl_row("REALIZED", r["REALIZED P/L IF SOLD (CSP)"], r["REALIZED P/L IF BOUGHT (long put)"],
