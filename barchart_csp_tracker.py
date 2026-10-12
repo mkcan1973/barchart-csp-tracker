@@ -64,12 +64,9 @@ SUMMARY_HTML = Path("index.html")  # repo-root name - GitHub Pages serves this a
 SUMMARY_HTML_URL = "https://mkcan1973.github.io/barchart-csp-tracker/"
 
 # Only ping Discord for new candidates at or above this Barchart annualized
-# return at selection, AND below this trailing P/E with positive trailing
-# EPS (excludes unprofitable and richly-valued names from notifications) -
-# every new candidate still gets tracked regardless, this only gates the
-# notification.
+# return at selection - every new candidate still gets tracked regardless,
+# this only gates the notification.
 DISCORD_NOTIFY_MIN_ANN_RETURN_PCT = 150.0
-DISCORD_NOTIFY_MAX_PE = 10.0
 
 # If yfinance has no usable bid/ask for the exact contract Barchart
 # surfaced, fall back to Barchart's own bid (flagged) and approximate
@@ -1440,9 +1437,8 @@ def main():
             positions.append(position)
             save_positions(positions)
             ann_return = candidate.get("potential_return_annual_pct") or 0
-            pe, eps = position.get("pe_at_entry"), position.get("eps_at_entry")
-            passes_pe_filter = pe is not None and pe < DISCORD_NOTIFY_MAX_PE and eps is not None and eps > 0
-            if ann_return >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT and passes_pe_filter:
+            if ann_return >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT:
+                pe = position.get("pe_at_entry")
                 pe_text = f"{pe:.1f}" if pe is not None else "n/a"
                 mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
                 notify_discord(
