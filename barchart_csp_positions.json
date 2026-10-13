@@ -13,7 +13,8 @@
     "entry_stock_px": 2.799999952316284,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.21
   },
   {
     "symbol": "ALHC",
@@ -28,8 +29,9 @@
     "potential_return_annual_pct": 125.586,
     "entry_stock_px": 7.860000133514404,
     "added_date": "2026-09-23",
-    "pe_at_entry": 44.368423,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 43.973682,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.19
   },
   {
     "symbol": "PENG",
@@ -44,8 +46,9 @@
     "potential_return_annual_pct": 119.448,
     "entry_stock_px": 53.880001068115234,
     "added_date": "2026-09-23",
-    "pe_at_entry": 27.815386,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 29.603848,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 2.6
   },
   {
     "symbol": "EOSE",
@@ -61,7 +64,8 @@
     "entry_stock_px": 3.5799999237060547,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -5.8
   },
   {
     "symbol": "ARCT",
@@ -77,7 +81,8 @@
     "entry_stock_px": 13.300000190734863,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -3.33
   },
   {
     "symbol": "NBIS",
@@ -92,8 +97,9 @@
     "potential_return_annual_pct": 108.263,
     "entry_stock_px": 226.61000061035156,
     "added_date": "2026-09-23",
-    "pe_at_entry": 177.35938,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 157.42969,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 1.28
   },
   {
     "symbol": "CRML",
@@ -109,7 +115,8 @@
     "entry_stock_px": 7.71999979019165,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.87
   },
   {
     "symbol": "GLXY",
@@ -125,7 +132,8 @@
     "entry_stock_px": 25.790000915527344,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.85
   },
   {
     "symbol": "BB",
@@ -140,8 +148,9 @@
     "potential_return_annual_pct": 101.295,
     "entry_stock_px": 8.380000114440918,
     "added_date": "2026-09-23",
-    "pe_at_entry": 67.5,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 64.85307,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.13
   },
   {
     "symbol": "WOLF",
@@ -157,7 +166,8 @@
     "entry_stock_px": 27.139999389648438,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -11.39
   },
   {
     "symbol": "LCID",
@@ -173,7 +183,8 @@
     "entry_stock_px": 4.159999847412109,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -13.71
   },
   {
     "symbol": "APLD",
@@ -189,7 +200,8 @@
     "entry_stock_px": 27.229999542236328,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.91
   },
   {
     "symbol": "IREN",
@@ -205,7 +217,8 @@
     "entry_stock_px": 47.04999923706055,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.22
   },
   {
     "symbol": "AAOI",
@@ -221,7 +234,8 @@
     "entry_stock_px": 101.05999755859375,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.75
   },
   {
     "symbol": "FRVO",
@@ -237,7 +251,8 @@
     "entry_stock_px": 16.350000381469727,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.26
   },
   {
     "symbol": "SMCI",
@@ -252,8 +267,9 @@
     "potential_return_annual_pct": 89.2584,
     "entry_stock_px": 41.439998626708984,
     "added_date": "2026-09-23",
-    "pe_at_entry": 13.125153,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 11.845093,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 3.26
   },
   {
     "symbol": "CIFR",
@@ -269,7 +285,8 @@
     "entry_stock_px": 18.350000381469727,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.87
   },
   {
     "symbol": "PCT",
@@ -285,7 +302,8 @@
     "entry_stock_px": 5.150000095367432,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.47
   },
   {
     "symbol": "MARA",
@@ -301,7 +319,8 @@
     "entry_stock_px": 13.350000381469727,
     "added_date": "2026-09-23",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -9.4
   },
   {
     "symbol": "SECZ",
@@ -317,7 +336,8 @@
     "entry_stock_px": 15.5649995803833,
     "added_date": "2026-09-24",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.38
   },
   {
     "symbol": "GLND",
@@ -333,7 +353,8 @@
     "entry_stock_px": 4.749899864196777,
     "added_date": "2026-09-24",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": null
   },
   {
     "symbol": "MSTR",
@@ -349,7 +370,8 @@
     "entry_stock_px": 162.69000244140625,
     "added_date": "2026-09-24",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -99.08
   },
   {
     "symbol": "BMNR",
@@ -365,7 +387,8 @@
     "entry_stock_px": 27.815000534057617,
     "added_date": "2026-09-24",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -4.54
   },
   {
     "symbol": "INTC",
@@ -381,7 +404,8 @@
     "entry_stock_px": 124.05000305175781,
     "added_date": "2026-09-24",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.12
   },
   {
     "symbol": "MRNA",
@@ -397,7 +421,8 @@
     "entry_stock_px": 186.33999633789062,
     "added_date": "2026-09-24",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -7.98
   },
   {
     "symbol": "ONDS",
@@ -413,7 +438,8 @@
     "entry_stock_px": 7.445000171661377,
     "added_date": "2026-09-24",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.06
   },
   {
     "symbol": "BE",
@@ -428,8 +454,9 @@
     "potential_return_annual_pct": 69.8792,
     "entry_stock_px": 257.7699890136719,
     "added_date": "2026-09-24",
-    "pe_at_entry": 363.57895,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 333.75,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "MU",
@@ -444,8 +471,9 @@
     "potential_return_annual_pct": 61.4349,
     "entry_stock_px": 1052.2650146484375,
     "added_date": "2026-09-24",
-    "pe_at_entry": 14.335799,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 12.616171,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 74.33
   },
   {
     "symbol": "AXTI",
@@ -460,8 +488,9 @@
     "potential_return_annual_pct": 60.7632,
     "entry_stock_px": 73.16500091552734,
     "added_date": "2026-09-24",
-    "pe_at_entry": 1839.75,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 1516.0,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.04
   },
   {
     "symbol": "PLTR",
@@ -476,8 +505,9 @@
     "potential_return_annual_pct": 58.9713,
     "entry_stock_px": 191.0050048828125,
     "added_date": "2026-09-24",
-    "pe_at_entry": 171.65517,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 178.77588,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 1.16
   },
   {
     "symbol": "USAR",
@@ -493,7 +523,8 @@
     "entry_stock_px": 15.329999923706055,
     "added_date": "2026-09-24",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.49
   },
   {
     "symbol": "AMD",
@@ -508,8 +539,9 @@
     "potential_return_annual_pct": 57.8021,
     "entry_stock_px": 615.72998046875,
     "added_date": "2026-09-24",
-    "pe_at_entry": 161.91327,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 149.74605,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 3.92
   },
   {
     "symbol": "U",
@@ -525,7 +557,8 @@
     "entry_stock_px": 43.30500030517578,
     "added_date": "2026-09-24",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.37
   },
   {
     "symbol": "WULF",
@@ -541,7 +574,8 @@
     "entry_stock_px": 15.625,
     "added_date": "2026-09-25",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -4.43
   },
   {
     "symbol": "CLSK",
@@ -557,7 +591,8 @@
     "entry_stock_px": 13.699999809265137,
     "added_date": "2026-09-25",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -3.78
   },
   {
     "symbol": "RKLB",
@@ -573,7 +608,8 @@
     "entry_stock_px": 73.18599700927734,
     "added_date": "2026-09-25",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.27
   },
   {
     "symbol": "HOOD",
@@ -588,8 +624,9 @@
     "potential_return_annual_pct": 76.5298,
     "entry_stock_px": 118.6178970336914,
     "added_date": "2026-09-25",
-    "pe_at_entry": 47.361237,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 48.766518,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 2.27
   },
   {
     "symbol": "P",
@@ -604,8 +641,9 @@
     "potential_return_annual_pct": 72.4206,
     "entry_stock_px": 124.58999633789062,
     "added_date": "2026-09-25",
-    "pe_at_entry": 213.27397,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 209.17807,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.73
   },
   {
     "symbol": "MRVL",
@@ -620,8 +658,9 @@
     "potential_return_annual_pct": 69.3468,
     "entry_stock_px": 262.1498107910156,
     "added_date": "2026-09-25",
-    "pe_at_entry": 90.570724,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 82.61587,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 3.15
   },
   {
     "symbol": "CRWD",
@@ -636,8 +675,9 @@
     "potential_return_annual_pct": 69.0323,
     "entry_stock_px": 256.8900146484375,
     "added_date": "2026-09-25",
-    "pe_at_entry": 5314.0,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 5242.402,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.05
   },
   {
     "symbol": "QURE",
@@ -653,7 +693,8 @@
     "entry_stock_px": 37.68000030517578,
     "added_date": "2026-09-28",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -4.03
   },
   {
     "symbol": "IONQ",
@@ -669,7 +710,8 @@
     "entry_stock_px": 46.06999969482422,
     "added_date": "2026-09-28",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -3.43
   },
   {
     "symbol": "ARM",
@@ -684,8 +726,9 @@
     "potential_return_annual_pct": 89.801,
     "entry_stock_px": 283.32000732421875,
     "added_date": "2026-09-28",
-    "pe_at_entry": 289.6804,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 258.91235,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.97
   },
   {
     "symbol": "SNDK",
@@ -700,8 +743,9 @@
     "potential_return_annual_pct": 85.3162,
     "entry_stock_px": 1686.849853515625,
     "added_date": "2026-09-28",
-    "pe_at_entry": 22.172585,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 19.491865,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 73.76
   },
   {
     "symbol": "CRWV",
@@ -717,7 +761,8 @@
     "entry_stock_px": 84.1449966430664,
     "added_date": "2026-09-28",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -3.69
   },
   {
     "symbol": "SPCE",
@@ -733,7 +778,8 @@
     "entry_stock_px": 3.194999933242798,
     "added_date": "2026-09-28",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -3.19
   },
   {
     "symbol": "PSKY",
@@ -749,7 +795,8 @@
     "entry_stock_px": 10.145000457763672,
     "added_date": "2026-09-28",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.02
   },
   {
     "symbol": "LUNR",
@@ -765,7 +812,8 @@
     "entry_stock_px": 14.904999732971191,
     "added_date": "2026-09-29",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.95
   },
   {
     "symbol": "FCEL",
@@ -781,7 +829,8 @@
     "entry_stock_px": 17.295000076293945,
     "added_date": "2026-09-29",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.76
   },
   {
     "symbol": "FLEX",
@@ -796,8 +845,9 @@
     "potential_return_annual_pct": 89.4608,
     "entry_stock_px": 113.08999633789062,
     "added_date": "2026-09-29",
-    "pe_at_entry": 44.899616,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 41.89189,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 2.59
   },
   {
     "symbol": "NVTS",
@@ -813,7 +863,8 @@
     "entry_stock_px": 11.90999984741211,
     "added_date": "2026-09-29",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.34
   },
   {
     "symbol": "ACHR",
@@ -829,7 +880,8 @@
     "entry_stock_px": 5.245200157165527,
     "added_date": "2026-09-29",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.09
   },
   {
     "symbol": "NKE",
@@ -844,8 +896,9 @@
     "potential_return_annual_pct": 76.8849,
     "entry_stock_px": 36.125,
     "added_date": "2026-09-29",
-    "pe_at_entry": 16.45678,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 17.021635,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 2.08
   },
   {
     "symbol": "CORZ",
@@ -861,7 +914,8 @@
     "entry_stock_px": 16.989999771118164,
     "added_date": "2026-09-29",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -4.25
   },
   {
     "symbol": "NOW",
@@ -876,8 +930,9 @@
     "potential_return_annual_pct": 72.8404,
     "entry_stock_px": 131.8800048828125,
     "added_date": "2026-09-29",
-    "pe_at_entry": 85.1875,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 88.22981,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 1.61
   },
   {
     "symbol": "QBTS",
@@ -893,7 +948,8 @@
     "entry_stock_px": 16.670000076293945,
     "added_date": "2026-09-29",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.69
   },
   {
     "symbol": "BW",
@@ -909,7 +965,8 @@
     "entry_stock_px": 5.840000152587891,
     "added_date": "2026-09-29",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.64
   },
   {
     "symbol": "LPTH",
@@ -925,7 +982,8 @@
     "entry_stock_px": 10.395000457763672,
     "added_date": "2026-09-30",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.38
   },
   {
     "symbol": "AMC",
@@ -941,7 +999,8 @@
     "entry_stock_px": 3.134999990463257,
     "added_date": "2026-09-30",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.02
   },
   {
     "symbol": "ASTS",
@@ -957,7 +1016,8 @@
     "entry_stock_px": 62.150001525878906,
     "added_date": "2026-09-30",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.13
   },
   {
     "symbol": "CYPH",
@@ -972,8 +1032,9 @@
     "potential_return_annual_pct": 97.5936,
     "entry_stock_px": 3.4049999713897705,
     "added_date": "2026-09-30",
-    "pe_at_entry": 4.142857,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 4.3174605,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.63
   },
   {
     "symbol": "CSIQ",
@@ -989,7 +1050,8 @@
     "entry_stock_px": 11.479999542236328,
     "added_date": "2026-09-30",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -3.85
   },
   {
     "symbol": "FWDI",
@@ -1005,7 +1067,8 @@
     "entry_stock_px": 7.989999771118164,
     "added_date": "2026-09-30",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -30.27
   },
   {
     "symbol": "CNXC",
@@ -1021,7 +1084,8 @@
     "entry_stock_px": 26.58530044555664,
     "added_date": "2026-09-30",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -38.36
   },
   {
     "symbol": "CMPX",
@@ -1037,7 +1101,8 @@
     "entry_stock_px": 1.0399999618530273,
     "added_date": "2026-09-30",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.39
   },
   {
     "symbol": "SGML",
@@ -1053,7 +1118,8 @@
     "entry_stock_px": 9.399999618530273,
     "added_date": "2026-09-30",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.24
   },
   {
     "symbol": "IBRX",
@@ -1069,7 +1135,8 @@
     "entry_stock_px": 9.4399995803833,
     "added_date": "2026-09-30",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.96
   },
   {
     "symbol": "LQDA",
@@ -1084,8 +1151,9 @@
     "potential_return_annual_pct": 120.066,
     "entry_stock_px": 30.260000228881836,
     "added_date": "2026-09-30",
-    "pe_at_entry": 20.309353,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 18.935251,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 1.39
   },
   {
     "symbol": "CLOV",
@@ -1101,7 +1169,8 @@
     "entry_stock_px": 4.159999847412109,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.05
   },
   {
     "symbol": "GLAS",
@@ -1117,7 +1186,8 @@
     "entry_stock_px": 5.349999904632568,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.74
   },
   {
     "symbol": "RUM",
@@ -1133,7 +1203,8 @@
     "entry_stock_px": 7.525000095367432,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.59
   },
   {
     "symbol": "JBLU",
@@ -1149,7 +1220,8 @@
     "entry_stock_px": 4.15500020980835,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.38
   },
   {
     "symbol": "CBRS",
@@ -1165,7 +1237,8 @@
     "entry_stock_px": 173.25,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -5.14
   },
   {
     "symbol": "FHTX",
@@ -1181,7 +1254,8 @@
     "entry_stock_px": 2.7049999237060547,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.98
   },
   {
     "symbol": "BTDR",
@@ -1197,7 +1271,8 @@
     "entry_stock_px": 10.680000305175781,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.59
   },
   {
     "symbol": "TLRY",
@@ -1213,7 +1288,8 @@
     "entry_stock_px": 3.640000104904175,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.41
   },
   {
     "symbol": "SHAZ",
@@ -1229,7 +1305,8 @@
     "entry_stock_px": 51.65999984741211,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -29.29
   },
   {
     "symbol": "RIOT",
@@ -1245,7 +1322,8 @@
     "entry_stock_px": 19.584999084472656,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -3.89
   },
   {
     "symbol": "IRON",
@@ -1261,7 +1339,8 @@
     "entry_stock_px": 64.22000122070312,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -6.58
   },
   {
     "symbol": "SAIL",
@@ -1277,7 +1356,8 @@
     "entry_stock_px": 20.59000015258789,
     "added_date": "2026-10-01",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.34
   },
   {
     "symbol": "GFL",
@@ -1293,7 +1373,8 @@
     "entry_stock_px": 41.4900016784668,
     "added_date": "2026-10-02",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.46
   },
   {
     "symbol": "ASST",
@@ -1309,7 +1390,8 @@
     "entry_stock_px": 30.3799991607666,
     "added_date": "2026-10-02",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -204.8
   },
   {
     "symbol": "WDC",
@@ -1324,8 +1406,9 @@
     "potential_return_annual_pct": 105.009,
     "entry_stock_px": 398.3999938964844,
     "added_date": "2026-10-02",
-    "pe_at_entry": 14.860513,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 13.884658,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 26.92
   },
   {
     "symbol": "PBF",
@@ -1340,8 +1423,9 @@
     "potential_return_annual_pct": 99.2338,
     "entry_stock_px": 79.4000015258789,
     "added_date": "2026-10-02",
-    "pe_at_entry": 7.670335,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 7.9181337,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 11.36
   },
   {
     "symbol": "SMR",
@@ -1357,7 +1441,8 @@
     "entry_stock_px": 7.809999942779541,
     "added_date": "2026-10-02",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.92
   },
   {
     "symbol": "FSLY",
@@ -1373,7 +1458,8 @@
     "entry_stock_px": 26.219999313354492,
     "added_date": "2026-10-02",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.53
   },
   {
     "symbol": "CRCL",
@@ -1388,8 +1474,9 @@
     "potential_return_annual_pct": 101.577,
     "entry_stock_px": 80.80000305175781,
     "added_date": "2026-10-02",
-    "pe_at_entry": 54.458904,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 56.959187,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 1.47
   },
   {
     "symbol": "HUT",
@@ -1405,7 +1492,8 @@
     "entry_stock_px": 88.34500122070312,
     "added_date": "2026-10-02",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -5.42
   },
   {
     "symbol": "NUAI",
@@ -1421,7 +1509,8 @@
     "entry_stock_px": 6.275000095367432,
     "added_date": "2026-10-02",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.02
   },
   {
     "symbol": "ALOY",
@@ -1437,7 +1526,8 @@
     "entry_stock_px": 8.118499755859375,
     "added_date": "2026-10-02",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": null
   },
   {
     "symbol": "HIMS",
@@ -1453,7 +1543,8 @@
     "entry_stock_px": 29.073299407958984,
     "added_date": "2026-10-02",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.64
   },
   {
     "symbol": "TE",
@@ -1469,7 +1560,8 @@
     "entry_stock_px": 3.674999952316284,
     "added_date": "2026-10-05",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.68
   },
   {
     "symbol": "PDSB",
@@ -1485,7 +1577,8 @@
     "entry_stock_px": 1.2800999879837036,
     "added_date": "2026-10-05",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.64
   },
   {
     "symbol": "AEHR",
@@ -1501,7 +1594,8 @@
     "entry_stock_px": 106.72000122070312,
     "added_date": "2026-10-05",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.23
   },
   {
     "symbol": "KOD",
@@ -1517,7 +1611,8 @@
     "entry_stock_px": 94.73999786376953,
     "added_date": "2026-10-05",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -4.19
   },
   {
     "symbol": "PENG",
@@ -1532,8 +1627,9 @@
     "potential_return_annual_pct": 192.105,
     "entry_stock_px": 60.33000183105469,
     "added_date": "2026-10-06",
-    "pe_at_entry": 27.811539,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 29.569231,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 2.6
   },
   {
     "symbol": "DNA",
@@ -1549,7 +1645,8 @@
     "entry_stock_px": 13.163100242614746,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -5.06
   },
   {
     "symbol": "APLD",
@@ -1565,7 +1662,8 @@
     "entry_stock_px": 25.18000030517578,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.91
   },
   {
     "symbol": "CIFR",
@@ -1581,7 +1679,8 @@
     "entry_stock_px": 15.600099563598633,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.87
   },
   {
     "symbol": "MRNA",
@@ -1597,7 +1696,8 @@
     "entry_stock_px": 193.09979248046875,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -7.98
   },
   {
     "symbol": "CLOV",
@@ -1613,7 +1713,8 @@
     "entry_stock_px": 4.644999980926514,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.05
   },
   {
     "symbol": "WULF",
@@ -1629,7 +1730,8 @@
     "entry_stock_px": 14.85990047454834,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -4.43
   },
   {
     "symbol": "CLSK",
@@ -1645,7 +1747,8 @@
     "entry_stock_px": 12.470000267028809,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -3.78
   },
   {
     "symbol": "IBRX",
@@ -1661,7 +1764,8 @@
     "entry_stock_px": 9.96500015258789,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.96
   },
   {
     "symbol": "SMCI",
@@ -1676,8 +1780,9 @@
     "potential_return_annual_pct": 117.914,
     "entry_stock_px": 43.44499969482422,
     "added_date": "2026-10-06",
-    "pe_at_entry": 13.120522,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 11.855828,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 3.26
   },
   {
     "symbol": "BE",
@@ -1692,8 +1797,9 @@
     "potential_return_annual_pct": 116.293,
     "entry_stock_px": 295.7099914550781,
     "added_date": "2026-10-06",
-    "pe_at_entry": 363.61093,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 334.20395,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "APLD",
@@ -1709,7 +1815,8 @@
     "entry_stock_px": 25.18000030517578,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.91
   },
   {
     "symbol": "PURR",
@@ -1724,8 +1831,9 @@
     "potential_return_annual_pct": 109.657,
     "entry_stock_px": 12.885000228881836,
     "added_date": "2026-10-06",
-    "pe_at_entry": 3.4252336,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 3.1713395,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 3.21
   },
   {
     "symbol": "ILMN",
@@ -1740,8 +1848,9 @@
     "potential_return_annual_pct": 108.581,
     "entry_stock_px": 275.364990234375,
     "added_date": "2026-10-06",
-    "pe_at_entry": 48.498135,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 50.710575,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 5.39
   },
   {
     "symbol": "STX",
@@ -1756,8 +1865,9 @@
     "potential_return_annual_pct": 108.044,
     "entry_stock_px": 814.5050048828125,
     "added_date": "2026-10-06",
-    "pe_at_entry": 56.52739,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 52.388493,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 13.9
   },
   {
     "symbol": "CRML",
@@ -1773,7 +1883,8 @@
     "entry_stock_px": 7.510000228881836,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.87
   },
   {
     "symbol": "HTZ",
@@ -1789,7 +1900,8 @@
     "entry_stock_px": 2.050100088119507,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.09
   },
   {
     "symbol": "HTZ",
@@ -1805,7 +1917,8 @@
     "entry_stock_px": 2.050100088119507,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.09
   },
   {
     "symbol": "TWST",
@@ -1821,7 +1934,8 @@
     "entry_stock_px": 172.1199951171875,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.23
   },
   {
     "symbol": "LQDA",
@@ -1836,8 +1950,9 @@
     "potential_return_annual_pct": 137.736,
     "entry_stock_px": 26.215999603271484,
     "added_date": "2026-10-06",
-    "pe_at_entry": 20.330936,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 18.920862,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 1.39
   },
   {
     "symbol": "SMR",
@@ -1853,7 +1968,8 @@
     "entry_stock_px": 8.225000381469727,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.92
   },
   {
     "symbol": "NBIS",
@@ -1868,8 +1984,9 @@
     "potential_return_annual_pct": 132.783,
     "entry_stock_px": 253.02000427246094,
     "added_date": "2026-10-06",
-    "pe_at_entry": 177.70703,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 157.61719,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 1.28
   },
   {
     "symbol": "ABCL",
@@ -1885,7 +2002,8 @@
     "entry_stock_px": 13.194999694824219,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.54
   },
   {
     "symbol": "GLND",
@@ -1901,7 +2019,8 @@
     "entry_stock_px": 2.9916999340057373,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": null
   },
   {
     "symbol": "PDSB",
@@ -1917,7 +2036,8 @@
     "entry_stock_px": 1.0549999475479126,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.64
   },
   {
     "symbol": "OKLO",
@@ -1933,7 +2053,8 @@
     "entry_stock_px": 38.582298278808594,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.01
   },
   {
     "symbol": "XE",
@@ -1949,7 +2070,8 @@
     "entry_stock_px": 15.4350004196167,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.75
   },
   {
     "symbol": "TEM",
@@ -1965,7 +2087,8 @@
     "entry_stock_px": 71.89600372314453,
     "added_date": "2026-10-06",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -1.44
   },
   {
     "symbol": "EOSE",
@@ -1981,7 +2104,8 @@
     "entry_stock_px": 3.0850000381469727,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -5.8
   },
   {
     "symbol": "CIFR",
@@ -1997,7 +2121,8 @@
     "entry_stock_px": 14.704999923706055,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.87
   },
   {
     "symbol": "AAOI",
@@ -2013,7 +2138,8 @@
     "entry_stock_px": 121.33999633789062,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.75
   },
   {
     "symbol": "NBIS",
@@ -2028,8 +2154,9 @@
     "potential_return_annual_pct": 134.821,
     "entry_stock_px": 236.25,
     "added_date": "2026-10-07",
-    "pe_at_entry": 177.70314,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 157.61719,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 1.28
   },
   {
     "symbol": "MARA",
@@ -2045,7 +2172,8 @@
     "entry_stock_px": 10.274999618530273,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -9.4
   },
   {
     "symbol": "LEVI",
@@ -2060,8 +2188,9 @@
     "potential_return_annual_pct": 132.246,
     "entry_stock_px": 19.514999389648438,
     "added_date": "2026-10-07",
-    "pe_at_entry": 13.417857,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 12.763158,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 1.52
   },
   {
     "symbol": "CRWV",
@@ -2077,7 +2206,8 @@
     "entry_stock_px": 88.47000122070312,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -3.69
   },
   {
     "symbol": "IREN",
@@ -2093,7 +2223,8 @@
     "entry_stock_px": 38.900001525878906,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.22
   },
   {
     "symbol": "ASTS",
@@ -2109,7 +2240,8 @@
     "entry_stock_px": 59.380001068115234,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.13
   },
   {
     "symbol": "SMCI",
@@ -2124,8 +2256,9 @@
     "potential_return_annual_pct": 127.435,
     "entry_stock_px": 44.071998596191406,
     "added_date": "2026-10-07",
-    "pe_at_entry": 13.121166,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 11.854295,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 3.26
   },
   {
     "symbol": "AXTI",
@@ -2140,8 +2273,9 @@
     "potential_return_annual_pct": 125.43,
     "entry_stock_px": 81.53500366210938,
     "added_date": "2026-10-07",
-    "pe_at_entry": 1841.5001,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 1516.0,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.04
   },
   {
     "symbol": "BE",
@@ -2156,8 +2290,9 @@
     "potential_return_annual_pct": 125.43,
     "entry_stock_px": 288.1000061035156,
     "added_date": "2026-10-07",
-    "pe_at_entry": 363.48026,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 334.2434,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "SLS",
@@ -2173,7 +2308,8 @@
     "entry_stock_px": 11.3100004196167,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.21
   },
   {
     "symbol": "FCEL",
@@ -2189,7 +2325,8 @@
     "entry_stock_px": 17.810100555419922,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -2.76
   },
   {
     "symbol": "APLD",
@@ -2205,7 +2342,8 @@
     "entry_stock_px": 23.885000228881836,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.91
   },
   {
     "symbol": "SMCI",
@@ -2220,8 +2358,9 @@
     "potential_return_annual_pct": 126.916,
     "entry_stock_px": 44.64500045776367,
     "added_date": "2026-10-07",
-    "pe_at_entry": 13.121166,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 11.854295,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 3.26
   },
   {
     "symbol": "BE",
@@ -2236,8 +2375,9 @@
     "potential_return_annual_pct": 126.574,
     "entry_stock_px": 290.07000732421875,
     "added_date": "2026-10-07",
-    "pe_at_entry": 363.63156,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 334.2434,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "BMNR",
@@ -2253,7 +2393,8 @@
     "entry_stock_px": 24.434999465942383,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -4.54
   },
   {
     "symbol": "COHR",
@@ -2268,8 +2409,9 @@
     "potential_return_annual_pct": 122.737,
     "entry_stock_px": 333.8450012207031,
     "added_date": "2026-10-07",
-    "pe_at_entry": 76.3835,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry": 67.53641,
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": 4.12
   },
   {
     "symbol": "ABSI",
@@ -2285,7 +2427,8 @@
     "entry_stock_px": 9.158599853515625,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -0.79
   },
   {
     "symbol": "MRNA",
@@ -2301,7 +2444,8 @@
     "entry_stock_px": 196.25,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -7.98
   },
   {
     "symbol": "XRX",
@@ -2317,7 +2461,8 @@
     "entry_stock_px": 3.0220000743865967,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -7.36
   },
   {
     "symbol": "WULF",
@@ -2333,7 +2478,8 @@
     "entry_stock_px": 14.375,
     "added_date": "2026-10-07",
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": true
+    "pe_at_entry_is_approx": true,
+    "eps_at_entry": -4.43
   },
   {
     "symbol": "CIFR",
@@ -2348,8 +2494,9 @@
     "potential_return_annual_pct": 163.596,
     "entry_stock_px": 13.505000114440918,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -2.87
   },
   {
     "symbol": "AXTI",
@@ -2363,9 +2510,10 @@
     "potential_return_pct": 3.5503,
     "potential_return_annual_pct": 161.982,
     "entry_stock_px": 73.6500015258789,
-    "pe_at_entry": 1841.2501,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 1516.0,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 0.04
   },
   {
     "symbol": "WULF",
@@ -2380,8 +2528,9 @@
     "potential_return_annual_pct": 133.66,
     "entry_stock_px": 13.414999961853027,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -4.43
   },
   {
     "symbol": "CRWV",
@@ -2396,8 +2545,9 @@
     "potential_return_annual_pct": 130.845,
     "entry_stock_px": 84.4135971069336,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -3.69
   },
   {
     "symbol": "LITE",
@@ -2412,8 +2562,9 @@
     "potential_return_annual_pct": 126.376,
     "entry_stock_px": 1069.991943359375,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -92.96
   },
   {
     "symbol": "BE",
@@ -2427,9 +2578,10 @@
     "potential_return_pct": 2.72018,
     "potential_return_annual_pct": 124.108,
     "entry_stock_px": 276.5,
-    "pe_at_entry": 363.8158,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 334.2434,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "PENG",
@@ -2443,9 +2595,10 @@
     "potential_return_pct": 2.7146,
     "potential_return_annual_pct": 123.854,
     "entry_stock_px": 72.2699966430664,
-    "pe_at_entry": 27.796154,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 29.565386,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 2.6
   },
   {
     "symbol": "AXTI",
@@ -2459,9 +2612,10 @@
     "potential_return_pct": 14.1925,
     "potential_return_annual_pct": 120.471,
     "entry_stock_px": 73.6500015258789,
-    "pe_at_entry": 1841.2501,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 1516.0,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 0.04
   },
   {
     "symbol": "IONQ",
@@ -2476,8 +2630,9 @@
     "potential_return_annual_pct": 120.066,
     "entry_stock_px": 40.002201080322266,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -3.43
   },
   {
     "symbol": "MRVL",
@@ -2491,9 +2646,10 @@
     "potential_return_pct": 2.62258,
     "potential_return_annual_pct": 119.655,
     "entry_stock_px": 275.7099914550781,
-    "pe_at_entry": 90.69408,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 82.67937,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 3.15
   },
   {
     "symbol": "RKLB",
@@ -2508,8 +2664,9 @@
     "potential_return_annual_pct": 118.399,
     "entry_stock_px": 68.67990112304688,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -0.27
   },
   {
     "symbol": "MARA",
@@ -2524,8 +2681,9 @@
     "potential_return_annual_pct": 118.251,
     "entry_stock_px": 9.904999732971191,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -9.4
   },
   {
     "symbol": "QNT",
@@ -2540,8 +2698,9 @@
     "potential_return_annual_pct": 116.987,
     "entry_stock_px": 41.63999938964844,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -1.56
   },
   {
     "symbol": "TEM",
@@ -2556,8 +2715,9 @@
     "potential_return_annual_pct": 116.618,
     "entry_stock_px": 67.61799621582031,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -1.44
   },
   {
     "symbol": "AAOI",
@@ -2572,8 +2732,9 @@
     "potential_return_annual_pct": 115.845,
     "entry_stock_px": 111.25,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -0.75
   },
   {
     "symbol": "CRWV",
@@ -2588,8 +2749,9 @@
     "potential_return_annual_pct": 115.817,
     "entry_stock_px": 84.38999938964844,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -3.69
   },
   {
     "symbol": "BE",
@@ -2603,9 +2765,10 @@
     "potential_return_pct": 3.5503,
     "potential_return_annual_pct": 161.982,
     "entry_stock_px": 266.010009765625,
-    "pe_at_entry": 350.01318,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 334.27634,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "CIFR",
@@ -2620,8 +2783,9 @@
     "potential_return_annual_pct": 158.63,
     "entry_stock_px": 12.952899932861328,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -2.87
   },
   {
     "symbol": "RIOT",
@@ -2636,8 +2800,9 @@
     "potential_return_annual_pct": 153.262,
     "entry_stock_px": 16.559900283813477,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -3.89
   },
   {
     "symbol": "NBIS",
@@ -2651,9 +2816,10 @@
     "potential_return_pct": 3.19174,
     "potential_return_annual_pct": 145.623,
     "entry_stock_px": 220.0,
-    "pe_at_entry": 171.82031,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 157.5625,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 1.28
   },
   {
     "symbol": "BE",
@@ -2667,9 +2833,10 @@
     "potential_return_pct": 3.15414,
     "potential_return_annual_pct": 143.907,
     "entry_stock_px": 266.010009765625,
-    "pe_at_entry": 349.86816,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 334.27634,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "HUM",
@@ -2683,9 +2850,10 @@
     "potential_return_pct": 3.03209,
     "potential_return_annual_pct": 138.339,
     "entry_stock_px": 384.3399963378906,
-    "pe_at_entry": 36.32703,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 39.716446,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 10.58
   },
   {
     "symbol": "SMCI",
@@ -2699,9 +2867,10 @@
     "potential_return_pct": 2.97767,
     "potential_return_annual_pct": 135.856,
     "entry_stock_px": 42.07780075073242,
-    "pe_at_entry": 12.903374,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 11.85276,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 3.26
   },
   {
     "symbol": "GME",
@@ -2715,9 +2884,10 @@
     "potential_return_pct": 2.92301,
     "potential_return_annual_pct": 133.362,
     "entry_stock_px": 25.639999389648438,
-    "pe_at_entry": 16.868422,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 17.871712,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 1.52
   },
   {
     "symbol": "COHR",
@@ -2731,9 +2901,10 @@
     "potential_return_pct": 2.91595,
     "potential_return_annual_pct": 133.04,
     "entry_stock_px": 306.1449890136719,
-    "pe_at_entry": 74.30704,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 67.53641,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 4.12
   },
   {
     "symbol": "CBRS",
@@ -2748,8 +2919,9 @@
     "potential_return_annual_pct": 132.034,
     "entry_stock_px": 162.47999572753906,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -5.14
   },
   {
     "symbol": "CAPR",
@@ -2764,8 +2936,9 @@
     "potential_return_annual_pct": 363.787,
     "entry_stock_px": 7.974999904632568,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -2.45
   },
   {
     "symbol": "EQPT",
@@ -2779,9 +2952,10 @@
     "potential_return_pct": 6.76157,
     "potential_return_annual_pct": 308.496,
     "entry_stock_px": 15.305000305175781,
-    "pe_at_entry": 139.13637,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 135.63637,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 0.11
   },
   {
     "symbol": "NVTS",
@@ -2796,8 +2970,9 @@
     "potential_return_annual_pct": 148.046,
     "entry_stock_px": 10.885000228881836,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -1.34
   },
   {
     "symbol": "GMAB",
@@ -2811,9 +2986,10 @@
     "potential_return_pct": 3.09278,
     "potential_return_annual_pct": 141.108,
     "entry_stock_px": 36.1349983215332,
-    "pe_at_entry": 28.452755,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 29.299212,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 1.27
   },
   {
     "symbol": "KEEL",
@@ -2828,8 +3004,9 @@
     "potential_return_annual_pct": 141.108,
     "entry_stock_px": 3.1600000858306885,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -0.65
   },
   {
     "symbol": "NBIS",
@@ -2843,9 +3020,10 @@
     "potential_return_pct": 3.05529,
     "potential_return_annual_pct": 139.397,
     "entry_stock_px": 218.6699981689453,
-    "pe_at_entry": 170.84375,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 157.5625,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 1.28
   },
   {
     "symbol": "LUNR",
@@ -2860,8 +3038,9 @@
     "potential_return_annual_pct": 133.66,
     "entry_stock_px": 13.654999732971191,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -0.95
   },
   {
     "symbol": "CRWV",
@@ -2876,8 +3055,9 @@
     "potential_return_annual_pct": 132.531,
     "entry_stock_px": 81.37999725341797,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -3.69
   },
   {
     "symbol": "ASTS",
@@ -2892,8 +3072,9 @@
     "potential_return_annual_pct": 131.43,
     "entry_stock_px": 56.625,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": -2.13
   },
   {
     "symbol": "MRVL",
@@ -2907,9 +3088,10 @@
     "potential_return_pct": 2.83275,
     "potential_return_annual_pct": 129.244,
     "entry_stock_px": 272.0450134277344,
-    "pe_at_entry": 89.488495,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-08"
+    "pe_at_entry": 82.65873,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-08",
+    "eps_at_entry": 3.15
   },
   {
     "symbol": "HUM",
@@ -2923,9 +3105,10 @@
     "potential_return_pct": 5.1009,
     "potential_return_annual_pct": 232.728,
     "entry_stock_px": 387.1199951171875,
-    "pe_at_entry": 36.58979,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 39.716446,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 10.58
   },
   {
     "symbol": "IRON",
@@ -2940,8 +3123,9 @@
     "potential_return_annual_pct": 203.44,
     "entry_stock_px": 60.77000045776367,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -6.58
   },
   {
     "symbol": "ERAS",
@@ -2956,8 +3140,9 @@
     "potential_return_annual_pct": 190.104,
     "entry_stock_px": 15.460000038146973,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -0.95
   },
   {
     "symbol": "MXL",
@@ -2972,8 +3157,9 @@
     "potential_return_annual_pct": 154.617,
     "entry_stock_px": 93.69999694824219,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -1.18
   },
   {
     "symbol": "PURR",
@@ -2987,9 +3173,10 @@
     "potential_return_pct": 3.28639,
     "potential_return_annual_pct": 149.941,
     "entry_stock_px": 11.300000190734863,
-    "pe_at_entry": 3.5202491,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 3.1713707,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 3.21
   },
   {
     "symbol": "BE",
@@ -3003,9 +3190,10 @@
     "potential_return_pct": 2.89264,
     "potential_return_annual_pct": 131.977,
     "entry_stock_px": 272.82000732421875,
-    "pe_at_entry": 358.9737,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 334.4737,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "AAOI",
@@ -3020,8 +3208,9 @@
     "potential_return_annual_pct": 131.43,
     "entry_stock_px": 105.9000015258789,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -0.75
   },
   {
     "symbol": "HUT",
@@ -3036,8 +3225,9 @@
     "potential_return_annual_pct": 121.15,
     "entry_stock_px": 79.58999633789062,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -5.42
   },
   {
     "symbol": "SNDK",
@@ -3051,9 +3241,10 @@
     "potential_return_pct": 2.64406,
     "potential_return_annual_pct": 120.635,
     "entry_stock_px": 1609.4599609375,
-    "pe_at_entry": 21.820227,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 19.480206,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 73.76
   },
   {
     "symbol": "IRON",
@@ -3068,8 +3259,9 @@
     "potential_return_annual_pct": 464.639,
     "entry_stock_px": 62.584999084472656,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -6.58
   },
   {
     "symbol": "SECZ",
@@ -3084,8 +3276,9 @@
     "potential_return_annual_pct": 217.262,
     "entry_stock_px": 13.399999618530273,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -0.38
   },
   {
     "symbol": "MRNA",
@@ -3100,8 +3293,9 @@
     "potential_return_annual_pct": 170.176,
     "entry_stock_px": 212.85000610351562,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -7.98
   },
   {
     "symbol": "MRNA",
@@ -3116,8 +3310,9 @@
     "potential_return_annual_pct": 150.206,
     "entry_stock_px": 212.85000610351562,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -7.98
   },
   {
     "symbol": "EOSE",
@@ -3132,8 +3327,9 @@
     "potential_return_annual_pct": 150.206,
     "entry_stock_px": 2.5950000286102295,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -5.8
   },
   {
     "symbol": "NBIS",
@@ -3147,9 +3343,10 @@
     "potential_return_pct": 2.81257,
     "potential_return_annual_pct": 146.656,
     "entry_stock_px": 220.58999633789062,
-    "pe_at_entry": 172.33594,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 157.58595,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 1.28
   },
   {
     "symbol": "ASTS",
@@ -3164,8 +3361,9 @@
     "potential_return_annual_pct": 144.355,
     "entry_stock_px": 47.9900016784668,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -2.13
   },
   {
     "symbol": "MSTR",
@@ -3180,8 +3378,9 @@
     "potential_return_annual_pct": 135.049,
     "entry_stock_px": 157.35000610351562,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -99.08
   },
   {
     "symbol": "IBRX",
@@ -3196,8 +3395,9 @@
     "potential_return_annual_pct": 133.7,
     "entry_stock_px": 10.449999809265137,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -0.96
   },
   {
     "symbol": "SMCI",
@@ -3211,9 +3411,10 @@
     "potential_return_pct": 2.50569,
     "potential_return_annual_pct": 130.654,
     "entry_stock_px": 41.32500076293945,
-    "pe_at_entry": 12.676381,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 11.855828,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 3.26
   },
   {
     "symbol": "TXG",
@@ -3228,8 +3429,9 @@
     "potential_return_annual_pct": 175.157,
     "entry_stock_px": 82.62999725341797,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -0.59
   },
   {
     "symbol": "AXTI",
@@ -3243,9 +3445,10 @@
     "potential_return_pct": 2.8481,
     "potential_return_annual_pct": 148.508,
     "entry_stock_px": 68.75,
-    "pe_at_entry": 1718.75,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 1516.0,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 0.04
   },
   {
     "symbol": "SLS",
@@ -3260,8 +3463,9 @@
     "potential_return_annual_pct": 147.382,
     "entry_stock_px": 11.65999984741211,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -0.21
   },
   {
     "symbol": "UNH",
@@ -3275,9 +3479,10 @@
     "potential_return_pct": 2.52147,
     "potential_return_annual_pct": 131.477,
     "entry_stock_px": 378.5498962402344,
-    "pe_at_entry": 24.344044,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 24.294533,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 15.55
   },
   {
     "symbol": "AMAT",
@@ -3291,9 +3496,10 @@
     "potential_return_pct": 2.51153,
     "potential_return_annual_pct": 130.958,
     "entry_stock_px": 508.32501220703125,
-    "pe_at_entry": 43.858932,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 39.620792,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 11.59
   },
   {
     "symbol": "APLD",
@@ -3308,8 +3514,9 @@
     "potential_return_annual_pct": 128.22,
     "entry_stock_px": 23.209999084472656,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -0.91
   },
   {
     "symbol": "MRVL",
@@ -3323,9 +3530,10 @@
     "potential_return_pct": 2.41194,
     "potential_return_annual_pct": 125.766,
     "entry_stock_px": 273.3699951171875,
-    "pe_at_entry": 89.97365,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 82.63695,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 3.15
   },
   {
     "symbol": "IREN",
@@ -3340,8 +3548,9 @@
     "potential_return_annual_pct": 125.645,
     "entry_stock_px": 34.89500045776367,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -2.22
   },
   {
     "symbol": "MRNA",
@@ -3356,8 +3565,9 @@
     "potential_return_annual_pct": 125.018,
     "entry_stock_px": 220.07130432128906,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -7.98
   },
   {
     "symbol": "MRNA",
@@ -3372,8 +3582,9 @@
     "potential_return_annual_pct": 191.073,
     "entry_stock_px": 221.99000549316406,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -7.98
   },
   {
     "symbol": "HUT",
@@ -3388,8 +3599,9 @@
     "potential_return_annual_pct": 166.12,
     "entry_stock_px": 83.82499694824219,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -5.42
   },
   {
     "symbol": "CRML",
@@ -3404,8 +3616,9 @@
     "potential_return_annual_pct": 165.533,
     "entry_stock_px": 6.784999847412109,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -1.87
   },
   {
     "symbol": "SMCI",
@@ -3419,9 +3632,10 @@
     "potential_return_pct": 2.55128,
     "potential_return_annual_pct": 133.031,
     "entry_stock_px": 41.724998474121094,
-    "pe_at_entry": 12.799079,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 11.857362,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 3.26
   },
   {
     "symbol": "UNH",
@@ -3435,9 +3649,10 @@
     "potential_return_pct": 2.46183,
     "potential_return_annual_pct": 128.367,
     "entry_stock_px": 382.5,
-    "pe_at_entry": 24.59807,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry": 24.308037,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": 15.55
   },
   {
     "symbol": "HIMS",
@@ -3452,8 +3667,9 @@
     "potential_return_annual_pct": 128.22,
     "entry_stock_px": 31.059999465942383,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -0.64
   },
   {
     "symbol": "ASST",
@@ -3468,8 +3684,9 @@
     "potential_return_annual_pct": 126.599,
     "entry_stock_px": 27.8700008392334,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -204.8
   },
   {
     "symbol": "CORZ",
@@ -3484,8 +3701,9 @@
     "potential_return_annual_pct": 124.573,
     "entry_stock_px": 15.295000076293945,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-09"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-09",
+    "eps_at_entry": -4.25
   },
   {
     "symbol": "IRON",
@@ -3500,8 +3718,9 @@
     "potential_return_annual_pct": 460.084,
     "entry_stock_px": 61.189998626708984,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -6.58
   },
   {
     "symbol": "CTNM",
@@ -3516,8 +3735,9 @@
     "potential_return_annual_pct": 446.678,
     "entry_stock_px": 9.854999542236328,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -1.73
   },
   {
     "symbol": "FSLY",
@@ -3532,8 +3752,9 @@
     "potential_return_annual_pct": 233.974,
     "entry_stock_px": 26.93000030517578,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -0.53
   },
   {
     "symbol": "HIMS",
@@ -3548,8 +3769,9 @@
     "potential_return_annual_pct": 223.757,
     "entry_stock_px": 31.128000259399414,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -0.64
   },
   {
     "symbol": "ASTS",
@@ -3564,8 +3786,9 @@
     "potential_return_annual_pct": 213.713,
     "entry_stock_px": 53.470001220703125,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -2.13
   },
   {
     "symbol": "TEM",
@@ -3580,8 +3803,9 @@
     "potential_return_annual_pct": 211.82,
     "entry_stock_px": 68.06999969482422,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -1.44
   },
   {
     "symbol": "SMCI",
@@ -3595,9 +3819,10 @@
     "potential_return_pct": 2.3085,
     "potential_return_annual_pct": 210.651,
     "entry_stock_px": 39.62120056152344,
-    "pe_at_entry": 12.153743,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 11.858895,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 3.26
   },
   {
     "symbol": "MRVL",
@@ -3611,9 +3836,10 @@
     "potential_return_pct": 2.24145,
     "potential_return_annual_pct": 204.532,
     "entry_stock_px": 266.10009765625,
-    "pe_at_entry": 87.53293,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 82.680954,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 3.15
   },
   {
     "symbol": "BE",
@@ -3627,9 +3853,10 @@
     "potential_return_pct": 2.22489,
     "potential_return_annual_pct": 203.022,
     "entry_stock_px": 262.56500244140625,
-    "pe_at_entry": 345.4803,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 334.86844,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "NBIS",
@@ -3643,9 +3870,10 @@
     "potential_return_pct": 2.2189,
     "potential_return_annual_pct": 202.474,
     "entry_stock_px": 210.00999450683594,
-    "pe_at_entry": 164.07031,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 157.64453,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 1.28
   },
   {
     "symbol": "ACI",
@@ -3659,9 +3887,10 @@
     "potential_return_pct": 2.12766,
     "potential_return_annual_pct": 194.149,
     "entry_stock_px": 12.25,
-    "pe_at_entry": 72.05882,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 75.2647,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 0.17
   },
   {
     "symbol": "UNH",
@@ -3675,9 +3904,10 @@
     "potential_return_pct": 2.12647,
     "potential_return_annual_pct": 194.04,
     "entry_stock_px": 375.7974853515625,
-    "pe_at_entry": 24.16704,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 24.319614,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 15.55
   },
   {
     "symbol": "BULL",
@@ -3691,9 +3921,10 @@
     "potential_return_pct": 2.04082,
     "potential_return_annual_pct": 186.224,
     "entry_stock_px": 6.125,
-    "pe_at_entry": 76.5625,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 78.87375,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 0.08
   },
   {
     "symbol": "PENG",
@@ -3707,9 +3938,10 @@
     "potential_return_pct": 2.04082,
     "potential_return_annual_pct": 186.224,
     "entry_stock_px": 79.91999816894531,
-    "pe_at_entry": 30.738462,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 29.59231,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 2.6
   },
   {
     "symbol": "MRNA",
@@ -3724,8 +3956,9 @@
     "potential_return_annual_pct": 266.081,
     "entry_stock_px": 214.5800018310547,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -7.98
   },
   {
     "symbol": "AEHR",
@@ -3740,8 +3973,9 @@
     "potential_return_annual_pct": 224.385,
     "entry_stock_px": 78.03500366210938,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -0.23
   },
   {
     "symbol": "COHR",
@@ -3755,9 +3989,10 @@
     "potential_return_pct": 2.45152,
     "potential_return_annual_pct": 223.701,
     "entry_stock_px": 285.4700012207031,
-    "pe_at_entry": 69.28883,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 67.59224,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 4.12
   },
   {
     "symbol": "SKYD",
@@ -3772,8 +4007,9 @@
     "potential_return_annual_pct": 219.88,
     "entry_stock_px": 8.819899559020996,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -0.02
   },
   {
     "symbol": "CRCL",
@@ -3787,9 +4023,10 @@
     "potential_return_pct": 2.23164,
     "potential_return_annual_pct": 203.637,
     "entry_stock_px": 83.01499938964844,
-    "pe_at_entry": 56.85959,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 57.006805,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 1.47
   },
   {
     "symbol": "AXTI",
@@ -3803,9 +4040,10 @@
     "potential_return_pct": 2.21465,
     "potential_return_annual_pct": 202.087,
     "entry_stock_px": 62.209999084472656,
-    "pe_at_entry": 1555.25,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 1516.5,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 0.04
   },
   {
     "symbol": "TXG",
@@ -3820,8 +4058,9 @@
     "potential_return_annual_pct": 199.818,
     "entry_stock_px": 72.76000213623047,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -0.59
   },
   {
     "symbol": "BE",
@@ -3835,9 +4074,10 @@
     "potential_return_pct": 2.14401,
     "potential_return_annual_pct": 195.641,
     "entry_stock_px": 259.9549865722656,
-    "pe_at_entry": 342.04605,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 334.75,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 0.76
   },
   {
     "symbol": "COHR",
@@ -3851,9 +4091,10 @@
     "potential_return_pct": 2.13471,
     "potential_return_annual_pct": 194.792,
     "entry_stock_px": 285.4700012207031,
-    "pe_at_entry": 69.25121,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 67.61165,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 4.12
   },
   {
     "symbol": "BMNR",
@@ -3868,8 +4109,9 @@
     "potential_return_annual_pct": 194.318,
     "entry_stock_px": 23.701099395751953,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -4.54
   },
   {
     "symbol": "MRVL",
@@ -3883,9 +4125,10 @@
     "potential_return_pct": 2.0805,
     "potential_return_annual_pct": 189.845,
     "entry_stock_px": 266.3900146484375,
-    "pe_at_entry": 87.628296,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 82.66032,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 3.15
   },
   {
     "symbol": "FRVO",
@@ -3900,8 +4143,9 @@
     "potential_return_annual_pct": 186.224,
     "entry_stock_px": 12.991499900817871,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -1.26
   },
   {
     "symbol": "SDGR",
@@ -3916,8 +4160,9 @@
     "potential_return_annual_pct": 186.224,
     "entry_stock_px": 25.59000015258789,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -0.74
   },
   {
     "symbol": "SLS",
@@ -3932,8 +4177,9 @@
     "potential_return_annual_pct": 244.42,
     "entry_stock_px": 11.974100112915039,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -0.21
   },
   {
     "symbol": "CRDO",
@@ -3947,9 +4193,10 @@
     "potential_return_pct": 2.3085,
     "potential_return_annual_pct": 210.651,
     "entry_stock_px": 200.98500061035156,
-    "pe_at_entry": 71.27128,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry": 66.53369,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 2.82
   },
   {
     "symbol": "FSLY",
@@ -3964,8 +4211,9 @@
     "potential_return_annual_pct": 201.152,
     "entry_stock_px": 26.4950008392334,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -0.53
   },
   {
     "symbol": "FLY",
@@ -3980,8 +4228,9 @@
     "potential_return_annual_pct": 196.237,
     "entry_stock_px": 19.3700008392334,
     "pe_at_entry": null,
-    "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": -0.26
   },
   {
     "symbol": "LRCX",
@@ -3995,8 +4244,264 @@
     "potential_return_pct": 2.14334,
     "potential_return_annual_pct": 195.579,
     "entry_stock_px": 310.04998779296875,
-    "pe_at_entry": 53.82812,
+    "pe_at_entry": 51.149303,
+    "pe_at_entry_is_approx": true,
+    "added_date": "2026-10-12",
+    "eps_at_entry": 5.76
+  },
+  {
+    "symbol": "EYPT",
+    "strike": 2.5,
+    "expiration": "2026-11-20",
+    "barchart_bid": 0.9,
+    "bid": 0.9,
+    "bid_is_approx": false,
+    "ask": 1.0,
+    "ask_is_approx": false,
+    "potential_return_pct": 56.25,
+    "potential_return_annual_pct": 540.296,
+    "entry_stock_px": 3.184999942779541,
+    "pe_at_entry": null,
+    "eps_at_entry": -3.75,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-12"
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "WULF",
+    "strike": 12.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.28,
+    "bid": 0.27,
+    "bid_is_approx": false,
+    "ask": 0.28,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.29133,
+    "potential_return_annual_pct": 278.778,
+    "entry_stock_px": 12.770000457763672,
+    "pe_at_entry": null,
+    "eps_at_entry": -4.43,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "NVTS",
+    "strike": 10.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.22,
+    "bid": 0.23,
+    "bid_is_approx": false,
+    "ask": 0.24,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.24949,
+    "potential_return_annual_pct": 273.688,
+    "entry_stock_px": 10.120499610900879,
+    "pe_at_entry": null,
+    "eps_at_entry": -1.34,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "APLD",
+    "strike": 21.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.46,
+    "bid": 0.45,
+    "bid_is_approx": false,
+    "ask": 0.49,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.18631,
+    "potential_return_annual_pct": 266.001,
+    "entry_stock_px": 21.8700008392334,
+    "pe_at_entry": null,
+    "eps_at_entry": -0.91,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "BE",
+    "strike": 250.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 5.15,
+    "bid": 5.65,
+    "bid_is_approx": false,
+    "ask": 5.7,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.10333,
+    "potential_return_annual_pct": 255.905,
+    "entry_stock_px": 254.375,
+    "pe_at_entry": 334.70395,
+    "eps_at_entry": 0.76,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "NBIS",
+    "strike": 197.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 3.95,
+    "bid": 3.9,
+    "bid_is_approx": false,
+    "ask": 4.4,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.04082,
+    "potential_return_annual_pct": 248.299,
+    "entry_stock_px": 201.8300018310547,
+    "pe_at_entry": 157.67969,
+    "eps_at_entry": 1.28,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "PURR",
+    "strike": 10.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.2,
+    "bid": 0.2,
+    "bid_is_approx": false,
+    "ask": 0.25,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.04082,
+    "potential_return_annual_pct": 248.299,
+    "entry_stock_px": 10.199999809265137,
+    "pe_at_entry": 3.17757,
+    "eps_at_entry": 3.21,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "IREN",
+    "strike": 33.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.65,
+    "bid": 0.69,
+    "bid_is_approx": false,
+    "ask": 0.73,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.00927,
+    "potential_return_annual_pct": 244.462,
+    "entry_stock_px": 33.78990173339844,
+    "pe_at_entry": null,
+    "eps_at_entry": -2.22,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "HIMS",
+    "strike": 29.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.57,
+    "bid": 0.6,
+    "bid_is_approx": false,
+    "ask": 0.67,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.97027,
+    "potential_return_annual_pct": 239.717,
+    "entry_stock_px": 29.920000076293945,
+    "pe_at_entry": null,
+    "eps_at_entry": -0.64,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "SMCI",
+    "strike": 38.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.73,
+    "bid": 0.79,
+    "bid_is_approx": false,
+    "ask": 0.8,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.95868,
+    "potential_return_annual_pct": 238.306,
+    "entry_stock_px": 38.68000030517578,
+    "pe_at_entry": 11.865031,
+    "eps_at_entry": 3.26,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "EIX",
+    "strike": 52.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 1.0,
+    "bid": 0.8,
+    "bid_is_approx": false,
+    "ask": 1.3,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.94175,
+    "potential_return_annual_pct": 236.246,
+    "entry_stock_px": 53.630001068115234,
+    "pe_at_entry": 5.5288663,
+    "eps_at_entry": 9.7,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "MRVL",
+    "strike": 255.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 4.8,
+    "bid": 5.1,
+    "bid_is_approx": false,
+    "ask": 5.5,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.91847,
+    "potential_return_annual_pct": 233.413,
+    "entry_stock_px": 260.69000244140625,
+    "pe_at_entry": 82.75873,
+    "eps_at_entry": 3.15,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "OKLO",
+    "strike": 31.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.56,
+    "bid": 0.6,
+    "bid_is_approx": false,
+    "ask": 0.66,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.83968,
+    "potential_return_annual_pct": 223.828,
+    "entry_stock_px": 31.450000762939453,
+    "pe_at_entry": null,
+    "eps_at_entry": -1.01,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "FAST",
+    "strike": 50.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.9,
+    "bid": 0.95,
+    "bid_is_approx": false,
+    "ask": 1.05,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.83299,
+    "potential_return_annual_pct": 223.014,
+    "entry_stock_px": 50.94499969482422,
+    "pe_at_entry": 43.542736,
+    "eps_at_entry": 1.17,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
+  },
+  {
+    "symbol": "ALAB",
+    "strike": 300.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 5.4,
+    "bid": 5.7,
+    "bid_is_approx": false,
+    "ask": 7.15,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.83299,
+    "potential_return_annual_pct": 223.014,
+    "entry_stock_px": 311.6099853515625,
+    "pe_at_entry": 145.61214,
+    "eps_at_entry": 2.14,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-13"
   }
 ]
