@@ -759,16 +759,25 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
         ann_return = r.get('BARCHART ANNUALIZED RETURN % (at selection)')
         pe = r.get('PE AT ENTRY')
         pe_text = f"{pe:.1f}" if pe is not None else "--"
+        dte_entry = r.get('DTE AT ENTRY')
+        # Today's run-of-the-day label (A/B/C) - only shown while the
+        # position is still today's, purely to let a same-day Discord
+        # message be visually matched to its webpage card. Gone the next
+        # day the page regenerates, since r['ADDED'] no longer equals today.
+        run_label = r.get('RUN LABEL')
+        run_badge = (f'<span class="run-badge">{_html_escape(run_label)}</span>'
+                     if run_label and not closed and r['ADDED'] == today.isoformat() else '')
         return f"""
-        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
+        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
           <div class="card-head">
             <span class="sym">{_html_escape(r['SYMBOL'])}</span>
             <span class="strike">${r['STRIKE']:g}P</span>
             <span class="exp">{r['EXPIRATION']}</span>
+            {run_badge}
           </div>
           <div class="sub">{days_line} &middot; Entry {r['ENTRY STOCK PRICE']:.2f} &middot; {price_line}
             &middot; bid {r['BID']:.2f}/{r['BID SOURCE']} &middot; ask {r['ASK']:.2f}/{r['ASK SOURCE']}</div>
-          <div class="sub">Barchart ann. return at selection: {_fmt_pct(ann_return)} &middot; PE at entry: {pe_text} ({r.get('PE SOURCE', '')})</div>
+          <div class="sub">Barchart ann. return at selection: {_fmt_pct(ann_return)} &middot; PE at entry: {pe_text} ({r.get('PE SOURCE', '')}) &middot; DTE at entry: {dte_entry if dte_entry is not None else '--'}</div>
           {rows_html}
         </div>"""
 
@@ -802,6 +811,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
   .card-head .sym {{ font-size: 1.15rem; }}
   .card-head .strike {{ color: #9aa4b2; }}
   .card-head .exp {{ margin-left: auto; color: #9aa4b2; font-weight: 400; font-size: 0.9rem; }}
+  .run-badge {{ display: inline-flex; align-items: center; justify-content: center; width: 1.4em; height: 1.4em;
+    border-radius: 50%; background: #2563eb; color: #fff; font-size: 0.8rem; font-weight: 700; }}
   .sub {{ color: #9aa4b2; font-size: 0.82rem; margin-top: 4px; }}
   .sub2 {{ color: #9aa4b2; font-size: 0.78rem; margin-top: 2px; }}
   .rowlabel {{ font-size: 0.72rem; letter-spacing: 0.03em; color: #9aa4b2; margin-top: 10px; }}
@@ -841,6 +852,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     <label>Max ROI % <input type="number" id="maxRoi" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <label>Min PE <input type="number" id="minPe" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max PE <input type="number" id="maxPe" step="any" placeholder="&infin;" inputmode="decimal"></label>
+    <label>Min DTE@entry <input type="number" id="minDte" step="any" placeholder="-&infin;" inputmode="decimal"></label>
+    <label>Max DTE@entry <input type="number" id="maxDte" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <button id="applyFilter" type="button">Filter</button>
     <span class="count" id="filterCount"></span>
   </div>
@@ -934,15 +947,20 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     var maxRoiRaw = document.getElementById('maxRoi').value.trim();
     var minPeRaw = document.getElementById('minPe').value.trim();
     var maxPeRaw = document.getElementById('maxPe').value.trim();
-    var noFilter = minRoiRaw === '' && maxRoiRaw === '' && minPeRaw === '' && maxPeRaw === '';
+    var minDteRaw = document.getElementById('minDte').value.trim();
+    var maxDteRaw = document.getElementById('maxDte').value.trim();
+    var noFilter = minRoiRaw === '' && maxRoiRaw === '' && minPeRaw === '' && maxPeRaw === ''
+      && minDteRaw === '' && maxDteRaw === '';
     var minRoi = minRoiRaw === '' ? -Infinity : parseFloat(minRoiRaw);
     var maxRoi = maxRoiRaw === '' ? Infinity : parseFloat(maxRoiRaw);
     var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
     var maxPe = maxPeRaw === '' ? Infinity : parseFloat(maxPeRaw);
+    var minDte = minDteRaw === '' ? -Infinity : parseFloat(minDteRaw);
+    var maxDte = maxDteRaw === '' ? Infinity : parseFloat(maxDteRaw);
     var cards = document.querySelectorAll('.card[data-ann-return]');
 
-    // Pass 1: which cards individually clear BOTH the ROI range and the PE
-    // range? (A range with both bounds blank is treated as "not filtering
+    // Pass 1: which cards individually clear the ROI, PE, AND DTE@entry
+    // ranges? (A range with both bounds blank is treated as "not filtering
     // on this dimension," so e.g. setting only PE still lets every ROI
     // value through.)
     var passing = [];
@@ -957,7 +975,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       var peOk = (minPeRaw === '' && maxPeRaw === '')
         || (peVal !== null && !isNaN(peVal) && peVal >= minPe && peVal <= maxPe);
 
-      if (noFilter || (roiOk && peOk)) {{
+      var dteRaw = card.getAttribute('data-dte-entry');
+      var dteVal = dteRaw === '' ? null : parseFloat(dteRaw);
+      var dteOk = (minDteRaw === '' && maxDteRaw === '')
+        || (dteVal !== null && !isNaN(dteVal) && dteVal >= minDte && dteVal <= maxDte);
+
+      if (noFilter || (roiOk && peOk && dteOk)) {{
         passing.push(card);
       }}
     }});
@@ -1044,12 +1067,14 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       localStorage.setItem('csp_filter_max_roi', maxRoiRaw);
       localStorage.setItem('csp_filter_min_pe', minPeRaw);
       localStorage.setItem('csp_filter_max_pe', maxPeRaw);
+      localStorage.setItem('csp_filter_min_dte', minDteRaw);
+      localStorage.setItem('csp_filter_max_dte', maxDteRaw);
     }} catch (e) {{}}
   }}
 
   var btn = document.getElementById('applyFilter');
   if (btn) btn.addEventListener('click', applyFilter);
-  ['minRoi', 'maxRoi', 'minPe', 'maxPe'].forEach(function(id) {{
+  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte'].forEach(function(id) {{
     var el = document.getElementById(id);
     if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyFilter(); }});
   }});
@@ -1059,7 +1084,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       minRoi: localStorage.getItem('csp_filter_min_roi'),
       maxRoi: localStorage.getItem('csp_filter_max_roi'),
       minPe: localStorage.getItem('csp_filter_min_pe'),
-      maxPe: localStorage.getItem('csp_filter_max_pe')
+      maxPe: localStorage.getItem('csp_filter_max_pe'),
+      minDte: localStorage.getItem('csp_filter_min_dte'),
+      maxDte: localStorage.getItem('csp_filter_max_dte')
     }};
     Object.keys(saved).forEach(function(id) {{
       if (saved[id]) document.getElementById(id).value = saved[id];
@@ -1084,7 +1111,9 @@ def build_summary(positions, today):
         exp_date = datetime.strptime(p["expiration"], "%Y-%m-%d").date()
         if exp_date < today:
             continue  # expired - handled by settle_expired_positions() instead
-        days_held = (today - datetime.strptime(p["added_date"], "%Y-%m-%d").date()).days
+        added_date_obj = datetime.strptime(p["added_date"], "%Y-%m-%d").date()
+        days_held = (today - added_date_obj).days
+        dte_at_entry = (exp_date - added_date_obj).days
         current_px = get_current_stock_price(p["symbol"])
 
         # "Fictional": intrinsic value at today's stock price only - ignores
@@ -1169,6 +1198,8 @@ def build_summary(positions, today):
             "STRIKE": p["strike"],
             "EXPIRATION": p["expiration"],
             "DAYS LEFT": (exp_date - today).days,
+            "DTE AT ENTRY": dte_at_entry,
+            "RUN LABEL": p.get("run_label"),
             "ENTRY STOCK PRICE": p["entry_stock_px"],
             "CURRENT STOCK PRICE": current_px,
             "STOCK LONG P/L": stock_long_pnl,
@@ -1242,6 +1273,7 @@ def build_summary(positions, today):
             "SYMBOL": p["symbol"],
             "STRIKE": p["strike"],
             "EXPIRATION": p["expiration"],
+            "DTE AT ENTRY": holding_days,
             "ENTRY STOCK PRICE": p["entry_stock_px"],
             "FINAL STOCK PRICE": p["final_stock_px"],
             "STOCK LONG P/L": stock_long_pnl,
@@ -1421,11 +1453,23 @@ def main():
     if ensure_pe_at_entry(positions):
         save_positions(positions)
 
+    # Markets run this script up to 3x/day - label each run's additions
+    # A, B, C (next unused letter among today's existing positions) purely
+    # so a same-day Discord message and its webpage card can be visually
+    # matched to "which of today's screening passes" produced it. Only
+    # meaningful for today - once a position is no longer today's, the
+    # card stops showing its letter (see position_card()).
+    todays_run_labels = sorted(set(
+        p.get("run_label") for p in positions
+        if p.get("added_date") == today.isoformat() and p.get("run_label")
+    ))
+    run_label = chr(ord("A") + len(todays_run_labels))
+
     candidates = pick_new_candidates(barchart_rows, positions, today)
     if not candidates:
         print("\n  All of Barchart's top candidates are already open positions - nothing new to add.")
     else:
-        print(f"\n  Adding {len(candidates)} new candidate(s):")
+        print(f"\n  Adding {len(candidates)} new candidate(s) (run {run_label}):")
         for candidate in candidates:
             print(f"    {candidate['symbol']} ${candidate['strike']}P exp {candidate['expiration']} "
                   f"(barchart bid {candidate['barchart_bid']:.2f}, annualized return "
@@ -1440,6 +1484,7 @@ def main():
                 for p in positions
             )
             position = add_new_position(candidate, today)
+            position["run_label"] = run_label
             bid_source = "approx (barchart)" if position["bid_is_approx"] else "yahoo"
             ask_source = "approx (bid x 1.2)" if position["ask_is_approx"] else "yahoo"
             print(f"      bid: {position['bid']:.2f} ({bid_source})   ask: {position['ask']:.2f} ({ask_source})")
@@ -1451,7 +1496,7 @@ def main():
                 pe_text = f"{pe:.1f}" if pe is not None else "n/a"
                 mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
                 notify_discord(
-                    f"**New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
+                    f"**[{run_label}] New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
                     f"Barchart ann. return: {ann_return:.1f}% "
                     f"· PE: {pe_text} · Entry stock px {position['entry_stock_px']:.2f}\n"
                     f"Bid {position['bid']:.2f} ({bid_source})\n"
