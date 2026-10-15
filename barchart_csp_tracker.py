@@ -768,7 +768,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
         run_badge = (f'<span class="run-badge">{_html_escape(run_label)}</span>'
                      if run_label and not closed and r['ADDED'] == today.isoformat() else '')
         return f"""
-        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
+        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-strike="{attr(r['STRIKE'])}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
           <div class="card-head">
             <span class="sym">{_html_escape(r['SYMBOL'])}</span>
             <span class="strike">${r['STRIKE']:g}P</span>
@@ -854,6 +854,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     <label>Max PE <input type="number" id="maxPe" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <label>Min DTE@entry <input type="number" id="minDte" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max DTE@entry <input type="number" id="maxDte" step="any" placeholder="&infin;" inputmode="decimal"></label>
+    <label>Base investment $ <input type="number" id="baseInvest" step="any" placeholder="e.g. 1000" inputmode="decimal"></label>
     <button id="applyFilter" type="button">Filter</button>
     <span class="count" id="filterCount"></span>
   </div>
@@ -949,20 +950,22 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     var maxPeRaw = document.getElementById('maxPe').value.trim();
     var minDteRaw = document.getElementById('minDte').value.trim();
     var maxDteRaw = document.getElementById('maxDte').value.trim();
+    var baseInvestRaw = document.getElementById('baseInvest').value.trim();
     var noFilter = minRoiRaw === '' && maxRoiRaw === '' && minPeRaw === '' && maxPeRaw === ''
-      && minDteRaw === '' && maxDteRaw === '';
+      && minDteRaw === '' && maxDteRaw === '' && baseInvestRaw === '';
     var minRoi = minRoiRaw === '' ? -Infinity : parseFloat(minRoiRaw);
     var maxRoi = maxRoiRaw === '' ? Infinity : parseFloat(maxRoiRaw);
     var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
     var maxPe = maxPeRaw === '' ? Infinity : parseFloat(maxPeRaw);
     var minDte = minDteRaw === '' ? -Infinity : parseFloat(minDteRaw);
     var maxDte = maxDteRaw === '' ? Infinity : parseFloat(maxDteRaw);
+    var baseInvest = baseInvestRaw === '' ? Infinity : parseFloat(baseInvestRaw);
     var cards = document.querySelectorAll('.card[data-ann-return]');
 
-    // Pass 1: which cards individually clear the ROI, PE, AND DTE@entry
-    // ranges? (A range with both bounds blank is treated as "not filtering
-    // on this dimension," so e.g. setting only PE still lets every ROI
-    // value through.)
+    // Pass 1: which cards individually clear the ROI, PE, DTE@entry, AND
+    // base-investment ranges? (A range with both bounds blank is treated
+    // as "not filtering on this dimension," so e.g. setting only PE still
+    // lets every ROI value through.)
     var passing = [];
     cards.forEach(function(card) {{
       var roiRaw = card.getAttribute('data-ann-return');
@@ -970,17 +973,29 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       var roiOk = (minRoiRaw === '' && maxRoiRaw === '')
         || (roiVal !== null && !isNaN(roiVal) && roiVal >= minRoi && roiVal <= maxRoi);
 
+      // No trailing P/E ("--" on the card) means unprofitable/undefined,
+      // not zero - treat it as infinite so it correctly fails a Max PE
+      // cap but still passes a Min-PE-only filter (infinity clears any
+      // finite floor).
       var peRaw = card.getAttribute('data-pe');
-      var peVal = peRaw === '' ? null : parseFloat(peRaw);
+      var peVal = peRaw === '' ? Infinity : parseFloat(peRaw);
       var peOk = (minPeRaw === '' && maxPeRaw === '')
-        || (peVal !== null && !isNaN(peVal) && peVal >= minPe && peVal <= maxPe);
+        || (!isNaN(peVal) && peVal >= minPe && peVal <= maxPe);
+
+      // Base investment: 100 shares at the strike price is the actual
+      // cash a CSP ties up if assigned - exclude anything that wouldn't
+      // fit inside this account size.
+      var strikeRaw = card.getAttribute('data-strike');
+      var strikeVal = strikeRaw === '' ? null : parseFloat(strikeRaw);
+      var investOk = baseInvestRaw === ''
+        || (strikeVal !== null && !isNaN(strikeVal) && strikeVal * 100 <= baseInvest);
 
       var dteRaw = card.getAttribute('data-dte-entry');
       var dteVal = dteRaw === '' ? null : parseFloat(dteRaw);
       var dteOk = (minDteRaw === '' && maxDteRaw === '')
         || (dteVal !== null && !isNaN(dteVal) && dteVal >= minDte && dteVal <= maxDte);
 
-      if (noFilter || (roiOk && peOk && dteOk)) {{
+      if (noFilter || (roiOk && peOk && dteOk && investOk)) {{
         passing.push(card);
       }}
     }});
@@ -1069,12 +1084,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       localStorage.setItem('csp_filter_max_pe', maxPeRaw);
       localStorage.setItem('csp_filter_min_dte', minDteRaw);
       localStorage.setItem('csp_filter_max_dte', maxDteRaw);
+      localStorage.setItem('csp_filter_base_invest', baseInvestRaw);
     }} catch (e) {{}}
   }}
 
   var btn = document.getElementById('applyFilter');
   if (btn) btn.addEventListener('click', applyFilter);
-  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte'].forEach(function(id) {{
+  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte', 'baseInvest'].forEach(function(id) {{
     var el = document.getElementById(id);
     if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyFilter(); }});
   }});
@@ -1086,7 +1102,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       minPe: localStorage.getItem('csp_filter_min_pe'),
       maxPe: localStorage.getItem('csp_filter_max_pe'),
       minDte: localStorage.getItem('csp_filter_min_dte'),
-      maxDte: localStorage.getItem('csp_filter_max_dte')
+      maxDte: localStorage.getItem('csp_filter_max_dte'),
+      baseInvest: localStorage.getItem('csp_filter_base_invest')
     }};
     Object.keys(saved).forEach(function(id) {{
       if (saved[id]) document.getElementById(id).value = saved[id];
