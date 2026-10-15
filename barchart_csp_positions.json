@@ -14,7 +14,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.21
+    "eps_at_entry": -0.21,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ALHC",
@@ -31,7 +32,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": 43.973682,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.19
+    "eps_at_entry": 0.19,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PENG",
@@ -48,7 +50,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": 29.603848,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 2.6
+    "eps_at_entry": 2.6,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "EOSE",
@@ -82,7 +85,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -3.33
+    "eps_at_entry": -3.33,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -99,7 +103,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": 157.42969,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 1.28
+    "eps_at_entry": 1.28,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRML",
@@ -133,7 +138,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.85
+    "eps_at_entry": -0.85,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BB",
@@ -150,7 +156,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": 64.85307,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.13
+    "eps_at_entry": 0.13,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "WOLF",
@@ -167,7 +174,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -11.39
+    "eps_at_entry": -11.39,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LCID",
@@ -184,7 +192,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -13.71
+    "eps_at_entry": -13.71,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "APLD",
@@ -201,7 +210,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.91
+    "eps_at_entry": -0.91,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IREN",
@@ -218,7 +228,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.22
+    "eps_at_entry": -2.22,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AAOI",
@@ -235,7 +246,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.75
+    "eps_at_entry": -0.75,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FRVO",
@@ -252,7 +264,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.26
+    "eps_at_entry": -1.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -269,7 +282,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": 11.845093,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 3.26
+    "eps_at_entry": 3.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CIFR",
@@ -320,7 +334,8 @@
     "added_date": "2026-09-23",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -9.4
+    "eps_at_entry": -9.4,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SECZ",
@@ -337,7 +352,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.38
+    "eps_at_entry": -0.38,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "GLND",
@@ -354,7 +370,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": null
+    "eps_at_entry": null,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MSTR",
@@ -371,7 +388,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -99.08
+    "eps_at_entry": -99.08,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BMNR",
@@ -388,7 +406,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -4.54
+    "eps_at_entry": -4.54,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "INTC",
@@ -405,7 +424,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.12
+    "eps_at_entry": -2.12,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -422,7 +442,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -7.98
+    "eps_at_entry": -7.98,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ONDS",
@@ -439,7 +460,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.06
+    "eps_at_entry": -0.06,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -456,7 +478,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": 333.75,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MU",
@@ -473,7 +496,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": 12.616171,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 74.33
+    "eps_at_entry": 74.33,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AXTI",
@@ -507,7 +531,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": 178.77588,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 1.16
+    "eps_at_entry": 1.16,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "USAR",
@@ -541,7 +566,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": 149.74605,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 3.92
+    "eps_at_entry": 3.92,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "U",
@@ -558,7 +584,8 @@
     "added_date": "2026-09-24",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.37
+    "eps_at_entry": -1.37,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "WULF",
@@ -575,7 +602,8 @@
     "added_date": "2026-09-25",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -4.43
+    "eps_at_entry": -4.43,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CLSK",
@@ -592,7 +620,8 @@
     "added_date": "2026-09-25",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -3.78
+    "eps_at_entry": -3.78,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "RKLB",
@@ -609,7 +638,8 @@
     "added_date": "2026-09-25",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.27
+    "eps_at_entry": -0.27,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HOOD",
@@ -626,7 +656,8 @@
     "added_date": "2026-09-25",
     "pe_at_entry": 48.766518,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 2.27
+    "eps_at_entry": 2.27,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "P",
@@ -643,7 +674,8 @@
     "added_date": "2026-09-25",
     "pe_at_entry": 209.17807,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.73
+    "eps_at_entry": 0.73,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRVL",
@@ -660,7 +692,8 @@
     "added_date": "2026-09-25",
     "pe_at_entry": 82.61587,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 3.15
+    "eps_at_entry": 3.15,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRWD",
@@ -677,7 +710,8 @@
     "added_date": "2026-09-25",
     "pe_at_entry": 5242.402,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.05
+    "eps_at_entry": 0.05,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "QURE",
@@ -694,7 +728,8 @@
     "added_date": "2026-09-28",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -4.03
+    "eps_at_entry": -4.03,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IONQ",
@@ -711,7 +746,8 @@
     "added_date": "2026-09-28",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -3.43
+    "eps_at_entry": -3.43,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ARM",
@@ -728,7 +764,8 @@
     "added_date": "2026-09-28",
     "pe_at_entry": 258.91235,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.97
+    "eps_at_entry": 0.97,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SNDK",
@@ -745,7 +782,8 @@
     "added_date": "2026-09-28",
     "pe_at_entry": 19.491865,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 73.76
+    "eps_at_entry": 73.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRWV",
@@ -762,7 +800,8 @@
     "added_date": "2026-09-28",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -3.69
+    "eps_at_entry": -3.69,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SPCE",
@@ -779,7 +818,8 @@
     "added_date": "2026-09-28",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -3.19
+    "eps_at_entry": -3.19,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PSKY",
@@ -796,7 +836,8 @@
     "added_date": "2026-09-28",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.02
+    "eps_at_entry": -0.02,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LUNR",
@@ -813,7 +854,8 @@
     "added_date": "2026-09-29",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.95
+    "eps_at_entry": -0.95,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FCEL",
@@ -830,7 +872,8 @@
     "added_date": "2026-09-29",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.76
+    "eps_at_entry": -2.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FLEX",
@@ -847,7 +890,8 @@
     "added_date": "2026-09-29",
     "pe_at_entry": 41.89189,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 2.59
+    "eps_at_entry": 2.59,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NVTS",
@@ -864,7 +908,8 @@
     "added_date": "2026-09-29",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.34
+    "eps_at_entry": -1.34,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ACHR",
@@ -881,7 +926,8 @@
     "added_date": "2026-09-29",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.09
+    "eps_at_entry": -1.09,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NKE",
@@ -898,7 +944,8 @@
     "added_date": "2026-09-29",
     "pe_at_entry": 17.021635,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 2.08
+    "eps_at_entry": 2.08,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CORZ",
@@ -932,7 +979,8 @@
     "added_date": "2026-09-29",
     "pe_at_entry": 88.22981,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 1.61
+    "eps_at_entry": 1.61,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "QBTS",
@@ -983,7 +1031,8 @@
     "added_date": "2026-09-30",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.38
+    "eps_at_entry": -0.38,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AMC",
@@ -1000,7 +1049,8 @@
     "added_date": "2026-09-30",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.02
+    "eps_at_entry": -1.02,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ASTS",
@@ -1017,7 +1067,8 @@
     "added_date": "2026-09-30",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.13
+    "eps_at_entry": -2.13,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CYPH",
@@ -1051,7 +1102,8 @@
     "added_date": "2026-09-30",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -3.85
+    "eps_at_entry": -3.85,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FWDI",
@@ -1068,7 +1120,8 @@
     "added_date": "2026-09-30",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -30.27
+    "eps_at_entry": -30.27,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CNXC",
@@ -1085,7 +1138,8 @@
     "added_date": "2026-09-30",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -38.36
+    "eps_at_entry": -38.36,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CMPX",
@@ -1119,7 +1173,8 @@
     "added_date": "2026-09-30",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.24
+    "eps_at_entry": -0.24,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IBRX",
@@ -1136,7 +1191,8 @@
     "added_date": "2026-09-30",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.96
+    "eps_at_entry": -0.96,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LQDA",
@@ -1153,7 +1209,8 @@
     "added_date": "2026-09-30",
     "pe_at_entry": 18.935251,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 1.39
+    "eps_at_entry": 1.39,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CLOV",
@@ -1170,7 +1227,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.05
+    "eps_at_entry": -0.05,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "GLAS",
@@ -1187,7 +1245,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.74
+    "eps_at_entry": -0.74,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "RUM",
@@ -1204,7 +1263,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.59
+    "eps_at_entry": -0.59,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "JBLU",
@@ -1221,7 +1281,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.38
+    "eps_at_entry": -2.38,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CBRS",
@@ -1238,7 +1299,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -5.14
+    "eps_at_entry": -5.14,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FHTX",
@@ -1255,7 +1317,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.98
+    "eps_at_entry": -0.98,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BTDR",
@@ -1272,7 +1335,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.59
+    "eps_at_entry": -2.59,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "TLRY",
@@ -1289,7 +1353,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.41
+    "eps_at_entry": -1.41,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SHAZ",
@@ -1306,7 +1371,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -29.29
+    "eps_at_entry": -29.29,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "RIOT",
@@ -1323,7 +1389,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -3.89
+    "eps_at_entry": -3.89,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IRON",
@@ -1357,7 +1424,8 @@
     "added_date": "2026-10-01",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.34
+    "eps_at_entry": -0.34,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "GFL",
@@ -1374,7 +1442,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.46
+    "eps_at_entry": -0.46,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ASST",
@@ -1391,7 +1460,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -204.8
+    "eps_at_entry": -204.8,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "WDC",
@@ -1408,7 +1478,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": 13.884658,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 26.92
+    "eps_at_entry": 26.92,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PBF",
@@ -1425,7 +1496,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": 7.9181337,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 11.36
+    "eps_at_entry": 11.36,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMR",
@@ -1442,7 +1514,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.92
+    "eps_at_entry": -2.92,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FSLY",
@@ -1459,7 +1532,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.53
+    "eps_at_entry": -0.53,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRCL",
@@ -1476,7 +1550,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": 56.959187,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 1.47
+    "eps_at_entry": 1.47,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HUT",
@@ -1510,7 +1585,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.02
+    "eps_at_entry": -1.02,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ALOY",
@@ -1527,7 +1603,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": null
+    "eps_at_entry": null,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HIMS",
@@ -1544,7 +1621,8 @@
     "added_date": "2026-10-02",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.64
+    "eps_at_entry": -0.64,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "TE",
@@ -1561,7 +1639,8 @@
     "added_date": "2026-10-05",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.68
+    "eps_at_entry": -1.68,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PDSB",
@@ -1578,7 +1657,8 @@
     "added_date": "2026-10-05",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.64
+    "eps_at_entry": -0.64,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AEHR",
@@ -1595,7 +1675,8 @@
     "added_date": "2026-10-05",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.23
+    "eps_at_entry": -0.23,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "KOD",
@@ -1612,7 +1693,8 @@
     "added_date": "2026-10-05",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -4.19
+    "eps_at_entry": -4.19,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PENG",
@@ -1629,7 +1711,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": 29.569231,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 2.6
+    "eps_at_entry": 2.6,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "DNA",
@@ -1646,7 +1729,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -5.06
+    "eps_at_entry": -5.06,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "APLD",
@@ -1663,7 +1747,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.91
+    "eps_at_entry": -0.91,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CIFR",
@@ -1680,7 +1765,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.87
+    "eps_at_entry": -2.87,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -1697,7 +1783,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -7.98
+    "eps_at_entry": -7.98,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CLOV",
@@ -1714,7 +1801,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.05
+    "eps_at_entry": -0.05,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "WULF",
@@ -1731,7 +1819,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -4.43
+    "eps_at_entry": -4.43,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CLSK",
@@ -1748,7 +1837,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -3.78
+    "eps_at_entry": -3.78,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IBRX",
@@ -1765,7 +1855,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.96
+    "eps_at_entry": -0.96,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -1782,7 +1873,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": 11.855828,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 3.26
+    "eps_at_entry": 3.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -1799,7 +1891,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": 334.20395,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "APLD",
@@ -1816,7 +1909,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.91
+    "eps_at_entry": -0.91,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PURR",
@@ -1833,7 +1927,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": 3.1713395,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 3.21
+    "eps_at_entry": 3.21,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ILMN",
@@ -1850,7 +1945,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": 50.710575,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 5.39
+    "eps_at_entry": 5.39,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "STX",
@@ -1867,7 +1963,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": 52.388493,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 13.9
+    "eps_at_entry": 13.9,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRML",
@@ -1884,7 +1981,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.87
+    "eps_at_entry": -1.87,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HTZ",
@@ -1901,7 +1999,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.09
+    "eps_at_entry": -1.09,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HTZ",
@@ -1935,7 +2034,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.23
+    "eps_at_entry": -2.23,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LQDA",
@@ -1952,7 +2052,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": 18.920862,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 1.39
+    "eps_at_entry": 1.39,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMR",
@@ -1969,7 +2070,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.92
+    "eps_at_entry": -2.92,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -1986,7 +2088,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": 157.61719,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 1.28
+    "eps_at_entry": 1.28,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ABCL",
@@ -2003,7 +2106,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.54
+    "eps_at_entry": -0.54,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "GLND",
@@ -2054,7 +2158,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.01
+    "eps_at_entry": -1.01,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "XE",
@@ -2071,7 +2176,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.75
+    "eps_at_entry": -0.75,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "TEM",
@@ -2088,7 +2194,8 @@
     "added_date": "2026-10-06",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -1.44
+    "eps_at_entry": -1.44,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "EOSE",
@@ -2105,7 +2212,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -5.8
+    "eps_at_entry": -5.8,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CIFR",
@@ -2122,7 +2230,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.87
+    "eps_at_entry": -2.87,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AAOI",
@@ -2139,7 +2248,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.75
+    "eps_at_entry": -0.75,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -2156,7 +2266,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": 157.61719,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 1.28
+    "eps_at_entry": 1.28,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MARA",
@@ -2173,7 +2284,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -9.4
+    "eps_at_entry": -9.4,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LEVI",
@@ -2190,7 +2302,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": 12.763158,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 1.52
+    "eps_at_entry": 1.52,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRWV",
@@ -2207,7 +2320,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -3.69
+    "eps_at_entry": -3.69,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IREN",
@@ -2224,7 +2338,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.22
+    "eps_at_entry": -2.22,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ASTS",
@@ -2241,7 +2356,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.13
+    "eps_at_entry": -2.13,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -2258,7 +2374,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": 11.854295,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 3.26
+    "eps_at_entry": 3.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AXTI",
@@ -2275,7 +2392,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": 1516.0,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.04
+    "eps_at_entry": 0.04,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -2292,7 +2410,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": 334.2434,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SLS",
@@ -2309,7 +2428,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.21
+    "eps_at_entry": -0.21,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FCEL",
@@ -2326,7 +2446,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -2.76
+    "eps_at_entry": -2.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "APLD",
@@ -2343,7 +2464,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.91
+    "eps_at_entry": -0.91,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -2360,7 +2482,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": 11.854295,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 3.26
+    "eps_at_entry": 3.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -2377,7 +2500,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": 334.2434,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BMNR",
@@ -2394,7 +2518,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -4.54
+    "eps_at_entry": -4.54,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "COHR",
@@ -2411,7 +2536,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": 67.53641,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": 4.12
+    "eps_at_entry": 4.12,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ABSI",
@@ -2428,7 +2554,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -0.79
+    "eps_at_entry": -0.79,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -2445,7 +2572,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -7.98
+    "eps_at_entry": -7.98,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "XRX",
@@ -2462,7 +2590,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -7.36
+    "eps_at_entry": -7.36,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "WULF",
@@ -2479,7 +2608,8 @@
     "added_date": "2026-10-07",
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
-    "eps_at_entry": -4.43
+    "eps_at_entry": -4.43,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CIFR",
@@ -2496,7 +2626,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -2.87
+    "eps_at_entry": -2.87,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AXTI",
@@ -2513,7 +2644,8 @@
     "pe_at_entry": 1516.0,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 0.04
+    "eps_at_entry": 0.04,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "WULF",
@@ -2530,7 +2662,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -4.43
+    "eps_at_entry": -4.43,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRWV",
@@ -2547,7 +2680,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -3.69
+    "eps_at_entry": -3.69,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LITE",
@@ -2564,7 +2698,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -92.96
+    "eps_at_entry": -92.96,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -2581,7 +2716,8 @@
     "pe_at_entry": 334.2434,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PENG",
@@ -2598,7 +2734,8 @@
     "pe_at_entry": 29.565386,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 2.6
+    "eps_at_entry": 2.6,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AXTI",
@@ -2632,7 +2769,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -3.43
+    "eps_at_entry": -3.43,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRVL",
@@ -2649,7 +2787,8 @@
     "pe_at_entry": 82.67937,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 3.15
+    "eps_at_entry": 3.15,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "RKLB",
@@ -2666,7 +2805,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -0.27
+    "eps_at_entry": -0.27,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MARA",
@@ -2683,7 +2823,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -9.4
+    "eps_at_entry": -9.4,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "QNT",
@@ -2700,7 +2841,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -1.56
+    "eps_at_entry": -1.56,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "TEM",
@@ -2717,7 +2859,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -1.44
+    "eps_at_entry": -1.44,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AAOI",
@@ -2734,7 +2877,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -0.75
+    "eps_at_entry": -0.75,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRWV",
@@ -2751,7 +2895,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -3.69
+    "eps_at_entry": -3.69,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -2768,7 +2913,8 @@
     "pe_at_entry": 334.27634,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CIFR",
@@ -2785,7 +2931,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -2.87
+    "eps_at_entry": -2.87,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "RIOT",
@@ -2802,7 +2949,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -3.89
+    "eps_at_entry": -3.89,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -2819,7 +2967,8 @@
     "pe_at_entry": 157.5625,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 1.28
+    "eps_at_entry": 1.28,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -2836,7 +2985,8 @@
     "pe_at_entry": 334.27634,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HUM",
@@ -2853,7 +3003,8 @@
     "pe_at_entry": 39.716446,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 10.58
+    "eps_at_entry": 10.58,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -2870,7 +3021,8 @@
     "pe_at_entry": 11.85276,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 3.26
+    "eps_at_entry": 3.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "GME",
@@ -2887,7 +3039,8 @@
     "pe_at_entry": 17.871712,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 1.52
+    "eps_at_entry": 1.52,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "COHR",
@@ -2904,7 +3057,8 @@
     "pe_at_entry": 67.53641,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 4.12
+    "eps_at_entry": 4.12,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CBRS",
@@ -2921,7 +3075,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -5.14
+    "eps_at_entry": -5.14,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CAPR",
@@ -2955,7 +3110,8 @@
     "pe_at_entry": 135.63637,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 0.11
+    "eps_at_entry": 0.11,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NVTS",
@@ -2972,7 +3128,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -1.34
+    "eps_at_entry": -1.34,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "GMAB",
@@ -2989,7 +3146,8 @@
     "pe_at_entry": 29.299212,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 1.27
+    "eps_at_entry": 1.27,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "KEEL",
@@ -3006,7 +3164,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -0.65
+    "eps_at_entry": -0.65,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -3023,7 +3182,8 @@
     "pe_at_entry": 157.5625,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 1.28
+    "eps_at_entry": 1.28,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LUNR",
@@ -3040,7 +3200,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -0.95
+    "eps_at_entry": -0.95,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRWV",
@@ -3057,7 +3218,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -3.69
+    "eps_at_entry": -3.69,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ASTS",
@@ -3074,7 +3236,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": -2.13
+    "eps_at_entry": -2.13,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRVL",
@@ -3091,7 +3254,8 @@
     "pe_at_entry": 82.65873,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
-    "eps_at_entry": 3.15
+    "eps_at_entry": 3.15,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HUM",
@@ -3108,7 +3272,8 @@
     "pe_at_entry": 39.716446,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 10.58
+    "eps_at_entry": 10.58,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IRON",
@@ -3142,7 +3307,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -0.95
+    "eps_at_entry": -0.95,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MXL",
@@ -3159,7 +3325,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -1.18
+    "eps_at_entry": -1.18,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PURR",
@@ -3176,7 +3343,8 @@
     "pe_at_entry": 3.1713707,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 3.21
+    "eps_at_entry": 3.21,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -3193,7 +3361,8 @@
     "pe_at_entry": 334.4737,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AAOI",
@@ -3210,7 +3379,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -0.75
+    "eps_at_entry": -0.75,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HUT",
@@ -3227,7 +3397,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -5.42
+    "eps_at_entry": -5.42,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SNDK",
@@ -3244,7 +3415,8 @@
     "pe_at_entry": 19.480206,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 73.76
+    "eps_at_entry": 73.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IRON",
@@ -3261,7 +3433,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -6.58
+    "eps_at_entry": -6.58,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SECZ",
@@ -3278,7 +3451,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -0.38
+    "eps_at_entry": -0.38,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -3295,7 +3469,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -7.98
+    "eps_at_entry": -7.98,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -3312,7 +3487,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -7.98
+    "eps_at_entry": -7.98,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "EOSE",
@@ -3329,7 +3505,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -5.8
+    "eps_at_entry": -5.8,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -3346,7 +3523,8 @@
     "pe_at_entry": 157.58595,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 1.28
+    "eps_at_entry": 1.28,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ASTS",
@@ -3363,7 +3541,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -2.13
+    "eps_at_entry": -2.13,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MSTR",
@@ -3380,7 +3559,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -99.08
+    "eps_at_entry": -99.08,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IBRX",
@@ -3397,7 +3577,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -0.96
+    "eps_at_entry": -0.96,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -3414,7 +3595,8 @@
     "pe_at_entry": 11.855828,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 3.26
+    "eps_at_entry": 3.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "TXG",
@@ -3431,7 +3613,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -0.59
+    "eps_at_entry": -0.59,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AXTI",
@@ -3448,7 +3631,8 @@
     "pe_at_entry": 1516.0,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 0.04
+    "eps_at_entry": 0.04,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SLS",
@@ -3482,7 +3666,8 @@
     "pe_at_entry": 24.294533,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 15.55
+    "eps_at_entry": 15.55,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AMAT",
@@ -3499,7 +3684,8 @@
     "pe_at_entry": 39.620792,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 11.59
+    "eps_at_entry": 11.59,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "APLD",
@@ -3516,7 +3702,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -0.91
+    "eps_at_entry": -0.91,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRVL",
@@ -3533,7 +3720,8 @@
     "pe_at_entry": 82.63695,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 3.15
+    "eps_at_entry": 3.15,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IREN",
@@ -3550,7 +3738,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -2.22
+    "eps_at_entry": -2.22,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -3567,7 +3756,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -7.98
+    "eps_at_entry": -7.98,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -3584,7 +3774,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -7.98
+    "eps_at_entry": -7.98,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HUT",
@@ -3601,7 +3792,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -5.42
+    "eps_at_entry": -5.42,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRML",
@@ -3618,7 +3810,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -1.87
+    "eps_at_entry": -1.87,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -3635,7 +3828,8 @@
     "pe_at_entry": 11.857362,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 3.26
+    "eps_at_entry": 3.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "UNH",
@@ -3652,7 +3846,8 @@
     "pe_at_entry": 24.308037,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": 15.55
+    "eps_at_entry": 15.55,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HIMS",
@@ -3669,7 +3864,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -0.64
+    "eps_at_entry": -0.64,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ASST",
@@ -3686,7 +3882,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -204.8
+    "eps_at_entry": -204.8,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CORZ",
@@ -3703,7 +3900,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
-    "eps_at_entry": -4.25
+    "eps_at_entry": -4.25,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IRON",
@@ -3720,7 +3918,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -6.58
+    "eps_at_entry": -6.58,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CTNM",
@@ -3737,7 +3936,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -1.73
+    "eps_at_entry": -1.73,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FSLY",
@@ -3754,7 +3954,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -0.53
+    "eps_at_entry": -0.53,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HIMS",
@@ -3771,7 +3972,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -0.64
+    "eps_at_entry": -0.64,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ASTS",
@@ -3788,7 +3990,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -2.13
+    "eps_at_entry": -2.13,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "TEM",
@@ -3805,7 +4008,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -1.44
+    "eps_at_entry": -1.44,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -3822,7 +4026,8 @@
     "pe_at_entry": 11.858895,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 3.26
+    "eps_at_entry": 3.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRVL",
@@ -3839,7 +4044,8 @@
     "pe_at_entry": 82.680954,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 3.15
+    "eps_at_entry": 3.15,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -3856,7 +4062,8 @@
     "pe_at_entry": 334.86844,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -3873,7 +4080,8 @@
     "pe_at_entry": 157.64453,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 1.28
+    "eps_at_entry": 1.28,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ACI",
@@ -3890,7 +4098,8 @@
     "pe_at_entry": 75.2647,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 0.17
+    "eps_at_entry": 0.17,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "UNH",
@@ -3907,7 +4116,8 @@
     "pe_at_entry": 24.319614,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 15.55
+    "eps_at_entry": 15.55,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BULL",
@@ -3924,7 +4134,8 @@
     "pe_at_entry": 78.87375,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 0.08
+    "eps_at_entry": 0.08,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PENG",
@@ -3941,7 +4152,8 @@
     "pe_at_entry": 29.59231,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 2.6
+    "eps_at_entry": 2.6,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -3958,7 +4170,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -7.98
+    "eps_at_entry": -7.98,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AEHR",
@@ -3975,7 +4188,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -0.23
+    "eps_at_entry": -0.23,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "COHR",
@@ -3992,7 +4206,8 @@
     "pe_at_entry": 67.59224,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 4.12
+    "eps_at_entry": 4.12,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SKYD",
@@ -4009,7 +4224,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -0.02
+    "eps_at_entry": -0.02,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRCL",
@@ -4026,7 +4242,8 @@
     "pe_at_entry": 57.006805,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 1.47
+    "eps_at_entry": 1.47,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AXTI",
@@ -4043,7 +4260,8 @@
     "pe_at_entry": 1516.5,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 0.04
+    "eps_at_entry": 0.04,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "TXG",
@@ -4060,7 +4278,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -0.59
+    "eps_at_entry": -0.59,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -4077,7 +4296,8 @@
     "pe_at_entry": 334.75,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 0.76
+    "eps_at_entry": 0.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "COHR",
@@ -4094,7 +4314,8 @@
     "pe_at_entry": 67.61165,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 4.12
+    "eps_at_entry": 4.12,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BMNR",
@@ -4111,7 +4332,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -4.54
+    "eps_at_entry": -4.54,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRVL",
@@ -4128,7 +4350,8 @@
     "pe_at_entry": 82.66032,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 3.15
+    "eps_at_entry": 3.15,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FRVO",
@@ -4145,7 +4368,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -1.26
+    "eps_at_entry": -1.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SDGR",
@@ -4162,7 +4386,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -0.74
+    "eps_at_entry": -0.74,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SLS",
@@ -4179,7 +4404,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -0.21
+    "eps_at_entry": -0.21,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRDO",
@@ -4196,7 +4422,8 @@
     "pe_at_entry": 66.53369,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 2.82
+    "eps_at_entry": 2.82,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FSLY",
@@ -4213,7 +4440,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -0.53
+    "eps_at_entry": -0.53,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FLY",
@@ -4230,7 +4458,8 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": -0.26
+    "eps_at_entry": -0.26,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LRCX",
@@ -4247,7 +4476,8 @@
     "pe_at_entry": 51.149303,
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
-    "eps_at_entry": 5.76
+    "eps_at_entry": 5.76,
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "EYPT",
@@ -4281,7 +4511,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -4.43,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NVTS",
@@ -4298,7 +4529,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -1.34,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "APLD",
@@ -4315,7 +4547,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -0.91,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -4332,7 +4565,8 @@
     "pe_at_entry": 334.70395,
     "eps_at_entry": 0.76,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -4349,7 +4583,8 @@
     "pe_at_entry": 157.67969,
     "eps_at_entry": 1.28,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "PURR",
@@ -4366,7 +4601,8 @@
     "pe_at_entry": 3.17757,
     "eps_at_entry": 3.21,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IREN",
@@ -4383,7 +4619,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -2.22,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "HIMS",
@@ -4400,7 +4637,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -0.64,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -4417,7 +4655,8 @@
     "pe_at_entry": 11.865031,
     "eps_at_entry": 3.26,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "EIX",
@@ -4434,7 +4673,8 @@
     "pe_at_entry": 5.5288663,
     "eps_at_entry": 9.7,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRVL",
@@ -4451,7 +4691,8 @@
     "pe_at_entry": 82.75873,
     "eps_at_entry": 3.15,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "OKLO",
@@ -4468,7 +4709,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -1.01,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FAST",
@@ -4485,7 +4727,8 @@
     "pe_at_entry": 43.542736,
     "eps_at_entry": 1.17,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ALAB",
@@ -4502,7 +4745,8 @@
     "pe_at_entry": 145.61214,
     "eps_at_entry": 2.14,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LQDA",
@@ -4519,7 +4763,8 @@
     "pe_at_entry": 19.115108,
     "eps_at_entry": 1.39,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRDO",
@@ -4536,7 +4781,8 @@
     "pe_at_entry": 69.083405,
     "eps_at_entry": 2.82,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ALAB",
@@ -4553,7 +4799,8 @@
     "pe_at_entry": 156.36208,
     "eps_at_entry": 2.03,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SLS",
@@ -4570,7 +4817,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -0.21,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -4587,7 +4835,8 @@
     "pe_at_entry": 161.0586,
     "eps_at_entry": 1.28,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -4604,7 +4853,8 @@
     "pe_at_entry": 12.006135,
     "eps_at_entry": 3.26,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CIFR",
@@ -4621,7 +4871,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -2.87,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LUNR",
@@ -4638,7 +4889,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -0.95,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LITE",
@@ -4655,7 +4907,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -92.96,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CBRS",
@@ -4672,7 +4925,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -5.14,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MSTR",
@@ -4689,7 +4943,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -99.08,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "VSTM",
@@ -4706,7 +4961,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -2.45,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CAPR",
@@ -4740,7 +4996,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -17.31,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FCEL",
@@ -4757,7 +5014,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -2.76,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -4774,7 +5032,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -7.98,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SOC",
@@ -4791,7 +5050,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -3.26,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MARA",
@@ -4808,7 +5068,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -9.4,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LITE",
@@ -4825,7 +5086,8 @@
     "pe_at_entry": null,
     "eps_at_entry": -92.96,
     "pe_at_entry_is_approx": false,
-    "added_date": "2026-10-13"
+    "added_date": "2026-10-13",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IREN",
@@ -4843,7 +5105,8 @@
     "eps_at_entry": -2.22,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CRWV",
@@ -4861,7 +5124,8 @@
     "eps_at_entry": -3.69,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -4879,7 +5143,8 @@
     "eps_at_entry": 1.26,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMMT",
@@ -4897,7 +5162,8 @@
     "eps_at_entry": -1.11,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BFLY",
@@ -4915,7 +5181,8 @@
     "eps_at_entry": -0.29,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRVL",
@@ -4933,7 +5200,8 @@
     "eps_at_entry": 3.15,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "APLD",
@@ -4951,7 +5219,8 @@
     "eps_at_entry": -0.91,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CIFR",
@@ -4969,7 +5238,8 @@
     "eps_at_entry": -2.87,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SMCI",
@@ -4987,7 +5257,8 @@
     "eps_at_entry": 3.26,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "COHR",
@@ -5005,7 +5276,8 @@
     "eps_at_entry": 4.12,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "SNDK",
@@ -5023,7 +5295,8 @@
     "eps_at_entry": 73.76,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ASTS",
@@ -5041,7 +5314,8 @@
     "eps_at_entry": -2.13,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MSTR",
@@ -5059,7 +5333,8 @@
     "eps_at_entry": -99.08,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LITE",
@@ -5077,7 +5352,8 @@
     "eps_at_entry": -92.96,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MU",
@@ -5095,7 +5371,8 @@
     "eps_at_entry": 74.33,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -5113,7 +5390,8 @@
     "eps_at_entry": 0.76,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "DELL",
@@ -5131,7 +5409,8 @@
     "eps_at_entry": 17.2,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "A"
+    "run_label": "A",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AAOI",
@@ -5149,7 +5428,8 @@
     "eps_at_entry": -0.75,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BE",
@@ -5167,7 +5447,8 @@
     "eps_at_entry": 0.76,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "LUNR",
@@ -5185,7 +5466,8 @@
     "eps_at_entry": -0.95,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IREN",
@@ -5203,7 +5485,8 @@
     "eps_at_entry": -2.22,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "NBIS",
@@ -5221,7 +5504,8 @@
     "eps_at_entry": 1.26,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "COHR",
@@ -5239,7 +5523,8 @@
     "eps_at_entry": 4.12,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MSTR",
@@ -5257,7 +5542,8 @@
     "eps_at_entry": -99.08,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "INMD",
@@ -5275,7 +5561,8 @@
     "eps_at_entry": 1.21,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "CBRS",
@@ -5293,7 +5580,8 @@
     "eps_at_entry": -5.14,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRVL",
@@ -5311,7 +5599,8 @@
     "eps_at_entry": 3.15,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "BMNR",
@@ -5329,7 +5618,8 @@
     "eps_at_entry": -4.5,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "INTC",
@@ -5347,7 +5637,8 @@
     "eps_at_entry": -2.12,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MSTR",
@@ -5365,7 +5656,8 @@
     "eps_at_entry": -99.08,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "B"
+    "run_label": "B",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -5383,7 +5675,8 @@
     "eps_at_entry": -7.98,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "AA",
@@ -5401,7 +5694,8 @@
     "eps_at_entry": 4.81,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ARM",
@@ -5419,7 +5713,8 @@
     "eps_at_entry": 0.97,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MSTR",
@@ -5437,7 +5732,8 @@
     "eps_at_entry": -99.08,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "FSLY",
@@ -5455,7 +5751,8 @@
     "eps_at_entry": -0.53,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MARA",
@@ -5473,7 +5770,8 @@
     "eps_at_entry": -9.4,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MRNA",
@@ -5491,7 +5789,8 @@
     "eps_at_entry": -7.98,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "DELL",
@@ -5509,7 +5808,8 @@
     "eps_at_entry": 17.2,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "ALAB",
@@ -5527,7 +5827,8 @@
     "eps_at_entry": 2.03,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "MSTR",
@@ -5545,7 +5846,8 @@
     "eps_at_entry": -99.08,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "INTC",
@@ -5563,7 +5865,8 @@
     "eps_at_entry": -2.12,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "COIN",
@@ -5581,7 +5884,8 @@
     "eps_at_entry": -3.84,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "WULF",
@@ -5599,7 +5903,8 @@
     "eps_at_entry": -4.43,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
   },
   {
     "symbol": "IREN",
@@ -5617,6 +5922,292 @@
     "eps_at_entry": -2.22,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
-    "run_label": "C"
+    "run_label": "C",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "WVE",
+    "strike": 3.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.15,
+    "bid": 0.15,
+    "bid_is_approx": false,
+    "ask": 0.3,
+    "ask_is_approx": false,
+    "potential_return_pct": 5.26316,
+    "potential_return_annual_pct": 1921.05,
+    "entry_stock_px": 3.1050000190734863,
+    "pe_at_entry": null,
+    "eps_at_entry": -1.06,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "CRDO",
+    "strike": 175.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 2.7,
+    "bid": 3.4,
+    "bid_is_approx": false,
+    "ask": 4.6,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.56703,
+    "potential_return_annual_pct": 571.967,
+    "entry_stock_px": 176.21359252929688,
+    "pe_at_entry": 69.10337,
+    "eps_at_entry": 2.55,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "SNDK",
+    "strike": 1340.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 20.0,
+    "bid": 18.3,
+    "bid_is_approx": false,
+    "ask": 20.3,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.51515,
+    "potential_return_annual_pct": 553.03,
+    "entry_stock_px": 1368.27001953125,
+    "pe_at_entry": 19.5943,
+    "eps_at_entry": 69.83,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "IREN",
+    "strike": 27.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.38,
+    "bid": 0.5,
+    "bid_is_approx": false,
+    "ask": 0.54,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.4275,
+    "potential_return_annual_pct": 521.037,
+    "entry_stock_px": 28.204999923706055,
+    "pe_at_entry": null,
+    "eps_at_entry": -1.95,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "APLD",
+    "strike": 19.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.26,
+    "bid": 0.34,
+    "bid_is_approx": false,
+    "ask": 0.39,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.38741,
+    "potential_return_annual_pct": 506.403,
+    "entry_stock_px": 19.325000762939453,
+    "pe_at_entry": null,
+    "eps_at_entry": -0.91,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "DFH",
+    "strike": 7.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.1,
+    "bid": 0.1,
+    "bid_is_approx": false,
+    "ask": 0.15,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.35135,
+    "potential_return_annual_pct": 493.243,
+    "entry_stock_px": 8.399999618530273,
+    "pe_at_entry": 7.3684206,
+    "eps_at_entry": 1.14,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "PENG",
+    "strike": 60.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.8,
+    "bid": 0.85,
+    "bid_is_approx": false,
+    "ask": 1.0,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.35135,
+    "potential_return_annual_pct": 493.243,
+    "entry_stock_px": 61.84000015258789,
+    "pe_at_entry": 27.484444,
+    "eps_at_entry": 2.25,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "GME",
+    "strike": 27.5,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.34,
+    "bid": 0.37,
+    "bid_is_approx": false,
+    "ask": 0.41,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.25184,
+    "potential_return_annual_pct": 456.922,
+    "entry_stock_px": 27.860000610351562,
+    "pe_at_entry": 18.328947,
+    "eps_at_entry": 1.52,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "MU",
+    "strike": 900.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 11.05,
+    "bid": 11.9,
+    "bid_is_approx": false,
+    "ask": 12.05,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.24304,
+    "potential_return_annual_pct": 453.709,
+    "entry_stock_px": 916.739990234375,
+    "pe_at_entry": 12.861112,
+    "eps_at_entry": 71.28,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "NVTS",
+    "strike": 9.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.11,
+    "bid": 0.11,
+    "bid_is_approx": false,
+    "ask": 0.16,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.23735,
+    "potential_return_annual_pct": 451.631,
+    "entry_stock_px": 9.194999694824219,
+    "pe_at_entry": null,
+    "eps_at_entry": -1.2,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "NBIS",
+    "strike": 170.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 2.03,
+    "bid": 2.48,
+    "bid_is_approx": false,
+    "ask": 2.66,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.20855,
+    "potential_return_annual_pct": 441.12,
+    "entry_stock_px": 176.6699981689453,
+    "pe_at_entry": 140.21428,
+    "eps_at_entry": 1.26,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "BE",
+    "strike": 225.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 2.57,
+    "bid": 3.0,
+    "bid_is_approx": false,
+    "ask": 3.05,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.15542,
+    "potential_return_annual_pct": 421.728,
+    "entry_stock_px": 232.4600067138672,
+    "pe_at_entry": 305.92105,
+    "eps_at_entry": 0.76,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "DELL",
+    "strike": 460.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 5.25,
+    "bid": 5.65,
+    "bid_is_approx": false,
+    "ask": 6.0,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.15448,
+    "potential_return_annual_pct": 421.385,
+    "entry_stock_px": 469.6499938964844,
+    "pe_at_entry": 30.776539,
+    "eps_at_entry": 15.26,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "LRCX",
+    "strike": 270.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 3.05,
+    "bid": 3.3,
+    "bid_is_approx": false,
+    "ask": 4.1,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.14254,
+    "potential_return_annual_pct": 417.026,
+    "entry_stock_px": 274.760009765625,
+    "pe_at_entry": 47.70139,
+    "eps_at_entry": 5.76,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
+  },
+  {
+    "symbol": "AAOI",
+    "strike": 80.0,
+    "expiration": "2026-10-16",
+    "barchart_bid": 0.85,
+    "bid": 1.15,
+    "bid_is_approx": false,
+    "ask": 1.45,
+    "ask_is_approx": false,
+    "potential_return_pct": 1.07391,
+    "potential_return_annual_pct": 391.977,
+    "entry_stock_px": 82.48500061035156,
+    "pe_at_entry": null,
+    "eps_at_entry": -0.66,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-15",
+    "run_label": "A",
+    "expiration_reminder_sent": true
   }
 ]
