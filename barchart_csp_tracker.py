@@ -768,7 +768,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
         run_badge = (f'<span class="run-badge">{_html_escape(run_label)}</span>'
                      if run_label and not closed and r['ADDED'] == today.isoformat() else '')
         return f"""
-        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-strike="{attr(r['STRIKE'])}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
+        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-ask="{attr(r.get('ASK'))}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
           <div class="card-head">
             <span class="sym">{_html_escape(r['SYMBOL'])}</span>
             <span class="strike">${r['STRIKE']:g}P</span>
@@ -989,13 +989,14 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       var peOk = (minPeRaw === '' && maxPeRaw === '')
         || (!isNaN(peVal) && peVal >= minPe && peVal <= maxPe);
 
-      // Base investment: 100 shares at the strike price is the actual
-      // cash a CSP ties up if assigned - exclude anything that wouldn't
-      // fit inside this account size.
-      var strikeRaw = card.getAttribute('data-strike');
-      var strikeVal = strikeRaw === '' ? null : parseFloat(strikeRaw);
+      // Base investment: the option's own premium x 100 is what it
+      // actually costs to control one contract - exclude anything pricier
+      // than this account size (NOT the strike-based CSP collateral,
+      // which is a separate, much larger number).
+      var askRaw = card.getAttribute('data-ask');
+      var askVal = askRaw === '' ? null : parseFloat(askRaw);
       var investOk = baseInvestRaw === ''
-        || (strikeVal !== null && !isNaN(strikeVal) && strikeVal * 100 <= baseInvest);
+        || (askVal !== null && !isNaN(askVal) && askVal * 100 <= baseInvest);
 
       var dteRaw = card.getAttribute('data-dte-entry');
       var dteVal = dteRaw === '' ? null : parseFloat(dteRaw);
