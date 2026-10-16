@@ -638,13 +638,20 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     a browser (or serve it as-is via GitHub Pages)."""
 
     def pnl_row(label, seller_pnl, buyer_pnl, seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi, norm_seller, norm_buyer,
+                norm_seller_key, norm_buyer_key,
                 seller_quote=None, seller_quote_label="", buyer_quote=None, buyer_quote_label="",
                 seller_mid=None, buyer_mid=None, norm_seller_mid=None, norm_buyer_mid=None,
+                norm_seller_mid_key=None, norm_buyer_mid_key=None,
                 seller_mid_label="mid", buyer_mid_label="mid"):
         # seller_mid/buyer_mid are on the SAME (raw, per-position) basis as
-        # seller_pnl/buyer_pnl; norm_seller_mid/norm_buyer_mid are on the same
-        # normalized basis as norm_seller/norm_buyer - each parenthetical
-        # must sit next to the number it's actually comparable to.
+        # seller_pnl/buyer_pnl and never rescale with the base-investment
+        # filter (they're real dollar estimates for THIS position's actual
+        # size). norm_seller_mid/norm_buyer_mid ARE on the normalized
+        # ($NORMALIZED_RISK_USD risk) basis and DO rescale - each
+        # norm-*-num span below carries a data-src pointing at the card's
+        # own data-norm-* attribute so the client-side filter can
+        # recompute it live against whatever base investment is entered,
+        # without re-deriving strike/ask risk math in JS (see applyFilter()).
         # buyer_mid_label switches to "exe" when buyer_mid is actually a
         # guaranteed exercise value (buy shares + exercise), not a market
         # mid-price estimate.
@@ -652,6 +659,10 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                               if seller_quote is not None else '')
         buyer_quote_html = (f'<div class="sub2">{buyer_quote_label}: {_fmt_money(buyer_quote)}</div>'
                              if buyer_quote is not None else '')
+        seller_mid_num_html = (f'<span class="{_pnl_class(norm_seller_mid)} norm-mid-num" data-src="{norm_seller_mid_key}">{_fmt_money(norm_seller_mid)}</span>'
+                                if norm_seller_mid is not None and norm_seller_mid_key else '')
+        buyer_mid_num_html = (f'<span class="{_pnl_class(norm_buyer_mid)} norm-mid-num" data-src="{norm_buyer_mid_key}">{_fmt_money(norm_buyer_mid)}</span>'
+                               if norm_buyer_mid is not None and norm_buyer_mid_key else '')
         return f"""
           <div class="rowlabel">{label}</div>
           <div class="grid2">
@@ -659,14 +670,14 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
               <div class="val {_pnl_class(seller_pnl)}">{_fmt_money(seller_pnl)}<span class="{_pnl_class(seller_mid)}">{_fmt_money_paren(seller_mid, seller_mid_label)}</span></div>
               <div class="sub2">ROI {_fmt_pct(seller_roi)} &middot; ann {_fmt_pct(ann_seller_roi)}</div>
-              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_seller)}<span class="{_pnl_class(norm_seller_mid)}">{_fmt_money_paren(norm_seller_mid, seller_mid_label)}</span></div>
+              <div class="sub2">norm (<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span> risk): <span class="{_pnl_class(norm_seller)} norm-primary-num" data-src="{norm_seller_key}">{_fmt_money(norm_seller)}</span>{f' ({seller_mid_label}: ' + seller_mid_num_html + ')' if seller_mid_num_html else ''}</div>
               {seller_quote_html}
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
               <div class="val {_pnl_class(buyer_pnl)}">{_fmt_money(buyer_pnl)}<span class="{_pnl_class(buyer_mid)}">{_fmt_money_paren(buyer_mid, buyer_mid_label)}</span></div>
               <div class="sub2">ROI {_fmt_pct(buyer_roi)} &middot; ann {_fmt_pct(ann_buyer_roi)}</div>
-              <div class="sub2">norm ({NORMALIZED_RISK_USD:.0f} risk): {_fmt_money(norm_buyer)}<span class="{_pnl_class(norm_buyer_mid)}">{_fmt_money_paren(norm_buyer_mid, buyer_mid_label)}</span></div>
+              <div class="sub2">norm (<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span> risk): <span class="{_pnl_class(norm_buyer)} norm-primary-num" data-src="{norm_buyer_key}">{_fmt_money(norm_buyer)}</span>{f' ({buyer_mid_label}: ' + buyer_mid_num_html + ')' if buyer_mid_num_html else ''}</div>
               {buyer_quote_html}
             </div>
           </div>"""
@@ -695,7 +706,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
             rows_html = pnl_row("REALIZED", r["REALIZED P/L IF SOLD (CSP)"], r["REALIZED P/L IF BOUGHT (long put)"],
                                  r["ROI % IF SOLD (CSP)"], r["ROI % IF BOUGHT (long put)"],
                                  r["ANNUALIZED ROI % IF SOLD (CSP)"], r["ANNUALIZED ROI % IF BOUGHT (long put)"],
-                                 r[realized_norm_seller_key], r[realized_norm_buyer_key])
+                                 r[realized_norm_seller_key], r[realized_norm_buyer_key],
+                                 norm_seller_key="data-norm-rs", norm_buyer_key="data-norm-rb")
             data_attrs = (
                 f'data-kind="closed" '
                 f'data-norm-rs="{attr(r[realized_norm_seller_key])}" data-norm-rb="{attr(r[realized_norm_buyer_key])}" '
@@ -723,11 +735,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
                                  r["ROI % (ACTUAL) IF SOLD (CSP)"], r["ROI % (ACTUAL) IF BOUGHT (long put)"],
                                  r["ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)"], r["ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)"],
                                  r[actual_norm_seller_key], r[actual_norm_buyer_key],
+                                 norm_seller_key="data-norm-as", norm_buyer_key="data-norm-ab",
                                  seller_quote=r["CURRENT OPTION ASK"], seller_quote_label="current ask (pay to close)",
                                  buyer_quote=r["CURRENT OPTION BID"], buyer_quote_label="current bid (receive to close)",
                                  seller_mid=r["UNREALIZED P/L (MID) IF SOLD (CSP)"],
                                  buyer_mid=r["UNREALIZED P/L (MID) IF BOUGHT (long put)"],
                                  norm_seller_mid=r[mid_norm_seller_key], norm_buyer_mid=r[mid_norm_buyer_key],
+                                 norm_seller_mid_key="data-norm-ms", norm_buyer_mid_key="data-norm-mb",
                                  buyer_mid_label=buyer_mid_label)
             if buyer_mid_is_exercise:
                 rows_html += ('<div class="sub2">Long "exe" = buy shares + exercise the put '
@@ -869,7 +883,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
   <div class="totals">
     <div class="box">
-      <div class="label">UNREALIZED - ACTUAL, worst case (<span id="openCount">{len(open_rows)}</span> open, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
+      <div class="label">UNREALIZED - ACTUAL, worst case (<span id="openCount">{len(open_rows)}</span> open, normalized $<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span>/position)</div>
       <div class="val {_pnl_class(totals['unrealized_actual_seller_total'])}" id="totalActualSeller">Short <span id="totalActualSellerAmt">{_fmt_money(totals['unrealized_actual_seller_total'])}</span><span id="totalActualSellerMid" class="{_pnl_class(totals['unrealized_mid_seller_total'])}">{_fmt_money_paren(totals['unrealized_mid_seller_total'])}</span></div>
       <div class="val {_pnl_class(totals['unrealized_actual_buyer_total'])}" id="totalActualBuyer">Long <span id="totalActualBuyerAmt">{_fmt_money(totals['unrealized_actual_buyer_total'])}</span><span id="totalActualBuyerMid" class="{_pnl_class(totals['unrealized_mid_buyer_total'])}">{_fmt_money_paren(totals['unrealized_mid_buyer_total'])}</span></div>
       <div class="sub2">avg ROI: short <span id="avgActualSellerRoi">{_fmt_pct(totals['avg_unrealized_actual_seller_roi'])}</span> / long <span id="avgActualBuyerRoi">{_fmt_pct(totals['avg_unrealized_actual_buyer_roi'])}</span></div>
@@ -877,7 +891,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       <div class="sub2">(mid) = less pessimistic reference using the mid price instead of crossing the spread</div>
     </div>
     <div class="box">
-      <div class="label">REALIZED (<span id="realizedCount">{totals['settled_count']}</span> settled, normalized ${NORMALIZED_RISK_USD:.0f}/position)</div>
+      <div class="label">REALIZED (<span id="realizedCount">{totals['settled_count']}</span> settled, normalized $<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span>/position)</div>
       <div class="val {_pnl_class(totals['realized_seller_total'])}" id="totalRealizedSeller">Short <span id="totalRealizedSellerAmt">{_fmt_money(totals['realized_seller_total'])}</span></div>
       <div class="val {_pnl_class(totals['realized_buyer_total'])}" id="totalRealizedBuyer">Long <span id="totalRealizedBuyerAmt">{_fmt_money(totals['realized_buyer_total'])}</span></div>
       <div class="sub2">avg ROI: short <span id="avgRealizedSellerRoi">{_fmt_pct(totals['avg_realized_seller_roi'])}</span> / long <span id="avgRealizedBuyerRoi">{_fmt_pct(totals['avg_realized_buyer_roi'])}</span></div>
@@ -967,6 +981,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     var minDte = minDteRaw === '' ? -Infinity : parseFloat(minDteRaw);
     var maxDte = maxDteRaw === '' ? Infinity : parseFloat(maxDteRaw);
     var baseInvest = baseInvestRaw === '' ? Infinity : parseFloat(baseInvestRaw);
+    // Separate from baseInvest (which uses Infinity as "no filter"): this is
+    // what every "norm ($X risk)" figure on the page rescales against -
+    // defaults to the server's own $NORMALIZED_RISK_USD baseline when the
+    // box is empty, so the page looks identical to today's cards until you
+    // actually type something.
+    var normBase = baseInvestRaw === '' ? {NORMALIZED_RISK_USD:.0f} : parseFloat(baseInvestRaw);
+    var normScale = normBase / {NORMALIZED_RISK_USD:.0f};
     var cards = document.querySelectorAll('.card[data-ann-return]');
 
     // Pass 1: which cards individually clear the ROI, PE, DTE@entry, AND
@@ -1044,12 +1065,36 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     var countEl = document.getElementById('filterCount');
     if (countEl) countEl.textContent = shown + ' of ' + cards.length + ' shown';
 
+    // Rescale every per-card "norm (...)" figure (and the box-label $
+    // baselines) to normBase - these are tagged with data-src pointing at
+    // the card's own $NORMALIZED_RISK_USD-basis data-norm-* attribute, so
+    // the underlying P&L math never needs re-deriving in JS, just scaled.
+    document.querySelectorAll('.norm-base-num').forEach(function(el) {{
+      el.textContent = Math.round(normBase);
+    }});
+    cards.forEach(function(card) {{
+      card.querySelectorAll('.norm-primary-num, .norm-mid-num').forEach(function(el) {{
+        var src = el.getAttribute('data-src');
+        if (!src) return;
+        var raw = readAttr(card, src);
+        var scaled = raw === null ? null : raw * normScale;
+        el.textContent = fmtMoney(scaled);
+        var keepClasses = el.className.split(' ').filter(function(c) {{ return c !== 'pos' && c !== 'neg' && c !== ''; }});
+        var newCls = pnlClass(scaled);
+        if (newCls) keepClasses.push(newCls);
+        el.className = keepClasses.join(' ');
+      }});
+    }});
+
     // Recompute every total/average from only the currently-visible cards -
     // same sum/average math the Python side uses, just run over a subset.
-    setMoney('totalActualSeller', 'totalActualSellerAmt', sumAttr(openVisible, 'data-norm-as'));
-    setMoney('totalActualBuyer', 'totalActualBuyerAmt', sumAttr(openVisible, 'data-norm-ab'));
-    var midSellerVal = sumAttr(openVisible, 'data-norm-ms');
-    var midBuyerVal = sumAttr(openVisible, 'data-norm-mb');
+    // Normalized $ totals also get rescaled by normScale so they stay on
+    // the SAME basis as the per-card "norm (...)" figures below, not stuck
+    // at the server's original $NORMALIZED_RISK_USD baseline.
+    setMoney('totalActualSeller', 'totalActualSellerAmt', sumAttr(openVisible, 'data-norm-as') * normScale);
+    setMoney('totalActualBuyer', 'totalActualBuyerAmt', sumAttr(openVisible, 'data-norm-ab') * normScale);
+    var midSellerVal = sumAttr(openVisible, 'data-norm-ms') * normScale;
+    var midBuyerVal = sumAttr(openVisible, 'data-norm-mb') * normScale;
     var midSellerEl = document.getElementById('totalActualSellerMid');
     var midBuyerEl = document.getElementById('totalActualBuyerMid');
     if (midSellerEl) {{ midSellerEl.textContent = fmtMoneyParen(midSellerVal); midSellerEl.className = pnlClass(midSellerVal); }}
@@ -1059,8 +1104,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     setPct('avgActualSellerAnn', avgAttr(openVisible, 'data-ann-as'));
     setPct('avgActualBuyerAnn', avgAttr(openVisible, 'data-ann-ab'));
 
-    setMoney('totalRealizedSeller', 'totalRealizedSellerAmt', sumAttr(closedVisible, 'data-norm-rs'));
-    setMoney('totalRealizedBuyer', 'totalRealizedBuyerAmt', sumAttr(closedVisible, 'data-norm-rb'));
+    setMoney('totalRealizedSeller', 'totalRealizedSellerAmt', sumAttr(closedVisible, 'data-norm-rs') * normScale);
+    setMoney('totalRealizedBuyer', 'totalRealizedBuyerAmt', sumAttr(closedVisible, 'data-norm-rb') * normScale);
     setPct('avgRealizedSellerRoi', avgAttr(closedVisible, 'data-roi-rs'));
     setPct('avgRealizedBuyerRoi', avgAttr(closedVisible, 'data-roi-rb'));
     setPct('avgRealizedSellerAnn', avgAttr(closedVisible, 'data-ann-rs'));
