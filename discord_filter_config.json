@@ -1,11 +1,11 @@
 {
     "min_roi": 150,
     "max_roi": null,
-    "min_pe": null,
+    "min_pe": 999,
     "max_pe": null,
     "min_dte_entry": null,
     "max_dte_entry": null,
-    "base_investment": null,
+    "base_investment": 50,
     "min_put_price": null,
     "max_put_price": null
 }
