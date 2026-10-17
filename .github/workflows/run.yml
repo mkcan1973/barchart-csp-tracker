@@ -6,11 +6,22 @@ on:
     # 15:30 UTC = 11:30am EDT / 10:30am EST
     # 17:30 UTC = 1:30pm EDT / 12:30pm EST
     # 19:30 UTC = 3:30pm EDT / 2:30pm EST
+    # Plus one evening run, well after the close, for an end-of-day status
+    # check and to settle anything expiring that same day (the script
+    # itself only allows same-day settlement once it's past 4pm ET, via
+    # same_day_settle_ok in main() - see settle_expired_positions()):
+    # 00:00 UTC = 5:00pm PDT/8:00pm EDT (most of the year) or 4:00pm PST/
+    # 7:00pm EST during US winter (GitHub cron doesn't follow DST, so this
+    # drifts an hour during standard time - still safely after close).
+    # Note the weekday field below is shifted a day later (Tue-Sat) than
+    # the other three crons, since 00:00 UTC has already rolled into the
+    # next UTC calendar day while still being the same US trading evening.
     # The script itself checks the NYSE calendar and exits immediately on
-    # market holidays, so all three just no-op on non-trading days.
+    # market holidays, so all four just no-op on non-trading days.
     - cron: "30 15 * * 1-5"
     - cron: "30 17 * * 1-5"
     - cron: "30 19 * * 1-5"
+    - cron: "0 0 * * 2-6"
   workflow_dispatch: {}  # lets you trigger a run manually from the Actions tab
 
 permissions:

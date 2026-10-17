@@ -50,6 +50,7 @@ import json
 import os
 import urllib.request
 from datetime import datetime, date, timedelta
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 yf = None
@@ -476,17 +477,23 @@ def annualize_roi_pct(roi_pct, days_held):
     return round(roi_pct * (365.0 / days_held), 2) if roi_pct is not None and days_held and days_held > 0 else None
 
 
-def settle_expired_positions(positions, today):
+def settle_expired_positions(positions, today, same_day_ok=False):
     """Once a tracked position's expiration has passed, lock in its final
     P&L using the stock price at expiration instead of continuing to mark it
     to market - settled positions are kept permanently (not dropped) so a
-    realized P&L total means something."""
+    realized P&L total means something.
+
+    same_day_ok allows settling a position that expires TODAY, not just
+    strictly-in-the-past ones - only safe to set True once the market has
+    actually closed for the day (the caller is responsible for that check),
+    since yfinance can return a live, still-moving intraday "close" for the
+    current session rather than the final one while trading is ongoing."""
     changed = False
     for p in positions:
         if p.get("settled"):
             continue
         exp_date = datetime.strptime(p["expiration"], "%Y-%m-%d").date()
-        if exp_date >= today:
+        if exp_date > today or (exp_date == today and not same_day_ok):
             continue
         final_px = get_price_at(p["symbol"], p["expiration"])
         if final_px is None:
@@ -1556,7 +1563,19 @@ def build_summary(positions, today):
 
 def main():
     ensure_deps()
-    today = date.today()
+    # The exchange's own calendar date, not the runner's raw system clock -
+    # GitHub Actions runners are UTC, and the new ~5pm Pacific/8pm Eastern
+    # run crosses UTC midnight (00:00 UTC is already the next UTC day while
+    # still the same US trading day) - using America/New_York here keeps
+    # "today" correct for every scheduled run time, not just the earlier
+    # ones that happened to avoid that rollover.
+    now_et = datetime.now(ZoneInfo("America/New_York"))
+    today = now_et.date()
+    # Only the evening run (well after the 4:00pm ET close) is allowed to
+    # settle a position that expires TODAY - the daytime runs would risk
+    # locking in yfinance's still-moving intraday price instead of the
+    # actual final close.
+    same_day_settle_ok = now_et.hour >= 16
 
     if not is_us_market_open_today(today):
         print(f"  US markets are closed today ({today.isoformat()}) - skipping this run.")
@@ -1625,7 +1644,7 @@ def main():
                     f"<{SUMMARY_HTML_URL}>"
                 )
 
-    if settle_expired_positions(positions, today):
+    if settle_expired_positions(positions, today, same_day_ok=same_day_settle_ok):
         save_positions(positions)
 
     print("\n-- Rebuilding summary for all open positions -----------------------------")
