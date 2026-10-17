@@ -64,10 +64,75 @@ REALIZED_PNL_PNG = Path("barchart_csp_realized_pnl.png")
 SUMMARY_HTML = Path("index.html")  # repo-root name - GitHub Pages serves this at the clean root URL
 SUMMARY_HTML_URL = "https://mkcan1973.github.io/barchart-csp-tracker/"
 
-# Only ping Discord for new candidates at or above this Barchart annualized
-# return at selection - every new candidate still gets tracked regardless,
-# this only gates the notification.
-DISCORD_NOTIFY_MIN_ANN_RETURN_PCT = 150.0
+# Single source of truth for "what counts as a good opportunity" - edit
+# this file (not the script) to change which new candidates trigger a
+# Discord ping AND what the webpage's filter boxes default to on first
+# load (before any per-browser localStorage customization overrides it).
+# Same fields/semantics as the webpage's own filter boxes; null/missing
+# means no bound on that dimension. Every new candidate is still tracked
+# and shown on the dashboard regardless - this only gates the notification.
+FILTER_CONFIG_FILE = Path("discord_filter_config.json")
+DEFAULT_FILTER_CONFIG = {
+    "min_roi": 150, "max_roi": None,
+    "min_pe": None, "max_pe": None,
+    "min_dte_entry": None, "max_dte_entry": None,
+    "base_investment": None,
+    "min_put_price": None, "max_put_price": None,
+}
+
+
+def load_filter_config():
+    if FILTER_CONFIG_FILE.exists():
+        try:
+            cfg = json.loads(FILTER_CONFIG_FILE.read_text())
+            return {**DEFAULT_FILTER_CONFIG, **cfg}
+        except Exception as e:
+            print(f"  WARNING: couldn't parse {FILTER_CONFIG_FILE} ({e}) - using defaults.")
+    return dict(DEFAULT_FILTER_CONFIG)
+
+
+def position_passes_filter_config(p, cfg):
+    """Same filter logic as the webpage's client-side JS (ROI/PE/DTE@entry/
+    base investment/put price-as-strike) - works on either a freshly-built
+    candidate position or an already-stored one, since both carry the same
+    field names."""
+    ann_return = p.get("potential_return_annual_pct") or 0
+    if cfg.get("min_roi") is not None and ann_return < cfg["min_roi"]:
+        return False
+    if cfg.get("max_roi") is not None and ann_return > cfg["max_roi"]:
+        return False
+
+    # Missing PE ("--" on the webpage) means unprofitable/undefined, not
+    # zero - treat as infinite so it fails a Max PE cap but still passes a
+    # Min-PE-only filter, same convention as the webpage's own fix.
+    pe = p.get("pe_at_entry")
+    pe_for_check = pe if pe is not None else float("inf")
+    if cfg.get("min_pe") is not None and pe_for_check < cfg["min_pe"]:
+        return False
+    if cfg.get("max_pe") is not None and pe_for_check > cfg["max_pe"]:
+        return False
+
+    if cfg.get("min_dte_entry") is not None or cfg.get("max_dte_entry") is not None:
+        added = datetime.strptime(p["added_date"], "%Y-%m-%d").date()
+        exp = datetime.strptime(p["expiration"], "%Y-%m-%d").date()
+        dte_entry = (exp - added).days
+        if cfg.get("min_dte_entry") is not None and dte_entry < cfg["min_dte_entry"]:
+            return False
+        if cfg.get("max_dte_entry") is not None and dte_entry > cfg["max_dte_entry"]:
+            return False
+
+    if cfg.get("base_investment") is not None:
+        ask = p.get("ask")
+        if ask is None or ask * 100 > cfg["base_investment"]:
+            return False
+
+    strike = p.get("strike")
+    if cfg.get("min_put_price") is not None and (strike is None or strike < cfg["min_put_price"]):
+        return False
+    if cfg.get("max_put_price") is not None and (strike is None or strike > cfg["max_put_price"]):
+        return False
+
+    return True
 
 # If yfinance has no usable bid/ask for the exact contract Barchart
 # surfaced, fall back to Barchart's own bid (flagged) and approximate
@@ -128,44 +193,6 @@ def notify_discord(message):
     except Exception as e:
         print(f"  [notification] Discord webhook failed (run continues normally): "
               f"{type(e).__name__}: {e}")
-
-
-def notify_expiration_reminders(positions, open_rows, today):
-    """One-day-ahead heads-up for open positions, sent once per position
-    (flagged on the stored record so it never repeats on a later run that
-    same day, or any day after). The user's actual strategy is going long
-    (buying the put), so the message leads with the LONG-side decision:
-    sell now at the current bid, or exercise if that's already better -
-    reusing the same exercise-vs-mid figure already computed for the card.
-    Returns True if any position was flagged (caller should save_positions())."""
-    changed = False
-    by_key = {(p["symbol"], p["strike"], p["expiration"]): p for p in positions}
-    for r in open_rows:
-        if r["DAYS LEFT"] != 1:
-            continue
-        p = by_key.get((r["SYMBOL"], r["STRIKE"], r["EXPIRATION"]))
-        if p is None or p.get("expiration_reminder_sent"):
-            continue
-
-        stock_px = r.get("CURRENT STOCK PRICE")
-        stock_line = f"Current stock px: {stock_px:.2f}" if stock_px is not None else "Current stock px: no live quote"
-        current_bid = r.get("CURRENT OPTION BID")
-        bid_line = (f"+ Current bid (sell to close): {current_bid:.2f}" if current_bid is not None
-                    else "+ Current bid: no live quote")
-        action_label = "exe" if r.get("BUYER MID IS EXERCISE") else "mid"
-        action_value = r.get("UNREALIZED P/L (MID) IF BOUGHT (long put)")
-        action_line = f"Long P/L ({action_label}): {_fmt_money(action_value)}"
-
-        notify_discord(
-            f"**Expiring tomorrow: {r['SYMBOL']} ${r['STRIKE']:g}P exp {r['EXPIRATION']}**\n"
-            f"{stock_line}\n"
-            f"```diff\n{bid_line}\n```\n"
-            f"{action_line}\n"
-            f"<{SUMMARY_HTML_URL}>"
-        )
-        p["expiration_reminder_sent"] = True
-        changed = True
-    return changed
 
 
 def _install(pkg):
@@ -651,7 +678,7 @@ def _fmt_money_paren(x, label="mid"):
     return f" ({label}: {_fmt_money(x)})" if x is not None else ""
 
 
-def generate_html_summary(open_rows, closed_rows, totals, today):
+def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None):
     """Single self-contained HTML file - a card per position (readable on a
     phone, unlike the 20+ column CSV) plus the totals and the realized P&L
     chart if one exists. No build step, no external assets - just open it in
@@ -946,6 +973,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
 
 <script>
 (function() {{
+  var DEFAULT_FILTERS = {json.dumps(filter_cfg or DEFAULT_FILTER_CONFIG)};
   function fmtMoney(x) {{
     return x === null ? '--' : '$' + x.toLocaleString('en-US', {{minimumFractionDigits: 2, maximumFractionDigits: 2}});
   }}
@@ -1196,6 +1224,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyFilter(); }});
   }});
 
+  var fieldToCfgKey = {{
+    minRoi: 'min_roi', maxRoi: 'max_roi',
+    minPe: 'min_pe', maxPe: 'max_pe',
+    minDte: 'min_dte_entry', maxDte: 'max_dte_entry',
+    baseInvest: 'base_investment',
+    minPutPrice: 'min_put_price', maxPutPrice: 'max_put_price'
+  }};
   try {{
     var saved = {{
       minRoi: localStorage.getItem('csp_filter_min_roi'),
@@ -1209,7 +1244,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       maxPutPrice: localStorage.getItem('csp_filter_max_put_price')
     }};
     Object.keys(saved).forEach(function(id) {{
-      if (saved[id]) document.getElementById(id).value = saved[id];
+      if (saved[id]) {{
+        document.getElementById(id).value = saved[id];
+      }} else {{
+        var cfgVal = DEFAULT_FILTERS[fieldToCfgKey[id]];
+        if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
+      }}
     }});
   }} catch (e) {{}}
   applyFilter();
@@ -1222,7 +1262,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     return SUMMARY_HTML
 
 
-def build_summary(positions, today):
+def build_summary(positions, today, filter_cfg=None):
     open_rows = []
     open_roi_fict = []    # (seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi) per open position
     open_roi_actual = []  # same, for the "actual" (live requote) side
@@ -1562,7 +1602,7 @@ def build_summary(positions, today):
         "settled_count": len(settled),
         "png_path": png_path,
     }
-    html_path = generate_html_summary(open_rows, closed_rows, totals, today)
+    html_path = generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg)
     totals["html_path"] = html_path
 
     return open_rows, closed_rows, totals
@@ -1596,6 +1636,7 @@ def main():
     print(f"  Scraped {len(barchart_rows)} candidates (ranked by annualized potential return desc)")
 
     positions = load_positions()
+    filter_cfg = load_filter_config()
 
     if ensure_pe_at_entry(positions):
         save_positions(positions)
@@ -1627,7 +1668,7 @@ def main():
             # dashboard's own "first instance to qualify per symbol" filter,
             # just applied to the notification trigger instead of display.
             symbol_already_qualified = any(
-                p["symbol"] == candidate["symbol"] and (p.get("potential_return_annual_pct") or 0) >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT
+                p["symbol"] == candidate["symbol"] and position_passes_filter_config(p, filter_cfg)
                 for p in positions
             )
             position = add_new_position(candidate, today)
@@ -1638,7 +1679,7 @@ def main():
             positions.append(position)
             save_positions(positions)
             ann_return = candidate.get("potential_return_annual_pct") or 0
-            if ann_return >= DISCORD_NOTIFY_MIN_ANN_RETURN_PCT and not symbol_already_qualified:
+            if position_passes_filter_config(position, filter_cfg) and not symbol_already_qualified:
                 pe = position.get("pe_at_entry")
                 pe_text = f"{pe:.1f}" if pe is not None else "n/a"
                 mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
@@ -1655,13 +1696,10 @@ def main():
         save_positions(positions)
 
     print("\n-- Rebuilding summary for all open positions -----------------------------")
-    open_rows, closed_rows, totals = build_summary(positions, today)
+    open_rows, closed_rows, totals = build_summary(positions, today, filter_cfg)
     if not open_rows and not totals["settled_count"]:
         print("  No positions to summarize.")
         return
-
-    if notify_expiration_reminders(positions, open_rows, today):
-        save_positions(positions)
 
     if open_rows:
         df = pd.DataFrame(open_rows).sort_values("DAYS LEFT")
