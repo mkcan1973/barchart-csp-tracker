@@ -802,7 +802,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
         run_badge = (f'<span class="run-badge">{_html_escape(run_label)}</span>'
                      if run_label and not closed and r['ADDED'] == today.isoformat() else '')
         return f"""
-        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-ask="{attr(r.get('ASK'))}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
+        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-ask="{attr(r.get('ASK'))}" data-strike="{attr(r['STRIKE'])}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
           <div class="card-head">
             <span class="sym">{_html_escape(r['SYMBOL'])}</span>
             <span class="strike">${r['STRIKE']:g}P</span>
@@ -1046,11 +1046,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       var investOk = baseInvestRaw === ''
         || (askVal !== null && !isNaN(askVal) && askVal * 100 <= baseInvest);
 
-      // Put price (the option's own ask, same figure as above) - lets you
-      // skip low-priced puts with little profit potential on the long
-      // side, or cap how expensive a contract you want to consider.
+      // Put price = the STRIKE (not the premium/ask) - lets you skip
+      // low-strike puts with little profit potential on the long side, or
+      // cap how high a strike you want to consider.
+      var strikeRaw = card.getAttribute('data-strike');
+      var strikeVal = strikeRaw === '' ? null : parseFloat(strikeRaw);
       var putPriceOk = (minPutPriceRaw === '' && maxPutPriceRaw === '')
-        || (askVal !== null && !isNaN(askVal) && askVal >= minPutPrice && askVal <= maxPutPrice);
+        || (strikeVal !== null && !isNaN(strikeVal) && strikeVal >= minPutPrice && strikeVal <= maxPutPrice);
 
       var dteRaw = card.getAttribute('data-dte-entry');
       var dteVal = dteRaw === '' ? null : parseFloat(dteRaw);
