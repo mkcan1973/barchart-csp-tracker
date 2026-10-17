@@ -12473,6 +12473,7 @@
 
 <script>
 (function() {
+  var DEFAULT_FILTERS = {"min_roi": 150, "max_roi": null, "min_pe": null, "max_pe": null, "min_dte_entry": null, "max_dte_entry": null, "base_investment": null, "min_put_price": null, "max_put_price": null};
   function fmtMoney(x) {
     return x === null ? '--' : '$' + x.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
   }
@@ -12723,6 +12724,13 @@
     if (el) el.addEventListener('keydown', function(e) { if (e.key === 'Enter') applyFilter(); });
   });
 
+  var fieldToCfgKey = {
+    minRoi: 'min_roi', maxRoi: 'max_roi',
+    minPe: 'min_pe', maxPe: 'max_pe',
+    minDte: 'min_dte_entry', maxDte: 'max_dte_entry',
+    baseInvest: 'base_investment',
+    minPutPrice: 'min_put_price', maxPutPrice: 'max_put_price'
+  };
   try {
     var saved = {
       minRoi: localStorage.getItem('csp_filter_min_roi'),
@@ -12736,7 +12744,12 @@
       maxPutPrice: localStorage.getItem('csp_filter_max_put_price')
     };
     Object.keys(saved).forEach(function(id) {
-      if (saved[id]) document.getElementById(id).value = saved[id];
+      if (saved[id]) {
+        document.getElementById(id).value = saved[id];
+      } else {
+        var cfgVal = DEFAULT_FILTERS[fieldToCfgKey[id]];
+        if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
+      }
     });
   } catch (e) {}
   applyFilter();
