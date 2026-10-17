@@ -54,7 +54,7 @@
 </head>
 <body>
   <h1>Barchart CSP Tracker</h1>
-  <div class="updated">Last updated 2026-10-17 &middot; 60 open &middot; 351 closed</div>
+  <div class="updated">Last updated 2026-10-17 &middot; 60 open &middot; 352 closed</div>
 
   <div class="filterbar">
     <label>Min ROI % <input type="number" id="minRoi" step="any" placeholder="-&infin;" inputmode="decimal"></label>
@@ -64,6 +64,8 @@
     <label>Min DTE@entry <input type="number" id="minDte" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max DTE@entry <input type="number" id="maxDte" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <label>Base investment $ <input type="number" id="baseInvest" step="any" placeholder="e.g. 1000" inputmode="decimal"></label>
+    <label>Min put price <input type="number" id="minPutPrice" step="any" placeholder="-&infin;" inputmode="decimal"></label>
+    <label>Max put price <input type="number" id="maxPutPrice" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <button id="applyFilter" type="button">Filter</button>
     <span class="count" id="filterCount"></span>
   </div>
@@ -80,20 +82,20 @@
       <div class="sub2">(mid) = less pessimistic reference using the mid price instead of crossing the spread</div>
     </div>
     <div class="box">
-      <div class="label">REALIZED (<span id="realizedCount">351</span> settled, normalized $<span class="norm-base-num">1000</span>/position)</div>
-      <div class="val neg" id="totalRealizedSeller">Short <span id="totalRealizedSellerAmt">$-33,771.60</span></div>
-      <div class="val pos" id="totalRealizedBuyer">Long <span id="totalRealizedBuyerAmt">$1,031,539.73</span></div>
-      <div class="sub2">avg ROI: short <span id="avgRealizedSellerRoi">-9.6%</span> / long <span id="avgRealizedBuyerRoi">+293.9%</span></div>
-      <div class="sub2">avg ann. ROI: short <span id="avgRealizedSellerAnn">-596.2%</span> / long <span id="avgRealizedBuyerAnn">+23862.2%</span></div>
+      <div class="label">REALIZED (<span id="realizedCount">352</span> settled, normalized $<span class="norm-base-num">1000</span>/position)</div>
+      <div class="val neg" id="totalRealizedSeller">Short <span id="totalRealizedSellerAmt">$-34,044.60</span></div>
+      <div class="val pos" id="totalRealizedBuyer">Long <span id="totalRealizedBuyerAmt">$1,037,562.46</span></div>
+      <div class="sub2">avg ROI: short <span id="avgRealizedSellerRoi">-9.7%</span> / long <span id="avgRealizedBuyerRoi">+294.8%</span></div>
+      <div class="sub2">avg ann. ROI: short <span id="avgRealizedSellerAnn">-596.0%</span> / long <span id="avgRealizedBuyerAnn">+23828.2%</span></div>
     </div>
     <div class="box">
       <div class="label">STOCK BENCHMARK (no options - buy/short $<span class="norm-base-num">1000</span> of shares at entry)</div>
       <div class="val neg" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">$-4,960.67</span></div>
       <div class="val pos" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">$4,960.67</span></div>
       <div class="sub2">avg price change (open): <span id="avgStockUnrealPct">-8.3%</span> &middot; avg ann. ROI: <span id="avgStockUnrealAnn">-520.1%</span></div>
-      <div class="val neg" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">$-50,639.43</span></div>
-      <div class="val pos" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">$50,639.43</span></div>
-      <div class="sub2">avg price change (closed): <span id="avgStockRealPct">-14.4%</span> &middot; avg ann. ROI: <span id="avgStockRealAnn">-980.8%</span></div>
+      <div class="val neg" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">$-50,958.31</span></div>
+      <div class="val pos" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">$50,958.31</span></div>
+      <div class="sub2">avg price change (closed): <span id="avgStockRealPct">-14.5%</span> &middot; avg ann. ROI: <span id="avgStockRealAnn">-979.8%</span></div>
       <div class="sub2">Indicator only - short assumes unlimited-risk shorting is actually available.</div>
     </div>
   </div>
@@ -224,7 +226,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="122.346" data-pe="" data-dte-entry="35" data-ask="0.23" data-symbol="OPEN" data-added="2026-10-16" data-kind="open" data-norm-as="-5.0" data-norm-ab="-347.83" data-roi-as="-0.5" data-roi-ab="-34.78" data-ann-as="-182.5" data-ann-ab="-12694.7" data-norm-ms="12.5" data-norm-mb="-195.65" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="-0.0">
+        <div class="card" data-ann-return="122.346" data-pe="" data-dte-entry="35" data-ask="0.23" data-symbol="OPEN" data-added="2026-10-16" data-kind="open" data-norm-as="-5.0" data-norm-ab="-347.83" data-roi-as="-0.5" data-roi-ab="-34.78" data-ann-as="-182.5" data-ann-ab="-12694.7" data-norm-ms="12.5" data-norm-mb="-195.65" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="0.0">
           <div class="card-head">
             <span class="sym">OPEN</span>
             <span class="strike">$2P</span>
@@ -1905,7 +1907,7 @@
         </div>
   </div>
 
-  <h2>Closed positions (<span id="closedSectionCount">351</span>)</h2>
+  <h2>Closed positions (<span id="closedSectionCount">352</span>)</h2>
   <div class="cards">
   
         <div class="card" data-ann-return="356.805" data-pe="" data-dte-entry="0" data-ask="0.99" data-symbol="INTC" data-added="2026-10-16" data-kind="closed" data-norm-rs="-34.47" data-norm-rb="3191.92" data-roi-rs="-3.45" data-roi-rb="319.19" data-ann-rs="" data-ann-rb="" data-stock-long="-57.88" data-stock-short="57.88" data-stock-pct="-5.79" data-stock-pct-ann="">
@@ -11238,6 +11240,36 @@
           </div>
         </div>
 
+        <div class="card" data-ann-return="75.7261" data-pe="" data-dte-entry="18" data-ask="0.44" data-symbol="PSKY" data-added="2026-09-28" data-kind="closed" data-norm-rs="-273.0" data-norm-rb="6022.73" data-roi-rs="-27.3" data-roi-rb="602.27" data-ann-rs="-553.58" data-ann-rb="12212.7" data-stock-long="-318.88" data-stock-short="318.88" data-stock-pct="-31.89" data-stock-pct-ann="-646.66">
+          <div class="card-head">
+            <span class="sym">PSKY</span>
+            <span class="strike">$10P</span>
+            <span class="exp">2026-10-16</span>
+            
+          </div>
+          <div class="sub">Settled 2026-10-16 &middot; Entry 10.15 &middot; Final 6.91
+            &middot; bid 0.36/yahoo &middot; ask 0.44/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +75.7% &middot; PE at entry: -- (approx (backfilled)) &middot; DTE at entry: 18</div>
+          
+          <div class="rowlabel">REALIZED</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
+              <div class="val neg">$-273.00<span class=""></span></div>
+              <div class="sub2">ROI -27.3% &middot; ann -553.6%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-rs">$-273.00</span></div>
+              
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put) - bearish, same side as short stock</div>
+              <div class="val pos">$265.00<span class=""></span></div>
+              <div class="sub2">ROI +602.3% &middot; ann +12212.7%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-rb">$6,022.73</span></div>
+              
+            </div>
+          </div>
+        </div>
+
         <div class="card" data-ann-return="77.1819" data-pe="" data-dte-entry="18" data-ask="0.14" data-symbol="SPCE" data-added="2026-09-28" data-kind="closed" data-norm-rs="-153.33" data-norm-rb="3071.43" data-roi-rs="-15.33" data-roi-rb="307.14" data-ann-rs="-310.86" data-ann-rb="6228.12" data-stock-long="-239.44" data-stock-short="239.44" data-stock-pct="-23.94" data-stock-pct-ann="-485.45">
           <div class="card-head">
             <span class="sym">SPCE</span>
@@ -12489,8 +12521,11 @@
     var minDteRaw = document.getElementById('minDte').value.trim();
     var maxDteRaw = document.getElementById('maxDte').value.trim();
     var baseInvestRaw = document.getElementById('baseInvest').value.trim();
+    var minPutPriceRaw = document.getElementById('minPutPrice').value.trim();
+    var maxPutPriceRaw = document.getElementById('maxPutPrice').value.trim();
     var noFilter = minRoiRaw === '' && maxRoiRaw === '' && minPeRaw === '' && maxPeRaw === ''
-      && minDteRaw === '' && maxDteRaw === '' && baseInvestRaw === '';
+      && minDteRaw === '' && maxDteRaw === '' && baseInvestRaw === ''
+      && minPutPriceRaw === '' && maxPutPriceRaw === '';
     var minRoi = minRoiRaw === '' ? -Infinity : parseFloat(minRoiRaw);
     var maxRoi = maxRoiRaw === '' ? Infinity : parseFloat(maxRoiRaw);
     var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
@@ -12498,6 +12533,8 @@
     var minDte = minDteRaw === '' ? -Infinity : parseFloat(minDteRaw);
     var maxDte = maxDteRaw === '' ? Infinity : parseFloat(maxDteRaw);
     var baseInvest = baseInvestRaw === '' ? Infinity : parseFloat(baseInvestRaw);
+    var minPutPrice = minPutPriceRaw === '' ? -Infinity : parseFloat(minPutPriceRaw);
+    var maxPutPrice = maxPutPriceRaw === '' ? Infinity : parseFloat(maxPutPriceRaw);
     // Separate from baseInvest (which uses Infinity as "no filter"): this is
     // what every "norm ($X risk)" figure on the page rescales against -
     // defaults to the server's own $NORMALIZED_RISK_USD baseline when the
@@ -12536,12 +12573,18 @@
       var investOk = baseInvestRaw === ''
         || (askVal !== null && !isNaN(askVal) && askVal * 100 <= baseInvest);
 
+      // Put price (the option's own ask, same figure as above) - lets you
+      // skip low-priced puts with little profit potential on the long
+      // side, or cap how expensive a contract you want to consider.
+      var putPriceOk = (minPutPriceRaw === '' && maxPutPriceRaw === '')
+        || (askVal !== null && !isNaN(askVal) && askVal >= minPutPrice && askVal <= maxPutPrice);
+
       var dteRaw = card.getAttribute('data-dte-entry');
       var dteVal = dteRaw === '' ? null : parseFloat(dteRaw);
       var dteOk = (minDteRaw === '' && maxDteRaw === '')
         || (dteVal !== null && !isNaN(dteVal) && dteVal >= minDte && dteVal <= maxDte);
 
-      if (noFilter || (roiOk && peOk && dteOk && investOk)) {
+      if (noFilter || (roiOk && peOk && dteOk && investOk && putPriceOk)) {
         passing.push(card);
       }
     });
@@ -12568,19 +12611,28 @@
     }
     var selectedSet = new Set(selected);
 
-    var shown = 0;
     var openVisible = [];
     var closedVisible = [];
+    var totalOpenCount = 0;
+    var totalClosedCount = 0;
     cards.forEach(function(card) {
+      var isOpen = card.getAttribute('data-kind') === 'open';
+      if (isOpen) { totalOpenCount++; } else { totalClosedCount++; }
       var visible = selectedSet.has(card);
       card.style.display = visible ? '' : 'none';
       if (visible) {
-        shown++;
-        (card.getAttribute('data-kind') === 'open' ? openVisible : closedVisible).push(card);
+        (isOpen ? openVisible : closedVisible).push(card);
       }
     });
+    // Broken out by open/closed, not just one combined number, so this
+    // reconciles directly with the open/closed counts shown elsewhere on
+    // the page (the "Last updated" header, the section headers) instead
+    // of leaving you to guess how a filtered total splits.
     var countEl = document.getElementById('filterCount');
-    if (countEl) countEl.textContent = shown + ' of ' + cards.length + ' shown';
+    if (countEl) {
+      countEl.textContent = openVisible.length + ' open + ' + closedVisible.length + ' closed shown '
+        + '(of ' + totalOpenCount + ' open, ' + totalClosedCount + ' closed total)';
+    }
 
     // Rescale every per-card "norm (...)" figure (and the box-label $
     // baselines) to normBase - these are tagged with data-src pointing at
@@ -12657,12 +12709,14 @@
       localStorage.setItem('csp_filter_min_dte', minDteRaw);
       localStorage.setItem('csp_filter_max_dte', maxDteRaw);
       localStorage.setItem('csp_filter_base_invest', baseInvestRaw);
+      localStorage.setItem('csp_filter_min_put_price', minPutPriceRaw);
+      localStorage.setItem('csp_filter_max_put_price', maxPutPriceRaw);
     } catch (e) {}
   }
 
   var btn = document.getElementById('applyFilter');
   if (btn) btn.addEventListener('click', applyFilter);
-  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte', 'baseInvest'].forEach(function(id) {
+  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte', 'baseInvest', 'minPutPrice', 'maxPutPrice'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('keydown', function(e) { if (e.key === 'Enter') applyFilter(); });
   });
@@ -12675,7 +12729,9 @@
       maxPe: localStorage.getItem('csp_filter_max_pe'),
       minDte: localStorage.getItem('csp_filter_min_dte'),
       maxDte: localStorage.getItem('csp_filter_max_dte'),
-      baseInvest: localStorage.getItem('csp_filter_base_invest')
+      baseInvest: localStorage.getItem('csp_filter_base_invest'),
+      minPutPrice: localStorage.getItem('csp_filter_min_put_price'),
+      maxPutPrice: localStorage.getItem('csp_filter_max_put_price')
     };
     Object.keys(saved).forEach(function(id) {
       if (saved[id]) document.getElementById(id).value = saved[id];

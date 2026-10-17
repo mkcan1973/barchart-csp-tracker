@@ -1226,9 +1226,14 @@ def build_summary(positions, today):
     open_roi_actual = []  # same, for the "actual" (live requote) side
     open_norm_mid = []    # (norm_seller_mid, norm_buyer_mid) per open position
     for p in positions:
+        if p.get("settled"):
+            continue  # already in closed_rows below - same-day settlement
+            # (now possible via settle_expired_positions' same_day_ok) means
+            # exp_date < today alone isn't enough to exclude it here, since
+            # a position settled TODAY has exp_date == today, not < today.
         exp_date = datetime.strptime(p["expiration"], "%Y-%m-%d").date()
         if exp_date < today:
-            continue  # expired - handled by settle_expired_positions() instead
+            continue  # expired but not yet settled (e.g. price data lag) - stays out of both lists until it settles
         added_date_obj = datetime.strptime(p["added_date"], "%Y-%m-%d").date()
         days_held = (today - added_date_obj).days
         dte_at_entry = (exp_date - added_date_obj).days

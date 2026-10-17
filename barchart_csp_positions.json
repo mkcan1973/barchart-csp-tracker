@@ -1037,7 +1037,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.02,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 6.909999847412109,
+    "settled_seller_pnl": -273.0,
+    "settled_buyer_pnl": 265.0,
+    "settled_at": "2026-10-16"
   },
   {
     "symbol": "LUNR",
