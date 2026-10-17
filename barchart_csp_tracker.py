@@ -1566,13 +1566,25 @@ def build_summary(positions, today, filter_cfg=None):
     # in the chart even though the webpage only ever shows one card for
     # it, making the chart's n= disagree with the page's own closed count.
     if filter_cfg is not None and any(v is not None for v in filter_cfg.values()):
-        candidates = sorted(
-            (p for p in positions if position_passes_filter_config(p, filter_cfg)),
-            key=lambda p: p["added_date"],
+        # Walk open positions before closed ones - the same DOM order the
+        # cards render in (open_cards before closed_cards below) - and only
+        # replace the symbol's pick on a STRICTLY earlier added_date, not a
+        # tie. That makes a same-day open/closed tie for one symbol resolve
+        # to the open card exactly like the JS loop does, instead of an
+        # arbitrary one (otherwise the chart's n= can drift from the page's
+        # own closed-shown count by exactly these tied cases).
+        ordered_candidates = (
+            [p for p in positions if not p.get("settled")]
+            + [p for p in positions if p.get("settled")]
         )
         first_for_symbol = {}
-        for p in candidates:
-            first_for_symbol.setdefault(p["symbol"], p)
+        for p in ordered_candidates:
+            if not position_passes_filter_config(p, filter_cfg):
+                continue
+            sym = p["symbol"]
+            current = first_for_symbol.get(sym)
+            if current is None or p["added_date"] < current["added_date"]:
+                first_for_symbol[sym] = p
         selected_keys = {(p["symbol"], p["strike"], p["expiration"]) for p in first_for_symbol.values()}
         closed_rows_for_chart = [
             r for p, r in zip(settled, closed_rows)
