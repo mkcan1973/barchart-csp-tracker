@@ -1556,8 +1556,28 @@ def build_summary(positions, today, filter_cfg=None):
     # count toward the realized-performance track record shown here. Every
     # other closed-position stat (CSV, totals, cards) still covers ALL
     # closed positions - only this chart is narrowed.
-    if filter_cfg is not None:
-        closed_rows_for_chart = [r for p, r in zip(settled, closed_rows) if position_passes_filter_config(p, filter_cfg)]
+    #
+    # This has to replicate the webpage's OWN two-pass filter exactly (see
+    # applyFilter()'s "Pass 2" in generate_html_summary), not just the raw
+    # per-position check: once any filter dimension is active, only the
+    # earliest-added instance per symbol - across open AND closed alike -
+    # counts as "the trade you'd have taken." Skipping that second pass
+    # would let a since-re-qualified symbol's LATER settlement double up
+    # in the chart even though the webpage only ever shows one card for
+    # it, making the chart's n= disagree with the page's own closed count.
+    if filter_cfg is not None and any(v is not None for v in filter_cfg.values()):
+        candidates = sorted(
+            (p for p in positions if position_passes_filter_config(p, filter_cfg)),
+            key=lambda p: p["added_date"],
+        )
+        first_for_symbol = {}
+        for p in candidates:
+            first_for_symbol.setdefault(p["symbol"], p)
+        selected_keys = {(p["symbol"], p["strike"], p["expiration"]) for p in first_for_symbol.values()}
+        closed_rows_for_chart = [
+            r for p, r in zip(settled, closed_rows)
+            if (p["symbol"], p["strike"], p["expiration"]) in selected_keys
+        ]
     else:
         closed_rows_for_chart = closed_rows
     png_path = plot_realized_pnl(closed_rows_for_chart)
