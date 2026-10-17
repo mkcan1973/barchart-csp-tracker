@@ -1,5 +1,5 @@
 {
-    "min_roi": 150,
+    "min_roi": null,
     "max_roi": null,
     "min_pe": 999,
     "max_pe": null,
