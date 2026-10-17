@@ -40,6 +40,9 @@
                        background: #0f131b; color: inherit; font-size: 0.95rem; }
   .filterbar button { padding: 8px 16px; border-radius: 6px; border: none; background: #3ddc84;
                         color: #06240f; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+  .filterbar a.editlink { padding: 8px 16px; border-radius: 6px; border: 1px solid #3ddc84;
+                            background: transparent; color: #3ddc84; font-weight: 700;
+                            font-size: 0.85rem; text-decoration: none; }
   .filterbar .count { color: #9aa4b2; font-size: 0.8rem; margin-left: auto; align-self: center; }
   @media (prefers-color-scheme: light) {
     body { background: #f5f6f8; color: #1a1d23; }
@@ -48,6 +51,7 @@
     .filterbar { background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .filterbar label { color: #6b7280; }
     .filterbar input { background: #f5f6f8; border-color: #d0d5dd; }
+    .filterbar a.editlink { border-color: #0969da; color: #0969da; }
     .filterbar .count { color: #6b7280; }
   }
 </style>
@@ -67,6 +71,7 @@
     <label>Min put price <input type="number" id="minPutPrice" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max put price <input type="number" id="maxPutPrice" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <button id="applyFilter" type="button">Filter</button>
+    <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/discord_filter_config.json" target="_blank" rel="noopener">Edit filters on GitHub</a>
     <span class="count" id="filterCount"></span>
   </div>
   <div class="updated" style="margin-top:-6px;">ROI filters on Barchart's annualized return at selection; PE filters on trailing P/E at entry (both frozen at entry, always available)</div>
@@ -12703,18 +12708,6 @@
 
     var noteEl = document.getElementById('filterNote');
     if (noteEl) noteEl.style.display = noFilter ? 'none' : '';
-
-    try {
-      localStorage.setItem('csp_filter_min_roi', minRoiRaw);
-      localStorage.setItem('csp_filter_max_roi', maxRoiRaw);
-      localStorage.setItem('csp_filter_min_pe', minPeRaw);
-      localStorage.setItem('csp_filter_max_pe', maxPeRaw);
-      localStorage.setItem('csp_filter_min_dte', minDteRaw);
-      localStorage.setItem('csp_filter_max_dte', maxDteRaw);
-      localStorage.setItem('csp_filter_base_invest', baseInvestRaw);
-      localStorage.setItem('csp_filter_min_put_price', minPutPriceRaw);
-      localStorage.setItem('csp_filter_max_put_price', maxPutPriceRaw);
-    } catch (e) {}
   }
 
   var btn = document.getElementById('applyFilter');
@@ -12724,6 +12717,8 @@
     if (el) el.addEventListener('keydown', function(e) { if (e.key === 'Enter') applyFilter(); });
   });
 
+  // Every page open starts from discord_filter_config.json's values (no
+  // localStorage override) - edit that file to change what a fresh load shows.
   var fieldToCfgKey = {
     minRoi: 'min_roi', maxRoi: 'max_roi',
     minPe: 'min_pe', maxPe: 'max_pe',
@@ -12731,27 +12726,10 @@
     baseInvest: 'base_investment',
     minPutPrice: 'min_put_price', maxPutPrice: 'max_put_price'
   };
-  try {
-    var saved = {
-      minRoi: localStorage.getItem('csp_filter_min_roi'),
-      maxRoi: localStorage.getItem('csp_filter_max_roi'),
-      minPe: localStorage.getItem('csp_filter_min_pe'),
-      maxPe: localStorage.getItem('csp_filter_max_pe'),
-      minDte: localStorage.getItem('csp_filter_min_dte'),
-      maxDte: localStorage.getItem('csp_filter_max_dte'),
-      baseInvest: localStorage.getItem('csp_filter_base_invest'),
-      minPutPrice: localStorage.getItem('csp_filter_min_put_price'),
-      maxPutPrice: localStorage.getItem('csp_filter_max_put_price')
-    };
-    Object.keys(saved).forEach(function(id) {
-      if (saved[id]) {
-        document.getElementById(id).value = saved[id];
-      } else {
-        var cfgVal = DEFAULT_FILTERS[fieldToCfgKey[id]];
-        if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
-      }
-    });
-  } catch (e) {}
+  Object.keys(fieldToCfgKey).forEach(function(id) {
+    var cfgVal = DEFAULT_FILTERS[fieldToCfgKey[id]];
+    if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
+  });
   applyFilter();
 })();
 </script>
