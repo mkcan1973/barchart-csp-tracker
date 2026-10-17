@@ -577,25 +577,38 @@ def ensure_plot_deps():
 
 
 def plot_realized_pnl(closed_rows):
-    """PNG of cumulative realized P&L over time (by expiration date), one
-    line for the CSP-seller (short) side and one for the long-put-buyer
-    side - both already normalized to NORMALIZED_RISK_USD risk/position so
-    the running totals are comparable across differently-priced names."""
+    """PNG of average realized ROI% by settlement (expiration) date - how
+    THAT period's batch of settlements actually performed, not a running
+    cumulative dollar total. Each position's ROI % IF SOLD/BOUGHT is
+    already "per $NORMALIZED_RISK_USD risked" in effect (ROI is scale-
+    invariant - a position normalized to any base investment size has the
+    same % return as its own actual size), so averaging those per date
+    gives exactly "ROI for that period, based on the base investment"
+    without needing a separate normalized-dollar computation."""
     if not closed_rows:
         return None
     ensure_plot_deps()
 
-    dates = [datetime.strptime(r["EXPIRATION"], "%Y-%m-%d").date() for r in closed_rows]
-    cum_short = [r["CUMULATIVE P/L IF SOLD"] for r in closed_rows]
-    cum_long = [r["CUMULATIVE P/L IF BOUGHT"] for r in closed_rows]
+    by_date = {}
+    for r in closed_rows:
+        d = datetime.strptime(r["EXPIRATION"], "%Y-%m-%d").date()
+        bucket = by_date.setdefault(d, {"seller": [], "buyer": []})
+        if r["ROI % IF SOLD (CSP)"] is not None:
+            bucket["seller"].append(r["ROI % IF SOLD (CSP)"])
+        if r["ROI % IF BOUGHT (long put)"] is not None:
+            bucket["buyer"].append(r["ROI % IF BOUGHT (long put)"])
+
+    dates = sorted(by_date)
+    avg_seller = [sum(by_date[d]["seller"]) / len(by_date[d]["seller"]) if by_date[d]["seller"] else None for d in dates]
+    avg_buyer = [sum(by_date[d]["buyer"]) / len(by_date[d]["buyer"]) if by_date[d]["buyer"] else None for d in dates]
 
     fig, ax = plt.subplots(figsize=(9, 5))
-    ax.plot(dates, cum_short, marker="o", label="Short (CSP seller)")
-    ax.plot(dates, cum_long, marker="o", label="Long (put buyer)")
+    ax.plot(dates, avg_seller, marker="o", label="Short (CSP seller)")
+    ax.plot(dates, avg_buyer, marker="o", label="Long (put buyer)")
     ax.axhline(0, color="gray", linewidth=0.8)
-    ax.set_xlabel("Expiration date")
-    ax.set_ylabel(f"Cumulative realized P/L (normalized to ${NORMALIZED_RISK_USD:.0f} risk/position)")
-    ax.set_title("Realized CSP P&L over time")
+    ax.set_xlabel("Settlement (expiration) date")
+    ax.set_ylabel("Avg ROI % for that period's settlements")
+    ax.set_title("Realized CSP ROI by settlement period")
     ax.legend()
     ax.grid(True, alpha=0.3)
     fig.autofmt_xdate()
