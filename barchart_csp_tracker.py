@@ -898,7 +898,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       <div class="sub2">avg ann. ROI: short <span id="avgRealizedSellerAnn">{_fmt_pct(totals['avg_realized_seller_ann_roi'])}</span> / long <span id="avgRealizedBuyerAnn">{_fmt_pct(totals['avg_realized_buyer_ann_roi'])}</span></div>
     </div>
     <div class="box">
-      <div class="label">STOCK BENCHMARK (no options - buy/short ${NORMALIZED_RISK_USD:.0f} of shares at entry)</div>
+      <div class="label">STOCK BENCHMARK (no options - buy/short $<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span> of shares at entry)</div>
       <div class="val {_pnl_class(totals['stock_unrealized_long_total'])}" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">{_fmt_money(totals['stock_unrealized_long_total'])}</span></div>
       <div class="val {_pnl_class(totals['stock_unrealized_short_total'])}" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">{_fmt_money(totals['stock_unrealized_short_total'])}</span></div>
       <div class="sub2">avg price change (open): <span id="avgStockUnrealPct">{_fmt_pct(totals['avg_stock_unrealized_pct'])}</span> &middot; avg ann. ROI: <span id="avgStockUnrealAnn">{_fmt_pct(totals['avg_stock_unrealized_ann_roi'])}</span></div>
@@ -1111,12 +1111,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     setPct('avgRealizedSellerAnn', avgAttr(closedVisible, 'data-ann-rs'));
     setPct('avgRealizedBuyerAnn', avgAttr(closedVisible, 'data-ann-rb'));
 
-    setMoney('totalStockUnrealLong', 'totalStockUnrealLongAmt', sumAttr(openVisible, 'data-stock-long'));
-    setMoney('totalStockUnrealShort', 'totalStockUnrealShortAmt', sumAttr(openVisible, 'data-stock-short'));
+    setMoney('totalStockUnrealLong', 'totalStockUnrealLongAmt', sumAttr(openVisible, 'data-stock-long') * normScale);
+    setMoney('totalStockUnrealShort', 'totalStockUnrealShortAmt', sumAttr(openVisible, 'data-stock-short') * normScale);
     setPct('avgStockUnrealPct', avgAttr(openVisible, 'data-stock-pct'));
     setPct('avgStockUnrealAnn', avgAttr(openVisible, 'data-stock-pct-ann'));
-    setMoney('totalStockRealLong', 'totalStockRealLongAmt', sumAttr(closedVisible, 'data-stock-long'));
-    setMoney('totalStockRealShort', 'totalStockRealShortAmt', sumAttr(closedVisible, 'data-stock-short'));
+    setMoney('totalStockRealLong', 'totalStockRealLongAmt', sumAttr(closedVisible, 'data-stock-long') * normScale);
+    setMoney('totalStockRealShort', 'totalStockRealShortAmt', sumAttr(closedVisible, 'data-stock-short') * normScale);
     setPct('avgStockRealPct', avgAttr(closedVisible, 'data-stock-pct'));
     setPct('avgStockRealAnn', avgAttr(closedVisible, 'data-stock-pct-ann'));
 

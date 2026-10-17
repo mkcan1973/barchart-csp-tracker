@@ -15,7 +15,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.21,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1.4199999570846558,
+    "settled_seller_pnl": -78.0,
+    "settled_buyer_pnl": 73.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ALHC",
@@ -33,7 +38,12 @@
     "pe_at_entry": 43.973682,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.19,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.279999732971191,
+    "settled_seller_pnl": 55.0,
+    "settled_buyer_pnl": -75.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PENG",
@@ -51,7 +61,12 @@
     "pe_at_entry": 29.603848,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 2.6,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 57.099998474121094,
+    "settled_seller_pnl": 350.0,
+    "settled_buyer_pnl": -390.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "EOSE",
@@ -86,7 +101,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -3.33,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 10.34000015258789,
+    "settled_seller_pnl": -136.0,
+    "settled_buyer_pnl": 126.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -104,7 +124,12 @@
     "pe_at_entry": 157.42969,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 1.28,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -4048.0,
+    "settled_buyer_pnl": 4003.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRML",
@@ -139,7 +164,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.85,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 16.139999389648438,
+    "settled_seller_pnl": -728.0,
+    "settled_buyer_pnl": 698.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BB",
@@ -157,7 +187,12 @@
     "pe_at_entry": 64.85307,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.13,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.0600004196167,
+    "settled_seller_pnl": 48.0,
+    "settled_buyer_pnl": -58.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "WOLF",
@@ -175,7 +210,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -11.39,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 23.219999313354492,
+    "settled_seller_pnl": -33.0,
+    "settled_buyer_pnl": 4.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LCID",
@@ -193,7 +233,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -13.71,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 3.130000114440918,
+    "settled_seller_pnl": -64.0,
+    "settled_buyer_pnl": 58.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "APLD",
@@ -211,7 +256,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.91,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 18.049999237060547,
+    "settled_seller_pnl": -554.0,
+    "settled_buyer_pnl": 545.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IREN",
@@ -229,7 +279,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.22,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.989999771118164,
+    "settled_seller_pnl": -1549.0,
+    "settled_buyer_pnl": 1537.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AAOI",
@@ -247,7 +302,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.75,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 75.56999969482422,
+    "settled_seller_pnl": -1413.0,
+    "settled_buyer_pnl": 1383.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FRVO",
@@ -265,7 +325,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.680000305175781,
+    "settled_seller_pnl": -452.0,
+    "settled_buyer_pnl": 437.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -283,7 +348,12 @@
     "pe_at_entry": 11.845093,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 3.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -624.0,
+    "settled_buyer_pnl": 619.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CIFR",
@@ -335,7 +405,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -9.4,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.53000020980835,
+    "settled_seller_pnl": -433.0,
+    "settled_buyer_pnl": 429.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SECZ",
@@ -353,7 +428,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.38,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.859999656677246,
+    "settled_seller_pnl": -339.0,
+    "settled_buyer_pnl": 289.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "GLND",
@@ -371,7 +451,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": null,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 3.119999885559082,
+    "settled_seller_pnl": 25.0,
+    "settled_buyer_pnl": -35.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -389,7 +474,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -99.08,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -1087.0,
+    "settled_buyer_pnl": 1077.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BMNR",
@@ -407,7 +497,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -4.54,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 21.65999984741211,
+    "settled_seller_pnl": -318.0,
+    "settled_buyer_pnl": 305.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "INTC",
@@ -425,7 +520,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.12,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 89.8499984741211,
+    "settled_seller_pnl": -2540.0,
+    "settled_buyer_pnl": 2525.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -443,7 +543,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -7.98,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 665.0,
+    "settled_buyer_pnl": -690.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ONDS",
@@ -461,7 +566,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.06,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 6.039999961853027,
+    "settled_seller_pnl": -64.0,
+    "settled_buyer_pnl": 62.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -479,7 +589,12 @@
     "pe_at_entry": 333.75,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -829.0,
+    "settled_buyer_pnl": 704.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MU",
@@ -497,7 +612,12 @@
     "pe_at_entry": 12.616171,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 74.33,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 878.8400268554688,
+    "settled_seller_pnl": -7441.0,
+    "settled_buyer_pnl": 7421.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AXTI",
@@ -532,7 +652,12 @@
     "pe_at_entry": 178.77588,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 1.16,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 186.02999877929688,
+    "settled_seller_pnl": 585.0,
+    "settled_buyer_pnl": -610.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "USAR",
@@ -567,7 +692,12 @@
     "pe_at_entry": 149.74605,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 3.92,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 528.75,
+    "settled_seller_pnl": -4860.0,
+    "settled_buyer_pnl": 4815.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "U",
@@ -585,7 +715,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.37,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 40.400001525878906,
+    "settled_seller_pnl": 96.0,
+    "settled_buyer_pnl": -113.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "WULF",
@@ -603,7 +738,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -4.43,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 11.680000305175781,
+    "settled_seller_pnl": -257.0,
+    "settled_buyer_pnl": 254.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CLSK",
@@ -621,7 +761,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -3.78,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.399999618530273,
+    "settled_seller_pnl": -398.0,
+    "settled_buyer_pnl": 389.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "RKLB",
@@ -639,7 +784,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.27,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 50.84000015258789,
+    "settled_seller_pnl": -1676.0,
+    "settled_buyer_pnl": 1651.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HOOD",
@@ -657,7 +807,12 @@
     "pe_at_entry": 48.766518,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 2.27,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 98.87000274658203,
+    "settled_seller_pnl": -1133.0,
+    "settled_buyer_pnl": 1118.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "P",
@@ -675,7 +830,12 @@
     "pe_at_entry": 209.17807,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.73,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 124.01000213623047,
+    "settled_seller_pnl": 470.0,
+    "settled_buyer_pnl": -520.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -693,7 +853,12 @@
     "pe_at_entry": 82.61587,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 3.15,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -832.0,
+    "settled_buyer_pnl": 797.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRWD",
@@ -711,7 +876,12 @@
     "pe_at_entry": 5242.402,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.05,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.38999938964844,
+    "settled_seller_pnl": -1266.0,
+    "settled_buyer_pnl": 1221.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "QURE",
@@ -729,7 +899,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -4.03,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 21.780000686645508,
+    "settled_seller_pnl": -922.0,
+    "settled_buyer_pnl": 882.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IONQ",
@@ -747,7 +922,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -3.43,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.280000686645508,
+    "settled_seller_pnl": -1135.0,
+    "settled_buyer_pnl": 1118.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ARM",
@@ -765,7 +945,12 @@
     "pe_at_entry": 258.91235,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.97,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8000030517578,
+    "settled_seller_pnl": -3110.0,
+    "settled_buyer_pnl": 3090.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SNDK",
@@ -783,7 +968,12 @@
     "pe_at_entry": 19.491865,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 73.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1299.300048828125,
+    "settled_seller_pnl": -23580.0,
+    "settled_buyer_pnl": 23440.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRWV",
@@ -801,7 +991,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -3.69,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 61.38999938964844,
+    "settled_seller_pnl": -1546.0,
+    "settled_buyer_pnl": 1526.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SPCE",
@@ -819,7 +1014,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -3.19,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 2.430000066757202,
+    "settled_seller_pnl": -46.0,
+    "settled_buyer_pnl": 43.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PSKY",
@@ -855,7 +1055,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.95,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 10.779999732971191,
+    "settled_seller_pnl": -264.0,
+    "settled_buyer_pnl": 253.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FCEL",
@@ -873,7 +1078,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 13.0,
+    "settled_seller_pnl": -230.0,
+    "settled_buyer_pnl": 210.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FLEX",
@@ -891,7 +1101,12 @@
     "pe_at_entry": 41.89189,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 2.59,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 90.45999908447266,
+    "settled_seller_pnl": -1514.0,
+    "settled_buyer_pnl": 1484.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NVTS",
@@ -909,7 +1124,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.34,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.34000015258789,
+    "settled_seller_pnl": -225.0,
+    "settled_buyer_pnl": 219.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ACHR",
@@ -927,7 +1147,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.09,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 4.070000171661377,
+    "settled_seller_pnl": -77.0,
+    "settled_buyer_pnl": 75.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NKE",
@@ -945,7 +1170,12 @@
     "pe_at_entry": 17.021635,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 2.08,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 37.130001068115234,
+    "settled_seller_pnl": 120.0,
+    "settled_buyer_pnl": -126.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CORZ",
@@ -980,7 +1210,12 @@
     "pe_at_entry": 88.22981,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 1.61,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 141.97000122070312,
+    "settled_seller_pnl": 375.0,
+    "settled_buyer_pnl": -400.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "QBTS",
@@ -1032,7 +1267,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.38,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.659999847412109,
+    "settled_seller_pnl": -184.0,
+    "settled_buyer_pnl": 174.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AMC",
@@ -1050,7 +1290,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.02,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 2.9100000858306885,
+    "settled_seller_pnl": 6.0,
+    "settled_buyer_pnl": -8.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASTS",
@@ -1068,7 +1313,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.13,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 40.65999984741211,
+    "settled_seller_pnl": -1660.0,
+    "settled_buyer_pnl": 1646.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CYPH",
@@ -1103,7 +1353,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -3.85,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.8100004196167,
+    "settled_seller_pnl": -74.0,
+    "settled_buyer_pnl": 64.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FWDI",
@@ -1121,7 +1376,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -30.27,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 6.909999847412109,
+    "settled_seller_pnl": -29.0,
+    "settled_buyer_pnl": 4.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CNXC",
@@ -1139,7 +1399,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -38.36,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 27.8700008392334,
+    "settled_seller_pnl": 95.0,
+    "settled_buyer_pnl": -125.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CMPX",
@@ -1174,7 +1439,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.24,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.529999732971191,
+    "settled_seller_pnl": -2.0,
+    "settled_buyer_pnl": -13.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IBRX",
@@ -1192,7 +1462,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.96,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.180000305175781,
+    "settled_seller_pnl": 45.0,
+    "settled_buyer_pnl": -60.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LQDA",
@@ -1210,7 +1485,12 @@
     "pe_at_entry": 18.935251,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 1.39,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 34.349998474121094,
+    "settled_seller_pnl": 125.0,
+    "settled_buyer_pnl": -170.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CLOV",
@@ -1228,7 +1508,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.05,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 4.480000019073486,
+    "settled_seller_pnl": 17.0,
+    "settled_buyer_pnl": -20.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "GLAS",
@@ -1246,7 +1531,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.74,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 3.190000057220459,
+    "settled_seller_pnl": -161.0,
+    "settled_buyer_pnl": 151.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "RUM",
@@ -1264,7 +1554,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.59,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 5.690000057220459,
+    "settled_seller_pnl": -106.0,
+    "settled_buyer_pnl": 101.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "JBLU",
@@ -1282,7 +1577,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.38,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 2.930000066757202,
+    "settled_seller_pnl": -93.0,
+    "settled_buyer_pnl": 88.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CBRS",
@@ -1300,7 +1600,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -5.14,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 127.20999908447266,
+    "settled_seller_pnl": -3219.0,
+    "settled_buyer_pnl": 3149.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FHTX",
@@ -1318,7 +1623,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.98,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1.850000023841858,
+    "settled_seller_pnl": -50.0,
+    "settled_buyer_pnl": 45.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BTDR",
@@ -1336,7 +1646,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.59,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.71999979019165,
+    "settled_seller_pnl": -188.0,
+    "settled_buyer_pnl": 173.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "TLRY",
@@ -1354,7 +1669,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.41,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 3.0399999618530273,
+    "settled_seller_pnl": -30.0,
+    "settled_buyer_pnl": 23.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SHAZ",
@@ -1372,7 +1692,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -29.29,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.59000015258789,
+    "settled_seller_pnl": -1701.0,
+    "settled_buyer_pnl": 1601.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "RIOT",
@@ -1390,7 +1715,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -3.89,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 13.720000267028809,
+    "settled_seller_pnl": -375.0,
+    "settled_buyer_pnl": 363.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IRON",
@@ -1425,7 +1755,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.34,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 18.75,
+    "settled_seller_pnl": -45.0,
+    "settled_buyer_pnl": 35.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "GFL",
@@ -1443,7 +1778,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.46,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 43.849998474121094,
+    "settled_seller_pnl": 185.0,
+    "settled_buyer_pnl": -200.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASST",
@@ -1461,7 +1801,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -204.8,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 24.09000015258789,
+    "settled_seller_pnl": -460.0,
+    "settled_buyer_pnl": 449.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "WDC",
@@ -1479,7 +1824,12 @@
     "pe_at_entry": 13.884658,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 26.92,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 332.0,
+    "settled_seller_pnl": -4300.0,
+    "settled_buyer_pnl": 4135.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PBF",
@@ -1497,7 +1847,12 @@
     "pe_at_entry": 7.9181337,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 11.36,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 84.5199966430664,
+    "settled_seller_pnl": 255.0,
+    "settled_buyer_pnl": -285.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMR",
@@ -1515,7 +1870,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.92,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 5.829999923706055,
+    "settled_seller_pnl": -140.0,
+    "settled_buyer_pnl": 136.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FSLY",
@@ -1533,7 +1893,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.53,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 22.469999313354492,
+    "settled_seller_pnl": -153.0,
+    "settled_buyer_pnl": 138.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRCL",
@@ -1551,7 +1916,12 @@
     "pe_at_entry": 56.959187,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 1.47,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 82.22000122070312,
+    "settled_seller_pnl": 335.0,
+    "settled_buyer_pnl": -345.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HUT",
@@ -1586,7 +1956,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.02,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 3.109999895095825,
+    "settled_seller_pnl": -264.0,
+    "settled_buyer_pnl": 249.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ALOY",
@@ -1604,7 +1979,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": null,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.230000019073486,
+    "settled_seller_pnl": 3.0,
+    "settled_buyer_pnl": -8.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HIMS",
@@ -1622,7 +2002,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.64,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 28.06999969482422,
+    "settled_seller_pnl": 100.0,
+    "settled_buyer_pnl": -106.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "TE",
@@ -1640,7 +2025,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.68,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 2.619999885559082,
+    "settled_seller_pnl": -73.0,
+    "settled_buyer_pnl": 68.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PDSB",
@@ -1658,7 +2048,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.64,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1.1299999952316284,
+    "settled_seller_pnl": 5.0,
+    "settled_buyer_pnl": -15.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AEHR",
@@ -1676,7 +2071,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.23,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 60.599998474121094,
+    "settled_seller_pnl": -3560.0,
+    "settled_buyer_pnl": 3480.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "KOD",
@@ -1694,7 +2094,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -4.19,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 85.75,
+    "settled_seller_pnl": -145.0,
+    "settled_buyer_pnl": 75.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PENG",
@@ -1712,7 +2117,12 @@
     "pe_at_entry": 29.569231,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 2.6,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 57.099998474121094,
+    "settled_seller_pnl": 290.0,
+    "settled_buyer_pnl": -320.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "DNA",
@@ -1730,7 +2140,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -5.06,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 10.270000457763672,
+    "settled_seller_pnl": -123.0,
+    "settled_buyer_pnl": 98.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "APLD",
@@ -1748,7 +2163,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.91,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 18.049999237060547,
+    "settled_seller_pnl": -487.0,
+    "settled_buyer_pnl": 481.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CIFR",
@@ -1766,7 +2186,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.87,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.979999542236328,
+    "settled_seller_pnl": -550.0,
+    "settled_buyer_pnl": 547.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -1784,7 +2209,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -7.98,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 670.0,
+    "settled_buyer_pnl": -690.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CLOV",
@@ -1802,7 +2232,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.05,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 4.480000019073486,
+    "settled_seller_pnl": 14.0,
+    "settled_buyer_pnl": -17.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "WULF",
@@ -1820,7 +2255,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -4.43,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 11.680000305175781,
+    "settled_seller_pnl": -231.0,
+    "settled_buyer_pnl": 228.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CLSK",
@@ -1838,7 +2278,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -3.78,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.399999618530273,
+    "settled_seller_pnl": -322.0,
+    "settled_buyer_pnl": 318.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IBRX",
@@ -1856,7 +2301,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.96,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.180000305175781,
+    "settled_seller_pnl": -7.0,
+    "settled_buyer_pnl": -8.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -1874,7 +2324,12 @@
     "pe_at_entry": 11.855828,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 3.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -962.0,
+    "settled_buyer_pnl": 958.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -1892,7 +2347,12 @@
     "pe_at_entry": 334.20395,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -5539.0,
+    "settled_buyer_pnl": 5519.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "APLD",
@@ -1910,7 +2370,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.91,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 18.049999237060547,
+    "settled_seller_pnl": -423.0,
+    "settled_buyer_pnl": 415.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PURR",
@@ -1928,7 +2393,12 @@
     "pe_at_entry": 3.1713395,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 3.21,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.069999694824219,
+    "settled_seller_pnl": -258.0,
+    "settled_buyer_pnl": 248.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ILMN",
@@ -1946,7 +2416,12 @@
     "pe_at_entry": 50.710575,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 5.39,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 262.5400085449219,
+    "settled_seller_pnl": -26.0,
+    "settled_buyer_pnl": -104.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "STX",
@@ -1964,7 +2439,12 @@
     "pe_at_entry": 52.388493,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 13.9,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 639.010009765625,
+    "settled_seller_pnl": -13719.0,
+    "settled_buyer_pnl": 13439.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRML",
@@ -1982,7 +2462,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.87,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 6.96999979019165,
+    "settled_seller_pnl": 17.0,
+    "settled_buyer_pnl": -27.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HTZ",
@@ -2000,7 +2485,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.09,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1.7300000190734863,
+    "settled_seller_pnl": -10.0,
+    "settled_buyer_pnl": 4.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HTZ",
@@ -2035,7 +2525,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.23,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 132.75,
+    "settled_seller_pnl": -2965.0,
+    "settled_buyer_pnl": 2905.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LQDA",
@@ -2053,7 +2548,12 @@
     "pe_at_entry": 18.920862,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 1.39,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 34.349998474121094,
+    "settled_seller_pnl": 80.0,
+    "settled_buyer_pnl": -90.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMR",
@@ -2071,7 +2571,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.92,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 5.829999923706055,
+    "settled_seller_pnl": -188.0,
+    "settled_buyer_pnl": 186.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -2089,7 +2594,12 @@
     "pe_at_entry": 157.61719,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 1.28,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -7028.0,
+    "settled_buyer_pnl": 7003.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ABCL",
@@ -2107,7 +2617,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.54,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 11.800000190734863,
+    "settled_seller_pnl": -70.0,
+    "settled_buyer_pnl": 55.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "GLND",
@@ -2159,7 +2674,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.01,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 27.969999313354492,
+    "settled_seller_pnl": -862.0,
+    "settled_buyer_pnl": 851.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "XE",
@@ -2177,7 +2697,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.75,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 10.359999656677246,
+    "settled_seller_pnl": -414.0,
+    "settled_buyer_pnl": 404.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "TEM",
@@ -2195,7 +2720,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -1.44,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 64.72000122070312,
+    "settled_seller_pnl": -274.0,
+    "settled_buyer_pnl": 259.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "EOSE",
@@ -2213,7 +2743,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -5.8,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1.8200000524520874,
+    "settled_seller_pnl": -108.0,
+    "settled_buyer_pnl": 106.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CIFR",
@@ -2231,7 +2766,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.87,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.979999542236328,
+    "settled_seller_pnl": -457.0,
+    "settled_buyer_pnl": 452.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AAOI",
@@ -2249,7 +2789,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.75,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 75.56999969482422,
+    "settled_seller_pnl": -3573.0,
+    "settled_buyer_pnl": 3543.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -2267,7 +2812,12 @@
     "pe_at_entry": 157.61719,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 1.28,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -5668.0,
+    "settled_buyer_pnl": 5623.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MARA",
@@ -2285,7 +2835,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -9.4,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.53000020980835,
+    "settled_seller_pnl": -213.0,
+    "settled_buyer_pnl": 212.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LEVI",
@@ -2303,7 +2858,12 @@
     "pe_at_entry": 12.763158,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 1.52,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 20.440000534057617,
+    "settled_seller_pnl": 60.0,
+    "settled_buyer_pnl": -70.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRWV",
@@ -2321,7 +2881,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -3.69,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 61.38999938964844,
+    "settled_seller_pnl": -2192.0,
+    "settled_buyer_pnl": 2175.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IREN",
@@ -2339,7 +2904,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.22,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.989999771118164,
+    "settled_seller_pnl": -972.0,
+    "settled_buyer_pnl": 966.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASTS",
@@ -2357,7 +2927,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.13,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 40.65999984741211,
+    "settled_seller_pnl": -1539.0,
+    "settled_buyer_pnl": 1532.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -2375,7 +2950,12 @@
     "pe_at_entry": 11.854295,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 3.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -1008.0,
+    "settled_buyer_pnl": 1000.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AXTI",
@@ -2393,7 +2973,12 @@
     "pe_at_entry": 1516.0,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.04,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 51.470001220703125,
+    "settled_seller_pnl": -2143.0,
+    "settled_buyer_pnl": 2113.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -2411,7 +2996,12 @@
     "pe_at_entry": 334.2434,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -5004.0,
+    "settled_buyer_pnl": 4994.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SLS",
@@ -2429,7 +3019,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.21,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.979999542236328,
+    "settled_seller_pnl": -62.0,
+    "settled_buyer_pnl": 47.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FCEL",
@@ -2447,7 +3042,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -2.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 13.0,
+    "settled_seller_pnl": -340.0,
+    "settled_buyer_pnl": 335.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "APLD",
@@ -2465,7 +3065,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.91,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 18.049999237060547,
+    "settled_seller_pnl": -327.0,
+    "settled_buyer_pnl": 323.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -2483,7 +3088,12 @@
     "pe_at_entry": 11.854295,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 3.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -1062.0,
+    "settled_buyer_pnl": 1056.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -2501,7 +3111,12 @@
     "pe_at_entry": 334.2434,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -5264.0,
+    "settled_buyer_pnl": 5249.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BMNR",
@@ -2519,7 +3134,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -4.54,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 21.65999984741211,
+    "settled_seller_pnl": -157.0,
+    "settled_buyer_pnl": 153.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "COHR",
@@ -2537,7 +3157,12 @@
     "pe_at_entry": 67.53641,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": 4.12,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 232.89999389648438,
+    "settled_seller_pnl": -7940.0,
+    "settled_buyer_pnl": 7750.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ABSI",
@@ -2555,7 +3180,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -0.79,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.25,
+    "settled_seller_pnl": -40.0,
+    "settled_buyer_pnl": 30.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -2573,7 +3203,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -7.98,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 675.0,
+    "settled_buyer_pnl": -730.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "XRX",
@@ -2591,7 +3226,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -7.36,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 2.4700000286102295,
+    "settled_seller_pnl": -43.0,
+    "settled_buyer_pnl": 38.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "WULF",
@@ -2609,7 +3249,12 @@
     "pe_at_entry": null,
     "pe_at_entry_is_approx": true,
     "eps_at_entry": -4.43,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 11.680000305175781,
+    "settled_seller_pnl": -186.0,
+    "settled_buyer_pnl": 183.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CIFR",
@@ -2627,7 +3272,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -2.87,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.979999542236328,
+    "settled_seller_pnl": -357.0,
+    "settled_buyer_pnl": 355.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AXTI",
@@ -2645,7 +3295,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 0.04,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 51.470001220703125,
+    "settled_seller_pnl": -1628.0,
+    "settled_buyer_pnl": 1588.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "WULF",
@@ -2663,7 +3318,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -4.43,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 11.680000305175781,
+    "settled_seller_pnl": -93.0,
+    "settled_buyer_pnl": 92.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRWV",
@@ -2681,7 +3341,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -3.69,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 61.38999938964844,
+    "settled_seller_pnl": -1888.0,
+    "settled_buyer_pnl": 1877.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LITE",
@@ -2699,7 +3364,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -92.96,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 824.1300048828125,
+    "settled_seller_pnl": -19717.0,
+    "settled_buyer_pnl": 19287.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -2717,7 +3387,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -4139.0,
+    "settled_buyer_pnl": 4129.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PENG",
@@ -2735,7 +3410,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 2.6,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 57.099998474121094,
+    "settled_seller_pnl": -1090.0,
+    "settled_buyer_pnl": 1065.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AXTI",
@@ -2770,7 +3450,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -3.43,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.280000686645508,
+    "settled_seller_pnl": -672.0,
+    "settled_buyer_pnl": 668.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -2788,7 +3473,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 3.15,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -3567.0,
+    "settled_buyer_pnl": 3542.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "RKLB",
@@ -2806,7 +3496,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -0.27,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 50.84000015258789,
+    "settled_seller_pnl": -1535.0,
+    "settled_buyer_pnl": 1526.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MARA",
@@ -2824,7 +3519,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -9.4,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.53000020980835,
+    "settled_seller_pnl": -173.0,
+    "settled_buyer_pnl": 171.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "QNT",
@@ -2842,7 +3542,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -1.56,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 36.54999923706055,
+    "settled_seller_pnl": -245.0,
+    "settled_buyer_pnl": 235.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "TEM",
@@ -2860,7 +3565,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -1.44,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 64.72000122070312,
+    "settled_seller_pnl": 134.0,
+    "settled_buyer_pnl": -154.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AAOI",
@@ -2878,7 +3588,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -0.75,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 75.56999969482422,
+    "settled_seller_pnl": -2673.0,
+    "settled_buyer_pnl": 2653.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRWV",
@@ -2896,7 +3611,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -3.69,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 61.38999938964844,
+    "settled_seller_pnl": -1856.0,
+    "settled_buyer_pnl": 1846.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -2914,7 +3634,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -3234.0,
+    "settled_buyer_pnl": 3209.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CIFR",
@@ -2932,7 +3657,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -2.87,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.979999542236328,
+    "settled_seller_pnl": -307.0,
+    "settled_buyer_pnl": 301.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "RIOT",
@@ -2950,7 +3680,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -3.89,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 13.720000267028809,
+    "settled_seller_pnl": -179.0,
+    "settled_buyer_pnl": 175.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -2968,7 +3703,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 1.28,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -4268.0,
+    "settled_buyer_pnl": 4253.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -2986,7 +3726,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -3099.0,
+    "settled_buyer_pnl": 3069.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HUM",
@@ -3004,7 +3749,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 10.58,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 413.1600036621094,
+    "settled_seller_pnl": 1020.0,
+    "settled_buyer_pnl": -1200.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -3022,7 +3772,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 3.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -858.0,
+    "settled_buyer_pnl": 840.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "GME",
@@ -3040,7 +3795,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 1.52,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.809999465942383,
+    "settled_seller_pnl": 70.0,
+    "settled_buyer_pnl": -77.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "COHR",
@@ -3058,7 +3818,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 4.12,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 232.89999389648438,
+    "settled_seller_pnl": -5680.0,
+    "settled_buyer_pnl": 5580.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CBRS",
@@ -3076,7 +3841,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -5.14,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 127.20999908447266,
+    "settled_seller_pnl": -2799.0,
+    "settled_buyer_pnl": 2729.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CAPR",
@@ -3111,7 +3881,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 0.11,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 13.585000038146973,
+    "settled_seller_pnl": -61.5,
+    "settled_buyer_pnl": 31.5,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NVTS",
@@ -3129,7 +3904,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -1.34,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.34000015258789,
+    "settled_seller_pnl": -187.0,
+    "settled_buyer_pnl": 185.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "GMAB",
@@ -3147,7 +3927,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 1.27,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 37.0,
+    "settled_seller_pnl": 105.0,
+    "settled_buyer_pnl": -140.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "KEEL",
@@ -3165,7 +3950,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -0.65,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 2.309999942779541,
+    "settled_seller_pnl": -62.0,
+    "settled_buyer_pnl": 60.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -3183,7 +3973,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 1.28,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -4058.0,
+    "settled_buyer_pnl": 4038.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LUNR",
@@ -3201,7 +3996,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -0.95,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 10.779999732971191,
+    "settled_seller_pnl": -192.0,
+    "settled_buyer_pnl": 181.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRWV",
@@ -3219,7 +4019,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -3.69,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 61.38999938964844,
+    "settled_seller_pnl": -1555.0,
+    "settled_buyer_pnl": 1546.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASTS",
@@ -3237,7 +4042,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": -2.13,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 40.65999984741211,
+    "settled_seller_pnl": -1291.0,
+    "settled_buyer_pnl": 1282.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -3255,7 +4065,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-08",
     "eps_at_entry": 3.15,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -3037.0,
+    "settled_buyer_pnl": 2992.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HUM",
@@ -3273,7 +4088,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 10.58,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 413.1600036621094,
+    "settled_seller_pnl": 1820.0,
+    "settled_buyer_pnl": -2460.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IRON",
@@ -3308,7 +4128,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -0.95,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 13.390000343322754,
+    "settled_seller_pnl": -101.0,
+    "settled_buyer_pnl": 81.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MXL",
@@ -3326,7 +4151,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -1.18,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 71.31999969482422,
+    "settled_seller_pnl": -1573.0,
+    "settled_buyer_pnl": 1518.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PURR",
@@ -3344,7 +4174,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 3.21,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.069999694824219,
+    "settled_seller_pnl": -158.0,
+    "settled_buyer_pnl": 148.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -3362,7 +4197,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -3624.0,
+    "settled_buyer_pnl": 3599.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AAOI",
@@ -3380,7 +4220,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -0.75,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 75.56999969482422,
+    "settled_seller_pnl": -2163.0,
+    "settled_buyer_pnl": 2123.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HUT",
@@ -3398,7 +4243,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -5.42,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 67.75,
+    "settled_seller_pnl": -531.0,
+    "settled_buyer_pnl": 498.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SNDK",
@@ -3416,7 +4266,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 73.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1299.300048828125,
+    "settled_seller_pnl": -24000.0,
+    "settled_buyer_pnl": 23860.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IRON",
@@ -3434,7 +4289,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -6.58,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 56.84000015258789,
+    "settled_seller_pnl": 400.0,
+    "settled_buyer_pnl": -530.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SECZ",
@@ -3452,7 +4312,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -0.38,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.859999656677246,
+    "settled_seller_pnl": -219.0,
+    "settled_buyer_pnl": 209.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -3470,7 +4335,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -7.98,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 630.0,
+    "settled_buyer_pnl": -755.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -3488,7 +4358,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -7.98,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 580.0,
+    "settled_buyer_pnl": -620.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "EOSE",
@@ -3506,7 +4381,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -5.8,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1.8200000524520874,
+    "settled_seller_pnl": -61.0,
+    "settled_buyer_pnl": 60.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -3524,7 +4404,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 1.28,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -4593.0,
+    "settled_buyer_pnl": 4553.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASTS",
@@ -3542,7 +4427,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -2.13,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 40.65999984741211,
+    "settled_seller_pnl": -642.0,
+    "settled_buyer_pnl": 631.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -3560,7 +4450,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -99.08,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -1222.0,
+    "settled_buyer_pnl": 1217.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IBRX",
@@ -3578,7 +4473,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -0.96,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.180000305175781,
+    "settled_seller_pnl": -57.0,
+    "settled_buyer_pnl": 37.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -3596,7 +4496,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 3.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -791.0,
+    "settled_buyer_pnl": 788.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "TXG",
@@ -3614,7 +4519,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -0.59,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 69.86000061035156,
+    "settled_seller_pnl": -749.0,
+    "settled_buyer_pnl": 694.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AXTI",
@@ -3632,7 +4542,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 0.04,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 51.470001220703125,
+    "settled_seller_pnl": -1168.0,
+    "settled_buyer_pnl": 1143.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SLS",
@@ -3667,7 +4582,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 15.55,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 401.42999267578125,
+    "settled_seller_pnl": 955.0,
+    "settled_buyer_pnl": -965.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AMAT",
@@ -3685,7 +4605,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 11.59,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 409.2900085449219,
+    "settled_seller_pnl": -7846.0,
+    "settled_buyer_pnl": 7821.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "APLD",
@@ -3703,7 +4628,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -0.91,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 18.049999237060547,
+    "settled_seller_pnl": -391.0,
+    "settled_buyer_pnl": 385.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -3721,7 +4651,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 3.15,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -3382.0,
+    "settled_buyer_pnl": 3372.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IREN",
@@ -3739,7 +4674,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -2.22,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.989999771118164,
+    "settled_seller_pnl": -616.0,
+    "settled_buyer_pnl": 615.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -3757,7 +4697,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -7.98,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 480.0,
+    "settled_buyer_pnl": -525.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -3775,7 +4720,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -7.98,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 760.0,
+    "settled_buyer_pnl": -912.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HUT",
@@ -3793,7 +4743,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -5.42,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 67.75,
+    "settled_seller_pnl": -985.0,
+    "settled_buyer_pnl": 968.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRML",
@@ -3811,7 +4766,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -1.87,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 6.96999979019165,
+    "settled_seller_pnl": 20.0,
+    "settled_buyer_pnl": -25.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -3829,7 +4789,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 3.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -832.0,
+    "settled_buyer_pnl": 830.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "UNH",
@@ -3847,7 +4812,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": 15.55,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 401.42999267578125,
+    "settled_seller_pnl": 915.0,
+    "settled_buyer_pnl": -980.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HIMS",
@@ -3865,7 +4835,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -0.64,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 28.06999969482422,
+    "settled_seller_pnl": -128.0,
+    "settled_buyer_pnl": 123.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASST",
@@ -3883,7 +4858,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -204.8,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 24.09000015258789,
+    "settled_seller_pnl": -229.0,
+    "settled_buyer_pnl": 226.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CORZ",
@@ -3901,7 +4881,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-09",
     "eps_at_entry": -4.25,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 13.479999542236328,
+    "settled_seller_pnl": -112.0,
+    "settled_buyer_pnl": 110.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IRON",
@@ -3919,7 +4904,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -6.58,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 56.84000015258789,
+    "settled_seller_pnl": 240.0,
+    "settled_buyer_pnl": -290.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CTNM",
@@ -3937,7 +4927,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -1.73,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.079999923706055,
+    "settled_seller_pnl": -32.0,
+    "settled_buyer_pnl": 22.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FSLY",
@@ -3955,7 +4950,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -0.53,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 22.469999313354492,
+    "settled_seller_pnl": -288.0,
+    "settled_buyer_pnl": 278.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HIMS",
@@ -3973,7 +4973,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -0.64,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 28.06999969482422,
+    "settled_seller_pnl": -171.0,
+    "settled_buyer_pnl": 167.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASTS",
@@ -3991,7 +4996,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -2.13,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 40.65999984741211,
+    "settled_seller_pnl": -1010.0,
+    "settled_buyer_pnl": 1007.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "TEM",
@@ -4009,7 +5019,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -1.44,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 64.72000122070312,
+    "settled_seller_pnl": -64.0,
+    "settled_buyer_pnl": 48.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -4027,7 +5042,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 3.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -643.0,
+    "settled_buyer_pnl": 642.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -4045,7 +5065,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 3.15,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -2622.0,
+    "settled_buyer_pnl": 2592.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -4063,7 +5088,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -2789.0,
+    "settled_buyer_pnl": 2774.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -4081,7 +5111,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 1.28,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -3473.0,
+    "settled_buyer_pnl": 3463.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ACI",
@@ -4099,7 +5134,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 0.17,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 13.09000015258789,
+    "settled_seller_pnl": 20.0,
+    "settled_buyer_pnl": -30.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "UNH",
@@ -4117,7 +5157,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 15.55,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 401.42999267578125,
+    "settled_seller_pnl": 765.0,
+    "settled_buyer_pnl": -795.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BULL",
@@ -4135,7 +5180,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 0.08,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 6.070000171661377,
+    "settled_seller_pnl": 12.0,
+    "settled_buyer_pnl": -13.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PENG",
@@ -4153,7 +5203,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 2.6,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 57.099998474121094,
+    "settled_seller_pnl": -1650.0,
+    "settled_buyer_pnl": 1635.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -4171,7 +5226,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -7.98,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 570.0,
+    "settled_buyer_pnl": -595.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AEHR",
@@ -4189,7 +5249,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -0.23,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 60.599998474121094,
+    "settled_seller_pnl": -1240.0,
+    "settled_buyer_pnl": 1220.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "COHR",
@@ -4207,7 +5272,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 4.12,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 232.89999389648438,
+    "settled_seller_pnl": -4050.0,
+    "settled_buyer_pnl": 3990.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SKYD",
@@ -4225,7 +5295,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -0.02,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 6.909999847412109,
+    "settled_seller_pnl": -138.0,
+    "settled_buyer_pnl": 137.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRCL",
@@ -4243,7 +5318,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 1.47,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 82.22000122070312,
+    "settled_seller_pnl": 187.0,
+    "settled_buyer_pnl": -195.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AXTI",
@@ -4261,7 +5341,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 0.04,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 51.470001220703125,
+    "settled_seller_pnl": -713.0,
+    "settled_buyer_pnl": 678.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "TXG",
@@ -4279,7 +5364,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -0.59,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 69.86000061035156,
+    "settled_seller_pnl": 141.0,
+    "settled_buyer_pnl": -186.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -4297,7 +5387,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 0.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -2659.0,
+    "settled_buyer_pnl": 2644.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "COHR",
@@ -4315,7 +5410,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 4.12,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 232.89999389648438,
+    "settled_seller_pnl": -3890.0,
+    "settled_buyer_pnl": 3860.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BMNR",
@@ -4333,7 +5433,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -4.54,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 21.65999984741211,
+    "settled_seller_pnl": -131.0,
+    "settled_buyer_pnl": 128.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -4351,7 +5456,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 3.15,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -2897.0,
+    "settled_buyer_pnl": 2852.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FRVO",
@@ -4369,7 +5479,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -1.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.680000305175781,
+    "settled_seller_pnl": -257.0,
+    "settled_buyer_pnl": 247.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SDGR",
@@ -4387,7 +5502,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -0.74,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 22.600000381469727,
+    "settled_seller_pnl": -190.0,
+    "settled_buyer_pnl": 160.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SLS",
@@ -4405,7 +5525,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -0.21,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.979999542236328,
+    "settled_seller_pnl": -122.0,
+    "settled_buyer_pnl": 117.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRDO",
@@ -4423,7 +5548,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 2.82,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 169.6999969482422,
+    "settled_seller_pnl": -2100.0,
+    "settled_buyer_pnl": 2080.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FSLY",
@@ -4441,7 +5571,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -0.53,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 22.469999313354492,
+    "settled_seller_pnl": -253.0,
+    "settled_buyer_pnl": 243.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FLY",
@@ -4459,7 +5594,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": -0.26,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 16.75,
+    "settled_seller_pnl": -180.0,
+    "settled_buyer_pnl": 175.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LRCX",
@@ -4477,7 +5617,12 @@
     "pe_at_entry_is_approx": true,
     "added_date": "2026-10-12",
     "eps_at_entry": 5.76,
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 263.94000244140625,
+    "settled_seller_pnl": -3481.0,
+    "settled_buyer_pnl": 3416.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "EYPT",
@@ -4512,7 +5657,12 @@
     "eps_at_entry": -4.43,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 11.680000305175781,
+    "settled_seller_pnl": -55.0,
+    "settled_buyer_pnl": 54.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NVTS",
@@ -4530,7 +5680,12 @@
     "eps_at_entry": -1.34,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.34000015258789,
+    "settled_seller_pnl": -143.0,
+    "settled_buyer_pnl": 142.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "APLD",
@@ -4548,7 +5703,12 @@
     "eps_at_entry": -0.91,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 18.049999237060547,
+    "settled_seller_pnl": -300.0,
+    "settled_buyer_pnl": 296.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -4566,7 +5726,12 @@
     "eps_at_entry": 0.76,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -2304.0,
+    "settled_buyer_pnl": 2299.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -4584,7 +5749,12 @@
     "eps_at_entry": 1.28,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -2813.0,
+    "settled_buyer_pnl": 2763.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PURR",
@@ -4602,7 +5772,12 @@
     "eps_at_entry": 3.21,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.069999694824219,
+    "settled_seller_pnl": -73.0,
+    "settled_buyer_pnl": 68.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IREN",
@@ -4620,7 +5795,12 @@
     "eps_at_entry": -2.22,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.989999771118164,
+    "settled_seller_pnl": -532.0,
+    "settled_buyer_pnl": 528.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HIMS",
@@ -4638,7 +5818,12 @@
     "eps_at_entry": -0.64,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 28.06999969482422,
+    "settled_seller_pnl": -83.0,
+    "settled_buyer_pnl": 76.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -4656,7 +5841,12 @@
     "eps_at_entry": 3.26,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -558.0,
+    "settled_buyer_pnl": 557.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "EIX",
@@ -4674,7 +5864,12 @@
     "eps_at_entry": 9.7,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 55.93000030517578,
+    "settled_seller_pnl": 80.0,
+    "settled_buyer_pnl": -130.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -4692,7 +5887,12 @@
     "eps_at_entry": 3.15,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -2207.0,
+    "settled_buyer_pnl": 2167.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "OKLO",
@@ -4710,7 +5910,12 @@
     "eps_at_entry": -1.01,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 27.969999313354492,
+    "settled_seller_pnl": -243.0,
+    "settled_buyer_pnl": 237.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FAST",
@@ -4728,7 +5933,12 @@
     "eps_at_entry": 1.17,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 51.02000045776367,
+    "settled_seller_pnl": 95.0,
+    "settled_buyer_pnl": -105.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ALAB",
@@ -4746,7 +5956,12 @@
     "eps_at_entry": 2.14,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 285.82000732421875,
+    "settled_seller_pnl": -848.0,
+    "settled_buyer_pnl": 703.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LQDA",
@@ -4764,7 +5979,12 @@
     "eps_at_entry": 1.39,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 34.349998474121094,
+    "settled_seller_pnl": 125.0,
+    "settled_buyer_pnl": -180.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRDO",
@@ -4782,7 +6002,12 @@
     "eps_at_entry": 2.82,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 169.6999969482422,
+    "settled_seller_pnl": -1530.0,
+    "settled_buyer_pnl": 1480.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ALAB",
@@ -4800,7 +6025,12 @@
     "eps_at_entry": 2.03,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 285.82000732421875,
+    "settled_seller_pnl": -1588.0,
+    "settled_buyer_pnl": 1493.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SLS",
@@ -4818,7 +6048,12 @@
     "eps_at_entry": -0.21,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.979999542236328,
+    "settled_seller_pnl": -172.0,
+    "settled_buyer_pnl": 162.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -4836,7 +6071,12 @@
     "eps_at_entry": 1.28,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -3213.0,
+    "settled_buyer_pnl": 3188.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -4854,7 +6094,12 @@
     "eps_at_entry": 3.26,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -608.0,
+    "settled_buyer_pnl": 602.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CIFR",
@@ -4872,7 +6117,12 @@
     "eps_at_entry": -2.87,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.979999542236328,
+    "settled_seller_pnl": -179.0,
+    "settled_buyer_pnl": 176.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LUNR",
@@ -4890,7 +6140,12 @@
     "eps_at_entry": -0.95,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 10.779999732971191,
+    "settled_seller_pnl": -96.0,
+    "settled_buyer_pnl": 91.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LITE",
@@ -4908,7 +6163,12 @@
     "eps_at_entry": -92.96,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 824.1300048828125,
+    "settled_seller_pnl": -10657.0,
+    "settled_buyer_pnl": 10557.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CBRS",
@@ -4926,7 +6186,12 @@
     "eps_at_entry": -5.14,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 127.20999908447266,
+    "settled_seller_pnl": -1514.0,
+    "settled_buyer_pnl": 1479.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -4944,7 +6209,12 @@
     "eps_at_entry": -99.08,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -1027.0,
+    "settled_buyer_pnl": 1024.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "VSTM",
@@ -4962,7 +6232,12 @@
     "eps_at_entry": -2.45,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.649999618530273,
+    "settled_seller_pnl": 95.0,
+    "settled_buyer_pnl": -120.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CAPR",
@@ -4997,7 +6272,12 @@
     "eps_at_entry": -17.31,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.109999656677246,
+    "settled_seller_pnl": -164.0,
+    "settled_buyer_pnl": 159.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FCEL",
@@ -5015,7 +6295,12 @@
     "eps_at_entry": -2.76,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 13.0,
+    "settled_seller_pnl": -170.0,
+    "settled_buyer_pnl": 155.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -5033,7 +6318,12 @@
     "eps_at_entry": -7.98,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 550.0,
+    "settled_buyer_pnl": -660.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SOC",
@@ -5051,7 +6341,12 @@
     "eps_at_entry": -3.26,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 3.319999933242798,
+    "settled_seller_pnl": -12.0,
+    "settled_buyer_pnl": 7.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MARA",
@@ -5069,7 +6364,12 @@
     "eps_at_entry": -9.4,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.53000020980835,
+    "settled_seller_pnl": -129.0,
+    "settled_buyer_pnl": 128.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LITE",
@@ -5087,7 +6387,12 @@
     "eps_at_entry": -92.96,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-13",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 824.1300048828125,
+    "settled_seller_pnl": -11917.0,
+    "settled_buyer_pnl": 11777.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IREN",
@@ -5106,7 +6411,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.989999771118164,
+    "settled_seller_pnl": -319.0,
+    "settled_buyer_pnl": 316.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRWV",
@@ -5125,7 +6435,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 61.38999938964844,
+    "settled_seller_pnl": -237.0,
+    "settled_buyer_pnl": 233.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -5144,7 +6459,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -1528.0,
+    "settled_buyer_pnl": 1518.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMMT",
@@ -5163,7 +6483,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 14.630000114440918,
+    "settled_seller_pnl": -7.0,
+    "settled_buyer_pnl": -13.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BFLY",
@@ -5182,7 +6507,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.25,
+    "settled_seller_pnl": -10.0,
+    "settled_buyer_pnl": 5.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -5201,7 +6531,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -1722.0,
+    "settled_buyer_pnl": 1697.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "APLD",
@@ -5220,7 +6555,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 18.049999237060547,
+    "settled_seller_pnl": -153.0,
+    "settled_buyer_pnl": 151.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CIFR",
@@ -5239,7 +6579,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.979999542236328,
+    "settled_seller_pnl": -84.0,
+    "settled_buyer_pnl": 78.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -5258,7 +6603,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -422.0,
+    "settled_buyer_pnl": 420.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "COHR",
@@ -5277,7 +6627,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 232.89999389648438,
+    "settled_seller_pnl": -2710.0,
+    "settled_buyer_pnl": 2660.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SNDK",
@@ -5296,7 +6651,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1299.300048828125,
+    "settled_seller_pnl": -7730.0,
+    "settled_buyer_pnl": 7700.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASTS",
@@ -5315,7 +6675,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 40.65999984741211,
+    "settled_seller_pnl": -68.0,
+    "settled_buyer_pnl": 55.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -5334,7 +6699,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -376.0,
+    "settled_buyer_pnl": 371.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LITE",
@@ -5353,7 +6723,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 824.1300048828125,
+    "settled_seller_pnl": -6027.0,
+    "settled_buyer_pnl": 5867.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MU",
@@ -5372,7 +6747,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 878.8400268554688,
+    "settled_seller_pnl": -3006.0,
+    "settled_buyer_pnl": 2991.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -5391,7 +6771,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -1284.0,
+    "settled_buyer_pnl": 1274.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "DELL",
@@ -5410,7 +6795,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 451.7099914550781,
+    "settled_seller_pnl": -4869.0,
+    "settled_buyer_pnl": 4779.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AAOI",
@@ -5429,7 +6819,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 75.56999969482422,
+    "settled_seller_pnl": -748.0,
+    "settled_buyer_pnl": 733.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -5448,7 +6843,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -809.0,
+    "settled_buyer_pnl": 789.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LUNR",
@@ -5467,7 +6867,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 10.779999732971191,
+    "settled_seller_pnl": 2.0,
+    "settled_buyer_pnl": -9.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IREN",
@@ -5486,7 +6891,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.989999771118164,
+    "settled_seller_pnl": -232.0,
+    "settled_buyer_pnl": 230.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -5505,7 +6915,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -1083.0,
+    "settled_buyer_pnl": 1078.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "COHR",
@@ -5524,7 +6939,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 232.89999389648438,
+    "settled_seller_pnl": -2150.0,
+    "settled_buyer_pnl": 2080.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -5543,7 +6963,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -207.0,
+    "settled_buyer_pnl": 197.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "INMD",
@@ -5562,7 +6987,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 14.15999984741211,
+    "settled_seller_pnl": 25.0,
+    "settled_buyer_pnl": -40.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CBRS",
@@ -5581,7 +7011,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 127.20999908447266,
+    "settled_seller_pnl": -1029.0,
+    "settled_buyer_pnl": 969.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -5600,7 +7035,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -1512.0,
+    "settled_buyer_pnl": 1482.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BMNR",
@@ -5619,7 +7059,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 21.65999984741211,
+    "settled_seller_pnl": 10.0,
+    "settled_buyer_pnl": -13.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "INTC",
@@ -5638,7 +7083,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 89.8499984741211,
+    "settled_seller_pnl": -591.0,
+    "settled_buyer_pnl": 585.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -5657,7 +7107,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -144.0,
+    "settled_buyer_pnl": 139.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -5676,7 +7131,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 141.0,
+    "settled_buyer_pnl": -161.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AA",
@@ -5695,7 +7155,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 41.45000076293945,
+    "settled_seller_pnl": 73.0,
+    "settled_buyer_pnl": -83.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ARM",
@@ -5714,7 +7179,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8000030517578,
+    "settled_seller_pnl": -285.0,
+    "settled_buyer_pnl": 260.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -5733,7 +7203,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -62.0,
+    "settled_buyer_pnl": 57.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FSLY",
@@ -5752,7 +7227,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 22.469999313354492,
+    "settled_seller_pnl": -158.0,
+    "settled_buyer_pnl": 153.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MARA",
@@ -5771,7 +7251,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 7.53000020980835,
+    "settled_seller_pnl": -32.0,
+    "settled_buyer_pnl": 31.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRNA",
@@ -5790,7 +7275,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 218.00999450683594,
+    "settled_seller_pnl": 296.0,
+    "settled_buyer_pnl": -331.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "DELL",
@@ -5809,7 +7299,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 451.7099914550781,
+    "settled_seller_pnl": -3979.0,
+    "settled_buyer_pnl": 3919.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ALAB",
@@ -5828,7 +7323,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 285.82000732421875,
+    "settled_seller_pnl": 22.0,
+    "settled_buyer_pnl": -167.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -5847,7 +7347,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": 3.0,
+    "settled_buyer_pnl": -7.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "INTC",
@@ -5866,7 +7371,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 89.8499984741211,
+    "settled_seller_pnl": -568.0,
+    "settled_buyer_pnl": 563.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "COIN",
@@ -5885,7 +7395,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 173.16000366210938,
+    "settled_seller_pnl": 286.0,
+    "settled_buyer_pnl": -305.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "WULF",
@@ -5904,7 +7419,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 11.680000305175781,
+    "settled_seller_pnl": 18.0,
+    "settled_buyer_pnl": -21.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IREN",
@@ -5923,7 +7443,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-14",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.989999771118164,
+    "settled_seller_pnl": -152.0,
+    "settled_buyer_pnl": 151.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "WVE",
@@ -5942,7 +7467,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 3.130000114440918,
+    "settled_seller_pnl": 15.0,
+    "settled_buyer_pnl": -30.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRDO",
@@ -5961,7 +7491,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 169.6999969482422,
+    "settled_seller_pnl": -190.0,
+    "settled_buyer_pnl": 70.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SNDK",
@@ -5980,7 +7515,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1299.300048828125,
+    "settled_seller_pnl": -2240.0,
+    "settled_buyer_pnl": 2040.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IREN",
@@ -5999,7 +7539,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.989999771118164,
+    "settled_seller_pnl": 49.0,
+    "settled_buyer_pnl": -53.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "APLD",
@@ -6018,7 +7563,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 18.049999237060547,
+    "settled_seller_pnl": -61.0,
+    "settled_buyer_pnl": 56.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "DFH",
@@ -6037,7 +7587,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.789999961853027,
+    "settled_seller_pnl": 10.0,
+    "settled_buyer_pnl": -15.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "PENG",
@@ -6056,7 +7611,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 57.099998474121094,
+    "settled_seller_pnl": -205.0,
+    "settled_buyer_pnl": 190.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "GME",
@@ -6075,7 +7635,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.809999465942383,
+    "settled_seller_pnl": -32.0,
+    "settled_buyer_pnl": 28.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MU",
@@ -6094,7 +7659,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 878.8400268554688,
+    "settled_seller_pnl": -926.0,
+    "settled_buyer_pnl": 911.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NVTS",
@@ -6113,7 +7683,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 8.34000015258789,
+    "settled_seller_pnl": -55.0,
+    "settled_buyer_pnl": 50.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -6132,7 +7707,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -205.0,
+    "settled_buyer_pnl": 187.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -6151,7 +7731,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -69.0,
+    "settled_buyer_pnl": 64.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "DELL",
@@ -6170,7 +7755,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 451.7099914550781,
+    "settled_seller_pnl": -264.0,
+    "settled_buyer_pnl": 229.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LRCX",
@@ -6189,7 +7779,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 263.94000244140625,
+    "settled_seller_pnl": -276.0,
+    "settled_buyer_pnl": 196.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AAOI",
@@ -6208,7 +7803,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "A",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 75.56999969482422,
+    "settled_seller_pnl": -328.0,
+    "settled_buyer_pnl": 298.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -6227,7 +7827,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -716.0,
+    "settled_buyer_pnl": 701.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IREN",
@@ -6246,7 +7851,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 26.989999771118164,
+    "settled_seller_pnl": -67.0,
+    "settled_buyer_pnl": 66.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "FRVO",
@@ -6265,7 +7875,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 9.680000305175781,
+    "settled_seller_pnl": -22.0,
+    "settled_buyer_pnl": 17.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SNDK",
@@ -6284,7 +7899,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 1299.300048828125,
+    "settled_seller_pnl": -680.0,
+    "settled_buyer_pnl": 580.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ALAB",
@@ -6303,7 +7923,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 285.82000732421875,
+    "settled_seller_pnl": 271.0,
+    "settled_buyer_pnl": -400.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -6322,7 +7947,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -752.0,
+    "settled_buyer_pnl": 748.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ARWR",
@@ -6341,7 +7971,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 55.900001525878906,
+    "settled_seller_pnl": -85.0,
+    "settled_buyer_pnl": 50.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -6360,7 +7995,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -261.0,
+    "settled_buyer_pnl": 246.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ALAB",
@@ -6379,7 +8019,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 285.82000732421875,
+    "settled_seller_pnl": 212.0,
+    "settled_buyer_pnl": -250.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "INTC",
@@ -6398,7 +8043,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 89.8499984741211,
+    "settled_seller_pnl": -186.0,
+    "settled_buyer_pnl": 183.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "COHR",
@@ -6417,7 +8067,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "B",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 232.89999389648438,
+    "settled_seller_pnl": -500.0,
+    "settled_buyer_pnl": 465.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRWV",
@@ -6436,7 +8091,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 61.38999938964844,
+    "settled_seller_pnl": -503.0,
+    "settled_buyer_pnl": 497.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMTC",
@@ -6455,7 +8115,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.72999572753906,
+    "settled_seller_pnl": -167.0,
+    "settled_buyer_pnl": 62.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASST",
@@ -6474,7 +8139,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 24.09000015258789,
+    "settled_seller_pnl": -54.0,
+    "settled_buyer_pnl": 52.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "IBKR",
@@ -6493,7 +8163,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 82.69000244140625,
+    "settled_seller_pnl": -11.0,
+    "settled_buyer_pnl": -4.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -6512,7 +8187,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -882.0,
+    "settled_buyer_pnl": 877.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BMNR",
@@ -6531,7 +8211,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 21.65999984741211,
+    "settled_seller_pnl": -112.0,
+    "settled_buyer_pnl": 107.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "RDDT",
@@ -6550,7 +8235,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 156.13999938964844,
+    "settled_seller_pnl": 101.0,
+    "settled_buyer_pnl": -120.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "BE",
@@ -6569,7 +8259,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 221.30999755859375,
+    "settled_seller_pnl": -663.0,
+    "settled_buyer_pnl": 660.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "ASTS",
@@ -6588,7 +8283,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 40.65999984741211,
+    "settled_seller_pnl": -207.0,
+    "settled_buyer_pnl": 198.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "AKAM",
@@ -6607,7 +8307,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 87.80999755859375,
+    "settled_seller_pnl": -164.0,
+    "settled_buyer_pnl": 134.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CLF",
@@ -6626,7 +8331,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-15",
     "run_label": "C",
-    "expiration_reminder_sent": true
+    "expiration_reminder_sent": true,
+    "settled": true,
+    "final_stock_px": 12.119999885559082,
+    "settled_seller_pnl": 11.0,
+    "settled_buyer_pnl": -19.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "CRWV",
@@ -6644,7 +8354,12 @@
     "eps_at_entry": -3.3,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-16",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 61.38999938964844,
+    "settled_seller_pnl": -554.0,
+    "settled_buyer_pnl": 551.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LITE",
@@ -6662,7 +8377,12 @@
     "eps_at_entry": -81.82,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-16",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 824.1300048828125,
+    "settled_seller_pnl": -2407.0,
+    "settled_buyer_pnl": 2337.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "HIMS",
@@ -6680,7 +8400,12 @@
     "eps_at_entry": -0.63,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-16",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 28.06999969482422,
+    "settled_seller_pnl": -57.0,
+    "settled_buyer_pnl": 45.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NBIS",
@@ -6698,7 +8423,12 @@
     "eps_at_entry": 1.17,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-16",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 165.47000122070312,
+    "settled_seller_pnl": -1497.0,
+    "settled_buyer_pnl": 1478.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "SMCI",
@@ -6716,7 +8446,12 @@
     "eps_at_entry": 2.93,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-16",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 31.6299991607666,
+    "settled_seller_pnl": -249.0,
+    "settled_buyer_pnl": 245.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MSTR",
@@ -6734,7 +8469,12 @@
     "eps_at_entry": -98.5,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-16",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 136.8300018310547,
+    "settled_seller_pnl": -1060.0,
+    "settled_buyer_pnl": 1037.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "LITE",
@@ -6752,7 +8492,12 @@
     "eps_at_entry": -81.82,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-16",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 824.1300048828125,
+    "settled_seller_pnl": -1737.0,
+    "settled_buyer_pnl": 1697.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "MRVL",
@@ -6770,7 +8515,12 @@
     "eps_at_entry": 2.73,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-16",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 227.8300018310547,
+    "settled_seller_pnl": -731.0,
+    "settled_buyer_pnl": 697.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "INTC",
@@ -6788,7 +8538,12 @@
     "eps_at_entry": -1.97,
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-16",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 89.8499984741211,
+    "settled_seller_pnl": -324.0,
+    "settled_buyer_pnl": 316.0,
+    "settled_at": "2026-10-17"
   },
   {
     "symbol": "NAUT",
