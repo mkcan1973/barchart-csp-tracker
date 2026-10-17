@@ -66,8 +66,8 @@ SUMMARY_HTML_URL = "https://mkcan1973.github.io/barchart-csp-tracker/"
 
 # Single source of truth for "what counts as a good opportunity" - edit
 # this file (not the script) to change which new candidates trigger a
-# Discord ping AND what the webpage's filter boxes default to on first
-# load (before any per-browser localStorage customization overrides it).
+# Discord ping AND what the webpage's filter boxes show on EVERY load
+# (no localStorage override - the page always starts from this file).
 # Same fields/semantics as the webpage's own filter boxes; null/missing
 # means no bound on that dimension. Every new candidate is still tracked
 # and shown on the dashboard regardless - this only gates the notification.
@@ -624,6 +624,7 @@ def plot_realized_pnl(closed_rows):
     ensure_plot_deps()
 
     by_date = {}
+    counts = {}
     for r in closed_rows:
         d = datetime.strptime(r["EXPIRATION"], "%Y-%m-%d").date()
         bucket = by_date.setdefault(d, {"seller": [], "buyer": []})
@@ -631,21 +632,24 @@ def plot_realized_pnl(closed_rows):
             bucket["seller"].append(r["ROI % IF SOLD (CSP)"])
         if r["ROI % IF BOUGHT (long put)"] is not None:
             bucket["buyer"].append(r["ROI % IF BOUGHT (long put)"])
+        counts[d] = counts.get(d, 0) + 1
 
     dates = sorted(by_date)
     avg_seller = [sum(by_date[d]["seller"]) / len(by_date[d]["seller"]) if by_date[d]["seller"] else None for d in dates]
     avg_buyer = [sum(by_date[d]["buyer"]) / len(by_date[d]["buyer"]) if by_date[d]["buyer"] else None for d in dates]
+    tick_labels = [d.strftime("%b %d") + f"\n(n={counts[d]})" for d in dates]
 
     fig, ax = plt.subplots(figsize=(9, 5))
     ax.plot(dates, avg_seller, marker="o", label="Short (CSP seller)")
     ax.plot(dates, avg_buyer, marker="o", label="Long (put buyer)")
     ax.axhline(0, color="gray", linewidth=0.8)
-    ax.set_xlabel("Settlement (expiration) date")
+    ax.set_xticks(dates)
+    ax.set_xticklabels(tick_labels, rotation=45, ha="right", fontsize=8)
+    ax.set_xlabel("Settlement (expiration) date  (n = closed positions that date)")
     ax.set_ylabel("Avg ROI % for that period's settlements")
     ax.set_title("Realized CSP ROI by settlement period")
     ax.legend()
     ax.grid(True, alpha=0.3)
-    fig.autofmt_xdate()
     fig.tight_layout()
     fig.savefig(REALIZED_PNL_PNG)
     plt.close(fig)
@@ -898,6 +902,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
                        background: #0f131b; color: inherit; font-size: 0.95rem; }}
   .filterbar button {{ padding: 8px 16px; border-radius: 6px; border: none; background: #3ddc84;
                         color: #06240f; font-weight: 700; font-size: 0.9rem; cursor: pointer; }}
+  .filterbar a.editlink {{ padding: 8px 16px; border-radius: 6px; border: 1px solid #3ddc84;
+                            background: transparent; color: #3ddc84; font-weight: 700;
+                            font-size: 0.85rem; text-decoration: none; }}
   .filterbar .count {{ color: #9aa4b2; font-size: 0.8rem; margin-left: auto; align-self: center; }}
   @media (prefers-color-scheme: light) {{
     body {{ background: #f5f6f8; color: #1a1d23; }}
@@ -906,6 +913,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     .filterbar {{ background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }}
     .filterbar label {{ color: #6b7280; }}
     .filterbar input {{ background: #f5f6f8; border-color: #d0d5dd; }}
+    .filterbar a.editlink {{ border-color: #0969da; color: #0969da; }}
     .filterbar .count {{ color: #6b7280; }}
   }}
 </style>
@@ -925,6 +933,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     <label>Min put price <input type="number" id="minPutPrice" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max put price <input type="number" id="maxPutPrice" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <button id="applyFilter" type="button">Filter</button>
+    <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/discord_filter_config.json" target="_blank" rel="noopener">Edit filters on GitHub</a>
     <span class="count" id="filterCount"></span>
   </div>
   <div class="updated" style="margin-top:-6px;">ROI filters on Barchart's annualized return at selection; PE filters on trailing P/E at entry (both frozen at entry, always available)</div>
@@ -1203,18 +1212,6 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
 
     var noteEl = document.getElementById('filterNote');
     if (noteEl) noteEl.style.display = noFilter ? 'none' : '';
-
-    try {{
-      localStorage.setItem('csp_filter_min_roi', minRoiRaw);
-      localStorage.setItem('csp_filter_max_roi', maxRoiRaw);
-      localStorage.setItem('csp_filter_min_pe', minPeRaw);
-      localStorage.setItem('csp_filter_max_pe', maxPeRaw);
-      localStorage.setItem('csp_filter_min_dte', minDteRaw);
-      localStorage.setItem('csp_filter_max_dte', maxDteRaw);
-      localStorage.setItem('csp_filter_base_invest', baseInvestRaw);
-      localStorage.setItem('csp_filter_min_put_price', minPutPriceRaw);
-      localStorage.setItem('csp_filter_max_put_price', maxPutPriceRaw);
-    }} catch (e) {{}}
   }}
 
   var btn = document.getElementById('applyFilter');
@@ -1224,6 +1221,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyFilter(); }});
   }});
 
+  // Every page open starts from discord_filter_config.json's values (no
+  // localStorage override) - edit that file to change what a fresh load shows.
   var fieldToCfgKey = {{
     minRoi: 'min_roi', maxRoi: 'max_roi',
     minPe: 'min_pe', maxPe: 'max_pe',
@@ -1231,27 +1230,10 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     baseInvest: 'base_investment',
     minPutPrice: 'min_put_price', maxPutPrice: 'max_put_price'
   }};
-  try {{
-    var saved = {{
-      minRoi: localStorage.getItem('csp_filter_min_roi'),
-      maxRoi: localStorage.getItem('csp_filter_max_roi'),
-      minPe: localStorage.getItem('csp_filter_min_pe'),
-      maxPe: localStorage.getItem('csp_filter_max_pe'),
-      minDte: localStorage.getItem('csp_filter_min_dte'),
-      maxDte: localStorage.getItem('csp_filter_max_dte'),
-      baseInvest: localStorage.getItem('csp_filter_base_invest'),
-      minPutPrice: localStorage.getItem('csp_filter_min_put_price'),
-      maxPutPrice: localStorage.getItem('csp_filter_max_put_price')
-    }};
-    Object.keys(saved).forEach(function(id) {{
-      if (saved[id]) {{
-        document.getElementById(id).value = saved[id];
-      }} else {{
-        var cfgVal = DEFAULT_FILTERS[fieldToCfgKey[id]];
-        if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
-      }}
-    }});
-  }} catch (e) {{}}
+  Object.keys(fieldToCfgKey).forEach(function(id) {{
+    var cfgVal = DEFAULT_FILTERS[fieldToCfgKey[id]];
+    if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
+  }});
   applyFilter();
 }})();
 </script>
