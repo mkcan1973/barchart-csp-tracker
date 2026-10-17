@@ -888,6 +888,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     <label>Min DTE@entry <input type="number" id="minDte" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max DTE@entry <input type="number" id="maxDte" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <label>Base investment $ <input type="number" id="baseInvest" step="any" placeholder="e.g. 1000" inputmode="decimal"></label>
+    <label>Min put price <input type="number" id="minPutPrice" step="any" placeholder="-&infin;" inputmode="decimal"></label>
+    <label>Max put price <input type="number" id="maxPutPrice" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <button id="applyFilter" type="button">Filter</button>
     <span class="count" id="filterCount"></span>
   </div>
@@ -985,8 +987,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     var minDteRaw = document.getElementById('minDte').value.trim();
     var maxDteRaw = document.getElementById('maxDte').value.trim();
     var baseInvestRaw = document.getElementById('baseInvest').value.trim();
+    var minPutPriceRaw = document.getElementById('minPutPrice').value.trim();
+    var maxPutPriceRaw = document.getElementById('maxPutPrice').value.trim();
     var noFilter = minRoiRaw === '' && maxRoiRaw === '' && minPeRaw === '' && maxPeRaw === ''
-      && minDteRaw === '' && maxDteRaw === '' && baseInvestRaw === '';
+      && minDteRaw === '' && maxDteRaw === '' && baseInvestRaw === ''
+      && minPutPriceRaw === '' && maxPutPriceRaw === '';
     var minRoi = minRoiRaw === '' ? -Infinity : parseFloat(minRoiRaw);
     var maxRoi = maxRoiRaw === '' ? Infinity : parseFloat(maxRoiRaw);
     var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
@@ -994,6 +999,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     var minDte = minDteRaw === '' ? -Infinity : parseFloat(minDteRaw);
     var maxDte = maxDteRaw === '' ? Infinity : parseFloat(maxDteRaw);
     var baseInvest = baseInvestRaw === '' ? Infinity : parseFloat(baseInvestRaw);
+    var minPutPrice = minPutPriceRaw === '' ? -Infinity : parseFloat(minPutPriceRaw);
+    var maxPutPrice = maxPutPriceRaw === '' ? Infinity : parseFloat(maxPutPriceRaw);
     // Separate from baseInvest (which uses Infinity as "no filter"): this is
     // what every "norm ($X risk)" figure on the page rescales against -
     // defaults to the server's own $NORMALIZED_RISK_USD baseline when the
@@ -1032,12 +1039,18 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       var investOk = baseInvestRaw === ''
         || (askVal !== null && !isNaN(askVal) && askVal * 100 <= baseInvest);
 
+      // Put price (the option's own ask, same figure as above) - lets you
+      // skip low-priced puts with little profit potential on the long
+      // side, or cap how expensive a contract you want to consider.
+      var putPriceOk = (minPutPriceRaw === '' && maxPutPriceRaw === '')
+        || (askVal !== null && !isNaN(askVal) && askVal >= minPutPrice && askVal <= maxPutPrice);
+
       var dteRaw = card.getAttribute('data-dte-entry');
       var dteVal = dteRaw === '' ? null : parseFloat(dteRaw);
       var dteOk = (minDteRaw === '' && maxDteRaw === '')
         || (dteVal !== null && !isNaN(dteVal) && dteVal >= minDte && dteVal <= maxDte);
 
-      if (noFilter || (roiOk && peOk && dteOk && investOk)) {{
+      if (noFilter || (roiOk && peOk && dteOk && investOk && putPriceOk)) {{
         passing.push(card);
       }}
     }});
@@ -1153,12 +1166,14 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       localStorage.setItem('csp_filter_min_dte', minDteRaw);
       localStorage.setItem('csp_filter_max_dte', maxDteRaw);
       localStorage.setItem('csp_filter_base_invest', baseInvestRaw);
+      localStorage.setItem('csp_filter_min_put_price', minPutPriceRaw);
+      localStorage.setItem('csp_filter_max_put_price', maxPutPriceRaw);
     }} catch (e) {{}}
   }}
 
   var btn = document.getElementById('applyFilter');
   if (btn) btn.addEventListener('click', applyFilter);
-  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte', 'baseInvest'].forEach(function(id) {{
+  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte', 'baseInvest', 'minPutPrice', 'maxPutPrice'].forEach(function(id) {{
     var el = document.getElementById(id);
     if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyFilter(); }});
   }});
@@ -1171,7 +1186,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
       maxPe: localStorage.getItem('csp_filter_max_pe'),
       minDte: localStorage.getItem('csp_filter_min_dte'),
       maxDte: localStorage.getItem('csp_filter_max_dte'),
-      baseInvest: localStorage.getItem('csp_filter_base_invest')
+      baseInvest: localStorage.getItem('csp_filter_base_invest'),
+      minPutPrice: localStorage.getItem('csp_filter_min_put_price'),
+      maxPutPrice: localStorage.getItem('csp_filter_max_put_price')
     }};
     Object.keys(saved).forEach(function(id) {{
       if (saved[id]) document.getElementById(id).value = saved[id];
