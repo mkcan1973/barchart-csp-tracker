@@ -1077,19 +1077,28 @@ def generate_html_summary(open_rows, closed_rows, totals, today):
     }}
     var selectedSet = new Set(selected);
 
-    var shown = 0;
     var openVisible = [];
     var closedVisible = [];
+    var totalOpenCount = 0;
+    var totalClosedCount = 0;
     cards.forEach(function(card) {{
+      var isOpen = card.getAttribute('data-kind') === 'open';
+      if (isOpen) {{ totalOpenCount++; }} else {{ totalClosedCount++; }}
       var visible = selectedSet.has(card);
       card.style.display = visible ? '' : 'none';
       if (visible) {{
-        shown++;
-        (card.getAttribute('data-kind') === 'open' ? openVisible : closedVisible).push(card);
+        (isOpen ? openVisible : closedVisible).push(card);
       }}
     }});
+    // Broken out by open/closed, not just one combined number, so this
+    // reconciles directly with the open/closed counts shown elsewhere on
+    // the page (the "Last updated" header, the section headers) instead
+    // of leaving you to guess how a filtered total splits.
     var countEl = document.getElementById('filterCount');
-    if (countEl) countEl.textContent = shown + ' of ' + cards.length + ' shown';
+    if (countEl) {{
+      countEl.textContent = openVisible.length + ' open + ' + closedVisible.length + ' closed shown '
+        + '(of ' + totalOpenCount + ' open, ' + totalClosedCount + ' closed total)';
+    }}
 
     // Rescale every per-card "norm (...)" figure (and the box-label $
     // baselines) to normBase - these are tagged with data-src pointing at
