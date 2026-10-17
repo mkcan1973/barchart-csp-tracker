@@ -1550,7 +1550,17 @@ def build_summary(positions, today, filter_cfg=None):
         combined = pd.concat(sections, ignore_index=True)
         combined.to_csv(SUMMARY_CSV, index=False)
 
-    png_path = plot_realized_pnl(closed_rows)
+    # The chart only tracks closed positions that actually passed the active
+    # filter config (same filter the webpage opens with / Discord notifies
+    # on) - a position that was never "interesting" by that filter shouldn't
+    # count toward the realized-performance track record shown here. Every
+    # other closed-position stat (CSV, totals, cards) still covers ALL
+    # closed positions - only this chart is narrowed.
+    if filter_cfg is not None:
+        closed_rows_for_chart = [r for p, r in zip(settled, closed_rows) if position_passes_filter_config(p, filter_cfg)]
+    else:
+        closed_rows_for_chart = closed_rows
+    png_path = plot_realized_pnl(closed_rows_for_chart)
 
     totals = {
         "unrealized_fict_seller_total": unrealized_fict_seller_total,
