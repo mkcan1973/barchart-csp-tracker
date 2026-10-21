@@ -305,8 +305,83 @@ def scrape_barchart_top20():
             "stock_px": raw.get("underlyingLastPrice"),  # reference only - entry price comes from yfinance
             "potential_return_pct": raw.get("potentialReturn"),
             "potential_return_annual_pct": raw.get("potentialReturnAnnual"),
+            "expiry_type": "monthly",
         })
 
+    return rows_out
+
+# Barchart's free naked-puts screener only ever surfaces one (monthly-
+# cadence) expiration per symbol - weeklies are paywalled there. Bounds how
+# many of a symbol's earlier expirations get a full option-chain fetch, so
+# a liquid name with many weeklies can't blow up one run's yfinance traffic.
+MAX_WEEKLY_EXPIRATIONS_PER_SYMBOL = 4
+
+
+def scrape_yahoo_weeklies(barchart_rows, today):
+    """For the SAME symbols Barchart's screener already surfaced, indepen-
+    dently scan yfinance's full option chain for any expiration EARLIER
+    than Barchart's own monthly pick - genuinely more frequent opportun-
+    ities than Barchart's free tier otherwise exposes for that symbol.
+    There's no Barchart ranking available for these, so each OTM put across
+    every such expiration is self-scored the same way Barchart's own
+    screener works (bid / strike, annualized by days-to-expiration), and
+    only the single BEST (strike, expiration) per symbol is kept - one shot
+    per symbol per run, same cadence pick_new_candidates already expects
+    from a Barchart scan, not a flood of every weekly/strike combination."""
+    rows_out = []
+    for row in barchart_rows:
+        symbol = row["symbol"]
+        monthly_exp = datetime.strptime(row["expiration"], "%Y-%m-%d").date()
+
+        _yf_rate_limiter.wait()
+        try:
+            t = yf.Ticker(symbol)
+            all_expirations = t.options
+        except Exception:
+            continue
+
+        earlier_exps = sorted(
+            e for e in all_expirations
+            if today < datetime.strptime(e, "%Y-%m-%d").date() < monthly_exp
+        )[:MAX_WEEKLY_EXPIRATIONS_PER_SYMBOL]
+        if not earlier_exps:
+            continue
+
+        stock_px = get_current_stock_price(symbol)
+        if stock_px is None:
+            continue
+
+        best = None
+        for exp in earlier_exps:
+            _yf_rate_limiter.wait()
+            try:
+                puts = t.option_chain(exp).puts
+            except Exception:
+                continue
+            dte = (datetime.strptime(exp, "%Y-%m-%d").date() - today).days
+            if dte <= 0:
+                continue
+            for _, r in puts.iterrows():
+                strike, bid = r.get("strike"), r.get("bid")
+                if strike is None or bid is None or pd.isna(strike) or pd.isna(bid) or bid <= 0:
+                    continue
+                strike, bid = float(strike), float(bid)
+                if strike >= stock_px:  # CSP candidates are OTM puts only
+                    continue
+                ann_roi_pct = (bid / strike * 100) * (365.0 / dte)
+                if best is None or ann_roi_pct > best["potential_return_annual_pct"]:
+                    best = {
+                        "symbol": symbol,
+                        "expiration": exp,
+                        "strike": strike,
+                        "barchart_bid": bid,  # sourced from yfinance here, not Barchart - see expiry_type
+                        "stock_px": stock_px,
+                        "potential_return_pct": round(bid / strike * 100, 4),
+                        "potential_return_annual_pct": round(ann_roi_pct, 4),
+                        "expiry_type": "weekly",
+                    }
+        if best is not None:
+            rows_out.append(best)
     return rows_out
 
 # --- yfinance quote for the exact contract ----------------------------------------
@@ -591,6 +666,7 @@ def add_new_position(candidate, today):
         "eps_at_entry": eps_at_entry,
         "pe_at_entry_is_approx": False,
         "added_date": today.isoformat(),
+        "expiry_type": candidate.get("expiry_type", "monthly"),
     }
     return position
 
@@ -832,12 +908,15 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
         run_label = r.get('RUN LABEL')
         run_badge = (f'<span class="run-badge">{_html_escape(run_label)}</span>'
                      if run_label and not closed and r['ADDED'] == today.isoformat() else '')
+        expiry_type = r.get('EXPIRY TYPE', 'monthly')
+        weekly_badge = '<span class="weekly-badge">weekly</span>' if expiry_type == 'weekly' else ''
         return f"""
-        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-ask="{attr(r.get('ASK'))}" data-strike="{attr(r['STRIKE'])}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" {data_attrs}>
+        <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-ask="{attr(r.get('ASK'))}" data-strike="{attr(r['STRIKE'])}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" data-expiry-type="{expiry_type}" {data_attrs}>
           <div class="card-head">
             <span class="sym">{_html_escape(r['SYMBOL'])}</span>
             <span class="strike">${r['STRIKE']:g}P</span>
             <span class="exp">{r['EXPIRATION']}</span>
+            {weekly_badge}
             {run_badge}
           </div>
           <div class="sub">{days_line} &middot; Entry {r['ENTRY STOCK PRICE']:.2f} &middot; {price_line}
@@ -884,6 +963,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   .card-head .exp {{ margin-left: auto; color: #9aa4b2; font-weight: 400; font-size: 0.9rem; }}
   .run-badge {{ display: inline-flex; align-items: center; justify-content: center; width: 1.4em; height: 1.4em;
     border-radius: 50%; background: #2563eb; color: #fff; font-size: 0.8rem; font-weight: 700; }}
+  .weekly-badge {{ display: inline-flex; align-items: center; padding: 1px 7px; border-radius: 10px;
+    background: #7c3aed; color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; }}
   .sub {{ color: #9aa4b2; font-size: 0.82rem; margin-top: 4px; }}
   .sub2 {{ color: #9aa4b2; font-size: 0.78rem; margin-top: 2px; }}
   .rowlabel {{ font-size: 0.72rem; letter-spacing: 0.03em; color: #9aa4b2; margin-top: 10px; }}
@@ -898,6 +979,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   .filterbar {{ display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px;
                 background: #161b25; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }}
   .filterbar label {{ display: flex; flex-direction: column; gap: 3px; font-size: 0.75rem; color: #9aa4b2; }}
+  .filterbar label.checklabel {{ flex-direction: row; align-items: center; gap: 6px; align-self: center; }}
   .filterbar input {{ width: 90px; padding: 7px 8px; border-radius: 6px; border: 1px solid #333a47;
                        background: #0f131b; color: inherit; font-size: 0.95rem; }}
   .filterbar button {{ padding: 8px 16px; border-radius: 6px; border: none; background: #3ddc84;
@@ -932,6 +1014,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     <label>Base investment $ <input type="number" id="baseInvest" step="any" placeholder="e.g. 1000" inputmode="decimal"></label>
     <label>Min put price <input type="number" id="minPutPrice" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max put price <input type="number" id="maxPutPrice" step="any" placeholder="&infin;" inputmode="decimal"></label>
+    <label class="checklabel"><input type="checkbox" id="includeWeekly"> Include weekly (non-monthly) expirations</label>
     <button id="applyFilter" type="button">Filter</button>
     <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/discord_filter_config.json" target="_blank" rel="noopener">Edit filters on GitHub</a>
     <span class="count" id="filterCount"></span>
@@ -1045,6 +1128,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     var baseInvest = baseInvestRaw === '' ? Infinity : parseFloat(baseInvestRaw);
     var minPutPrice = minPutPriceRaw === '' ? -Infinity : parseFloat(minPutPriceRaw);
     var maxPutPrice = maxPutPriceRaw === '' ? Infinity : parseFloat(maxPutPriceRaw);
+    var includeWeekly = document.getElementById('includeWeekly').checked;
     // Separate from baseInvest (which uses Infinity as "no filter"): this is
     // what every "norm ($X risk)" figure on the page rescales against -
     // defaults to the server's own $NORMALIZED_RISK_USD baseline when the
@@ -1096,7 +1180,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       var dteOk = (minDteRaw === '' && maxDteRaw === '')
         || (dteVal !== null && !isNaN(dteVal) && dteVal >= minDte && dteVal <= maxDte);
 
-      if (noFilter || (roiOk && peOk && dteOk && investOk && putPriceOk)) {{
+      // Independent of every other dimension above (and of noFilter) - this
+      // toggle is a visibility gate, not a quality threshold, so a weekly
+      // card stays hidden whenever it's unchecked even if nothing else is
+      // being filtered on.
+      var expiryOk = includeWeekly || card.getAttribute('data-expiry-type') !== 'weekly';
+
+      if (expiryOk && (noFilter || (roiOk && peOk && dteOk && investOk && putPriceOk))) {{
         passing.push(card);
       }}
     }});
@@ -1220,6 +1310,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     var el = document.getElementById(id);
     if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyFilter(); }});
   }});
+  var weeklyToggle = document.getElementById('includeWeekly');
+  if (weeklyToggle) weeklyToggle.addEventListener('change', applyFilter);
 
   // Every page open starts from discord_filter_config.json's values (no
   // localStorage override) - edit that file to change what a fresh load shows.
@@ -1350,6 +1442,7 @@ def build_summary(positions, today, filter_cfg=None):
             "DAYS LEFT": (exp_date - today).days,
             "DTE AT ENTRY": dte_at_entry,
             "RUN LABEL": p.get("run_label"),
+            "EXPIRY TYPE": p.get("expiry_type", "monthly"),
             "ENTRY STOCK PRICE": p["entry_stock_px"],
             "CURRENT STOCK PRICE": current_px,
             "STOCK LONG P/L": stock_long_pnl,
@@ -1426,6 +1519,7 @@ def build_summary(positions, today, filter_cfg=None):
             "STRIKE": p["strike"],
             "EXPIRATION": p["expiration"],
             "DTE AT ENTRY": holding_days,
+            "EXPIRY TYPE": p.get("expiry_type", "monthly"),
             "ENTRY STOCK PRICE": p["entry_stock_px"],
             "FINAL STOCK PRICE": p["final_stock_px"],
             "STOCK LONG P/L": stock_long_pnl,
@@ -1659,6 +1753,11 @@ def main():
         return
     print(f"  Scraped {len(barchart_rows)} candidates (ranked by annualized potential return desc)")
 
+    print("-- Scanning Yahoo for earlier (non-monthly) expirations on those symbols --")
+    yahoo_weekly_rows = scrape_yahoo_weeklies(barchart_rows, today)
+    print(f"  Found {len(yahoo_weekly_rows)} additional weekly candidate(s)")
+    all_rows = barchart_rows + yahoo_weekly_rows
+
     positions = load_positions()
     filter_cfg = load_filter_config()
 
@@ -1677,14 +1776,15 @@ def main():
     ))
     run_label = chr(ord("A") + len(todays_run_labels))
 
-    candidates = pick_new_candidates(barchart_rows, positions, today)
+    candidates = pick_new_candidates(all_rows, positions, today)
     if not candidates:
         print("\n  All of Barchart's top candidates are already open positions - nothing new to add.")
     else:
         print(f"\n  Adding {len(candidates)} new candidate(s) (run {run_label}):")
         for candidate in candidates:
+            src_label = "yahoo weekly" if candidate.get("expiry_type") == "weekly" else "barchart"
             print(f"    {candidate['symbol']} ${candidate['strike']}P exp {candidate['expiration']} "
-                  f"(barchart bid {candidate['barchart_bid']:.2f}, annualized return "
+                  f"({src_label} bid {candidate['barchart_bid']:.2f}, annualized return "
                   f"{candidate.get('potential_return_annual_pct') or 0:.1f}%)")
             # Was this symbol ALREADY good enough to notify on, via any
             # earlier position (same run or a prior day)? If so this new
@@ -1707,9 +1807,10 @@ def main():
                 pe = position.get("pe_at_entry")
                 pe_text = f"{pe:.1f}" if pe is not None else "n/a"
                 mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
+                weekly_tag = " [weekly]" if position.get("expiry_type") == "weekly" else ""
                 notify_discord(
-                    f"**[{run_label}] New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
-                    f"Barchart ann. return: {ann_return:.1f}% "
+                    f"**[{run_label}]{weekly_tag} New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
+                    f"{src_label.capitalize()} ann. return: {ann_return:.1f}% "
                     f"· PE: {pe_text} · Entry stock px {position['entry_stock_px']:.2f}\n"
                     f"Bid {position['bid']:.2f} ({bid_source})\n"
                     f"```diff\n+ Ask {position['ask']:.2f} ({ask_source})  (mid, buy: {mid_entry:.2f})\n```\n"
