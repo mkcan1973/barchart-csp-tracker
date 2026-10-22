@@ -15748,13 +15748,15 @@
     });
 
     // Pass 2: with an actual filter active, only one instance per symbol
-    // represents "the trade you'd have taken." An OPEN position always
-    // wins over a CLOSED one for the same symbol, regardless of which was
-    // added earlier - once a contract settles, it's history, and a new
-    // open signal on that same stock deserves to show as open rather than
-    // being permanently shadowed by an old settled pick. Within the same
-    // bucket (open-vs-open or closed-vs-closed), the chronologically FIRST
-    // one still wins, same as before.
+    // PER OPEN/CLOSED BUCKET represents "the trade you'd have taken" - a
+    // symbol can legitimately show once in OPEN (its current position) AND
+    // once in CLOSED (an earlier, already-settled trade on the same stock)
+    // at the same time, since those are two genuinely different, sequential
+    // trades, not a duplicate of the same one. Open and closed never
+    // compete with each other for a single slot. Within a bucket, if a
+    // symbol has both a monthly and a weekly candidate, only the
+    // chronologically FIRST one wins - a symbol can't occupy both monthly
+    // and weekly within the same open-or-closed bucket at once.
     var selected;
     if (noFilter) {
       selected = passing;
@@ -15762,21 +15764,15 @@
       var firstForSymbol = {};
       passing.forEach(function(card) {
         var sym = card.getAttribute('data-symbol');
+        var kind = card.getAttribute('data-kind');
+        var key = sym + '|' + kind;
         var added = card.getAttribute('data-added') || '';
-        var isOpen = card.getAttribute('data-kind') === 'open';
-        var current = firstForSymbol[sym];
-        if (!current) {
-          firstForSymbol[sym] = card;
-          return;
-        }
-        var currentIsOpen = current.getAttribute('data-kind') === 'open';
-        if (isOpen && !currentIsOpen) {
-          firstForSymbol[sym] = card;
-        } else if (isOpen === currentIsOpen && added < current.getAttribute('data-added')) {
-          firstForSymbol[sym] = card;
+        var current = firstForSymbol[key];
+        if (!current || added < current.getAttribute('data-added')) {
+          firstForSymbol[key] = card;
         }
       });
-      selected = Object.keys(firstForSymbol).map(function(sym) { return firstForSymbol[sym]; });
+      selected = Object.keys(firstForSymbol).map(function(key) { return firstForSymbol[key]; });
     }
     var selectedSet = new Set(selected);
 
