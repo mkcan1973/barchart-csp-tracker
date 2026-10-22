@@ -15747,11 +15747,14 @@
       }
     });
 
-    // Pass 2: with an actual filter active, only the chronologically FIRST
-    // passing instance per symbol represents "the trade you'd have taken"
-    // on a real entry signal - a later instance of the same symbol that
-    // also clears the bar is suppressed, so one stock can't occupy (or
-    // count toward) the summary more than once at a time.
+    // Pass 2: with an actual filter active, only one instance per symbol
+    // represents "the trade you'd have taken." An OPEN position always
+    // wins over a CLOSED one for the same symbol, regardless of which was
+    // added earlier - once a contract settles, it's history, and a new
+    // open signal on that same stock deserves to show as open rather than
+    // being permanently shadowed by an old settled pick. Within the same
+    // bucket (open-vs-open or closed-vs-closed), the chronologically FIRST
+    // one still wins, same as before.
     var selected;
     if (noFilter) {
       selected = passing;
@@ -15760,8 +15763,16 @@
       passing.forEach(function(card) {
         var sym = card.getAttribute('data-symbol');
         var added = card.getAttribute('data-added') || '';
+        var isOpen = card.getAttribute('data-kind') === 'open';
         var current = firstForSymbol[sym];
-        if (!current || added < current.getAttribute('data-added')) {
+        if (!current) {
+          firstForSymbol[sym] = card;
+          return;
+        }
+        var currentIsOpen = current.getAttribute('data-kind') === 'open';
+        if (isOpen && !currentIsOpen) {
+          firstForSymbol[sym] = card;
+        } else if (isOpen === currentIsOpen && added < current.getAttribute('data-added')) {
           firstForSymbol[sym] = card;
         }
       });
