@@ -77,7 +77,11 @@ DEFAULT_FILTER_CONFIG = {
     "min_pe": None, "max_pe": None,
     "min_dte_entry": None, "max_dte_entry": None,
     "base_investment": None,
-    "min_put_price": None, "max_put_price": None,
+    "min_put_strike": None, "max_put_strike": None,
+    # "monthly" (Barchart only), "weekly" (Yahoo-sourced non-monthly only),
+    # or "both" - gates Discord the same as every other field here AND sets
+    # the webpage's 3-way expiration toggle on every load.
+    "expiry_filter": "monthly",
 }
 
 
@@ -93,9 +97,9 @@ def load_filter_config():
 
 def position_passes_filter_config(p, cfg):
     """Same filter logic as the webpage's client-side JS (ROI/PE/DTE@entry/
-    base investment/put price-as-strike) - works on either a freshly-built
-    candidate position or an already-stored one, since both carry the same
-    field names."""
+    base investment/put strike/expiry type) - works on either a freshly-
+    built candidate position or an already-stored one, since both carry the
+    same field names."""
     ann_return = p.get("potential_return_annual_pct") or 0
     if cfg.get("min_roi") is not None and ann_return < cfg["min_roi"]:
         return False
@@ -127,9 +131,13 @@ def position_passes_filter_config(p, cfg):
             return False
 
     strike = p.get("strike")
-    if cfg.get("min_put_price") is not None and (strike is None or strike < cfg["min_put_price"]):
+    if cfg.get("min_put_strike") is not None and (strike is None or strike < cfg["min_put_strike"]):
         return False
-    if cfg.get("max_put_price") is not None and (strike is None or strike > cfg["max_put_price"]):
+    if cfg.get("max_put_strike") is not None and (strike is None or strike > cfg["max_put_strike"]):
+        return False
+
+    expiry_filter = cfg.get("expiry_filter") or "both"
+    if expiry_filter != "both" and p.get("expiry_type", "monthly") != expiry_filter:
         return False
 
     return True
@@ -979,11 +987,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   .filterbar {{ display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px;
                 background: #161b25; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }}
   .filterbar label {{ display: flex; flex-direction: column; gap: 3px; font-size: 0.75rem; color: #9aa4b2; }}
-  .filterbar label.checklabel {{ flex-direction: row; align-items: center; gap: 6px; align-self: center; }}
   .filterbar input {{ width: 90px; padding: 7px 8px; border-radius: 6px; border: 1px solid #333a47;
                        background: #0f131b; color: inherit; font-size: 0.95rem; }}
   .filterbar button {{ padding: 8px 16px; border-radius: 6px; border: none; background: #3ddc84;
                         color: #06240f; font-weight: 700; font-size: 0.9rem; cursor: pointer; }}
+  .filterbar button.expirytogglebtn {{ background: #7c3aed; color: #fff; }}
   .filterbar a.editlink {{ padding: 8px 16px; border-radius: 6px; border: 1px solid #3ddc84;
                             background: transparent; color: #3ddc84; font-weight: 700;
                             font-size: 0.85rem; text-decoration: none; }}
@@ -1012,9 +1020,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     <label>Min DTE@entry <input type="number" id="minDte" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max DTE@entry <input type="number" id="maxDte" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <label>Base investment $ <input type="number" id="baseInvest" step="any" placeholder="e.g. 1000" inputmode="decimal"></label>
-    <label>Min put price <input type="number" id="minPutPrice" step="any" placeholder="-&infin;" inputmode="decimal"></label>
-    <label>Max put price <input type="number" id="maxPutPrice" step="any" placeholder="&infin;" inputmode="decimal"></label>
-    <label class="checklabel"><input type="checkbox" id="includeWeekly"> Include weekly (non-monthly) expirations</label>
+    <label>Min put strike <input type="number" id="minPutStrike" step="any" placeholder="-&infin;" inputmode="decimal"></label>
+    <label>Max put strike <input type="number" id="maxPutStrike" step="any" placeholder="&infin;" inputmode="decimal"></label>
+    <button type="button" id="expiryToggle" class="expirytogglebtn" data-state="monthly">Expirations: Monthly only</button>
     <button id="applyFilter" type="button">Filter</button>
     <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/discord_filter_config.json" target="_blank" rel="noopener">Edit filters on GitHub</a>
     <span class="count" id="filterCount"></span>
@@ -1114,11 +1122,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     var minDteRaw = document.getElementById('minDte').value.trim();
     var maxDteRaw = document.getElementById('maxDte').value.trim();
     var baseInvestRaw = document.getElementById('baseInvest').value.trim();
-    var minPutPriceRaw = document.getElementById('minPutPrice').value.trim();
-    var maxPutPriceRaw = document.getElementById('maxPutPrice').value.trim();
+    var minPutStrikeRaw = document.getElementById('minPutStrike').value.trim();
+    var maxPutStrikeRaw = document.getElementById('maxPutStrike').value.trim();
     var noFilter = minRoiRaw === '' && maxRoiRaw === '' && minPeRaw === '' && maxPeRaw === ''
       && minDteRaw === '' && maxDteRaw === '' && baseInvestRaw === ''
-      && minPutPriceRaw === '' && maxPutPriceRaw === '';
+      && minPutStrikeRaw === '' && maxPutStrikeRaw === '';
     var minRoi = minRoiRaw === '' ? -Infinity : parseFloat(minRoiRaw);
     var maxRoi = maxRoiRaw === '' ? Infinity : parseFloat(maxRoiRaw);
     var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
@@ -1126,9 +1134,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     var minDte = minDteRaw === '' ? -Infinity : parseFloat(minDteRaw);
     var maxDte = maxDteRaw === '' ? Infinity : parseFloat(maxDteRaw);
     var baseInvest = baseInvestRaw === '' ? Infinity : parseFloat(baseInvestRaw);
-    var minPutPrice = minPutPriceRaw === '' ? -Infinity : parseFloat(minPutPriceRaw);
-    var maxPutPrice = maxPutPriceRaw === '' ? Infinity : parseFloat(maxPutPriceRaw);
-    var includeWeekly = document.getElementById('includeWeekly').checked;
+    var minPutStrike = minPutStrikeRaw === '' ? -Infinity : parseFloat(minPutStrikeRaw);
+    var maxPutStrike = maxPutStrikeRaw === '' ? Infinity : parseFloat(maxPutStrikeRaw);
+    var expiryFilter = (document.getElementById('expiryToggle').dataset.state) || 'monthly';
     // Separate from baseInvest (which uses Infinity as "no filter"): this is
     // what every "norm ($X risk)" figure on the page rescales against -
     // defaults to the server's own $NORMALIZED_RISK_USD baseline when the
@@ -1167,13 +1175,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       var investOk = baseInvestRaw === ''
         || (askVal !== null && !isNaN(askVal) && askVal * 100 <= baseInvest);
 
-      // Put price = the STRIKE (not the premium/ask) - lets you skip
-      // low-strike puts with little profit potential on the long side, or
-      // cap how high a strike you want to consider.
+      // Put strike - lets you skip low-strike puts with little profit
+      // potential on the long side, or cap how high a strike to consider.
       var strikeRaw = card.getAttribute('data-strike');
       var strikeVal = strikeRaw === '' ? null : parseFloat(strikeRaw);
-      var putPriceOk = (minPutPriceRaw === '' && maxPutPriceRaw === '')
-        || (strikeVal !== null && !isNaN(strikeVal) && strikeVal >= minPutPrice && strikeVal <= maxPutPrice);
+      var putStrikeOk = (minPutStrikeRaw === '' && maxPutStrikeRaw === '')
+        || (strikeVal !== null && !isNaN(strikeVal) && strikeVal >= minPutStrike && strikeVal <= maxPutStrike);
 
       var dteRaw = card.getAttribute('data-dte-entry');
       var dteVal = dteRaw === '' ? null : parseFloat(dteRaw);
@@ -1181,12 +1188,12 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
         || (dteVal !== null && !isNaN(dteVal) && dteVal >= minDte && dteVal <= maxDte);
 
       // Independent of every other dimension above (and of noFilter) - this
-      // toggle is a visibility gate, not a quality threshold, so a weekly
-      // card stays hidden whenever it's unchecked even if nothing else is
-      // being filtered on.
-      var expiryOk = includeWeekly || card.getAttribute('data-expiry-type') !== 'weekly';
+      // is a 3-way visibility gate (monthly only / weekly only / both), not
+      // a quality threshold, so it applies even when nothing else is being
+      // filtered on.
+      var expiryOk = expiryFilter === 'both' || card.getAttribute('data-expiry-type') === expiryFilter;
 
-      if (expiryOk && (noFilter || (roiOk && peOk && dteOk && investOk && putPriceOk))) {{
+      if (expiryOk && (noFilter || (roiOk && peOk && dteOk && investOk && putStrikeOk))) {{
         passing.push(card);
       }}
     }});
@@ -1306,12 +1313,28 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
 
   var btn = document.getElementById('applyFilter');
   if (btn) btn.addEventListener('click', applyFilter);
-  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte', 'baseInvest', 'minPutPrice', 'maxPutPrice'].forEach(function(id) {{
+  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte', 'baseInvest', 'minPutStrike', 'maxPutStrike'].forEach(function(id) {{
     var el = document.getElementById(id);
     if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyFilter(); }});
   }});
-  var weeklyToggle = document.getElementById('includeWeekly');
-  if (weeklyToggle) weeklyToggle.addEventListener('change', applyFilter);
+
+  var EXPIRY_STATES = ['monthly', 'weekly', 'both'];
+  var EXPIRY_LABELS = {{ monthly: 'Expirations: Monthly only', weekly: 'Expirations: Weekly only', both: 'Expirations: Both' }};
+  function setExpiryState(state) {{
+    var elBtn = document.getElementById('expiryToggle');
+    if (!elBtn) return;
+    if (EXPIRY_STATES.indexOf(state) === -1) state = 'monthly';
+    elBtn.dataset.state = state;
+    elBtn.textContent = EXPIRY_LABELS[state];
+  }}
+  var expiryBtn = document.getElementById('expiryToggle');
+  if (expiryBtn) {{
+    expiryBtn.addEventListener('click', function() {{
+      var idx = EXPIRY_STATES.indexOf(expiryBtn.dataset.state || 'monthly');
+      setExpiryState(EXPIRY_STATES[(idx + 1) % EXPIRY_STATES.length]);
+      applyFilter();
+    }});
+  }}
 
   // Every page open starts from discord_filter_config.json's values (no
   // localStorage override) - edit that file to change what a fresh load shows.
@@ -1320,12 +1343,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     minPe: 'min_pe', maxPe: 'max_pe',
     minDte: 'min_dte_entry', maxDte: 'max_dte_entry',
     baseInvest: 'base_investment',
-    minPutPrice: 'min_put_price', maxPutPrice: 'max_put_price'
+    minPutStrike: 'min_put_strike', maxPutStrike: 'max_put_strike'
   }};
   Object.keys(fieldToCfgKey).forEach(function(id) {{
     var cfgVal = DEFAULT_FILTERS[fieldToCfgKey[id]];
     if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
   }});
+  setExpiryState(DEFAULT_FILTERS.expiry_filter || 'monthly');
   applyFilter();
 }})();
 </script>
