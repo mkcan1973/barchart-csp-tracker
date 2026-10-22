@@ -38,11 +38,11 @@
   .filterbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px;
                 background: #161b25; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
   .filterbar label { display: flex; flex-direction: column; gap: 3px; font-size: 0.75rem; color: #9aa4b2; }
-  .filterbar label.checklabel { flex-direction: row; align-items: center; gap: 6px; align-self: center; }
   .filterbar input { width: 90px; padding: 7px 8px; border-radius: 6px; border: 1px solid #333a47;
                        background: #0f131b; color: inherit; font-size: 0.95rem; }
   .filterbar button { padding: 8px 16px; border-radius: 6px; border: none; background: #3ddc84;
                         color: #06240f; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+  .filterbar button.expirytogglebtn { background: #7c3aed; color: #fff; }
   .filterbar a.editlink { padding: 8px 16px; border-radius: 6px; border: 1px solid #3ddc84;
                             background: transparent; color: #3ddc84; font-weight: 700;
                             font-size: 0.85rem; text-decoration: none; }
@@ -71,9 +71,9 @@
     <label>Min DTE@entry <input type="number" id="minDte" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max DTE@entry <input type="number" id="maxDte" step="any" placeholder="&infin;" inputmode="decimal"></label>
     <label>Base investment $ <input type="number" id="baseInvest" step="any" placeholder="e.g. 1000" inputmode="decimal"></label>
-    <label>Min put price <input type="number" id="minPutPrice" step="any" placeholder="-&infin;" inputmode="decimal"></label>
-    <label>Max put price <input type="number" id="maxPutPrice" step="any" placeholder="&infin;" inputmode="decimal"></label>
-    <label class="checklabel"><input type="checkbox" id="includeWeekly"> Include weekly (non-monthly) expirations</label>
+    <label>Min put strike <input type="number" id="minPutStrike" step="any" placeholder="-&infin;" inputmode="decimal"></label>
+    <label>Max put strike <input type="number" id="maxPutStrike" step="any" placeholder="&infin;" inputmode="decimal"></label>
+    <button type="button" id="expiryToggle" class="expirytogglebtn" data-state="monthly">Expirations: Monthly only</button>
     <button id="applyFilter" type="button">Filter</button>
     <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/discord_filter_config.json" target="_blank" rel="noopener">Edit filters on GitHub</a>
     <span class="count" id="filterCount"></span>
@@ -99,8 +99,8 @@
     </div>
     <div class="box">
       <div class="label">STOCK BENCHMARK (no options - buy/short $<span class="norm-base-num">1000</span> of shares at entry)</div>
-      <div class="val neg" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">$-2,196.39</span></div>
-      <div class="val pos" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">$2,196.39</span></div>
+      <div class="val neg" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">$-2,195.91</span></div>
+      <div class="val pos" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">$2,195.91</span></div>
       <div class="sub2">avg price change (open): <span id="avgStockUnrealPct">-1.5%</span> &middot; avg ann. ROI: <span id="avgStockUnrealAnn">+143.7%</span></div>
       <div class="val neg" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">$-50,958.31</span></div>
       <div class="val pos" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">$50,958.31</span></div>
@@ -177,7 +177,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="121.856" data-pe="" data-dte-entry="58" data-ask="1.48" data-strike="9.0" data-symbol="CIFR" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-16.67" data-norm-ab="-27.03" data-roi-as="-1.67" data-roi-ab="-2.7" data-ann-as="" data-ann-ab="" data-norm-ms="-7.78" data-norm-mb="27.03" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="121.856" data-pe="" data-dte-entry="58" data-ask="1.48" data-strike="9.0" data-symbol="CIFR" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-16.67" data-norm-ab="-27.03" data-roi-as="-1.67" data-roi-ab="-2.7" data-ann-as="" data-ann-ab="" data-norm-ms="-7.78" data-norm-mb="27.03" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">CIFR</span>
             <span class="strike">$9P</span>
@@ -208,7 +208,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="113.024" data-pe="" data-dte-entry="30" data-ask="1.06" data-strike="12.0" data-symbol="WULF" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-12.5" data-norm-ab="-141.51" data-roi-as="-1.25" data-roi-ab="-14.15" data-ann-as="" data-ann-ab="" data-norm-ms="-1.67" data-norm-mb="-18.87" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="113.024" data-pe="" data-dte-entry="30" data-ask="1.06" data-strike="12.0" data-symbol="WULF" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-12.5" data-norm-ab="-141.51" data-roi-as="-1.25" data-roi-ab="-14.15" data-ann-as="" data-ann-ab="" data-norm-ms="-1.67" data-norm-mb="-18.87" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">WULF</span>
             <span class="strike">$12P</span>
@@ -239,7 +239,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="110.606" data-pe="" data-dte-entry="30" data-ask="5.1" data-strike="60.0" data-symbol="VSAT" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-1.67" data-norm-ab="-117.65" data-roi-as="-0.17" data-roi-ab="-11.76" data-ann-as="" data-ann-ab="" data-norm-ms="2.5" data-norm-mb="-68.63" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="110.606" data-pe="" data-dte-entry="30" data-ask="5.1" data-strike="60.0" data-symbol="VSAT" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-1.67" data-norm-ab="-117.65" data-roi-as="-0.17" data-roi-ab="-11.76" data-ann-as="" data-ann-ab="" data-norm-ms="2.5" data-norm-mb="-68.63" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">VSAT</span>
             <span class="strike">$60P</span>
@@ -301,7 +301,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="456.25" data-pe="" data-dte-entry="2" data-ask="0.45" data-strike="12.0" data-symbol="SLS" data-added="2026-10-21" data-expiry-type="weekly" data-kind="open" data-norm-as="-25.0" data-norm-ab="-333.33" data-roi-as="-2.5" data-roi-ab="-33.33" data-ann-as="" data-ann-ab="" data-norm-ms="-12.5" data-norm-mb="-0.0" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="456.25" data-pe="" data-dte-entry="2" data-ask="0.45" data-strike="12.0" data-symbol="SLS" data-added="2026-10-21" data-expiry-type="weekly" data-kind="open" data-norm-as="-25.0" data-norm-ab="-333.33" data-roi-as="-2.5" data-roi-ab="-33.33" data-ann-as="" data-ann-ab="" data-norm-ms="-12.5" data-norm-mb="-0.0" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">SLS</span>
             <span class="strike">$12P</span>
@@ -332,7 +332,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="446.1111" data-pe="" data-dte-entry="2" data-ask="0.27" data-strike="9.0" data-symbol="CIFR" data-added="2026-10-21" data-expiry-type="weekly" data-kind="open" data-norm-as="-8.89" data-norm-ab="-148.15" data-roi-as="-0.89" data-roi-ab="-14.81" data-ann-as="" data-ann-ab="" data-norm-ms="-4.44" data-norm-mb="0.0" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="446.1111" data-pe="" data-dte-entry="2" data-ask="0.27" data-strike="9.0" data-symbol="CIFR" data-added="2026-10-21" data-expiry-type="weekly" data-kind="open" data-norm-as="-8.89" data-norm-ab="-148.15" data-roi-as="-0.89" data-roi-ab="-14.81" data-ann-as="" data-ann-ab="" data-norm-ms="-4.44" data-norm-mb="0.0" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">CIFR</span>
             <span class="strike">$9P</span>
@@ -363,7 +363,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="335.8" data-pe="" data-dte-entry="2" data-ask="0.27" data-strike="12.5" data-symbol="WULF" data-added="2026-10-21" data-expiry-type="weekly" data-kind="open" data-norm-as="-4.0" data-norm-ab="0.0" data-roi-as="-0.4" data-roi-ab="0.0" data-ann-as="" data-ann-ab="" data-norm-ms="-3.2" data-norm-mb="37.04" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="335.8" data-pe="" data-dte-entry="2" data-ask="0.27" data-strike="12.5" data-symbol="WULF" data-added="2026-10-21" data-expiry-type="weekly" data-kind="open" data-norm-as="-4.0" data-norm-ab="0.0" data-roi-as="-0.4" data-roi-ab="0.0" data-ann-as="" data-ann-ab="" data-norm-ms="-3.2" data-norm-mb="37.04" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">WULF</span>
             <span class="strike">$12.5P</span>
@@ -394,7 +394,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="444.6831" data-pe="" data-dte-entry="2" data-ask="2.2" data-strike="71.0" data-symbol="HUT" data-added="2026-10-21" data-expiry-type="weekly" data-kind="open" data-norm-as="-17.61" data-norm-ab="-331.82" data-roi-as="-1.76" data-roi-ab="-33.18" data-ann-as="" data-ann-ab="" data-norm-ms="-6.97" data-norm-mb="11.36" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="444.6831" data-pe="" data-dte-entry="2" data-ask="2.2" data-strike="71.0" data-symbol="HUT" data-added="2026-10-21" data-expiry-type="weekly" data-kind="open" data-norm-as="-17.61" data-norm-ab="-331.82" data-roi-as="-1.76" data-roi-ab="-33.18" data-ann-as="" data-ann-ab="" data-norm-ms="-6.97" data-norm-mb="11.36" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">HUT</span>
             <span class="strike">$71P</span>
@@ -1758,7 +1758,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="95.176" data-pe="" data-dte-entry="59" data-ask="0.24" data-strike="1.5" data-symbol="EOSE" data-added="2026-10-20" data-expiry-type="monthly" data-kind="open" data-norm-as="-20.0" data-norm-ab="-250.0" data-roi-as="-2.0" data-roi-ab="-25.0" data-ann-as="-730.0" data-ann-ab="-9125.0" data-norm-ms="-3.33" data-norm-mb="-145.83" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="0.0">
+        <div class="card" data-ann-return="95.176" data-pe="" data-dte-entry="59" data-ask="0.24" data-strike="1.5" data-symbol="EOSE" data-added="2026-10-20" data-expiry-type="monthly" data-kind="open" data-norm-as="-20.0" data-norm-ab="-250.0" data-roi-as="-2.0" data-roi-ab="-25.0" data-ann-as="-730.0" data-ann-ab="-9125.0" data-norm-ms="-3.33" data-norm-mb="-145.83" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="-0.0">
           <div class="card-head">
             <span class="sym">EOSE</span>
             <span class="strike">$1.5P</span>
@@ -4393,7 +4393,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="178.922" data-pe="" data-dte-entry="51" data-ask="0.25" data-strike="1.0" data-symbol="CMPX" data-added="2026-09-30" data-expiry-type="monthly" data-kind="open" data-norm-as="-100.0" data-norm-ab="-200.0" data-roi-as="-10.0" data-roi-ab="-20.0" data-ann-as="-173.81" data-ann-ab="-347.62" data-norm-ms="-50.0" data-norm-mb="0.0" data-stock-long="-216.83" data-stock-short="216.83" data-stock-pct="-21.68" data-stock-pct-ann="-376.82">
+        <div class="card" data-ann-return="178.922" data-pe="" data-dte-entry="51" data-ask="0.25" data-strike="1.0" data-symbol="CMPX" data-added="2026-09-30" data-expiry-type="monthly" data-kind="open" data-norm-as="-100.0" data-norm-ab="-200.0" data-roi-as="-10.0" data-roi-ab="-20.0" data-ann-as="-173.81" data-ann-ab="-347.62" data-norm-ms="-50.0" data-norm-mb="0.0" data-stock-long="-216.35" data-stock-short="216.35" data-stock-pct="-21.63" data-stock-pct-ann="-375.95">
           <div class="card-head">
             <span class="sym">CMPX</span>
             <span class="strike">$1P</span>
@@ -15622,7 +15622,7 @@
 
 <script>
 (function() {
-  var DEFAULT_FILTERS = {"min_roi": null, "max_roi": null, "min_pe": 999, "max_pe": null, "min_dte_entry": null, "max_dte_entry": null, "base_investment": 50, "min_put_price": null, "max_put_price": null};
+  var DEFAULT_FILTERS = {"min_roi": null, "max_roi": null, "min_pe": 999, "max_pe": null, "min_dte_entry": null, "max_dte_entry": null, "base_investment": 50, "min_put_strike": null, "max_put_strike": null, "expiry_filter": "monthly"};
   function fmtMoney(x) {
     return x === null ? '--' : '$' + x.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
   }
@@ -15671,11 +15671,11 @@
     var minDteRaw = document.getElementById('minDte').value.trim();
     var maxDteRaw = document.getElementById('maxDte').value.trim();
     var baseInvestRaw = document.getElementById('baseInvest').value.trim();
-    var minPutPriceRaw = document.getElementById('minPutPrice').value.trim();
-    var maxPutPriceRaw = document.getElementById('maxPutPrice').value.trim();
+    var minPutStrikeRaw = document.getElementById('minPutStrike').value.trim();
+    var maxPutStrikeRaw = document.getElementById('maxPutStrike').value.trim();
     var noFilter = minRoiRaw === '' && maxRoiRaw === '' && minPeRaw === '' && maxPeRaw === ''
       && minDteRaw === '' && maxDteRaw === '' && baseInvestRaw === ''
-      && minPutPriceRaw === '' && maxPutPriceRaw === '';
+      && minPutStrikeRaw === '' && maxPutStrikeRaw === '';
     var minRoi = minRoiRaw === '' ? -Infinity : parseFloat(minRoiRaw);
     var maxRoi = maxRoiRaw === '' ? Infinity : parseFloat(maxRoiRaw);
     var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
@@ -15683,9 +15683,9 @@
     var minDte = minDteRaw === '' ? -Infinity : parseFloat(minDteRaw);
     var maxDte = maxDteRaw === '' ? Infinity : parseFloat(maxDteRaw);
     var baseInvest = baseInvestRaw === '' ? Infinity : parseFloat(baseInvestRaw);
-    var minPutPrice = minPutPriceRaw === '' ? -Infinity : parseFloat(minPutPriceRaw);
-    var maxPutPrice = maxPutPriceRaw === '' ? Infinity : parseFloat(maxPutPriceRaw);
-    var includeWeekly = document.getElementById('includeWeekly').checked;
+    var minPutStrike = minPutStrikeRaw === '' ? -Infinity : parseFloat(minPutStrikeRaw);
+    var maxPutStrike = maxPutStrikeRaw === '' ? Infinity : parseFloat(maxPutStrikeRaw);
+    var expiryFilter = (document.getElementById('expiryToggle').dataset.state) || 'monthly';
     // Separate from baseInvest (which uses Infinity as "no filter"): this is
     // what every "norm ($X risk)" figure on the page rescales against -
     // defaults to the server's own $NORMALIZED_RISK_USD baseline when the
@@ -15724,13 +15724,12 @@
       var investOk = baseInvestRaw === ''
         || (askVal !== null && !isNaN(askVal) && askVal * 100 <= baseInvest);
 
-      // Put price = the STRIKE (not the premium/ask) - lets you skip
-      // low-strike puts with little profit potential on the long side, or
-      // cap how high a strike you want to consider.
+      // Put strike - lets you skip low-strike puts with little profit
+      // potential on the long side, or cap how high a strike to consider.
       var strikeRaw = card.getAttribute('data-strike');
       var strikeVal = strikeRaw === '' ? null : parseFloat(strikeRaw);
-      var putPriceOk = (minPutPriceRaw === '' && maxPutPriceRaw === '')
-        || (strikeVal !== null && !isNaN(strikeVal) && strikeVal >= minPutPrice && strikeVal <= maxPutPrice);
+      var putStrikeOk = (minPutStrikeRaw === '' && maxPutStrikeRaw === '')
+        || (strikeVal !== null && !isNaN(strikeVal) && strikeVal >= minPutStrike && strikeVal <= maxPutStrike);
 
       var dteRaw = card.getAttribute('data-dte-entry');
       var dteVal = dteRaw === '' ? null : parseFloat(dteRaw);
@@ -15738,12 +15737,12 @@
         || (dteVal !== null && !isNaN(dteVal) && dteVal >= minDte && dteVal <= maxDte);
 
       // Independent of every other dimension above (and of noFilter) - this
-      // toggle is a visibility gate, not a quality threshold, so a weekly
-      // card stays hidden whenever it's unchecked even if nothing else is
-      // being filtered on.
-      var expiryOk = includeWeekly || card.getAttribute('data-expiry-type') !== 'weekly';
+      // is a 3-way visibility gate (monthly only / weekly only / both), not
+      // a quality threshold, so it applies even when nothing else is being
+      // filtered on.
+      var expiryOk = expiryFilter === 'both' || card.getAttribute('data-expiry-type') === expiryFilter;
 
-      if (expiryOk && (noFilter || (roiOk && peOk && dteOk && investOk && putPriceOk))) {
+      if (expiryOk && (noFilter || (roiOk && peOk && dteOk && investOk && putStrikeOk))) {
         passing.push(card);
       }
     });
@@ -15863,12 +15862,28 @@
 
   var btn = document.getElementById('applyFilter');
   if (btn) btn.addEventListener('click', applyFilter);
-  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte', 'baseInvest', 'minPutPrice', 'maxPutPrice'].forEach(function(id) {
+  ['minRoi', 'maxRoi', 'minPe', 'maxPe', 'minDte', 'maxDte', 'baseInvest', 'minPutStrike', 'maxPutStrike'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('keydown', function(e) { if (e.key === 'Enter') applyFilter(); });
   });
-  var weeklyToggle = document.getElementById('includeWeekly');
-  if (weeklyToggle) weeklyToggle.addEventListener('change', applyFilter);
+
+  var EXPIRY_STATES = ['monthly', 'weekly', 'both'];
+  var EXPIRY_LABELS = { monthly: 'Expirations: Monthly only', weekly: 'Expirations: Weekly only', both: 'Expirations: Both' };
+  function setExpiryState(state) {
+    var elBtn = document.getElementById('expiryToggle');
+    if (!elBtn) return;
+    if (EXPIRY_STATES.indexOf(state) === -1) state = 'monthly';
+    elBtn.dataset.state = state;
+    elBtn.textContent = EXPIRY_LABELS[state];
+  }
+  var expiryBtn = document.getElementById('expiryToggle');
+  if (expiryBtn) {
+    expiryBtn.addEventListener('click', function() {
+      var idx = EXPIRY_STATES.indexOf(expiryBtn.dataset.state || 'monthly');
+      setExpiryState(EXPIRY_STATES[(idx + 1) % EXPIRY_STATES.length]);
+      applyFilter();
+    });
+  }
 
   // Every page open starts from discord_filter_config.json's values (no
   // localStorage override) - edit that file to change what a fresh load shows.
@@ -15877,12 +15892,13 @@
     minPe: 'min_pe', maxPe: 'max_pe',
     minDte: 'min_dte_entry', maxDte: 'max_dte_entry',
     baseInvest: 'base_investment',
-    minPutPrice: 'min_put_price', maxPutPrice: 'max_put_price'
+    minPutStrike: 'min_put_strike', maxPutStrike: 'max_put_strike'
   };
   Object.keys(fieldToCfgKey).forEach(function(id) {
     var cfgVal = DEFAULT_FILTERS[fieldToCfgKey[id]];
     if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
   });
+  setExpiryState(DEFAULT_FILTERS.expiry_filter || 'monthly');
   applyFilter();
 })();
 </script>
