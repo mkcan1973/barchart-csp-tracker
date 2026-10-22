@@ -1199,13 +1199,15 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     }});
 
     // Pass 2: with an actual filter active, only one instance per symbol
-    // represents "the trade you'd have taken." An OPEN position always
-    // wins over a CLOSED one for the same symbol, regardless of which was
-    // added earlier - once a contract settles, it's history, and a new
-    // open signal on that same stock deserves to show as open rather than
-    // being permanently shadowed by an old settled pick. Within the same
-    // bucket (open-vs-open or closed-vs-closed), the chronologically FIRST
-    // one still wins, same as before.
+    // PER OPEN/CLOSED BUCKET represents "the trade you'd have taken" - a
+    // symbol can legitimately show once in OPEN (its current position) AND
+    // once in CLOSED (an earlier, already-settled trade on the same stock)
+    // at the same time, since those are two genuinely different, sequential
+    // trades, not a duplicate of the same one. Open and closed never
+    // compete with each other for a single slot. Within a bucket, if a
+    // symbol has both a monthly and a weekly candidate, only the
+    // chronologically FIRST one wins - a symbol can't occupy both monthly
+    // and weekly within the same open-or-closed bucket at once.
     var selected;
     if (noFilter) {{
       selected = passing;
@@ -1213,21 +1215,15 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       var firstForSymbol = {{}};
       passing.forEach(function(card) {{
         var sym = card.getAttribute('data-symbol');
+        var kind = card.getAttribute('data-kind');
+        var key = sym + '|' + kind;
         var added = card.getAttribute('data-added') || '';
-        var isOpen = card.getAttribute('data-kind') === 'open';
-        var current = firstForSymbol[sym];
-        if (!current) {{
-          firstForSymbol[sym] = card;
-          return;
-        }}
-        var currentIsOpen = current.getAttribute('data-kind') === 'open';
-        if (isOpen && !currentIsOpen) {{
-          firstForSymbol[sym] = card;
-        }} else if (isOpen === currentIsOpen && added < current.getAttribute('data-added')) {{
-          firstForSymbol[sym] = card;
+        var current = firstForSymbol[key];
+        if (!current || added < current.getAttribute('data-added')) {{
+          firstForSymbol[key] = card;
         }}
       }});
-      selected = Object.keys(firstForSymbol).map(function(sym) {{ return firstForSymbol[sym]; }});
+      selected = Object.keys(firstForSymbol).map(function(key) {{ return firstForSymbol[key]; }});
     }}
     var selectedSet = new Set(selected);
 
@@ -1689,43 +1685,24 @@ def build_summary(positions, today, filter_cfg=None):
     # This has to replicate the webpage's OWN two-pass filter exactly (see
     # applyFilter()'s "Pass 2" in generate_html_summary), not just the raw
     # per-position check: once any filter dimension is active, only the
-    # earliest-added instance per symbol - across open AND closed alike -
-    # counts as "the trade you'd have taken." Skipping that second pass
+    # earliest-added instance per symbol PER OPEN/CLOSED BUCKET counts as
+    # "the trade you'd have taken" - a symbol can legitimately appear once
+    # in open (its current position) and once in closed (an earlier,
+    # already-settled trade on the same stock), since those are two
+    # genuinely different, sequential trades. Skipping this second pass
     # would let a since-re-qualified symbol's LATER settlement double up
-    # in the chart even though the webpage only ever shows one card for
-    # it, making the chart's n= disagree with the page's own closed count.
+    # in the chart even though the webpage only ever shows one closed card
+    # per symbol, making the chart's n= disagree with the page's own count.
     if filter_cfg is not None and any(v is not None for v in filter_cfg.values()):
-        # Walk open positions before closed ones - the same DOM order the
-        # cards render in (open_cards before closed_cards below) - and only
-        # replace the symbol's pick on a STRICTLY earlier added_date, not a
-        # tie. That makes a same-day open/closed tie for one symbol resolve
-        # to the open card exactly like the JS loop does, instead of an
-        # arbitrary one (otherwise the chart's n= can drift from the page's
-        # own closed-shown count by exactly these tied cases).
-        ordered_candidates = (
-            [p for p in positions if not p.get("settled")]
-            + [p for p in positions if p.get("settled")]
-        )
-        first_for_symbol = {}
-        for p in ordered_candidates:
+        first_for_key = {}
+        for p in positions:
             if not position_passes_filter_config(p, filter_cfg):
                 continue
-            sym = p["symbol"]
-            is_open = not p.get("settled")
-            current = first_for_symbol.get(sym)
-            if current is None:
-                first_for_symbol[sym] = p
-                continue
-            current_is_open = not current.get("settled")
-            # An open position always wins over a closed one for the same
-            # symbol - once a contract settles, it's history, and shouldn't
-            # keep shadowing a genuinely new open signal on that stock just
-            # because it was added earlier (see the matching JS Pass 2).
-            if is_open and not current_is_open:
-                first_for_symbol[sym] = p
-            elif is_open == current_is_open and p["added_date"] < current["added_date"]:
-                first_for_symbol[sym] = p
-        selected_keys = {(p["symbol"], p["strike"], p["expiration"]) for p in first_for_symbol.values()}
+            key = (p["symbol"], bool(p.get("settled")))
+            current = first_for_key.get(key)
+            if current is None or p["added_date"] < current["added_date"]:
+                first_for_key[key] = p
+        selected_keys = {(p["symbol"], p["strike"], p["expiration"]) for p in first_for_key.values()}
         closed_rows_for_chart = [
             r for p, r in zip(settled, closed_rows)
             if (p["symbol"], p["strike"], p["expiration"]) in selected_keys
