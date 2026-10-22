@@ -10831,5 +10831,43 @@
     "added_date": "2026-10-21",
     "expiry_type": "weekly",
     "run_label": "D"
+  },
+  {
+    "symbol": "RIOT",
+    "strike": 13.0,
+    "expiration": "2026-11-20",
+    "barchart_bid": 0.91,
+    "bid": 0.91,
+    "bid_is_approx": false,
+    "ask": 1.12,
+    "ask_is_approx": false,
+    "potential_return_pct": 7.52688,
+    "potential_return_annual_pct": 91.5771,
+    "entry_stock_px": 14.02,
+    "pe_at_entry": null,
+    "eps_at_entry": -3.89,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-21",
+    "expiry_type": "monthly",
+    "run_label": "E"
+  },
+  {
+    "symbol": "RIOT",
+    "strike": 14.0,
+    "expiration": "2026-10-23",
+    "barchart_bid": 0.41,
+    "bid": 0.41,
+    "bid_is_approx": false,
+    "ask": 0.45,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.9286,
+    "potential_return_annual_pct": 534.4643,
+    "entry_stock_px": 14.02,
+    "pe_at_entry": null,
+    "eps_at_entry": -3.89,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-21",
+    "expiry_type": "weekly",
+    "run_label": "E"
   }
 ]
