@@ -1198,11 +1198,14 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       }}
     }});
 
-    // Pass 2: with an actual filter active, only the chronologically FIRST
-    // passing instance per symbol represents "the trade you'd have taken"
-    // on a real entry signal - a later instance of the same symbol that
-    // also clears the bar is suppressed, so one stock can't occupy (or
-    // count toward) the summary more than once at a time.
+    // Pass 2: with an actual filter active, only one instance per symbol
+    // represents "the trade you'd have taken." An OPEN position always
+    // wins over a CLOSED one for the same symbol, regardless of which was
+    // added earlier - once a contract settles, it's history, and a new
+    // open signal on that same stock deserves to show as open rather than
+    // being permanently shadowed by an old settled pick. Within the same
+    // bucket (open-vs-open or closed-vs-closed), the chronologically FIRST
+    // one still wins, same as before.
     var selected;
     if (noFilter) {{
       selected = passing;
@@ -1211,8 +1214,16 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       passing.forEach(function(card) {{
         var sym = card.getAttribute('data-symbol');
         var added = card.getAttribute('data-added') || '';
+        var isOpen = card.getAttribute('data-kind') === 'open';
         var current = firstForSymbol[sym];
-        if (!current || added < current.getAttribute('data-added')) {{
+        if (!current) {{
+          firstForSymbol[sym] = card;
+          return;
+        }}
+        var currentIsOpen = current.getAttribute('data-kind') === 'open';
+        if (isOpen && !currentIsOpen) {{
+          firstForSymbol[sym] = card;
+        }} else if (isOpen === currentIsOpen && added < current.getAttribute('data-added')) {{
           firstForSymbol[sym] = card;
         }}
       }});
@@ -1700,8 +1711,19 @@ def build_summary(positions, today, filter_cfg=None):
             if not position_passes_filter_config(p, filter_cfg):
                 continue
             sym = p["symbol"]
+            is_open = not p.get("settled")
             current = first_for_symbol.get(sym)
-            if current is None or p["added_date"] < current["added_date"]:
+            if current is None:
+                first_for_symbol[sym] = p
+                continue
+            current_is_open = not current.get("settled")
+            # An open position always wins over a closed one for the same
+            # symbol - once a contract settles, it's history, and shouldn't
+            # keep shadowing a genuinely new open signal on that stock just
+            # because it was added earlier (see the matching JS Pass 2).
+            if is_open and not current_is_open:
+                first_for_symbol[sym] = p
+            elif is_open == current_is_open and p["added_date"] < current["added_date"]:
                 first_for_symbol[sym] = p
         selected_keys = {(p["symbol"], p["strike"], p["expiration"]) for p in first_for_symbol.values()}
         closed_rows_for_chart = [
