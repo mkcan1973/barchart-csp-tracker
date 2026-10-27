@@ -61,7 +61,7 @@
 </head>
 <body>
   <h1>Barchart CSP Tracker</h1>
-  <div class="updated">Last updated 2026-10-26 &middot; 210 open &middot; 405 closed</div>
+  <div class="updated">Last updated 2026-10-26 &middot; 212 open &middot; 405 closed</div>
 
   <div class="filterbar">
     <label>Min ROI % <input type="number" id="minRoi" step="any" placeholder="-&infin;" inputmode="decimal"></label>
@@ -83,11 +83,11 @@
 
   <div class="totals">
     <div class="box">
-      <div class="label">UNREALIZED - ACTUAL, worst case (<span id="openCount">210</span> open, normalized $<span class="norm-base-num">1000</span>/position)</div>
-      <div class="val neg" id="totalActualSeller">Short <span id="totalActualSellerAmt">$-10,908.87</span><span id="totalActualSellerMid" class="neg"> (mid: $-7,488.54)</span></div>
-      <div class="val pos" id="totalActualBuyer">Long <span id="totalActualBuyerAmt">$18,001.04</span><span id="totalActualBuyerMid" class="pos"> (mid: $40,904.24)</span></div>
-      <div class="sub2">avg ROI: short <span id="avgActualSellerRoi">-5.2%</span> / long <span id="avgActualBuyerRoi">+8.6%</span></div>
-      <div class="sub2">avg ann. ROI: short <span id="avgActualSellerAnn">-315.5%</span> / long <span id="avgActualBuyerAnn">+220.2%</span></div>
+      <div class="label">UNREALIZED - ACTUAL, worst case (<span id="openCount">212</span> open, normalized $<span class="norm-base-num">1000</span>/position)</div>
+      <div class="val neg" id="totalActualSeller">Short <span id="totalActualSellerAmt">$-11,048.83</span><span id="totalActualSellerMid" class="neg"> (mid: $-7,529.48)</span></div>
+      <div class="val pos" id="totalActualBuyer">Long <span id="totalActualBuyerAmt">$17,399.85</span><span id="totalActualBuyerMid" class="pos"> (mid: $41,037.70)</span></div>
+      <div class="sub2">avg ROI: short <span id="avgActualSellerRoi">-5.2%</span> / long <span id="avgActualBuyerRoi">+8.2%</span></div>
+      <div class="sub2">avg ann. ROI: short <span id="avgActualSellerAnn">-318.6%</span> / long <span id="avgActualBuyerAnn">+199.2%</span></div>
       <div class="sub2">(mid) = less pessimistic reference using the mid price instead of crossing the spread</div>
     </div>
     <div class="box">
@@ -99,8 +99,8 @@
     </div>
     <div class="box">
       <div class="label">STOCK BENCHMARK (no options - buy/short $<span class="norm-base-num">1000</span> of shares at entry)</div>
-      <div class="val neg" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">$-13,697.20</span></div>
-      <div class="val pos" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">$13,697.20</span></div>
+      <div class="val neg" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">$-13,697.38</span></div>
+      <div class="val pos" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">$13,697.38</span></div>
       <div class="sub2">avg price change (open): <span id="avgStockUnrealPct">-6.5%</span> &middot; avg ann. ROI: <span id="avgStockUnrealAnn">-372.9%</span></div>
       <div class="val neg" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">$-54,472.06</span></div>
       <div class="val pos" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">$54,472.06</span></div>
@@ -112,10 +112,72 @@
 
   <h2>Realized P&amp;L over time</h2><img class="chart" src="barchart_csp_realized_pnl.png" alt="Realized P&L chart">
 
-  <h2>Open positions (<span id="openSectionCount">210</span>)</h2>
+  <h2>Open positions (<span id="openSectionCount">212</span>)</h2>
   <div class="cards">
   
-        <div class="card" data-ann-return="162.222" data-pe="" data-dte-entry="25" data-ask="0.25" data-strike="1.5" data-symbol="NXH" data-added="2026-10-26" data-expiry-type="monthly" data-kind="open" data-norm-as="-66.67" data-norm-ab="-400.0" data-roi-as="-6.67" data-roi-ab="-40.0" data-ann-as="" data-ann-ab="" data-norm-ms="-33.33" data-norm-mb="-200.0" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="131.729" data-pe="119.742195" data-dte-entry="25" data-ask="12.3" data-strike="145.0" data-symbol="NBIS" data-added="2026-10-26" data-expiry-type="monthly" data-kind="open" data-norm-as="-2.07" data-norm-ab="-24.39" data-roi-as="-0.21" data-roi-ab="-2.44" data-ann-as="" data-ann-ab="" data-norm-ms="-1.03" data-norm-mb="-12.2" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+          <div class="card-head">
+            <span class="sym">NBIS</span>
+            <span class="strike">$145P</span>
+            <span class="exp">2026-11-20</span>
+            
+            <span class="run-badge">D</span>
+          </div>
+          <div class="sub">0d active &middot; 25d left &middot; Entry 153.27 &middot; Now 153.27
+            &middot; bid 12.00/yahoo &middot; ask 12.30/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +131.7% &middot; PE at entry: 119.7 (yahoo) &middot; DTE at entry: 25</div>
+          
+          <div class="rowlabel">ACTUAL (real quote, crossing the spread to close now)</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
+              <div class="val neg">$-30.00<span class="neg"> (mid: $-15.00)</span></div>
+              <div class="sub2">ROI -0.2% &middot; ann --</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-2.07</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-1.03</span>)</div>
+              <div class="sub2">current ask (pay to close): $12.30</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put) - bearish, same side as short stock</div>
+              <div class="val neg">$-30.00<span class="neg"> (mid: $-15.00)</span></div>
+              <div class="sub2">ROI -2.4% &middot; ann --</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-24.39</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-12.20</span>)</div>
+              <div class="sub2">current bid (receive to close): $12.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" data-ann-return="261.8478" data-pe="" data-dte-entry="4" data-ask="0.36" data-strike="11.5" data-symbol="WULF" data-added="2026-10-26" data-expiry-type="weekly" data-kind="open" data-norm-as="-2.61" data-norm-ab="-83.33" data-roi-as="-0.26" data-roi-ab="-8.33" data-ann-as="" data-ann-ab="" data-norm-ms="-1.3" data-norm-mb="-41.67" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+          <div class="card-head">
+            <span class="sym">WULF</span>
+            <span class="strike">$11.5P</span>
+            <span class="exp">2026-10-30</span>
+            <span class="weekly-badge">weekly</span>
+            <span class="run-badge">D</span>
+          </div>
+          <div class="sub">0d active &middot; 4d left &middot; Entry 11.98 &middot; Now 11.98
+            &middot; bid 0.33/yahoo &middot; ask 0.36/yahoo</div>
+          <div class="sub">Barchart ann. return at selection: +261.8% &middot; PE at entry: -- (yahoo) &middot; DTE at entry: 4</div>
+          
+          <div class="rowlabel">ACTUAL (real quote, crossing the spread to close now)</div>
+          <div class="grid2">
+            <div class="box">
+              <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
+              <div class="val neg">$-3.00<span class="neg"> (mid: $-1.50)</span></div>
+              <div class="sub2">ROI -0.3% &middot; ann --</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-2.61</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-1.30</span>)</div>
+              <div class="sub2">current ask (pay to close): $0.36</div>
+            </div>
+            <div class="box">
+              <div class="label">LONG (bought put) - bearish, same side as short stock</div>
+              <div class="val neg">$-3.00<span class="neg"> (mid: $-1.50)</span></div>
+              <div class="sub2">ROI -8.3% &middot; ann --</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-83.33</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-41.67</span>)</div>
+              <div class="sub2">current bid (receive to close): $0.33</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" data-ann-return="162.222" data-pe="" data-dte-entry="25" data-ask="0.25" data-strike="1.5" data-symbol="NXH" data-added="2026-10-26" data-expiry-type="monthly" data-kind="open" data-norm-as="-66.67" data-norm-ab="-400.0" data-roi-as="-6.67" data-roi-ab="-40.0" data-ann-as="" data-ann-ab="" data-norm-ms="-33.33" data-norm-mb="-200.0" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">NXH</span>
             <span class="strike">$1.5P</span>
@@ -146,7 +208,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="162.222" data-pe="" data-dte-entry="25" data-ask="0.9" data-strike="7.0" data-symbol="BTDR" data-added="2026-10-26" data-expiry-type="monthly" data-kind="open" data-norm-as="-35.71" data-norm-ab="-277.78" data-roi-as="-3.57" data-roi-ab="-27.78" data-ann-as="" data-ann-ab="" data-norm-ms="-17.86" data-norm-mb="-138.89" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="162.222" data-pe="" data-dte-entry="25" data-ask="0.9" data-strike="7.0" data-symbol="BTDR" data-added="2026-10-26" data-expiry-type="monthly" data-kind="open" data-norm-as="-35.71" data-norm-ab="-277.78" data-roi-as="-3.57" data-roi-ab="-27.78" data-ann-as="" data-ann-ab="" data-norm-ms="-17.86" data-norm-mb="-138.89" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">BTDR</span>
             <span class="strike">$7P</span>
@@ -154,7 +216,7 @@
             
             <span class="run-badge">C</span>
           </div>
-          <div class="sub">0d active &middot; 25d left &middot; Entry 7.09 &middot; Now 7.09
+          <div class="sub">0d active &middot; 25d left &middot; Entry 7.09 &middot; Now 7.08
             &middot; bid 0.65/yahoo &middot; ask 0.90/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +162.2% &middot; PE at entry: -- (yahoo) &middot; DTE at entry: 25</div>
           
@@ -239,7 +301,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="129.554" data-pe="" data-dte-entry="53" data-ask="12.4" data-strike="60.0" data-symbol="CGON" data-added="2026-10-26" data-expiry-type="monthly" data-kind="open" data-norm-as="-48.33" data-norm-ab="-233.87" data-roi-as="-4.83" data-roi-ab="-23.39" data-ann-as="" data-ann-ab="" data-norm-ms="-24.17" data-norm-mb="-116.94" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="129.554" data-pe="" data-dte-entry="53" data-ask="12.4" data-strike="60.0" data-symbol="CGON" data-added="2026-10-26" data-expiry-type="monthly" data-kind="open" data-norm-as="-48.33" data-norm-ab="-233.87" data-roi-as="-4.83" data-roi-ab="-23.39" data-ann-as="" data-ann-ab="" data-norm-ms="-24.17" data-norm-mb="-116.94" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">CGON</span>
             <span class="strike">$60P</span>
@@ -270,7 +332,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="325.8929" data-pe="" data-dte-entry="4" data-ask="0.45" data-strike="7.0" data-symbol="BTDR" data-added="2026-10-26" data-expiry-type="weekly" data-kind="open" data-norm-as="-28.57" data-norm-ab="-444.44" data-roi-as="-2.86" data-roi-ab="-44.44" data-ann-as="" data-ann-ab="" data-norm-ms="-14.29" data-norm-mb="-222.22" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="325.8929" data-pe="" data-dte-entry="4" data-ask="0.45" data-strike="7.0" data-symbol="BTDR" data-added="2026-10-26" data-expiry-type="weekly" data-kind="open" data-norm-as="-28.57" data-norm-ab="-444.44" data-roi-as="-2.86" data-roi-ab="-44.44" data-ann-as="" data-ann-ab="" data-norm-ms="-14.29" data-norm-mb="-222.22" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">BTDR</span>
             <span class="strike">$7P</span>
@@ -278,7 +340,7 @@
             <span class="weekly-badge">weekly</span>
             <span class="run-badge">C</span>
           </div>
-          <div class="sub">0d active &middot; 4d left &middot; Entry 7.09 &middot; Now 7.09
+          <div class="sub">0d active &middot; 4d left &middot; Entry 7.09 &middot; Now 7.08
             &middot; bid 0.25/yahoo &middot; ask 0.45/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +325.9% &middot; PE at entry: -- (yahoo) &middot; DTE at entry: 4</div>
           
@@ -301,7 +363,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="500.4032" data-pe="" data-dte-entry="4" data-ask="1.03" data-strike="15.5" data-symbol="GLXY" data-added="2026-10-26" data-expiry-type="weekly" data-kind="open" data-norm-as="-11.61" data-norm-ab="-174.76" data-roi-as="-1.16" data-roi-ab="-17.48" data-ann-as="" data-ann-ab="" data-norm-ms="-5.81" data-norm-mb="-87.38" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="500.4032" data-pe="" data-dte-entry="4" data-ask="1.03" data-strike="15.5" data-symbol="GLXY" data-added="2026-10-26" data-expiry-type="weekly" data-kind="open" data-norm-as="-11.61" data-norm-ab="-174.76" data-roi-as="-1.16" data-roi-ab="-17.48" data-ann-as="" data-ann-ab="" data-norm-ms="-5.81" data-norm-mb="-87.38" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">GLXY</span>
             <span class="strike">$15.5P</span>
@@ -363,7 +425,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="397.9098" data-pe="119.742195" data-dte-entry="4" data-ask="6.8" data-strike="152.5" data-symbol="NBIS" data-added="2026-10-26" data-expiry-type="weekly" data-kind="open" data-norm-as="-0.98" data-norm-ab="-22.06" data-roi-as="-0.1" data-roi-ab="-2.21" data-ann-as="" data-ann-ab="" data-norm-ms="-0.49" data-norm-mb="-11.03" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="397.9098" data-pe="119.742195" data-dte-entry="4" data-ask="6.8" data-strike="152.5" data-symbol="NBIS" data-added="2026-10-26" data-expiry-type="weekly" data-kind="open" data-norm-as="-0.98" data-norm-ab="-22.06" data-roi-as="-0.1" data-roi-ab="-2.21" data-ann-as="" data-ann-ab="" data-norm-ms="-0.49" data-norm-mb="-11.03" data-stock-long="-0.0" data-stock-short="0.0" data-stock-pct="-0.0" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">NBIS</span>
             <span class="strike">$152.5P</span>
@@ -580,7 +642,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="315.2273" data-pe="10.130368" data-dte-entry="4" data-ask="1.15" data-strike="33.0" data-symbol="SMCI" data-added="2026-10-26" data-expiry-type="weekly" data-kind="open" data-norm-as="-3.94" data-norm-ab="86.96" data-roi-as="-0.39" data-roi-ab="8.7" data-ann-as="" data-ann-ab="" data-norm-ms="-3.64" data-norm-mb="95.65" data-stock-long="-10.14" data-stock-short="10.14" data-stock-pct="-1.01" data-stock-pct-ann="">
+        <div class="card" data-ann-return="315.2273" data-pe="10.130368" data-dte-entry="4" data-ask="1.15" data-strike="33.0" data-symbol="SMCI" data-added="2026-10-26" data-expiry-type="weekly" data-kind="open" data-norm-as="-3.94" data-norm-ab="78.26" data-roi-as="-0.39" data-roi-ab="7.83" data-ann-as="" data-ann-ab="" data-norm-ms="-3.48" data-norm-mb="91.3" data-stock-long="-10.14" data-stock-short="10.14" data-stock-pct="-1.01" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">SMCI</span>
             <span class="strike">$33P</span>
@@ -596,17 +658,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-13.00<span class="neg"> (mid: $-12.00)</span></div>
+              <div class="val neg">$-13.00<span class="neg"> (mid: $-11.50)</span></div>
               <div class="sub2">ROI -0.4% &middot; ann --</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-3.94</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-3.64</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-3.94</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-3.48</span>)</div>
               <div class="sub2">current ask (pay to close): $1.27</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$10.00<span class="pos"> (mid: $11.00)</span></div>
-              <div class="sub2">ROI +8.7% &middot; ann --</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$86.96</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$95.65</span>)</div>
-              <div class="sub2">current bid (receive to close): $1.25</div>
+              <div class="val pos">$9.00<span class="pos"> (mid: $10.50)</span></div>
+              <div class="sub2">ROI +7.8% &middot; ann --</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$78.26</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$91.30</span>)</div>
+              <div class="sub2">current bid (receive to close): $1.24</div>
             </div>
           </div>
         </div>
@@ -1704,7 +1766,7 @@
             <span class="weekly-badge">weekly</span>
             
           </div>
-          <div class="sub">3d active &middot; 4d left &middot; Entry 30.19 &middot; Now 15.70
+          <div class="sub">3d active &middot; 4d left &middot; Entry 30.19 &middot; Now 15.71
             &middot; bid 3.10/yahoo &middot; ask 3.40/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +538.8% &middot; PE at entry: 15.8 (yahoo) &middot; DTE at entry: 7</div>
           
@@ -1913,7 +1975,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="113.354" data-pe="" data-dte-entry="28" data-ask="0.65" data-strike="7.5" data-symbol="FRVO" data-added="2026-10-23" data-expiry-type="monthly" data-kind="open" data-norm-as="-13.33" data-norm-ab="-76.92" data-roi-as="-1.33" data-roi-ab="-7.69" data-ann-as="-161.82" data-ann-ab="-935.62" data-norm-ms="-6.67" data-norm-mb="-0.0" data-stock-long="-22.69" data-stock-short="22.69" data-stock-pct="-2.27" data-stock-pct-ann="-276.18">
+        <div class="card" data-ann-return="113.354" data-pe="" data-dte-entry="28" data-ask="0.65" data-strike="7.5" data-symbol="FRVO" data-added="2026-10-23" data-expiry-type="monthly" data-kind="open" data-norm-as="-20.0" data-norm-ab="-76.92" data-roi-as="-2.0" data-roi-ab="-7.69" data-ann-as="-243.33" data-ann-ab="-935.62" data-norm-ms="-10.0" data-norm-mb="38.46" data-stock-long="-22.69" data-stock-short="22.69" data-stock-pct="-2.27" data-stock-pct-ann="-276.18">
           <div class="card-head">
             <span class="sym">FRVO</span>
             <span class="strike">$7.5P</span>
@@ -1929,16 +1991,16 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-10.00<span class="neg"> (mid: $-5.00)</span></div>
-              <div class="sub2">ROI -1.3% &middot; ann -161.8%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-13.33</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-6.67</span>)</div>
-              <div class="sub2">current ask (pay to close): $0.70</div>
+              <div class="val neg">$-15.00<span class="neg"> (mid: $-7.50)</span></div>
+              <div class="sub2">ROI -2.0% &middot; ann -243.3%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-20.00</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-10.00</span>)</div>
+              <div class="sub2">current ask (pay to close): $0.75</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val neg">$-5.00<span class="pos"> (mid: $-0.00)</span></div>
+              <div class="val neg">$-5.00<span class="pos"> (mid: $2.50)</span></div>
               <div class="sub2">ROI -7.7% &middot; ann -935.6%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-76.92</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$-0.00</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-76.92</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$38.46</span>)</div>
               <div class="sub2">current bid (receive to close): $0.60</div>
             </div>
           </div>
@@ -2099,7 +2161,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="296.8132" data-pe="127.109375" data-dte-entry="7" data-ask="9.7" data-strike="162.5" data-symbol="NBIS" data-added="2026-10-23" data-expiry-type="weekly" data-kind="open" data-norm-as="-22.46" data-norm-ab="309.28" data-roi-as="-2.25" data-roi-ab="30.93" data-ann-as="-273.75" data-ann-ab="3763.15" data-norm-ms="-21.85" data-norm-mb="319.59" data-stock-long="-57.73" data-stock-short="57.73" data-stock-pct="-5.77" data-stock-pct-ann="-702.02">
+        <div class="card" data-ann-return="296.8132" data-pe="127.109375" data-dte-entry="7" data-ask="9.7" data-strike="162.5" data-symbol="NBIS" data-added="2026-10-23" data-expiry-type="weekly" data-kind="open" data-norm-as="-22.77" data-norm-ab="309.28" data-roi-as="-2.28" data-roi-ab="30.93" data-ann-as="-277.4" data-ann-ab="3763.15" data-norm-ms="-22.0" data-norm-mb="322.16" data-stock-long="-57.73" data-stock-short="57.73" data-stock-pct="-5.77" data-stock-pct-ann="-702.02">
           <div class="card-head">
             <span class="sym">NBIS</span>
             <span class="strike">$162.5P</span>
@@ -2115,22 +2177,22 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-365.00<span class="neg"> (mid: $-355.00)</span></div>
-              <div class="sub2">ROI -2.2% &middot; ann -273.8%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-22.46</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-21.85</span>)</div>
-              <div class="sub2">current ask (pay to close): $12.90</div>
+              <div class="val neg">$-370.00<span class="neg"> (mid: $-357.50)</span></div>
+              <div class="sub2">ROI -2.3% &middot; ann -277.4%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-22.77</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-22.00</span>)</div>
+              <div class="sub2">current ask (pay to close): $12.95</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$300.00<span class="pos"> (mid: $310.00)</span></div>
+              <div class="val pos">$300.00<span class="pos"> (mid: $312.50)</span></div>
               <div class="sub2">ROI +30.9% &middot; ann +3763.2%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$309.28</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$319.59</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$309.28</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$322.16</span>)</div>
               <div class="sub2">current bid (receive to close): $12.70</div>
             </div>
           </div>
         </div>
 
-        <div class="card" data-ann-return="208.5714" data-pe="" data-dte-entry="7" data-ask="0.28" data-strike="7.0" data-symbol="MARA" data-added="2026-10-23" data-expiry-type="weekly" data-kind="open" data-norm-as="-18.57" data-norm-ab="357.14" data-roi-as="-1.86" data-roi-ab="35.71" data-ann-as="-226.3" data-ann-ab="4344.72" data-norm-ms="-17.14" data-norm-mb="392.86" data-stock-long="-61.08" data-stock-short="61.08" data-stock-pct="-6.11" data-stock-pct-ann="-743.38">
+        <div class="card" data-ann-return="208.5714" data-pe="" data-dte-entry="7" data-ask="0.28" data-strike="7.0" data-symbol="MARA" data-added="2026-10-23" data-expiry-type="weekly" data-kind="open" data-norm-as="-18.57" data-norm-ab="321.43" data-roi-as="-1.86" data-roi-ab="32.14" data-ann-as="-226.3" data-ann-ab="3910.37" data-norm-ms="-16.43" data-norm-mb="375.0" data-stock-long="-61.08" data-stock-short="61.08" data-stock-pct="-6.11" data-stock-pct-ann="-743.38">
           <div class="card-head">
             <span class="sym">MARA</span>
             <span class="strike">$7P</span>
@@ -2146,17 +2208,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-13.00<span class="neg"> (mid: $-12.00)</span></div>
+              <div class="val neg">$-13.00<span class="neg"> (mid: $-11.50)</span></div>
               <div class="sub2">ROI -1.9% &middot; ann -226.3%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-18.57</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-17.14</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-18.57</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-16.43</span>)</div>
               <div class="sub2">current ask (pay to close): $0.40</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$10.00<span class="pos"> (mid: $11.00)</span></div>
-              <div class="sub2">ROI +35.7% &middot; ann +4344.7%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$357.14</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$392.86</span>)</div>
-              <div class="sub2">current bid (receive to close): $0.38</div>
+              <div class="val pos">$9.00<span class="pos"> (mid: $10.50)</span></div>
+              <div class="sub2">ROI +32.1% &middot; ann +3910.4%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$321.43</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$375.00</span>)</div>
+              <div class="sub2">current bid (receive to close): $0.37</div>
             </div>
           </div>
         </div>
@@ -2417,7 +2479,7 @@
             
             
           </div>
-          <div class="sub">4d active &middot; 25d left &middot; Entry 29.35 &middot; Now 15.70
+          <div class="sub">4d active &middot; 25d left &middot; Entry 29.35 &middot; Now 15.71
             &middot; bid 2.40/yahoo &middot; ask 2.65/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +122.8% &middot; PE at entry: 15.4 (yahoo) &middot; DTE at entry: 29</div>
           
@@ -2510,7 +2572,7 @@
             <span class="weekly-badge">weekly</span>
             
           </div>
-          <div class="sub">4d active &middot; 4d left &middot; Entry 29.35 &middot; Now 15.70
+          <div class="sub">4d active &middot; 4d left &middot; Entry 29.35 &middot; Now 15.71
             &middot; bid 2.95/yahoo &middot; ask 3.20/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +464.1% &middot; PE at entry: 15.4 (yahoo) &middot; DTE at entry: 8</div>
           
@@ -2719,7 +2781,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="130.7917" data-pe="" data-dte-entry="15" data-ask="0.58" data-strike="8.0" data-symbol="NVTS" data-added="2026-10-22" data-expiry-type="weekly" data-kind="open" data-norm-as="-8.75" data-norm-ab="-224.14" data-roi-as="-0.88" data-roi-ab="-22.41" data-ann-as="-80.3" data-ann-ab="-2044.91" data-norm-ms="-5.62" data-norm-mb="-181.03" data-stock-long="-5.33" data-stock-short="5.33" data-stock-pct="-0.53" data-stock-pct-ann="-48.36">
+        <div class="card" data-ann-return="130.7917" data-pe="" data-dte-entry="15" data-ask="0.58" data-strike="8.0" data-symbol="NVTS" data-added="2026-10-22" data-expiry-type="weekly" data-kind="open" data-norm-as="-8.75" data-norm-ab="-206.9" data-roi-as="-0.88" data-roi-ab="-20.69" data-ann-as="-80.3" data-ann-ab="-1887.96" data-norm-ms="-6.25" data-norm-mb="-172.41" data-stock-long="-5.33" data-stock-short="5.33" data-stock-pct="-0.53" data-stock-pct-ann="-48.36">
           <div class="card-head">
             <span class="sym">NVTS</span>
             <span class="strike">$8P</span>
@@ -2735,17 +2797,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-7.00<span class="neg"> (mid: $-4.50)</span></div>
+              <div class="val neg">$-7.00<span class="neg"> (mid: $-5.00)</span></div>
               <div class="sub2">ROI -0.9% &middot; ann -80.3%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-8.75</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-5.62</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-8.75</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-6.25</span>)</div>
               <div class="sub2">current ask (pay to close): $0.50</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val neg">$-13.00<span class="neg"> (mid: $-10.50)</span></div>
-              <div class="sub2">ROI -22.4% &middot; ann -2044.9%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-224.14</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-181.03</span>)</div>
-              <div class="sub2">current bid (receive to close): $0.45</div>
+              <div class="val neg">$-12.00<span class="neg"> (mid: $-10.00)</span></div>
+              <div class="sub2">ROI -20.7% &middot; ann -1888.0%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-206.90</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-172.41</span>)</div>
+              <div class="sub2">current bid (receive to close): $0.46</div>
             </div>
           </div>
         </div>
@@ -2781,7 +2843,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="139.847" data-pe="" data-dte-entry="29" data-ask="1.0" data-strike="7.5" data-symbol="SECZ" data-added="2026-10-22" data-expiry-type="monthly" data-kind="open" data-norm-as="-33.33" data-norm-ab="-150.0" data-roi-as="-3.33" data-roi-ab="-15.0" data-ann-as="-303.86" data-ann-ab="-1368.75" data-norm-ms="-23.33" data-norm-mb="-75.0" data-stock-long="-50.66" data-stock-short="50.66" data-stock-pct="-5.07" data-stock-pct-ann="-462.64">
+        <div class="card" data-ann-return="139.847" data-pe="" data-dte-entry="29" data-ask="1.0" data-strike="7.5" data-symbol="SECZ" data-added="2026-10-22" data-expiry-type="monthly" data-kind="open" data-norm-as="-33.33" data-norm-ab="-400.0" data-roi-as="-3.33" data-roi-ab="-40.0" data-ann-as="-303.86" data-ann-ab="-3650.0" data-norm-ms="-6.67" data-norm-mb="-200.0" data-stock-long="-50.66" data-stock-short="50.66" data-stock-pct="-5.07" data-stock-pct-ann="-462.64">
           <div class="card-head">
             <span class="sym">SECZ</span>
             <span class="strike">$7.5P</span>
@@ -2797,17 +2859,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-25.00<span class="neg"> (mid: $-17.50)</span></div>
+              <div class="val neg">$-25.00<span class="neg"> (mid: $-5.00)</span></div>
               <div class="sub2">ROI -3.3% &middot; ann -303.9%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-33.33</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-23.33</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-33.33</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-6.67</span>)</div>
               <div class="sub2">current ask (pay to close): $1.00</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val neg">$-15.00<span class="neg"> (mid: $-7.50)</span></div>
-              <div class="sub2">ROI -15.0% &middot; ann -1368.8%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-150.00</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-75.00</span>)</div>
-              <div class="sub2">current bid (receive to close): $0.85</div>
+              <div class="val neg">$-40.00<span class="neg"> (mid: $-20.00)</span></div>
+              <div class="sub2">ROI -40.0% &middot; ann -3650.0%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-400.00</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-200.00</span>)</div>
+              <div class="sub2">current bid (receive to close): $0.60</div>
             </div>
           </div>
         </div>
@@ -2905,7 +2967,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="110.122" data-pe="" data-dte-entry="29" data-ask="1.73" data-strike="22.0" data-symbol="IREN" data-added="2026-10-22" data-expiry-type="monthly" data-kind="open" data-norm-as="6.36" data-norm-ab="-127.17" data-roi-as="0.64" data-roi-ab="-12.72" data-ann-as="58.4" data-ann-ab="-1160.7" data-norm-ms="7.05" data-norm-mb="-118.5" data-stock-long="-6.64" data-stock-short="6.64" data-stock-pct="-0.66" data-stock-pct-ann="-60.23">
+        <div class="card" data-ann-return="110.122" data-pe="" data-dte-entry="29" data-ask="1.73" data-strike="22.0" data-symbol="IREN" data-added="2026-10-22" data-expiry-type="monthly" data-kind="open" data-norm-as="6.36" data-norm-ab="-179.19" data-roi-as="0.64" data-roi-ab="-17.92" data-ann-as="58.4" data-ann-ab="-1635.2" data-norm-ms="9.09" data-norm-mb="-144.51" data-stock-long="-6.64" data-stock-short="6.64" data-stock-pct="-0.66" data-stock-pct-ann="-60.23">
           <div class="card-head">
             <span class="sym">IREN</span>
             <span class="strike">$22P</span>
@@ -2921,17 +2983,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val pos">$14.00<span class="pos"> (mid: $15.50)</span></div>
+              <div class="val pos">$14.00<span class="pos"> (mid: $20.00)</span></div>
               <div class="sub2">ROI +0.6% &middot; ann +58.4%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-as">$6.36</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-ms">$7.05</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-as">$6.36</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-ms">$9.09</span>)</div>
               <div class="sub2">current ask (pay to close): $1.54</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val neg">$-22.00<span class="neg"> (mid: $-20.50)</span></div>
-              <div class="sub2">ROI -12.7% &middot; ann -1160.7%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-127.17</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-118.50</span>)</div>
-              <div class="sub2">current bid (receive to close): $1.51</div>
+              <div class="val neg">$-31.00<span class="neg"> (mid: $-25.00)</span></div>
+              <div class="sub2">ROI -17.9% &middot; ann -1635.2%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-179.19</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-144.51</span>)</div>
+              <div class="sub2">current bid (receive to close): $1.42</div>
             </div>
           </div>
         </div>
@@ -3254,7 +3316,7 @@
             
             
           </div>
-          <div class="sub">5d active &middot; 25d left &middot; Entry 2.45 &middot; Now 2.22
+          <div class="sub">5d active &middot; 25d left &middot; Entry 2.45 &middot; Now 2.23
             &middot; bid 0.15/yahoo &middot; ask 0.30/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +98.6% &middot; PE at entry: -- (yahoo) &middot; DTE at entry: 30</div>
           
@@ -3277,7 +3339,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="94.5896" data-pe="" data-dte-entry="58" data-ask="10.3" data-strike="75.0" data-symbol="AAOI" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-38.67" data-norm-ab="203.88" data-roi-as="-3.87" data-roi-ab="20.39" data-ann-as="-282.51" data-ann-ab="1488.47" data-norm-ms="-36.67" data-norm-mb="218.45" data-stock-long="-72.34" data-stock-short="72.34" data-stock-pct="-7.23" data-stock-pct-ann="-527.79">
+        <div class="card" data-ann-return="94.5896" data-pe="" data-dte-entry="58" data-ask="10.3" data-strike="75.0" data-symbol="AAOI" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-38.67" data-norm-ab="194.17" data-roi-as="-3.87" data-roi-ab="19.42" data-ann-as="-282.51" data-ann-ab="1417.66" data-norm-ms="-36.0" data-norm-mb="213.59" data-stock-long="-72.34" data-stock-short="72.34" data-stock-pct="-7.23" data-stock-pct-ann="-527.79">
           <div class="card-head">
             <span class="sym">AAOI</span>
             <span class="strike">$75P</span>
@@ -3293,17 +3355,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-290.00<span class="neg"> (mid: $-275.00)</span></div>
+              <div class="val neg">$-290.00<span class="neg"> (mid: $-270.00)</span></div>
               <div class="sub2">ROI -3.9% &middot; ann -282.5%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-38.67</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-36.67</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-38.67</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-36.00</span>)</div>
               <div class="sub2">current ask (pay to close): $12.70</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$210.00<span class="pos"> (mid: $225.00)</span></div>
-              <div class="sub2">ROI +20.4% &middot; ann +1488.5%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$203.88</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$218.45</span>)</div>
-              <div class="sub2">current bid (receive to close): $12.40</div>
+              <div class="val pos">$200.00<span class="pos"> (mid: $220.00)</span></div>
+              <div class="sub2">ROI +19.4% &middot; ann +1417.7%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$194.17</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$213.59</span>)</div>
+              <div class="sub2">current bid (receive to close): $12.30</div>
             </div>
           </div>
         </div>
@@ -3525,7 +3587,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="73.4004" data-pe="" data-dte-entry="30" data-ask="8.15" data-strike="145.0" data-symbol="MSTR" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-38.28" data-norm-ab="650.31" data-roi-as="-3.83" data-roi-ab="65.03" data-ann-as="-279.59" data-ann-ab="4747.19" data-norm-ms="-37.93" data-norm-mb="656.44" data-stock-long="-89.95" data-stock-short="89.95" data-stock-pct="-9.0" data-stock-pct-ann="-657.0">
+        <div class="card" data-ann-return="73.4004" data-pe="" data-dte-entry="30" data-ask="8.15" data-strike="145.0" data-symbol="MSTR" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-41.72" data-norm-ab="644.17" data-roi-as="-4.17" data-roi-ab="64.42" data-ann-as="-304.41" data-ann-ab="4702.66" data-norm-ms="-39.48" data-norm-mb="684.05" data-stock-long="-89.95" data-stock-short="89.95" data-stock-pct="-9.0" data-stock-pct-ann="-657.0">
           <div class="card-head">
             <span class="sym">MSTR</span>
             <span class="strike">$145P</span>
@@ -3541,17 +3603,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-555.00<span class="neg"> (mid: $-550.00)</span></div>
-              <div class="sub2">ROI -3.8% &middot; ann -279.6%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-38.28</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-37.93</span>)</div>
-              <div class="sub2">current ask (pay to close): $13.55</div>
+              <div class="val neg">$-605.00<span class="neg"> (mid: $-572.50)</span></div>
+              <div class="sub2">ROI -4.2% &middot; ann -304.4%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-41.72</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-39.48</span>)</div>
+              <div class="sub2">current ask (pay to close): $14.05</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$530.00<span class="pos"> (mid: $535.00)</span></div>
-              <div class="sub2">ROI +65.0% &middot; ann +4747.2%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$650.31</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$656.44</span>)</div>
-              <div class="sub2">current bid (receive to close): $13.45</div>
+              <div class="val pos">$525.00<span class="pos"> (mid: $557.50)</span></div>
+              <div class="sub2">ROI +64.4% &middot; ann +4702.7%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$644.17</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$684.05</span>)</div>
+              <div class="sub2">current bid (receive to close): $13.40</div>
             </div>
           </div>
         </div>
@@ -4122,7 +4184,7 @@
             
             
           </div>
-          <div class="sub">6d active &middot; 25d left &middot; Entry 31.25 &middot; Now 15.70
+          <div class="sub">6d active &middot; 25d left &middot; Entry 31.25 &middot; Now 15.71
             &middot; bid 2.15/yahoo &middot; ask 2.60/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +99.0% &middot; PE at entry: 16.4 (yahoo) &middot; DTE at entry: 31</div>
           
@@ -4331,7 +4393,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="93.0894" data-pe="" data-dte-entry="32" data-ask="4.65" data-strike="55.0" data-symbol="CRWV" data-added="2026-10-19" data-expiry-type="monthly" data-kind="open" data-norm-as="-33.64" data-norm-ab="354.84" data-roi-as="-3.36" data-roi-ab="35.48" data-ann-as="-175.2" data-ann-ab="1850.03" data-norm-ms="-32.73" data-norm-mb="365.59" data-stock-long="-82.54" data-stock-short="82.54" data-stock-pct="-8.25" data-stock-pct-ann="-430.18">
+        <div class="card" data-ann-return="93.0894" data-pe="" data-dte-entry="32" data-ask="4.65" data-strike="55.0" data-symbol="CRWV" data-added="2026-10-19" data-expiry-type="monthly" data-kind="open" data-norm-as="-33.64" data-norm-ab="344.09" data-roi-as="-3.36" data-roi-ab="34.41" data-ann-as="-175.2" data-ann-ab="1794.24" data-norm-ms="-32.27" data-norm-mb="360.22" data-stock-long="-82.54" data-stock-short="82.54" data-stock-pct="-8.25" data-stock-pct-ann="-430.18">
           <div class="card-head">
             <span class="sym">CRWV</span>
             <span class="strike">$55P</span>
@@ -4347,22 +4409,22 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-185.00<span class="neg"> (mid: $-180.00)</span></div>
+              <div class="val neg">$-185.00<span class="neg"> (mid: $-177.50)</span></div>
               <div class="sub2">ROI -3.4% &middot; ann -175.2%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-33.64</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-32.73</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-33.64</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-32.27</span>)</div>
               <div class="sub2">current ask (pay to close): $6.40</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$165.00<span class="pos"> (mid: $170.00)</span></div>
-              <div class="sub2">ROI +35.5% &middot; ann +1850.0%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$354.84</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$365.59</span>)</div>
-              <div class="sub2">current bid (receive to close): $6.30</div>
+              <div class="val pos">$160.00<span class="pos"> (mid: $167.50)</span></div>
+              <div class="sub2">ROI +34.4% &middot; ann +1794.2%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$344.09</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$360.22</span>)</div>
+              <div class="sub2">current bid (receive to close): $6.25</div>
             </div>
           </div>
         </div>
 
-        <div class="card" data-ann-return="92.4831" data-pe="" data-dte-entry="32" data-ask="0.63" data-strike="8.0" data-symbol="UUUU" data-added="2026-10-19" data-expiry-type="monthly" data-kind="open" data-norm-as="-45.0" data-norm-ab="333.33" data-roi-as="-4.5" data-roi-ab="33.33" data-ann-as="-234.64" data-ann-ab="1737.92" data-norm-ms="-37.5" data-norm-mb="428.57" data-stock-long="-84.2" data-stock-short="84.2" data-stock-pct="-8.42" data-stock-pct-ann="-439.04">
+        <div class="card" data-ann-return="92.4831" data-pe="" data-dte-entry="32" data-ask="0.63" data-strike="8.0" data-symbol="UUUU" data-added="2026-10-19" data-expiry-type="monthly" data-kind="open" data-norm-as="-45.0" data-norm-ab="333.33" data-roi-as="-4.5" data-roi-ab="33.33" data-ann-as="-234.64" data-ann-ab="1737.92" data-norm-ms="-37.5" data-norm-mb="428.57" data-stock-long="-84.19" data-stock-short="84.19" data-stock-pct="-8.42" data-stock-pct-ann="-439.04">
           <div class="card-head">
             <span class="sym">UUUU</span>
             <span class="strike">$8P</span>
@@ -4672,7 +4734,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="90.6028" data-pe="" data-dte-entry="60" data-ask="3.55" data-strike="27.0" data-symbol="IREN" data-added="2026-10-19" data-expiry-type="monthly" data-kind="open" data-norm-as="-59.26" data-norm-ab="380.28" data-roi-as="-5.93" data-roi-ab="38.03" data-ann-as="-309.21" data-ann-ab="1982.99" data-norm-ms="-57.41" data-norm-mb="394.37" data-stock-long="-113.94" data-stock-short="113.94" data-stock-pct="-11.39" data-stock-pct-ann="-593.91">
+        <div class="card" data-ann-return="90.6028" data-pe="" data-dte-entry="60" data-ask="3.55" data-strike="27.0" data-symbol="IREN" data-added="2026-10-19" data-expiry-type="monthly" data-kind="open" data-norm-as="-59.26" data-norm-ab="366.2" data-roi-as="-5.93" data-roi-ab="36.62" data-ann-as="-309.21" data-ann-ab="1909.47" data-norm-ms="-56.48" data-norm-mb="387.32" data-stock-long="-113.94" data-stock-short="113.94" data-stock-pct="-11.39" data-stock-pct-ann="-593.91">
           <div class="card-head">
             <span class="sym">IREN</span>
             <span class="strike">$27P</span>
@@ -4688,17 +4750,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-160.00<span class="neg"> (mid: $-155.00)</span></div>
+              <div class="val neg">$-160.00<span class="neg"> (mid: $-152.50)</span></div>
               <div class="sub2">ROI -5.9% &middot; ann -309.2%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-59.26</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-57.41</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-59.26</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-56.48</span>)</div>
               <div class="sub2">current ask (pay to close): $5.00</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$135.00<span class="pos"> (mid: $140.00)</span></div>
-              <div class="sub2">ROI +38.0% &middot; ann +1983.0%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$380.28</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$394.37</span>)</div>
-              <div class="sub2">current bid (receive to close): $4.90</div>
+              <div class="val pos">$130.00<span class="pos"> (mid: $137.50)</span></div>
+              <div class="sub2">ROI +36.6% &middot; ann +1909.5%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$366.20</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$387.32</span>)</div>
+              <div class="sub2">current bid (receive to close): $4.85</div>
             </div>
           </div>
         </div>
@@ -4920,7 +4982,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="115.873" data-pe="" data-dte-entry="35" data-ask="0.35" data-strike="3.0" data-symbol="HYLN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-33.33" data-norm-ab="-285.71" data-roi-as="-3.33" data-roi-ab="-28.57" data-ann-as="-121.55" data-ann-ab="-1042.81" data-norm-ms="-8.33" data-norm-mb="-71.43" data-stock-long="-29.32" data-stock-short="29.32" data-stock-pct="-2.93" data-stock-pct-ann="-106.95">
+        <div class="card" data-ann-return="115.873" data-pe="" data-dte-entry="35" data-ask="0.35" data-strike="3.0" data-symbol="HYLN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-50.0" data-norm-ab="-285.71" data-roi-as="-5.0" data-roi-ab="-28.57" data-ann-as="-182.5" data-ann-ab="-1042.81" data-norm-ms="-16.67" data-norm-mb="0.0" data-stock-long="-29.32" data-stock-short="29.32" data-stock-pct="-2.93" data-stock-pct-ann="-106.95">
           <div class="card-head">
             <span class="sym">HYLN</span>
             <span class="strike">$3P</span>
@@ -4936,16 +4998,16 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-10.00<span class="neg"> (mid: $-2.50)</span></div>
-              <div class="sub2">ROI -3.3% &middot; ann -121.5%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-33.33</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-8.33</span>)</div>
-              <div class="sub2">current ask (pay to close): $0.40</div>
+              <div class="val neg">$-15.00<span class="neg"> (mid: $-5.00)</span></div>
+              <div class="sub2">ROI -5.0% &middot; ann -182.5%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-50.00</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-16.67</span>)</div>
+              <div class="sub2">current ask (pay to close): $0.45</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val neg">$-10.00<span class="neg"> (mid: $-2.50)</span></div>
+              <div class="val neg">$-10.00<span class="pos"> (mid: $0.00)</span></div>
               <div class="sub2">ROI -28.6% &middot; ann -1042.8%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-285.71</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-71.43</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-285.71</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$0.00</span>)</div>
               <div class="sub2">current bid (receive to close): $0.25</div>
             </div>
           </div>
@@ -4990,7 +5052,7 @@
             
             
           </div>
-          <div class="sub">10d active &middot; 25d left &middot; Entry 29.23 &middot; Now 15.70
+          <div class="sub">10d active &middot; 25d left &middot; Entry 29.23 &middot; Now 15.71
             &middot; bid 2.60/yahoo &middot; ask 2.85/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +109.0% &middot; PE at entry: 15.3 (yahoo) &middot; DTE at entry: 35</div>
           
@@ -5137,7 +5199,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="133.298" data-pe="" data-dte-entry="35" data-ask="8.9" data-strike="75.0" data-symbol="AAOI" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-25.33" data-norm-ab="146.07" data-roi-as="-2.53" data-roi-ab="14.61" data-ann-as="-92.34" data-ann-ab="533.26" data-norm-ms="-23.33" data-norm-mb="162.92" data-stock-long="-65.23" data-stock-short="65.23" data-stock-pct="-6.52" data-stock-pct-ann="-237.98">
+        <div class="card" data-ann-return="133.298" data-pe="" data-dte-entry="35" data-ask="8.9" data-strike="75.0" data-symbol="AAOI" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-25.33" data-norm-ab="123.6" data-roi-as="-2.53" data-roi-ab="12.36" data-ann-as="-92.34" data-ann-ab="451.14" data-norm-ms="-22.0" data-norm-mb="151.69" data-stock-long="-65.23" data-stock-short="65.23" data-stock-pct="-6.52" data-stock-pct-ann="-237.98">
           <div class="card-head">
             <span class="sym">AAOI</span>
             <span class="strike">$75P</span>
@@ -5153,17 +5215,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-190.00<span class="neg"> (mid: $-175.00)</span></div>
+              <div class="val neg">$-190.00<span class="neg"> (mid: $-165.00)</span></div>
               <div class="sub2">ROI -2.5% &middot; ann -92.3%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-25.33</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-23.33</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-25.33</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-22.00</span>)</div>
               <div class="sub2">current ask (pay to close): $10.50</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$130.00<span class="pos"> (mid: $145.00)</span></div>
-              <div class="sub2">ROI +14.6% &middot; ann +533.3%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$146.07</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$162.92</span>)</div>
-              <div class="sub2">current bid (receive to close): $10.20</div>
+              <div class="val pos">$110.00<span class="pos"> (mid: $135.00)</span></div>
+              <div class="sub2">ROI +12.4% &middot; ann +451.1%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$123.60</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$151.69</span>)</div>
+              <div class="sub2">current bid (receive to close): $10.00</div>
             </div>
           </div>
         </div>
@@ -5323,7 +5385,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="148.98" data-pe="" data-dte-entry="35" data-ask="0.35" data-strike="2.0" data-symbol="NAUT" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="25.0" data-norm-ab="-571.43" data-roi-as="2.5" data-roi-ab="-57.14" data-ann-as="91.25" data-ann-ab="-2085.61" data-norm-ms="37.5" data-norm-mb="-500.0" data-stock-long="140.45" data-stock-short="-140.45" data-stock-pct="14.05" data-stock-pct-ann="512.83">
+        <div class="card" data-ann-return="148.98" data-pe="" data-dte-entry="35" data-ask="0.35" data-strike="2.0" data-symbol="NAUT" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-75.0" data-norm-ab="-571.43" data-roi-as="-7.5" data-roi-ab="-57.14" data-ann-as="-273.75" data-ann-ab="-2085.61" data-norm-ms="-12.5" data-norm-mb="-214.29" data-stock-long="140.45" data-stock-short="-140.45" data-stock-pct="14.05" data-stock-pct-ann="512.83">
           <div class="card-head">
             <span class="sym">NAUT</span>
             <span class="strike">$2P</span>
@@ -5339,16 +5401,16 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val pos">$5.00<span class="pos"> (mid: $7.50)</span></div>
-              <div class="sub2">ROI +2.5% &middot; ann +91.2%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-as">$25.00</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-ms">$37.50</span>)</div>
-              <div class="sub2">current ask (pay to close): $0.20</div>
+              <div class="val neg">$-15.00<span class="neg"> (mid: $-2.50)</span></div>
+              <div class="sub2">ROI -7.5% &middot; ann -273.8%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-75.00</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-12.50</span>)</div>
+              <div class="sub2">current ask (pay to close): $0.40</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val neg">$-20.00<span class="neg"> (mid: $-17.50)</span></div>
+              <div class="val neg">$-20.00<span class="neg"> (mid: $-7.50)</span></div>
               <div class="sub2">ROI -57.1% &middot; ann -2085.6%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-571.43</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-500.00</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-571.43</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-214.29</span>)</div>
               <div class="sub2">current bid (receive to close): $0.15</div>
             </div>
           </div>
@@ -5385,7 +5447,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="130.357" data-pe="" data-dte-entry="35" data-ask="2.97" data-strike="27.0" data-symbol="IREN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-41.85" data-norm-ab="329.97" data-roi-as="-4.19" data-roi-ab="33.0" data-ann-as="-152.94" data-ann-ab="1204.5" data-norm-ms="-40.93" data-norm-mb="338.38" data-stock-long="-88.04" data-stock-short="88.04" data-stock-pct="-8.8" data-stock-pct-ann="-321.2">
+        <div class="card" data-ann-return="130.357" data-pe="" data-dte-entry="35" data-ask="2.97" data-strike="27.0" data-symbol="IREN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-41.85" data-norm-ab="313.13" data-roi-as="-4.19" data-roi-ab="31.31" data-ann-as="-152.94" data-ann-ab="1142.82" data-norm-ms="-40.0" data-norm-mb="329.97" data-stock-long="-88.04" data-stock-short="88.04" data-stock-pct="-8.8" data-stock-pct-ann="-321.2">
           <div class="card-head">
             <span class="sym">IREN</span>
             <span class="strike">$27P</span>
@@ -5401,17 +5463,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-113.00<span class="neg"> (mid: $-110.50)</span></div>
+              <div class="val neg">$-113.00<span class="neg"> (mid: $-108.00)</span></div>
               <div class="sub2">ROI -4.2% &middot; ann -152.9%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-41.85</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-40.93</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-41.85</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-40.00</span>)</div>
               <div class="sub2">current ask (pay to close): $4.00</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$98.00<span class="pos"> (mid: $100.50)</span></div>
-              <div class="sub2">ROI +33.0% &middot; ann +1204.5%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$329.97</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$338.38</span>)</div>
-              <div class="sub2">current bid (receive to close): $3.95</div>
+              <div class="val pos">$93.00<span class="pos"> (mid: $98.00)</span></div>
+              <div class="sub2">ROI +31.3% &middot; ann +1142.8%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$313.13</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$329.97</span>)</div>
+              <div class="sub2">current bid (receive to close): $3.90</div>
             </div>
           </div>
         </div>
@@ -5447,7 +5509,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="110.942" data-pe="" data-dte-entry="35" data-ask="2.49" data-strike="26.0" data-symbol="IREN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-36.92" data-norm-ab="345.38" data-roi-as="-3.69" data-roi-ab="34.54" data-ann-as="-134.69" data-ann-ab="1260.71" data-norm-ms="-35.96" data-norm-mb="355.42" data-stock-long="-88.04" data-stock-short="88.04" data-stock-pct="-8.8" data-stock-pct-ann="-321.2">
+        <div class="card" data-ann-return="110.942" data-pe="" data-dte-entry="35" data-ask="2.49" data-strike="26.0" data-symbol="IREN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-36.92" data-norm-ab="325.3" data-roi-as="-3.69" data-roi-ab="32.53" data-ann-as="-134.69" data-ann-ab="1187.35" data-norm-ms="-35.0" data-norm-mb="345.38" data-stock-long="-88.04" data-stock-short="88.04" data-stock-pct="-8.8" data-stock-pct-ann="-321.2">
           <div class="card-head">
             <span class="sym">IREN</span>
             <span class="strike">$26P</span>
@@ -5463,17 +5525,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-96.00<span class="neg"> (mid: $-93.50)</span></div>
+              <div class="val neg">$-96.00<span class="neg"> (mid: $-91.00)</span></div>
               <div class="sub2">ROI -3.7% &middot; ann -134.7%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-36.92</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-35.96</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-36.92</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-35.00</span>)</div>
               <div class="sub2">current ask (pay to close): $3.40</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$86.00<span class="pos"> (mid: $88.50)</span></div>
-              <div class="sub2">ROI +34.5% &middot; ann +1260.7%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$345.38</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$355.42</span>)</div>
-              <div class="sub2">current bid (receive to close): $3.35</div>
+              <div class="val pos">$81.00<span class="pos"> (mid: $86.00)</span></div>
+              <div class="sub2">ROI +32.5% &middot; ann +1187.3%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$325.30</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$345.38</span>)</div>
+              <div class="sub2">current bid (receive to close): $3.30</div>
             </div>
           </div>
         </div>
@@ -5540,7 +5602,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="96.1306" data-pe="" data-dte-entry="35" data-ask="2.05" data-strike="25.0" data-symbol="IREN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-33.6" data-norm-ab="375.61" data-roi-as="-3.36" data-roi-ab="37.56" data-ann-as="-122.64" data-ann-ab="1370.94" data-norm-ms="-33.2" data-norm-mb="380.49" data-stock-long="-88.04" data-stock-short="88.04" data-stock-pct="-8.8" data-stock-pct-ann="-321.2">
+        <div class="card" data-ann-return="96.1306" data-pe="" data-dte-entry="35" data-ask="2.05" data-strike="25.0" data-symbol="IREN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-34.0" data-norm-ab="370.73" data-roi-as="-3.4" data-roi-ab="37.07" data-ann-as="-124.1" data-ann-ab="1353.06" data-norm-ms="-33.2" data-norm-mb="380.49" data-stock-long="-88.04" data-stock-short="88.04" data-stock-pct="-8.8" data-stock-pct-ann="-321.2">
           <div class="card-head">
             <span class="sym">IREN</span>
             <span class="strike">$25P</span>
@@ -5556,17 +5618,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-84.00<span class="neg"> (mid: $-83.00)</span></div>
-              <div class="sub2">ROI -3.4% &middot; ann -122.6%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-33.60</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-33.20</span>)</div>
-              <div class="sub2">current ask (pay to close): $2.84</div>
+              <div class="val neg">$-85.00<span class="neg"> (mid: $-83.00)</span></div>
+              <div class="sub2">ROI -3.4% &middot; ann -124.1%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-34.00</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-33.20</span>)</div>
+              <div class="sub2">current ask (pay to close): $2.85</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$77.00<span class="pos"> (mid: $78.00)</span></div>
-              <div class="sub2">ROI +37.6% &middot; ann +1370.9%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$375.61</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$380.49</span>)</div>
-              <div class="sub2">current bid (receive to close): $2.82</div>
+              <div class="val pos">$76.00<span class="pos"> (mid: $78.00)</span></div>
+              <div class="sub2">ROI +37.1% &middot; ann +1353.1%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$370.73</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$380.49</span>)</div>
+              <div class="sub2">current bid (receive to close): $2.81</div>
             </div>
           </div>
         </div>
@@ -5726,7 +5788,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="89.9137" data-pe="136.28174" data-dte-entry="35" data-ask="12.75" data-strike="160.0" data-symbol="NBIS" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-49.38" data-norm-ab="564.71" data-roi-as="-4.94" data-roi-ab="56.47" data-ann-as="-180.31" data-ann-ab="2061.15" data-norm-ms="-48.75" data-norm-mb="572.55" data-stock-long="-107.78" data-stock-short="107.78" data-stock-pct="-10.78" data-stock-pct-ann="-393.47">
+        <div class="card" data-ann-return="89.9137" data-pe="136.28174" data-dte-entry="35" data-ask="12.75" data-strike="160.0" data-symbol="NBIS" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-49.69" data-norm-ab="552.94" data-roi-as="-4.97" data-roi-ab="55.29" data-ann-as="-181.41" data-ann-ab="2018.09" data-norm-ms="-48.44" data-norm-mb="568.63" data-stock-long="-107.78" data-stock-short="107.78" data-stock-pct="-10.78" data-stock-pct-ann="-393.47">
           <div class="card-head">
             <span class="sym">NBIS</span>
             <span class="strike">$160P</span>
@@ -5742,17 +5804,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-790.00<span class="neg"> (mid: $-780.00)</span></div>
-              <div class="sub2">ROI -4.9% &middot; ann -180.3%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-49.38</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-48.75</span>)</div>
-              <div class="sub2">current ask (pay to close): $20.15</div>
+              <div class="val neg">$-795.00<span class="neg"> (mid: $-775.00)</span></div>
+              <div class="sub2">ROI -5.0% &middot; ann -181.4%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-49.69</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-48.44</span>)</div>
+              <div class="sub2">current ask (pay to close): $20.20</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$720.00<span class="pos"> (mid: $730.00)</span></div>
-              <div class="sub2">ROI +56.5% &middot; ann +2061.2%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$564.71</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$572.55</span>)</div>
-              <div class="sub2">current bid (receive to close): $19.95</div>
+              <div class="val pos">$705.00<span class="pos"> (mid: $725.00)</span></div>
+              <div class="sub2">ROI +55.3% &middot; ann +2018.1%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$552.94</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$568.63</span>)</div>
+              <div class="sub2">current bid (receive to close): $19.80</div>
             </div>
           </div>
         </div>
@@ -5850,7 +5912,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="81.0123" data-pe="" data-dte-entry="35" data-ask="1.72" data-strike="24.0" data-symbol="IREN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-28.75" data-norm-ab="360.47" data-roi-as="-2.88" data-roi-ab="36.05" data-ann-as="-105.12" data-ann-ab="1315.82" data-norm-ms="-28.33" data-norm-mb="366.28" data-stock-long="-86.89" data-stock-short="86.89" data-stock-pct="-8.69" data-stock-pct-ann="-317.19">
+        <div class="card" data-ann-return="81.0123" data-pe="" data-dte-entry="35" data-ask="1.72" data-strike="24.0" data-symbol="IREN" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="-28.75" data-norm-ab="308.14" data-roi-as="-2.88" data-roi-ab="30.81" data-ann-as="-105.12" data-ann-ab="1124.57" data-norm-ms="-26.46" data-norm-mb="340.12" data-stock-long="-86.89" data-stock-short="86.89" data-stock-pct="-8.69" data-stock-pct-ann="-317.19">
           <div class="card-head">
             <span class="sym">IREN</span>
             <span class="strike">$24P</span>
@@ -5866,22 +5928,22 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-69.00<span class="neg"> (mid: $-68.00)</span></div>
+              <div class="val neg">$-69.00<span class="neg"> (mid: $-63.50)</span></div>
               <div class="sub2">ROI -2.9% &middot; ann -105.1%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-28.75</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-28.33</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-28.75</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-26.46</span>)</div>
               <div class="sub2">current ask (pay to close): $2.36</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$62.00<span class="pos"> (mid: $63.00)</span></div>
-              <div class="sub2">ROI +36.0% &middot; ann +1315.8%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$360.47</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$366.28</span>)</div>
-              <div class="sub2">current bid (receive to close): $2.34</div>
+              <div class="val pos">$53.00<span class="pos"> (mid: $58.50)</span></div>
+              <div class="sub2">ROI +30.8% &middot; ann +1124.6%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$308.14</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-mb">$340.12</span>)</div>
+              <div class="sub2">current bid (receive to close): $2.25</div>
             </div>
           </div>
         </div>
 
-        <div class="card" data-ann-return="78.0928" data-pe="9.923282" data-dte-entry="35" data-ask="2.1" data-strike="30.0" data-symbol="SMCI" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="8.67" data-norm-ab="-238.1" data-roi-as="0.87" data-roi-ab="-23.81" data-ann-as="31.75" data-ann-ab="-869.06" data-norm-ms="12.17" data-norm-mb="-188.1" data-stock-long="10.51" data-stock-short="-10.51" data-stock-pct="1.05" data-stock-pct-ann="38.33">
+        <div class="card" data-ann-return="78.0928" data-pe="9.923282" data-dte-entry="35" data-ask="2.1" data-strike="30.0" data-symbol="SMCI" data-added="2026-10-16" data-expiry-type="monthly" data-kind="open" data-norm-as="8.67" data-norm-ab="-233.33" data-roi-as="0.87" data-roi-ab="-23.33" data-ann-as="31.75" data-ann-ab="-851.54" data-norm-ms="12.0" data-norm-mb="-185.71" data-stock-long="10.51" data-stock-short="-10.51" data-stock-pct="1.05" data-stock-pct-ann="38.33">
           <div class="card-head">
             <span class="sym">SMCI</span>
             <span class="strike">$30P</span>
@@ -5897,17 +5959,17 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val pos">$26.00<span class="pos"> (mid: $36.50)</span></div>
+              <div class="val pos">$26.00<span class="pos"> (mid: $36.00)</span></div>
               <div class="sub2">ROI +0.9% &middot; ann +31.8%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-as">$8.67</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-ms">$12.17</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-as">$8.67</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-ms">$12.00</span>)</div>
               <div class="sub2">current ask (pay to close): $1.81</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val neg">$-50.00<span class="neg"> (mid: $-39.50)</span></div>
-              <div class="sub2">ROI -23.8% &middot; ann -869.1%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-238.10</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-188.10</span>)</div>
-              <div class="sub2">current bid (receive to close): $1.60</div>
+              <div class="val neg">$-49.00<span class="neg"> (mid: $-39.00)</span></div>
+              <div class="sub2">ROI -23.3% &middot; ann -851.5%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-233.33</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-mb">$-185.71</span>)</div>
+              <div class="sub2">current bid (receive to close): $1.61</div>
             </div>
           </div>
         </div>
@@ -6199,7 +6261,7 @@
             
             
           </div>
-          <div class="sub">20d active &middot; 25d left &middot; Entry 1.05 &middot; Now 1.07
+          <div class="sub">20d active &middot; 25d left &middot; Entry 1.05 &middot; Now 1.06
             &middot; bid 0.15/yahoo &middot; ask 0.30/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +143.1% &middot; PE at entry: -- (approx (backfilled)) &middot; DTE at entry: 45</div>
           
@@ -6253,7 +6315,7 @@
           </div><div class="sub2">Long "exe" = buy shares + exercise the put (guaranteed, independent of the option's own market quotes)</div>
         </div>
 
-        <div class="card" data-ann-return="126.077" data-pe="" data-dte-entry="50" data-ask="9.0" data-strike="55.0" data-symbol="IRON" data-added="2026-10-01" data-expiry-type="monthly" data-kind="open" data-norm-as="146.36" data-norm-ab="-1000.0" data-roi-as="14.64" data-roi-ab="-100.0" data-ann-as="213.74" data-ann-ab="-1460.0" data-norm-ms="147.27" data-norm-mb="-1000.0" data-stock-long="209.28" data-stock-short="-209.28" data-stock-pct="20.93" data-stock-pct-ann="305.58">
+        <div class="card" data-ann-return="126.077" data-pe="" data-dte-entry="50" data-ask="9.0" data-strike="55.0" data-symbol="IRON" data-added="2026-10-01" data-expiry-type="monthly" data-kind="open" data-norm-as="141.82" data-norm-ab="-1000.0" data-roi-as="14.18" data-roi-ab="-100.0" data-ann-as="207.03" data-ann-ab="-1460.0" data-norm-ms="147.27" data-norm-mb="-1000.0" data-stock-long="209.28" data-stock-short="-209.28" data-stock-pct="20.93" data-stock-pct-ann="305.58">
           <div class="card-head">
             <span class="sym">IRON</span>
             <span class="strike">$55P</span>
@@ -6269,10 +6331,10 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val pos">$805.00<span class="pos"> (mid: $810.00)</span></div>
-              <div class="sub2">ROI +14.6% &middot; ann +213.7%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-as">$146.36</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-ms">$147.27</span>)</div>
-              <div class="sub2">current ask (pay to close): $0.05</div>
+              <div class="val pos">$780.00<span class="pos"> (mid: $810.00)</span></div>
+              <div class="sub2">ROI +14.2% &middot; ann +207.0%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-as">$141.82</span> (mid: <span class="pos norm-mid-num" data-src="data-norm-ms">$147.27</span>)</div>
+              <div class="sub2">current ask (pay to close): $0.30</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
@@ -6315,7 +6377,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="178.922" data-pe="" data-dte-entry="51" data-ask="0.25" data-strike="1.0" data-symbol="CMPX" data-added="2026-09-30" data-expiry-type="monthly" data-kind="open" data-norm-as="-100.0" data-norm-ab="-200.0" data-roi-as="-10.0" data-roi-ab="-20.0" data-ann-as="-140.38" data-ann-ab="-280.77" data-norm-ms="-50.0" data-norm-mb="11.2" data-stock-long="-281.54" data-stock-short="281.54" data-stock-pct="-28.15" data-stock-pct-ann="-395.18">
+        <div class="card" data-ann-return="178.922" data-pe="" data-dte-entry="51" data-ask="0.25" data-strike="1.0" data-symbol="CMPX" data-added="2026-09-30" data-expiry-type="monthly" data-kind="open" data-norm-as="-100.0" data-norm-ab="-200.0" data-roi-as="-10.0" data-roi-ab="-20.0" data-ann-as="-140.38" data-ann-ab="-280.77" data-norm-ms="-50.0" data-norm-mb="12.0" data-stock-long="-281.73" data-stock-short="281.73" data-stock-pct="-28.17" data-stock-pct-ann="-395.46">
           <div class="card-head">
             <span class="sym">CMPX</span>
             <span class="strike">$1P</span>
@@ -6338,9 +6400,9 @@
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val neg">$-5.00<span class="pos"> (exe: $0.28)</span></div>
+              <div class="val neg">$-5.00<span class="pos"> (exe: $0.30)</span></div>
               <div class="sub2">ROI -20.0% &middot; ann -280.8%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-200.00</span> (exe: <span class="pos norm-mid-num" data-src="data-norm-mb">$11.20</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-ab">$-200.00</span> (exe: <span class="pos norm-mid-num" data-src="data-norm-mb">$12.00</span>)</div>
               <div class="sub2">current bid (receive to close): $0.20</div>
             </div>
           </div><div class="sub2">Long "exe" = buy shares + exercise the put (guaranteed, independent of the option's own market quotes)</div>
@@ -6563,7 +6625,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="88.6947" data-pe="" data-dte-entry="58" data-ask="2.16" data-strike="17.0" data-symbol="CIFR" data-added="2026-09-23" data-expiry-type="monthly" data-kind="open" data-norm-as="-429.41" data-norm-ab="3166.67" data-roi-as="-42.94" data-roi-ab="316.67" data-ann-as="-474.94" data-ann-ab="3502.56" data-norm-ms="-417.65" data-norm-mb="3300.93" data-stock-long="-579.84" data-stock-short="579.84" data-stock-pct="-57.98" data-stock-pct-ann="-641.29">
+        <div class="card" data-ann-return="88.6947" data-pe="" data-dte-entry="58" data-ask="2.16" data-strike="17.0" data-symbol="CIFR" data-added="2026-09-23" data-expiry-type="monthly" data-kind="open" data-norm-as="-432.35" data-norm-ab="3166.67" data-roi-as="-43.24" data-roi-ab="316.67" data-ann-as="-478.26" data-ann-ab="3502.56" data-norm-ms="-419.12" data-norm-mb="3300.93" data-stock-long="-579.84" data-stock-short="579.84" data-stock-pct="-57.98" data-stock-pct-ann="-641.29">
           <div class="card-head">
             <span class="sym">CIFR</span>
             <span class="strike">$17P</span>
@@ -6579,10 +6641,10 @@
           <div class="grid2">
             <div class="box">
               <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val neg">$-730.00<span class="neg"> (mid: $-710.00)</span></div>
-              <div class="sub2">ROI -42.9% &middot; ann -474.9%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-429.41</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-417.65</span>)</div>
-              <div class="sub2">current ask (pay to close): $9.40</div>
+              <div class="val neg">$-735.00<span class="neg"> (mid: $-712.50)</span></div>
+              <div class="sub2">ROI -43.2% &middot; ann -478.3%</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="neg norm-primary-num" data-src="data-norm-as">$-432.35</span> (mid: <span class="neg norm-mid-num" data-src="data-norm-ms">$-419.12</span>)</div>
+              <div class="sub2">current ask (pay to close): $9.45</div>
             </div>
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>

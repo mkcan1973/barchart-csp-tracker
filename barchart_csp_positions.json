@@ -13319,5 +13319,43 @@
     "added_date": "2026-10-26",
     "expiry_type": "weekly",
     "run_label": "C"
+  },
+  {
+    "symbol": "NBIS",
+    "strike": 145.0,
+    "expiration": "2026-11-20",
+    "barchart_bid": 12.0,
+    "bid": 12.0,
+    "bid_is_approx": false,
+    "ask": 12.3,
+    "ask_is_approx": false,
+    "potential_return_pct": 9.02256,
+    "potential_return_annual_pct": 131.729,
+    "entry_stock_px": 153.27,
+    "pe_at_entry": 119.742195,
+    "eps_at_entry": 1.28,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-26",
+    "expiry_type": "monthly",
+    "run_label": "D"
+  },
+  {
+    "symbol": "WULF",
+    "strike": 11.5,
+    "expiration": "2026-10-30",
+    "barchart_bid": 0.33,
+    "bid": 0.33,
+    "bid_is_approx": false,
+    "ask": 0.36,
+    "ask_is_approx": false,
+    "potential_return_pct": 2.8696,
+    "potential_return_annual_pct": 261.8478,
+    "entry_stock_px": 11.98,
+    "pe_at_entry": null,
+    "eps_at_entry": -4.43,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-10-26",
+    "expiry_type": "weekly",
+    "run_label": "D"
   }
 ]
