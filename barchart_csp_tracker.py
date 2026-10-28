@@ -844,7 +844,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
                                  r[realized_norm_seller_key], r[realized_norm_buyer_key],
                                  norm_seller_key="data-norm-rs", norm_buyer_key="data-norm-rb")
             data_attrs = (
-                f'data-kind="closed" '
+                f'data-kind="closed" data-expiration="{attr(r["EXPIRATION"])}" '
                 f'data-norm-rs="{attr(r[realized_norm_seller_key])}" data-norm-rb="{attr(r[realized_norm_buyer_key])}" '
                 f'data-roi-rs="{attr(r["ROI % IF SOLD (CSP)"])}" data-roi-rb="{attr(r["ROI % IF BOUGHT (long put)"])}" '
                 f'data-ann-rs="{attr(r["ANNUALIZED ROI % IF SOLD (CSP)"])}" data-ann-rb="{attr(r["ANNUALIZED ROI % IF BOUGHT (long put)"])}" '
@@ -943,9 +943,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     open_cards = "\n".join(position_card(r, closed=False) for r in open_rows_newest_first) or '<p class="empty">No open positions.</p>'
     closed_cards = "\n".join(position_card(r, closed=True) for r in reversed(closed_rows)) or '<p class="empty">No closed positions yet.</p>'
 
+    # Live, client-side-drawn chart (not the static PNG) so it redraws from
+    # whatever closed cards are currently passing the filter bar - the PNG
+    # is still generated (see plot_realized_pnl) as a non-interactive
+    # snapshot, but no longer what the page itself shows.
     chart_html = ""
     if totals["png_path"]:
-        chart_html = f'<h2>Realized P&amp;L over time</h2><img class="chart" src="{REALIZED_PNL_PNG.name}" alt="Realized P&L chart">'
+        chart_html = '<h2>Realized P&amp;L over time</h2><canvas id="realizedChart" class="chart" width="900" height="420"></canvas>'
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -959,7 +963,10 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
           margin: 0; padding: 16px; max-width: 900px; margin-inline: auto;
           background: #0b0e14; color: #e6e9ef; }}
   h1 {{ font-size: 1.4rem; margin-bottom: 0; }}
-  h2 {{ font-size: 1.1rem; margin-top: 28px; border-top: 1px solid #2a2f3a; padding-top: 16px; }}
+  h2 {{ font-size: 1.1rem; margin-top: 28px; border-top: 1px solid #2a2f3a; padding-top: 16px;
+        display: flex; align-items: center; gap: 10px; }}
+  .expandbtn {{ padding: 4px 12px; border-radius: 6px; border: 1px solid #3ddc84; background: transparent;
+                color: #3ddc84; font-weight: 700; font-size: 0.78rem; cursor: pointer; }}
   .updated {{ color: #9aa4b2; font-size: 0.85rem; margin-top: 2px; margin-bottom: 20px; }}
   .totals {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 8px; }}
   .totals .box {{ background: #161b25; border-radius: 10px; padding: 12px 14px; }}
@@ -1004,6 +1011,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     .filterbar label {{ color: #6b7280; }}
     .filterbar input {{ background: #f5f6f8; border-color: #d0d5dd; }}
     .filterbar a.editlink {{ border-color: #0969da; color: #0969da; }}
+    .expandbtn {{ border-color: #0969da; color: #0969da; }}
     .filterbar .count {{ color: #6b7280; }}
   }}
 </style>
@@ -1066,8 +1074,10 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   {open_cards}
   </div>
 
-  <h2>Closed positions (<span id="closedSectionCount">{len(closed_rows)}</span>)</h2>
-  <div class="cards">
+  <h2>Closed positions (<span id="closedSectionCount">{len(closed_rows)}</span>)
+    <button type="button" id="closedToggle" class="expandbtn">Expand</button>
+  </h2>
+  <div class="cards" id="closedCardsWrap" style="display:none;">
   {closed_cards}
   </div>
 
@@ -1316,6 +1326,126 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
 
     var noteEl = document.getElementById('filterNote');
     if (noteEl) noteEl.style.display = noFilter ? 'none' : '';
+
+    drawRealizedChart(closedVisible);
+  }}
+
+  // Redrawn from whatever closed cards are CURRENTLY passing the filter -
+  // same per-expiration-date averaging as the server's plot_realized_pnl(),
+  // just run client-side so it actually responds to the filter bar instead
+  // of being a fixed snapshot from whenever the page was last generated.
+  function drawRealizedChart(closedCards) {{
+    var canvas = document.getElementById('realizedChart');
+    if (!canvas) return;
+    // Size the canvas's actual pixel buffer to its real on-screen CSS
+    // width (plus devicePixelRatio for sharpness) rather than leaving it
+    // at a fixed internal resolution - otherwise all the text/line widths
+    // below are sized relative to that fixed resolution and end up tiny
+    // once CSS scales a wide canvas down to a narrow phone screen.
+    var dpr = window.devicePixelRatio || 1;
+    var W = canvas.clientWidth || 900;
+    var H = 320;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.height = H + 'px';
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+
+    var byDate = {{}};
+    closedCards.forEach(function(card) {{
+      var d = card.getAttribute('data-expiration');
+      if (!d) return;
+      var bucket = byDate[d] || (byDate[d] = {{seller: [], buyer: [], n: 0}});
+      var roiS = card.getAttribute('data-roi-rs');
+      var roiB = card.getAttribute('data-roi-rb');
+      if (roiS !== '' && roiS !== null) bucket.seller.push(parseFloat(roiS));
+      if (roiB !== '' && roiB !== null) bucket.buyer.push(parseFloat(roiB));
+      bucket.n++;
+    }});
+    var dates = Object.keys(byDate).sort();
+
+    ctx.font = '13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    if (!dates.length) {{
+      ctx.fillStyle = '#9aa4b2';
+      ctx.fillText('No closed positions match the current filter.', 20, H / 2);
+      return;
+    }}
+
+    function avg(arr) {{ return arr.length ? arr.reduce(function(a, b) {{ return a + b; }}, 0) / arr.length : null; }}
+    var sellerVals = dates.map(function(d) {{ return avg(byDate[d].seller); }});
+    var buyerVals = dates.map(function(d) {{ return avg(byDate[d].buyer); }});
+    var allVals = sellerVals.concat(buyerVals).filter(function(v) {{ return v !== null; }});
+    var minV = Math.min(0, allVals.length ? Math.min.apply(null, allVals) : 0);
+    var maxV = Math.max(0, allVals.length ? Math.max.apply(null, allVals) : 0);
+    if (minV === maxV) {{ minV -= 1; maxV += 1; }}
+    var padL = 55, padR = 20, padT = 24, padB = 70;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+
+    function xFor(i) {{ return padL + (dates.length <= 1 ? plotW / 2 : (i / (dates.length - 1)) * plotW); }}
+    function yFor(v) {{ return padT + plotH - ((v - minV) / (maxV - minV)) * plotH; }}
+
+    ctx.strokeStyle = '#2a2f3a';
+    ctx.fillStyle = '#9aa4b2';
+    ctx.textAlign = 'right';
+    var steps = 5;
+    for (var s = 0; s <= steps; s++) {{
+      var v = minV + (maxV - minV) * (s / steps);
+      var y = yFor(v);
+      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y);
+      ctx.globalAlpha = 0.25; ctx.stroke(); ctx.globalAlpha = 1;
+      ctx.fillText(v.toFixed(0) + '%', padL - 8, y + 4);
+    }}
+    ctx.strokeStyle = '#6b7280';
+    ctx.beginPath(); ctx.moveTo(padL, yFor(0)); ctx.lineTo(W - padR, yFor(0)); ctx.stroke();
+
+    function drawSeries(vals, color) {{
+      ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 2;
+      ctx.beginPath();
+      var started = false;
+      vals.forEach(function(v, i) {{
+        if (v === null) return;
+        var x = xFor(i), y = yFor(v);
+        if (!started) {{ ctx.moveTo(x, y); started = true; }} else {{ ctx.lineTo(x, y); }}
+      }});
+      ctx.stroke();
+      vals.forEach(function(v, i) {{
+        if (v === null) return;
+        var x = xFor(i), y = yFor(v);
+        ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI * 2); ctx.fill();
+      }});
+    }}
+    drawSeries(sellerVals, '#2563eb');
+    drawSeries(buyerVals, '#f97316');
+
+    ctx.fillStyle = '#9aa4b2';
+    ctx.font = '10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    dates.forEach(function(d, i) {{
+      var x = xFor(i);
+      ctx.save();
+      ctx.translate(x, H - padB + 14);
+      ctx.rotate(-Math.PI / 4);
+      ctx.textAlign = 'right';
+      ctx.fillText(d.slice(5) + ' (n=' + byDate[d].n + ')', 0, 0);
+      ctx.restore();
+    }});
+
+    ctx.textAlign = 'left';
+    ctx.font = '12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillStyle = '#2563eb'; ctx.fillRect(padL, 4, 10, 10);
+    ctx.fillStyle = '#9aa4b2'; ctx.fillText('Short (CSP seller)', padL + 14, 13);
+    ctx.fillStyle = '#f97316'; ctx.fillRect(padL + 150, 4, 10, 10);
+    ctx.fillStyle = '#9aa4b2'; ctx.fillText('Long (put buyer)', padL + 164, 13);
+  }}
+
+  var closedToggleBtn = document.getElementById('closedToggle');
+  var closedWrap = document.getElementById('closedCardsWrap');
+  if (closedToggleBtn && closedWrap) {{
+    closedToggleBtn.addEventListener('click', function() {{
+      var collapsed = closedWrap.style.display === 'none';
+      closedWrap.style.display = collapsed ? '' : 'none';
+      closedToggleBtn.textContent = collapsed ? 'Collapse' : 'Expand';
+    }});
   }}
 
   var btn = document.getElementById('applyFilter');
