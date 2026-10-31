@@ -802,18 +802,18 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
           <div class="rowlabel">{label}</div>
           <div class="grid2">
             <div class="box">
-              <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
-              <div class="val {_pnl_class(seller_pnl)}">{_fmt_money(seller_pnl)}<span class="{_pnl_class(seller_mid)}">{_fmt_money_paren(seller_mid, seller_mid_label)}</span></div>
-              <div class="sub2">ROI {_fmt_pct(seller_roi)} &middot; ann {_fmt_pct(ann_seller_roi)}</div>
-              <div class="sub2">norm (<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span> risk): <span class="{_pnl_class(norm_seller)} norm-primary-num" data-src="{norm_seller_key}">{_fmt_money(norm_seller)}</span>{f' ({seller_mid_label}: ' + seller_mid_num_html + ')' if seller_mid_num_html else ''}</div>
-              {seller_quote_html}
-            </div>
-            <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
               <div class="val {_pnl_class(buyer_pnl)}">{_fmt_money(buyer_pnl)}<span class="{_pnl_class(buyer_mid)}">{_fmt_money_paren(buyer_mid, buyer_mid_label)}</span></div>
               <div class="sub2">ROI {_fmt_pct(buyer_roi)} &middot; ann {_fmt_pct(ann_buyer_roi)}</div>
               <div class="sub2">norm (<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span> risk): <span class="{_pnl_class(norm_buyer)} norm-primary-num" data-src="{norm_buyer_key}">{_fmt_money(norm_buyer)}</span>{f' ({buyer_mid_label}: ' + buyer_mid_num_html + ')' if buyer_mid_num_html else ''}</div>
               {buyer_quote_html}
+            </div>
+            <div class="box short-block">
+              <div class="label">SHORT (sold CSP) - bullish, same side as long stock</div>
+              <div class="val {_pnl_class(seller_pnl)}">{_fmt_money(seller_pnl)}<span class="{_pnl_class(seller_mid)}">{_fmt_money_paren(seller_mid, seller_mid_label)}</span></div>
+              <div class="sub2">ROI {_fmt_pct(seller_roi)} &middot; ann {_fmt_pct(ann_seller_roi)}</div>
+              <div class="sub2">norm (<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span> risk): <span class="{_pnl_class(norm_seller)} norm-primary-num" data-src="{norm_seller_key}">{_fmt_money(norm_seller)}</span>{f' ({seller_mid_label}: ' + seller_mid_num_html + ')' if seller_mid_num_html else ''}</div>
+              {seller_quote_html}
             </div>
           </div>"""
 
@@ -890,7 +890,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
                                f'intrinsic value - no live option quote (likely far OTM/illiquid)</div>')
             else:
                 if seller_approx_labels:
-                    rows_html += (f'<div class="sub2">Short {" and ".join(seller_approx_labels)} approximated via '
+                    rows_html += (f'<div class="sub2 short-block">Short {" and ".join(seller_approx_labels)} approximated via '
                                    f'intrinsic value - no live option quote (likely far OTM/illiquid)</div>')
                 if buyer_approx_labels:
                     rows_html += (f'<div class="sub2">Long {" and ".join(buyer_approx_labels)} approximated via '
@@ -984,6 +984,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   .sub2 {{ color: #9aa4b2; font-size: 0.78rem; margin-top: 2px; }}
   .rowlabel {{ font-size: 0.72rem; letter-spacing: 0.03em; color: #9aa4b2; margin-top: 10px; }}
   .grid2 {{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }}
+  .short-block {{ display: none; }}
+  .short-inline {{ display: none; }}
+  body.show-short .short-block {{ display: block; }}
+  body.show-short .short-inline {{ display: inline; }}
+  body:not(.show-short) .grid2 {{ grid-template-columns: 1fr; }}
   .box {{ background: #0f131b; border-radius: 8px; padding: 8px 10px; }}
   .label {{ font-size: 0.72rem; letter-spacing: 0.04em; color: #9aa4b2; }}
   .val {{ font-size: 1.15rem; font-weight: 700; }}
@@ -1036,33 +1041,34 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     <span class="count" id="filterCount"></span>
   </div>
   <div class="updated" style="margin-top:-6px;">ROI filters on Barchart's annualized return at selection; PE filters on trailing P/E at entry (both frozen at entry, always available)</div>
-  <div class="updated" style="margin-top:-6px;">Short/Long below = option position, NOT shares: Short = sold the CSP (bullish - same side as owning stock). Long = bought the put (bearish - same side as shorting stock).</div>
+  <div class="updated" style="margin-top:-6px;">Below = option position, NOT shares. Long = bought the put (bearish - same side as shorting stock)<span class="short-inline">. Short = sold the CSP (bullish - same side as owning stock)</span>.</div>
+  <button type="button" id="shortToggle" class="expandbtn" style="margin-bottom:12px;">Show seller/short (bullish) view</button>
 
   <div class="totals">
     <div class="box">
       <div class="label">UNREALIZED - ACTUAL, worst case (<span id="openCount">{len(open_rows)}</span> open, normalized $<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span>/position)</div>
-      <div class="val {_pnl_class(totals['unrealized_actual_seller_total'])}" id="totalActualSeller">Short <span id="totalActualSellerAmt">{_fmt_money(totals['unrealized_actual_seller_total'])}</span><span id="totalActualSellerMid" class="{_pnl_class(totals['unrealized_mid_seller_total'])}">{_fmt_money_paren(totals['unrealized_mid_seller_total'])}</span></div>
       <div class="val {_pnl_class(totals['unrealized_actual_buyer_total'])}" id="totalActualBuyer">Long <span id="totalActualBuyerAmt">{_fmt_money(totals['unrealized_actual_buyer_total'])}</span><span id="totalActualBuyerMid" class="{_pnl_class(totals['unrealized_mid_buyer_total'])}">{_fmt_money_paren(totals['unrealized_mid_buyer_total'])}</span></div>
-      <div class="sub2">avg ROI: short <span id="avgActualSellerRoi">{_fmt_pct(totals['avg_unrealized_actual_seller_roi'])}</span> / long <span id="avgActualBuyerRoi">{_fmt_pct(totals['avg_unrealized_actual_buyer_roi'])}</span></div>
-      <div class="sub2">avg ann. ROI: short <span id="avgActualSellerAnn">{_fmt_pct(totals['avg_unrealized_actual_seller_ann_roi'])}</span> / long <span id="avgActualBuyerAnn">{_fmt_pct(totals['avg_unrealized_actual_buyer_ann_roi'])}</span></div>
+      <div class="val short-block {_pnl_class(totals['unrealized_actual_seller_total'])}" id="totalActualSeller">Short <span id="totalActualSellerAmt">{_fmt_money(totals['unrealized_actual_seller_total'])}</span><span id="totalActualSellerMid" class="{_pnl_class(totals['unrealized_mid_seller_total'])}">{_fmt_money_paren(totals['unrealized_mid_seller_total'])}</span></div>
+      <div class="sub2">avg ROI: <span class="short-inline">short <span id="avgActualSellerRoi">{_fmt_pct(totals['avg_unrealized_actual_seller_roi'])}</span> / </span>long <span id="avgActualBuyerRoi">{_fmt_pct(totals['avg_unrealized_actual_buyer_roi'])}</span></div>
+      <div class="sub2">avg ann. ROI: <span class="short-inline">short <span id="avgActualSellerAnn">{_fmt_pct(totals['avg_unrealized_actual_seller_ann_roi'])}</span> / </span>long <span id="avgActualBuyerAnn">{_fmt_pct(totals['avg_unrealized_actual_buyer_ann_roi'])}</span></div>
       <div class="sub2">(mid) = less pessimistic reference using the mid price instead of crossing the spread</div>
     </div>
     <div class="box">
       <div class="label">REALIZED (<span id="realizedCount">{totals['settled_count']}</span> settled, normalized $<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span>/position)</div>
-      <div class="val {_pnl_class(totals['realized_seller_total'])}" id="totalRealizedSeller">Short <span id="totalRealizedSellerAmt">{_fmt_money(totals['realized_seller_total'])}</span></div>
       <div class="val {_pnl_class(totals['realized_buyer_total'])}" id="totalRealizedBuyer">Long <span id="totalRealizedBuyerAmt">{_fmt_money(totals['realized_buyer_total'])}</span></div>
-      <div class="sub2">avg ROI: short <span id="avgRealizedSellerRoi">{_fmt_pct(totals['avg_realized_seller_roi'])}</span> / long <span id="avgRealizedBuyerRoi">{_fmt_pct(totals['avg_realized_buyer_roi'])}</span></div>
-      <div class="sub2">avg ann. ROI: short <span id="avgRealizedSellerAnn">{_fmt_pct(totals['avg_realized_seller_ann_roi'])}</span> / long <span id="avgRealizedBuyerAnn">{_fmt_pct(totals['avg_realized_buyer_ann_roi'])}</span></div>
+      <div class="val short-block {_pnl_class(totals['realized_seller_total'])}" id="totalRealizedSeller">Short <span id="totalRealizedSellerAmt">{_fmt_money(totals['realized_seller_total'])}</span></div>
+      <div class="sub2">avg ROI: <span class="short-inline">short <span id="avgRealizedSellerRoi">{_fmt_pct(totals['avg_realized_seller_roi'])}</span> / </span>long <span id="avgRealizedBuyerRoi">{_fmt_pct(totals['avg_realized_buyer_roi'])}</span></div>
+      <div class="sub2">avg ann. ROI: <span class="short-inline">short <span id="avgRealizedSellerAnn">{_fmt_pct(totals['avg_realized_seller_ann_roi'])}</span> / </span>long <span id="avgRealizedBuyerAnn">{_fmt_pct(totals['avg_realized_buyer_ann_roi'])}</span></div>
     </div>
     <div class="box">
       <div class="label">STOCK BENCHMARK (no options - buy/short $<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span> of shares at entry)</div>
       <div class="val {_pnl_class(totals['stock_unrealized_long_total'])}" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">{_fmt_money(totals['stock_unrealized_long_total'])}</span></div>
-      <div class="val {_pnl_class(totals['stock_unrealized_short_total'])}" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">{_fmt_money(totals['stock_unrealized_short_total'])}</span></div>
+      <div class="val short-block {_pnl_class(totals['stock_unrealized_short_total'])}" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">{_fmt_money(totals['stock_unrealized_short_total'])}</span></div>
       <div class="sub2">avg price change (open): <span id="avgStockUnrealPct">{_fmt_pct(totals['avg_stock_unrealized_pct'])}</span> &middot; avg ann. ROI: <span id="avgStockUnrealAnn">{_fmt_pct(totals['avg_stock_unrealized_ann_roi'])}</span></div>
       <div class="val {_pnl_class(totals['stock_realized_long_total'])}" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">{_fmt_money(totals['stock_realized_long_total'])}</span></div>
-      <div class="val {_pnl_class(totals['stock_realized_short_total'])}" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">{_fmt_money(totals['stock_realized_short_total'])}</span></div>
+      <div class="val short-block {_pnl_class(totals['stock_realized_short_total'])}" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">{_fmt_money(totals['stock_realized_short_total'])}</span></div>
       <div class="sub2">avg price change (closed): <span id="avgStockRealPct">{_fmt_pct(totals['avg_stock_realized_pct'])}</span> &middot; avg ann. ROI: <span id="avgStockRealAnn">{_fmt_pct(totals['avg_stock_realized_ann_roi'])}</span></div>
-      <div class="sub2">Indicator only - short assumes unlimited-risk shorting is actually available.</div>
+      <div class="sub2 short-block">Indicator only - short assumes unlimited-risk shorting is actually available.</div>
     </div>
   </div>
   <div class="updated" id="filterNote" style="display:none;">Totals above reflect only the positions currently passing the filter.</div>
@@ -1116,7 +1122,15 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   function setMoney(divId, amtId, val) {{
     var div = document.getElementById(divId);
     var amt = document.getElementById(amtId);
-    if (div) div.className = 'val ' + pnlClass(val);
+    if (div) {{
+      // Only swap the pos/neg class - preserve every other class already on
+      // the element (e.g. short-block), since this runs on every filter
+      // change and would otherwise wipe out that server-rendered class.
+      var keep = div.className.split(' ').filter(function(c) {{ return c !== 'pos' && c !== 'neg' && c !== ''; }});
+      var cls = pnlClass(val);
+      if (cls) keep.push(cls);
+      div.className = keep.join(' ');
+    }}
     if (amt) amt.textContent = fmtMoney(val);
   }}
   function setPct(id, val) {{
@@ -1445,6 +1459,18 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       var collapsed = closedWrap.style.display === 'none';
       closedWrap.style.display = collapsed ? '' : 'none';
       closedToggleBtn.textContent = collapsed ? 'Collapse' : 'Expand';
+    }});
+  }}
+
+  // Long puts are the actual strategy here - short/CSP-seller figures are
+  // hidden everywhere (totals boxes, every card) by default via the
+  // short-block/short-inline CSS classes, and this one button reveals them
+  // all at once instead of each card needing its own toggle.
+  var shortToggleBtn = document.getElementById('shortToggle');
+  if (shortToggleBtn) {{
+    shortToggleBtn.addEventListener('click', function() {{
+      var showing = document.body.classList.toggle('show-short');
+      shortToggleBtn.textContent = showing ? 'Hide seller/short (bullish) view' : 'Show seller/short (bullish) view';
     }});
   }}
 
