@@ -1062,13 +1062,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     </div>
     <div class="box">
       <div class="label">STOCK BENCHMARK (no options - buy/short $<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span> of shares at entry)</div>
-      <div class="val {_pnl_class(totals['stock_unrealized_long_total'])}" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">{_fmt_money(totals['stock_unrealized_long_total'])}</span></div>
-      <div class="val short-block {_pnl_class(totals['stock_unrealized_short_total'])}" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">{_fmt_money(totals['stock_unrealized_short_total'])}</span></div>
+      <div class="val {_pnl_class(totals['stock_unrealized_short_total'])}" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">{_fmt_money(totals['stock_unrealized_short_total'])}</span></div>
+      <div class="val short-block {_pnl_class(totals['stock_unrealized_long_total'])}" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">{_fmt_money(totals['stock_unrealized_long_total'])}</span></div>
       <div class="sub2">avg price change (open): <span id="avgStockUnrealPct">{_fmt_pct(totals['avg_stock_unrealized_pct'])}</span> &middot; avg ann. ROI: <span id="avgStockUnrealAnn">{_fmt_pct(totals['avg_stock_unrealized_ann_roi'])}</span></div>
-      <div class="val {_pnl_class(totals['stock_realized_long_total'])}" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">{_fmt_money(totals['stock_realized_long_total'])}</span></div>
-      <div class="val short-block {_pnl_class(totals['stock_realized_short_total'])}" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">{_fmt_money(totals['stock_realized_short_total'])}</span></div>
+      <div class="val {_pnl_class(totals['stock_realized_short_total'])}" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">{_fmt_money(totals['stock_realized_short_total'])}</span></div>
+      <div class="val short-block {_pnl_class(totals['stock_realized_long_total'])}" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">{_fmt_money(totals['stock_realized_long_total'])}</span></div>
       <div class="sub2">avg price change (closed): <span id="avgStockRealPct">{_fmt_pct(totals['avg_stock_realized_pct'])}</span> &middot; avg ann. ROI: <span id="avgStockRealAnn">{_fmt_pct(totals['avg_stock_realized_ann_roi'])}</span></div>
-      <div class="sub2 short-block">Indicator only - short assumes unlimited-risk shorting is actually available.</div>
+      <div class="sub2">Indicator only - short assumes unlimited-risk shorting is actually available.</div>
     </div>
   </div>
   <div class="updated" id="filterNote" style="display:none;">Totals above reflect only the positions currently passing the filter.</div>
