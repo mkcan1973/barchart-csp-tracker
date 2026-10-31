@@ -5,8 +5,8 @@
     "max_pe": null,
     "min_dte_entry": null,
     "max_dte_entry": null,
-    "base_investment": 50,
-    "min_put_strike": null,
+    "base_investment": 200,
+    "min_put_strike": 9.5,
     "max_put_strike": null,
     "expiry_filter": "monthly"
 }
