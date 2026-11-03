@@ -18395,5 +18395,43 @@
     "added_date": "2026-11-03",
     "expiry_type": "weekly",
     "run_label": "A"
+  },
+  {
+    "symbol": "CAPR",
+    "strike": 8.0,
+    "expiration": "2026-12-18",
+    "barchart_bid": 3.5,
+    "bid": 3.5,
+    "bid_is_approx": false,
+    "ask": 4.4,
+    "ask_is_approx": false,
+    "potential_return_pct": 77.7778,
+    "potential_return_annual_pct": 630.864,
+    "entry_stock_px": 8.239999771118164,
+    "pe_at_entry": null,
+    "eps_at_entry": -2.45,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-11-03",
+    "expiry_type": "monthly",
+    "run_label": "B"
+  },
+  {
+    "symbol": "CAPR",
+    "strike": 8.0,
+    "expiration": "2026-11-20",
+    "barchart_bid": 2.3,
+    "bid": 2.3,
+    "bid_is_approx": false,
+    "ask": 3.9,
+    "ask_is_approx": false,
+    "potential_return_pct": 28.75,
+    "potential_return_annual_pct": 617.2794,
+    "entry_stock_px": 8.239999771118164,
+    "pe_at_entry": null,
+    "eps_at_entry": -2.45,
+    "pe_at_entry_is_approx": false,
+    "added_date": "2026-11-03",
+    "expiry_type": "weekly",
+    "run_label": "B"
   }
 ]
