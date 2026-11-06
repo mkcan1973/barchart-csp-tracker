@@ -64,6 +64,28 @@ REALIZED_PNL_PNG = Path("barchart_csp_realized_pnl.png")
 SUMMARY_HTML = Path("index.html")  # repo-root name - GitHub Pages serves this at the clean root URL
 SUMMARY_HTML_URL = "https://mkcan1973.github.io/barchart-csp-tracker/"
 
+# One entry per actual script execution that got past the market-open
+# check (so weekends/holidays correctly show zero entries, not "missing"
+# ones) - exists so the webpage can show whether GitHub Actions' own
+# scheduler is actually firing all 4 daily triggers, independent of
+# whether any run found a new candidate worth a run_label. Capped to the
+# most recent entries so the file doesn't grow unbounded.
+RUN_LOG_FILE = Path("run_log.json")
+RUN_LOG_MAX_ENTRIES = 200
+
+
+def load_run_log():
+    if not RUN_LOG_FILE.exists():
+        return []
+    try:
+        return json.loads(RUN_LOG_FILE.read_text())
+    except Exception:
+        return []
+
+
+def save_run_log(log):
+    RUN_LOG_FILE.write_text(json.dumps(log[-RUN_LOG_MAX_ENTRIES:], indent=2))
+
 # Single source of truth for "what counts as a good opportunity" - edit
 # this file (not the script) to change which new candidates trigger a
 # Discord ping AND what the webpage's filter boxes show on EVERY load
@@ -766,11 +788,61 @@ def _fmt_money_paren(x, label="mid"):
     return f" ({label}: {_fmt_money(x)})" if x is not None else ""
 
 
-def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None):
+def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None, run_log=None):
     """Single self-contained HTML file - a card per position (readable on a
     phone, unlike the 20+ column CSV) plus the totals and the realized P&L
     chart if one exists. No build step, no external assets - just open it in
     a browser (or serve it as-is via GitHub Pages)."""
+
+    def run_log_html():
+        """Last 10 weekdays, oldest first, cross-referenced against run_log
+        entries - a day with zero entries means GitHub's scheduler never
+        actually fired (or every trigger that day failed before logging),
+        not that nothing new happened to report that day (a run that found
+        nothing still logs an entry, just with run_label=None). A rare
+        actual market holiday will also show as "missing" here since this
+        only checks weekday, not the NYSE calendar - an acceptable false
+        positive for a diagnostic view."""
+        by_date = {}
+        for entry in (run_log or []):
+            by_date.setdefault(entry.get("date"), []).append(entry)
+
+        days = []
+        d = today
+        while len(days) < 10:
+            if d.weekday() < 5:
+                days.append(d)
+            d -= timedelta(days=1)
+        days.reverse()
+
+        rows = []
+        for day in days:
+            day_str = day.isoformat()
+            entries = sorted(by_date.get(day_str, []), key=lambda e: e.get("time_utc") or "")
+            if not entries:
+                rows.append(
+                    f'<tr class="runlog-missing"><td>{day_str}</td>'
+                    f'<td colspan="3">No runs recorded - check GitHub Actions</td></tr>'
+                )
+                continue
+            for e in entries:
+                label = _html_escape(e.get("run_label") or "--")
+                if e.get("note") == "scrape_failed":
+                    n_text = "Barchart scrape failed"
+                else:
+                    n = e.get("new_candidates")
+                    n_text = "--" if n is None else str(n)
+                time_utc = e.get("time_utc") or ""
+                rows.append(
+                    f'<tr><td>{day_str}</td><td>{label}</td>'
+                    f'<td class="runlog-time" data-utc="{_html_escape(time_utc)}">{_html_escape(time_utc)}</td>'
+                    f'<td>{n_text}</td></tr>'
+                )
+        return (
+            '<table class="runlog"><thead><tr><th>Date</th><th>Run</th>'
+            '<th>Time (your local)</th><th>New candidates</th></tr></thead>'
+            f'<tbody>{"".join(rows)}</tbody></table>'
+        )
 
     def pnl_row(label, seller_pnl, buyer_pnl, seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi, norm_seller, norm_buyer,
                 norm_seller_key, norm_buyer_key,
@@ -968,6 +1040,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   .expandbtn {{ padding: 4px 12px; border-radius: 6px; border: 1px solid #3ddc84; background: transparent;
                 color: #3ddc84; font-weight: 700; font-size: 0.78rem; cursor: pointer; }}
   .updated {{ color: #9aa4b2; font-size: 0.85rem; margin-top: 2px; margin-bottom: 20px; }}
+  table.runlog {{ width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 8px; }}
+  table.runlog th, table.runlog td {{ text-align: left; padding: 5px 8px; border-bottom: 1px solid #2a2f3a; }}
+  table.runlog tr.runlog-missing td {{ color: #ff6b6b; }}
   .totals {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 8px; }}
   .totals .box {{ background: #161b25; border-radius: 10px; padding: 12px 14px; }}
   .cards {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }}
@@ -1018,6 +1093,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     .filterbar a.editlink {{ border-color: #0969da; color: #0969da; }}
     .expandbtn {{ border-color: #0969da; color: #0969da; }}
     .filterbar .count {{ color: #6b7280; }}
+    table.runlog th, table.runlog td {{ border-bottom-color: #e0e3e8; }}
   }}
 </style>
 </head>
@@ -1085,6 +1161,14 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   </h2>
   <div class="cards" id="closedCardsWrap" style="display:none;">
   {closed_cards}
+  </div>
+
+  <h2>Run log (last 10 weekdays)
+    <button type="button" id="runLogToggle" class="expandbtn">Expand</button>
+  </h2>
+  <div id="runLogWrap" style="display:none;">
+    <div class="updated" style="margin-top:0;">One row per actual script execution that passed the market-open check - a day with no rows means the scheduled trigger never ran that day (see GitHub Actions), not that nothing new was found.</div>
+    {run_log_html()}
   </div>
 
 <script>
@@ -1462,6 +1546,24 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     }});
   }}
 
+  var runLogToggleBtn = document.getElementById('runLogToggle');
+  var runLogWrap = document.getElementById('runLogWrap');
+  if (runLogToggleBtn && runLogWrap) {{
+    runLogToggleBtn.addEventListener('click', function() {{
+      var collapsed = runLogWrap.style.display === 'none';
+      runLogWrap.style.display = collapsed ? '' : 'none';
+      runLogToggleBtn.textContent = collapsed ? 'Collapse' : 'Expand';
+    }});
+  }}
+  // Server renders UTC timestamps (it doesn't know the viewer's timezone) -
+  // swap each one to the viewer's own local time/zone once, on load.
+  document.querySelectorAll('.runlog-time').forEach(function(el) {{
+    var utc = el.getAttribute('data-utc');
+    if (!utc) return;
+    var d = new Date(utc);
+    if (!isNaN(d.getTime())) el.textContent = d.toLocaleString();
+  }});
+
   // Long puts are the actual strategy here - short/CSP-seller figures are
   // hidden everywhere (totals boxes, every card) by default via the
   // short-block/short-inline CSS classes, and this one button reveals them
@@ -1523,7 +1625,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     return SUMMARY_HTML
 
 
-def build_summary(positions, today, filter_cfg=None):
+def build_summary(positions, today, filter_cfg=None, run_log=None):
     open_rows = []
     open_roi_fict = []    # (seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi) per open position
     open_roi_actual = []  # same, for the "actual" (live requote) side
@@ -1899,7 +2001,7 @@ def build_summary(positions, today, filter_cfg=None):
         "settled_count": len(settled),
         "png_path": png_path,
     }
-    html_path = generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg)
+    html_path = generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg, run_log)
     totals["html_path"] = html_path
 
     return open_rows, closed_rows, totals
@@ -1925,10 +2027,20 @@ def main():
         print(f"  US markets are closed today ({today.isoformat()}) - skipping this run.")
         return
 
+    run_log = load_run_log()
+
     print("-- Scraping Barchart top naked puts --------------------------------------")
     barchart_rows = scrape_barchart_top20()
     if not barchart_rows:
         print("  No rows scraped - aborting.")
+        run_log.append({
+            "date": today.isoformat(),
+            "time_utc": now_et.astimezone(ZoneInfo("UTC")).isoformat(),
+            "run_label": None,
+            "new_candidates": None,
+            "note": "scrape_failed",
+        })
+        save_run_log(run_log)
         return
     print(f"  Scraped {len(barchart_rows)} candidates (ranked by annualized potential return desc)")
 
@@ -1956,6 +2068,13 @@ def main():
     run_label = chr(ord("A") + len(todays_run_labels))
 
     candidates = pick_new_candidates(all_rows, positions, today)
+    run_log.append({
+        "date": today.isoformat(),
+        "time_utc": now_et.astimezone(ZoneInfo("UTC")).isoformat(),
+        "run_label": run_label if candidates else None,
+        "new_candidates": len(candidates),
+    })
+    save_run_log(run_log)
     if not candidates:
         print("\n  All of Barchart's top candidates are already open positions - nothing new to add.")
     else:
@@ -2000,7 +2119,7 @@ def main():
         save_positions(positions)
 
     print("\n-- Rebuilding summary for all open positions -----------------------------")
-    open_rows, closed_rows, totals = build_summary(positions, today, filter_cfg)
+    open_rows, closed_rows, totals = build_summary(positions, today, filter_cfg, run_log)
     if not open_rows and not totals["settled_count"]:
         print("  No positions to summarize.")
         return

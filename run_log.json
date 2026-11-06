@@ -1,0 +1,266 @@
+[
+  {
+    "date": "2026-10-21",
+    "time_utc": "2026-10-21T04:11:01+00:00",
+    "run_label": "A",
+    "new_candidates": 12
+  },
+  {
+    "date": "2026-10-21",
+    "time_utc": "2026-10-21T16:04:38+00:00",
+    "run_label": "B",
+    "new_candidates": 17
+  },
+  {
+    "date": "2026-10-21",
+    "time_utc": "2026-10-21T18:02:32+00:00",
+    "run_label": "C",
+    "new_candidates": 11
+  },
+  {
+    "date": "2026-10-21",
+    "time_utc": "2026-10-21T20:03:48+00:00",
+    "run_label": "D",
+    "new_candidates": 10
+  },
+  {
+    "date": "2026-10-21",
+    "time_utc": "2026-10-22T00:40:44+00:00",
+    "run_label": "E",
+    "new_candidates": 2
+  },
+  {
+    "date": "2026-10-22",
+    "time_utc": "2026-10-22T16:09:45+00:00",
+    "run_label": "A",
+    "new_candidates": 19
+  },
+  {
+    "date": "2026-10-22",
+    "time_utc": "2026-10-22T18:13:08+00:00",
+    "run_label": "B",
+    "new_candidates": 12
+  },
+  {
+    "date": "2026-10-22",
+    "time_utc": "2026-10-22T20:06:05+00:00",
+    "run_label": "C",
+    "new_candidates": 12
+  },
+  {
+    "date": "2026-10-22",
+    "time_utc": "2026-10-23T00:43:11+00:00",
+    "run_label": "D",
+    "new_candidates": 4
+  },
+  {
+    "date": "2026-10-23",
+    "time_utc": "2026-10-23T16:06:12+00:00",
+    "run_label": "A",
+    "new_candidates": 14
+  },
+  {
+    "date": "2026-10-23",
+    "time_utc": "2026-10-23T18:10:02+00:00",
+    "run_label": "B",
+    "new_candidates": 11
+  },
+  {
+    "date": "2026-10-23",
+    "time_utc": "2026-10-23T20:01:53+00:00",
+    "run_label": "C",
+    "new_candidates": 7
+  },
+  {
+    "date": "2026-10-23",
+    "time_utc": "2026-10-24T00:46:31+00:00",
+    "run_label": "D",
+    "new_candidates": 4
+  },
+  {
+    "date": "2026-10-26",
+    "time_utc": "2026-10-26T16:22:56+00:00",
+    "run_label": "A",
+    "new_candidates": 16
+  },
+  {
+    "date": "2026-10-26",
+    "time_utc": "2026-10-26T18:09:38+00:00",
+    "run_label": "B",
+    "new_candidates": 7
+  },
+  {
+    "date": "2026-10-26",
+    "time_utc": "2026-10-26T20:21:49+00:00",
+    "run_label": "C",
+    "new_candidates": 9
+  },
+  {
+    "date": "2026-10-26",
+    "time_utc": "2026-10-27T00:40:28+00:00",
+    "run_label": "D",
+    "new_candidates": 2
+  },
+  {
+    "date": "2026-10-27",
+    "time_utc": "2026-10-27T16:11:42+00:00",
+    "run_label": "A",
+    "new_candidates": 18
+  },
+  {
+    "date": "2026-10-27",
+    "time_utc": "2026-10-27T18:13:32+00:00",
+    "run_label": "B",
+    "new_candidates": 11
+  },
+  {
+    "date": "2026-10-27",
+    "time_utc": "2026-10-27T20:11:08+00:00",
+    "run_label": "C",
+    "new_candidates": 7
+  },
+  {
+    "date": "2026-10-27",
+    "time_utc": "2026-10-28T00:51:07+00:00",
+    "run_label": "D",
+    "new_candidates": 4
+  },
+  {
+    "date": "2026-10-28",
+    "time_utc": "2026-10-28T16:19:57+00:00",
+    "run_label": "A",
+    "new_candidates": 14
+  },
+  {
+    "date": "2026-10-28",
+    "time_utc": "2026-10-28T18:15:49+00:00",
+    "run_label": "B",
+    "new_candidates": 7
+  },
+  {
+    "date": "2026-10-28",
+    "time_utc": "2026-10-28T20:17:40+00:00",
+    "run_label": "C",
+    "new_candidates": 12
+  },
+  {
+    "date": "2026-10-28",
+    "time_utc": "2026-10-29T00:51:46+00:00",
+    "run_label": "D",
+    "new_candidates": 3
+  },
+  {
+    "date": "2026-10-29",
+    "time_utc": "2026-10-29T16:23:17+00:00",
+    "run_label": "A",
+    "new_candidates": 18
+  },
+  {
+    "date": "2026-10-29",
+    "time_utc": "2026-10-29T18:17:52+00:00",
+    "run_label": "B",
+    "new_candidates": 12
+  },
+  {
+    "date": "2026-10-29",
+    "time_utc": "2026-10-29T20:19:05+00:00",
+    "run_label": "C",
+    "new_candidates": 10
+  },
+  {
+    "date": "2026-10-29",
+    "time_utc": "2026-10-30T00:53:41+00:00",
+    "run_label": "D",
+    "new_candidates": 6
+  },
+  {
+    "date": "2026-10-30",
+    "time_utc": "2026-10-30T16:18:05+00:00",
+    "run_label": "A",
+    "new_candidates": 22
+  },
+  {
+    "date": "2026-10-30",
+    "time_utc": "2026-10-30T18:13:01+00:00",
+    "run_label": "B",
+    "new_candidates": 19
+  },
+  {
+    "date": "2026-10-30",
+    "time_utc": "2026-10-30T20:14:57+00:00",
+    "run_label": "C",
+    "new_candidates": 10
+  },
+  {
+    "date": "2026-10-30",
+    "time_utc": "2026-10-31T00:57:28+00:00",
+    "run_label": "D",
+    "new_candidates": 4
+  },
+  {
+    "date": "2026-11-02",
+    "time_utc": "2026-11-02T16:30:34+00:00",
+    "run_label": "A",
+    "new_candidates": 14
+  },
+  {
+    "date": "2026-11-02",
+    "time_utc": "2026-11-02T18:24:26+00:00",
+    "run_label": "B",
+    "new_candidates": 17
+  },
+  {
+    "date": "2026-11-02",
+    "time_utc": "2026-11-02T20:20:19+00:00",
+    "run_label": "C",
+    "new_candidates": 14
+  },
+  {
+    "date": "2026-11-02",
+    "time_utc": "2026-11-03T00:59:32+00:00",
+    "run_label": "D",
+    "new_candidates": 9
+  },
+  {
+    "date": "2026-11-03",
+    "time_utc": "2026-11-03T21:14:53+00:00",
+    "run_label": "A",
+    "new_candidates": 6
+  },
+  {
+    "date": "2026-11-03",
+    "time_utc": "2026-11-03T22:32:10+00:00",
+    "run_label": "B",
+    "new_candidates": 2
+  },
+  {
+    "date": "2026-11-04",
+    "time_utc": "2026-11-04T21:28:31+00:00",
+    "run_label": "A",
+    "new_candidates": 14
+  },
+  {
+    "date": "2026-11-04",
+    "time_utc": "2026-11-04T22:52:35+00:00",
+    "run_label": "B",
+    "new_candidates": 5
+  },
+  {
+    "date": "2026-11-05",
+    "time_utc": "2026-11-05T21:36:01+00:00",
+    "run_label": "A",
+    "new_candidates": 27
+  },
+  {
+    "date": "2026-11-05",
+    "time_utc": "2026-11-05T22:52:57+00:00",
+    "run_label": "B",
+    "new_candidates": 9
+  },
+  {
+    "date": "2026-11-05",
+    "time_utc": "2026-11-06T00:35:50+00:00",
+    "run_label": "C",
+    "new_candidates": 1
+  }
+]
