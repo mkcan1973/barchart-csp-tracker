@@ -15,6 +15,9 @@
   .expandbtn { padding: 4px 12px; border-radius: 6px; border: 1px solid #3ddc84; background: transparent;
                 color: #3ddc84; font-weight: 700; font-size: 0.78rem; cursor: pointer; }
   .updated { color: #9aa4b2; font-size: 0.85rem; margin-top: 2px; margin-bottom: 20px; }
+  table.runlog { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 8px; }
+  table.runlog th, table.runlog td { text-align: left; padding: 5px 8px; border-bottom: 1px solid #2a2f3a; }
+  table.runlog tr.runlog-missing td { color: #ff6b6b; }
   .totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 8px; }
   .totals .box { background: #161b25; border-radius: 10px; padding: 12px 14px; }
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
@@ -65,6 +68,7 @@
     .filterbar a.editlink { border-color: #0969da; color: #0969da; }
     .expandbtn { border-color: #0969da; color: #0969da; }
     .filterbar .count { color: #6b7280; }
+    table.runlog th, table.runlog td { border-bottom-color: #e0e3e8; }
   }
 </style>
 </head>
@@ -94,7 +98,7 @@
   <div class="totals">
     <div class="box">
       <div class="label">UNREALIZED - ACTUAL, worst case (<span id="openCount">400</span> open, normalized $<span class="norm-base-num">1000</span>/position)</div>
-      <div class="val pos" id="totalActualBuyer">Long <span id="totalActualBuyerAmt">$343,763.74</span><span id="totalActualBuyerMid" class="pos"> (mid: $408,735.12)</span></div>
+      <div class="val pos" id="totalActualBuyer">Long <span id="totalActualBuyerAmt">$343,763.74</span><span id="totalActualBuyerMid" class="pos"> (mid: $408,729.42)</span></div>
       <div class="val short-block neg" id="totalActualSeller">Short <span id="totalActualSellerAmt">$-47,020.50</span><span id="totalActualSellerMid" class="neg"> (mid: $-39,760.95)</span></div>
       <div class="sub2">avg ROI: <span class="short-inline">short <span id="avgActualSellerRoi">-11.8%</span> / </span>long <span id="avgActualBuyerRoi">+85.9%</span></div>
       <div class="sub2">avg ann. ROI: <span class="short-inline">short <span id="avgActualSellerAnn">-752.7%</span> / </span>long <span id="avgActualBuyerAnn">+6119.9%</span></div>
@@ -109,9 +113,9 @@
     </div>
     <div class="box">
       <div class="label">STOCK BENCHMARK (no options - buy/short $<span class="norm-base-num">1000</span> of shares at entry)</div>
-      <div class="val pos" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">$60,285.73</span></div>
-      <div class="val short-block neg" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">$-60,285.73</span></div>
-      <div class="sub2">avg price change (open): <span id="avgStockUnrealPct">-15.1%</span> &middot; avg ann. ROI: <span id="avgStockUnrealAnn">-946.7%</span></div>
+      <div class="val pos" id="totalStockUnrealShort">Open, Short <span id="totalStockUnrealShortAmt">$60,278.07</span></div>
+      <div class="val short-block neg" id="totalStockUnrealLong">Open, Long <span id="totalStockUnrealLongAmt">$-60,278.07</span></div>
+      <div class="sub2">avg price change (open): <span id="avgStockUnrealPct">-15.1%</span> &middot; avg ann. ROI: <span id="avgStockUnrealAnn">-946.6%</span></div>
       <div class="val pos" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">$62,250.89</span></div>
       <div class="val short-block neg" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">$-62,250.89</span></div>
       <div class="sub2">avg price change (closed): <span id="avgStockRealPct">-12.2%</span> &middot; avg ann. ROI: <span id="avgStockRealAnn">-1123.2%</span></div>
@@ -311,7 +315,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="216.832" data-pe="" data-dte-entry="15" data-ask="0.46" data-strike="5.5" data-symbol="MARA" data-added="2026-11-05" data-expiry-type="monthly" data-kind="open" data-norm-as="-1.82" data-norm-ab="-21.74" data-roi-as="-0.18" data-roi-ab="-2.17" data-ann-as="" data-ann-ab="" data-norm-ms="-0.91" data-norm-mb="-10.87" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="216.832" data-pe="" data-dte-entry="15" data-ask="0.46" data-strike="5.5" data-symbol="MARA" data-added="2026-11-05" data-expiry-type="monthly" data-kind="open" data-norm-as="-1.82" data-norm-ab="-21.74" data-roi-as="-0.18" data-roi-ab="-2.17" data-ann-as="" data-ann-ab="" data-norm-ms="-0.91" data-norm-mb="-10.87" data-stock-long="0.85" data-stock-short="-0.85" data-stock-pct="0.09" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">MARA</span>
             <span class="strike">$5.5P</span>
@@ -404,7 +408,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="530.9091" data-pe="" data-dte-entry="1" data-ask="0.09" data-strike="5.5" data-symbol="MARA" data-added="2026-11-05" data-expiry-type="weekly" data-kind="open" data-norm-as="-1.82" data-norm-ab="-111.11" data-roi-as="-0.18" data-roi-ab="-11.11" data-ann-as="" data-ann-ab="" data-norm-ms="-0.91" data-norm-mb="-55.56" data-stock-long="0.0" data-stock-short="-0.0" data-stock-pct="0.0" data-stock-pct-ann="">
+        <div class="card" data-ann-return="530.9091" data-pe="" data-dte-entry="1" data-ask="0.09" data-strike="5.5" data-symbol="MARA" data-added="2026-11-05" data-expiry-type="weekly" data-kind="open" data-norm-as="-1.82" data-norm-ab="-111.11" data-roi-as="-0.18" data-roi-ab="-11.11" data-ann-as="" data-ann-ab="" data-norm-ms="-0.91" data-norm-mb="-55.56" data-stock-long="0.85" data-stock-short="-0.85" data-stock-pct="0.09" data-stock-pct-ann="">
           <div class="card-head">
             <span class="sym">MARA</span>
             <span class="strike">$5.5P</span>
@@ -4744,7 +4748,7 @@
           </div><div class="sub2">Long "exe" = buy shares + exercise the put (guaranteed, independent of the option's own market quotes)</div>
         </div>
 
-        <div class="card" data-ann-return="173.8095" data-pe="" data-dte-entry="7" data-ask="0.21" data-strike="6.0" data-symbol="MARA" data-added="2026-10-30" data-expiry-type="weekly" data-kind="open" data-norm-as="-16.67" data-norm-ab="380.95" data-roi-as="-1.67" data-roi-ab="38.1" data-ann-as="-101.59" data-ann-ab="2317.75" data-norm-ms="-15.83" data-norm-mb="404.76" data-stock-long="-95.46" data-stock-short="95.46" data-stock-pct="-9.55" data-stock-pct-ann="-580.96">
+        <div class="card" data-ann-return="173.8095" data-pe="" data-dte-entry="7" data-ask="0.21" data-strike="6.0" data-symbol="MARA" data-added="2026-10-30" data-expiry-type="weekly" data-kind="open" data-norm-as="-16.67" data-norm-ab="380.95" data-roi-as="-1.67" data-roi-ab="38.1" data-ann-as="-101.59" data-ann-ab="2317.75" data-norm-ms="-15.83" data-norm-mb="404.76" data-stock-long="-94.69" data-stock-short="94.69" data-stock-pct="-9.47" data-stock-pct-ann="-576.09">
           <div class="card-head">
             <span class="sym">MARA</span>
             <span class="strike">$6P</span>
@@ -4992,7 +4996,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="117.522" data-pe="" data-dte-entry="21" data-ask="0.4" data-strike="6.0" data-symbol="MARA" data-added="2026-10-30" data-expiry-type="monthly" data-kind="open" data-norm-as="-51.67" data-norm-ab="725.0" data-roi-as="-5.17" data-roi-ab="72.5" data-ann-as="-314.51" data-ann-ab="4410.42" data-norm-ms="-50.83" data-norm-mb="737.5" data-stock-long="-113.21" data-stock-short="113.21" data-stock-pct="-11.32" data-stock-pct-ann="-688.63">
+        <div class="card" data-ann-return="117.522" data-pe="" data-dte-entry="21" data-ask="0.4" data-strike="6.0" data-symbol="MARA" data-added="2026-10-30" data-expiry-type="monthly" data-kind="open" data-norm-as="-51.67" data-norm-ab="725.0" data-roi-as="-5.17" data-roi-ab="72.5" data-ann-as="-314.51" data-ann-ab="4410.42" data-norm-ms="-50.83" data-norm-mb="737.5" data-stock-long="-112.45" data-stock-short="112.45" data-stock-pct="-11.25" data-stock-pct-ann="-684.38">
           <div class="card-head">
             <span class="sym">MARA</span>
             <span class="strike">$6P</span>
@@ -5457,7 +5461,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="280.7692" data-pe="" data-dte-entry="7" data-ask="0.36" data-strike="6.5" data-symbol="MARA" data-added="2026-10-30" data-expiry-type="weekly" data-kind="open" data-norm-as="-52.31" data-norm-ab="777.78" data-roi-as="-5.23" data-roi-ab="77.78" data-ann-as="-318.16" data-ann-ab="4731.62" data-norm-ms="-48.46" data-norm-mb="847.22" data-stock-long="-113.89" data-stock-short="113.89" data-stock-pct="-11.39" data-stock-pct-ann="-692.89">
+        <div class="card" data-ann-return="280.7692" data-pe="" data-dte-entry="7" data-ask="0.36" data-strike="6.5" data-symbol="MARA" data-added="2026-10-30" data-expiry-type="weekly" data-kind="open" data-norm-as="-52.31" data-norm-ab="777.78" data-roi-as="-5.23" data-roi-ab="77.78" data-ann-as="-318.16" data-ann-ab="4731.62" data-norm-ms="-48.46" data-norm-mb="847.22" data-stock-long="-113.14" data-stock-short="113.14" data-stock-pct="-11.31" data-stock-pct-ann="-688.03">
           <div class="card-head">
             <span class="sym">MARA</span>
             <span class="strike">$6.5P</span>
@@ -7534,7 +7538,7 @@
           </div><div class="sub2">Long "exe" = buy shares + exercise the put (guaranteed, independent of the option's own market quotes)</div>
         </div>
 
-        <div class="card" data-ann-return="108.595" data-pe="" data-dte-entry="25" data-ask="0.47" data-strike="6.5" data-symbol="MARA" data-added="2026-10-26" data-expiry-type="monthly" data-kind="open" data-norm-as="-86.15" data-norm-ab="1106.38" data-roi-as="-8.62" data-roi-ab="110.64" data-ann-as="-314.63" data-ann-ab="4038.36" data-norm-ms="-84.62" data-norm-mb="1127.66" data-stock-long="-160.11" data-stock-short="160.11" data-stock-pct="-16.01" data-stock-pct-ann="-584.37">
+        <div class="card" data-ann-return="108.595" data-pe="" data-dte-entry="25" data-ask="0.47" data-strike="6.5" data-symbol="MARA" data-added="2026-10-26" data-expiry-type="monthly" data-kind="open" data-norm-as="-86.15" data-norm-ab="1106.38" data-roi-as="-8.62" data-roi-ab="110.64" data-ann-as="-314.63" data-ann-ab="4038.36" data-norm-ms="-84.62" data-norm-mb="1127.66" data-stock-long="-159.4" data-stock-short="159.4" data-stock-pct="-15.94" data-stock-pct-ann="-581.81">
           <div class="card-head">
             <span class="sym">MARA</span>
             <span class="strike">$6.5P</span>
@@ -9270,7 +9274,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="123.275" data-pe="" data-dte-entry="30" data-ask="0.83" data-strike="7.5" data-symbol="MARA" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-146.67" data-norm-ab="1120.48" data-roi-as="-14.67" data-roi-ab="112.05" data-ann-as="-356.97" data-ann-ab="2726.55" data-norm-ms="-144.67" data-norm-mb="1138.55" data-stock-long="-246.79" data-stock-short="246.79" data-stock-pct="-24.68" data-stock-pct-ann="-600.55">
+        <div class="card" data-ann-return="123.275" data-pe="" data-dte-entry="30" data-ask="0.83" data-strike="7.5" data-symbol="MARA" data-added="2026-10-21" data-expiry-type="monthly" data-kind="open" data-norm-as="-146.67" data-norm-ab="1120.48" data-roi-as="-14.67" data-roi-ab="112.05" data-ann-as="-356.97" data-ann-ab="2726.55" data-norm-ms="-144.67" data-norm-mb="1138.55" data-stock-long="-246.14" data-stock-short="246.14" data-stock-pct="-24.61" data-stock-pct-ann="-598.84">
           <div class="card-head">
             <span class="sym">MARA</span>
             <span class="strike">$7.5P</span>
@@ -10634,7 +10638,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="83.9724" data-pe="" data-dte-entry="32" data-ask="0.5" data-strike="7.0" data-symbol="MARA" data-added="2026-10-19" data-expiry-type="monthly" data-kind="open" data-norm-as="-128.57" data-norm-ab="1700.0" data-roi-as="-12.86" data-roi-ab="170.0" data-ann-as="-276.11" data-ann-ab="3650.0" data-norm-ms="-126.43" data-norm-mb="1730.0" data-stock-long="-232.83" data-stock-short="232.83" data-stock-pct="-23.28" data-stock-pct-ann="-499.84">
+        <div class="card" data-ann-return="83.9724" data-pe="" data-dte-entry="32" data-ask="0.5" data-strike="7.0" data-symbol="MARA" data-added="2026-10-19" data-expiry-type="monthly" data-kind="open" data-norm-as="-128.57" data-norm-ab="1700.0" data-roi-as="-12.86" data-roi-ab="170.0" data-ann-as="-276.11" data-ann-ab="3650.0" data-norm-ms="-126.43" data-norm-mb="1730.0" data-stock-long="-232.18" data-stock-short="232.18" data-stock-pct="-23.22" data-stock-pct-ann="-498.55">
           <div class="card-head">
             <span class="sym">MARA</span>
             <span class="strike">$7P</span>
@@ -11843,7 +11847,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="540.296" data-pe="" data-dte-entry="38" data-ask="1.0" data-strike="2.5" data-symbol="EYPT" data-added="2026-10-13" data-expiry-type="monthly" data-kind="open" data-norm-as="-520.0" data-norm-ab="1100.0" data-roi-as="-52.0" data-roi-ab="110.0" data-ann-as="-825.22" data-ann-ab="1745.65" data-norm-ms="-500.0" data-norm-mb="1144.1" data-stock-long="-888.26" data-stock-short="888.26" data-stock-pct="-88.83" data-stock-pct-ann="-1409.69">
+        <div class="card" data-ann-return="540.296" data-pe="" data-dte-entry="38" data-ask="1.0" data-strike="2.5" data-symbol="EYPT" data-added="2026-10-13" data-expiry-type="monthly" data-kind="open" data-norm-as="-520.0" data-norm-ab="1100.0" data-roi-as="-52.0" data-roi-ab="110.0" data-ann-as="-825.22" data-ann-ab="1745.65" data-norm-ms="-500.0" data-norm-mb="1140.0" data-stock-long="-886.97" data-stock-short="886.97" data-stock-pct="-88.7" data-stock-pct-ann="-1407.63">
           <div class="card-head">
             <span class="sym">EYPT</span>
             <span class="strike">$2.5P</span>
@@ -11859,9 +11863,9 @@
           <div class="grid2">
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$110.00<span class="pos"> (exe: $114.41)</span></div>
+              <div class="val pos">$110.00<span class="pos"> (exe: $114.00)</span></div>
               <div class="sub2">ROI +110.0% &middot; ann +1745.7%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$1,100.00</span> (exe: <span class="pos norm-mid-num" data-src="data-norm-mb">$1,144.10</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$1,100.00</span> (exe: <span class="pos norm-mid-num" data-src="data-norm-mb">$1,140.00</span>)</div>
               <div class="sub2">current bid (receive to close): $2.10</div>
             </div>
             <div class="box short-block">
@@ -12215,7 +12219,7 @@
           </div>
         </div>
 
-        <div class="card" data-ann-return="178.922" data-pe="" data-dte-entry="51" data-ask="0.25" data-strike="1.0" data-symbol="CMPX" data-added="2026-09-30" data-expiry-type="monthly" data-kind="open" data-norm-as="-150.0" data-norm-ab="0.0" data-roi-as="-15.0" data-roi-ab="0.0" data-ann-as="-152.08" data-ann-ab="0.0" data-norm-ms="-100.0" data-norm-mb="261.6" data-stock-long="-341.73" data-stock-short="341.73" data-stock-pct="-34.17" data-stock-pct-ann="-346.45">
+        <div class="card" data-ann-return="178.922" data-pe="" data-dte-entry="51" data-ask="0.25" data-strike="1.0" data-symbol="CMPX" data-added="2026-09-30" data-expiry-type="monthly" data-kind="open" data-norm-as="-150.0" data-norm-ab="0.0" data-roi-as="-15.0" data-roi-ab="0.0" data-ann-as="-152.08" data-ann-ab="0.0" data-norm-ms="-100.0" data-norm-mb="260.0" data-stock-long="-341.35" data-stock-short="341.35" data-stock-pct="-34.13" data-stock-pct-ann="-346.04">
           <div class="card-head">
             <span class="sym">CMPX</span>
             <span class="strike">$1P</span>
@@ -12223,7 +12227,7 @@
             
             
           </div>
-          <div class="sub">36d active &middot; 15d left &middot; Entry 1.04 &middot; Now 0.68
+          <div class="sub">36d active &middot; 15d left &middot; Entry 1.04 &middot; Now 0.69
             &middot; bid 0.20/yahoo &middot; ask 0.25/yahoo</div>
           <div class="sub">Barchart ann. return at selection: +178.9% &middot; PE at entry: -- (approx (backfilled)) &middot; DTE at entry: 51</div>
           
@@ -12231,9 +12235,9 @@
           <div class="grid2">
             <div class="box">
               <div class="label">LONG (bought put) - bearish, same side as short stock</div>
-              <div class="val pos">$0.00<span class="pos"> (exe: $6.54)</span></div>
+              <div class="val pos">$0.00<span class="pos"> (exe: $6.50)</span></div>
               <div class="sub2">ROI +0.0% &middot; ann +0.0%</div>
-              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$0.00</span> (exe: <span class="pos norm-mid-num" data-src="data-norm-mb">$261.60</span>)</div>
+              <div class="sub2">norm (<span class="norm-base-num">1000</span> risk): <span class="pos norm-primary-num" data-src="data-norm-ab">$0.00</span> (exe: <span class="pos norm-mid-num" data-src="data-norm-mb">$260.00</span>)</div>
               <div class="sub2">current bid (receive to close): $0.25</div>
             </div>
             <div class="box short-block">
@@ -28404,6 +28408,14 @@
         </div>
   </div>
 
+  <h2>Run log (last 10 weekdays)
+    <button type="button" id="runLogToggle" class="expandbtn">Expand</button>
+  </h2>
+  <div id="runLogWrap" style="display:none;">
+    <div class="updated" style="margin-top:0;">One row per actual script execution that passed the market-open check - a day with no rows means the scheduled trigger never ran that day (see GitHub Actions), not that nothing new was found.</div>
+    <table class="runlog"><thead><tr><th>Date</th><th>Run</th><th>Time (your local)</th><th>New candidates</th></tr></thead><tbody><tr><td>2026-10-23</td><td>A</td><td class="runlog-time" data-utc="2026-10-23T16:06:12+00:00">2026-10-23T16:06:12+00:00</td><td>14</td></tr><tr><td>2026-10-23</td><td>B</td><td class="runlog-time" data-utc="2026-10-23T18:10:02+00:00">2026-10-23T18:10:02+00:00</td><td>11</td></tr><tr><td>2026-10-23</td><td>C</td><td class="runlog-time" data-utc="2026-10-23T20:01:53+00:00">2026-10-23T20:01:53+00:00</td><td>7</td></tr><tr><td>2026-10-23</td><td>D</td><td class="runlog-time" data-utc="2026-10-24T00:46:31+00:00">2026-10-24T00:46:31+00:00</td><td>4</td></tr><tr><td>2026-10-26</td><td>A</td><td class="runlog-time" data-utc="2026-10-26T16:22:56+00:00">2026-10-26T16:22:56+00:00</td><td>16</td></tr><tr><td>2026-10-26</td><td>B</td><td class="runlog-time" data-utc="2026-10-26T18:09:38+00:00">2026-10-26T18:09:38+00:00</td><td>7</td></tr><tr><td>2026-10-26</td><td>C</td><td class="runlog-time" data-utc="2026-10-26T20:21:49+00:00">2026-10-26T20:21:49+00:00</td><td>9</td></tr><tr><td>2026-10-26</td><td>D</td><td class="runlog-time" data-utc="2026-10-27T00:40:28+00:00">2026-10-27T00:40:28+00:00</td><td>2</td></tr><tr><td>2026-10-27</td><td>A</td><td class="runlog-time" data-utc="2026-10-27T16:11:42+00:00">2026-10-27T16:11:42+00:00</td><td>18</td></tr><tr><td>2026-10-27</td><td>B</td><td class="runlog-time" data-utc="2026-10-27T18:13:32+00:00">2026-10-27T18:13:32+00:00</td><td>11</td></tr><tr><td>2026-10-27</td><td>C</td><td class="runlog-time" data-utc="2026-10-27T20:11:08+00:00">2026-10-27T20:11:08+00:00</td><td>7</td></tr><tr><td>2026-10-27</td><td>D</td><td class="runlog-time" data-utc="2026-10-28T00:51:07+00:00">2026-10-28T00:51:07+00:00</td><td>4</td></tr><tr><td>2026-10-28</td><td>A</td><td class="runlog-time" data-utc="2026-10-28T16:19:57+00:00">2026-10-28T16:19:57+00:00</td><td>14</td></tr><tr><td>2026-10-28</td><td>B</td><td class="runlog-time" data-utc="2026-10-28T18:15:49+00:00">2026-10-28T18:15:49+00:00</td><td>7</td></tr><tr><td>2026-10-28</td><td>C</td><td class="runlog-time" data-utc="2026-10-28T20:17:40+00:00">2026-10-28T20:17:40+00:00</td><td>12</td></tr><tr><td>2026-10-28</td><td>D</td><td class="runlog-time" data-utc="2026-10-29T00:51:46+00:00">2026-10-29T00:51:46+00:00</td><td>3</td></tr><tr><td>2026-10-29</td><td>A</td><td class="runlog-time" data-utc="2026-10-29T16:23:17+00:00">2026-10-29T16:23:17+00:00</td><td>18</td></tr><tr><td>2026-10-29</td><td>B</td><td class="runlog-time" data-utc="2026-10-29T18:17:52+00:00">2026-10-29T18:17:52+00:00</td><td>12</td></tr><tr><td>2026-10-29</td><td>C</td><td class="runlog-time" data-utc="2026-10-29T20:19:05+00:00">2026-10-29T20:19:05+00:00</td><td>10</td></tr><tr><td>2026-10-29</td><td>D</td><td class="runlog-time" data-utc="2026-10-30T00:53:41+00:00">2026-10-30T00:53:41+00:00</td><td>6</td></tr><tr><td>2026-10-30</td><td>A</td><td class="runlog-time" data-utc="2026-10-30T16:18:05+00:00">2026-10-30T16:18:05+00:00</td><td>22</td></tr><tr><td>2026-10-30</td><td>B</td><td class="runlog-time" data-utc="2026-10-30T18:13:01+00:00">2026-10-30T18:13:01+00:00</td><td>19</td></tr><tr><td>2026-10-30</td><td>C</td><td class="runlog-time" data-utc="2026-10-30T20:14:57+00:00">2026-10-30T20:14:57+00:00</td><td>10</td></tr><tr><td>2026-10-30</td><td>D</td><td class="runlog-time" data-utc="2026-10-31T00:57:28+00:00">2026-10-31T00:57:28+00:00</td><td>4</td></tr><tr><td>2026-11-02</td><td>A</td><td class="runlog-time" data-utc="2026-11-02T16:30:34+00:00">2026-11-02T16:30:34+00:00</td><td>14</td></tr><tr><td>2026-11-02</td><td>B</td><td class="runlog-time" data-utc="2026-11-02T18:24:26+00:00">2026-11-02T18:24:26+00:00</td><td>17</td></tr><tr><td>2026-11-02</td><td>C</td><td class="runlog-time" data-utc="2026-11-02T20:20:19+00:00">2026-11-02T20:20:19+00:00</td><td>14</td></tr><tr><td>2026-11-02</td><td>D</td><td class="runlog-time" data-utc="2026-11-03T00:59:32+00:00">2026-11-03T00:59:32+00:00</td><td>9</td></tr><tr><td>2026-11-03</td><td>A</td><td class="runlog-time" data-utc="2026-11-03T21:14:53+00:00">2026-11-03T21:14:53+00:00</td><td>6</td></tr><tr><td>2026-11-03</td><td>B</td><td class="runlog-time" data-utc="2026-11-03T22:32:10+00:00">2026-11-03T22:32:10+00:00</td><td>2</td></tr><tr><td>2026-11-04</td><td>A</td><td class="runlog-time" data-utc="2026-11-04T21:28:31+00:00">2026-11-04T21:28:31+00:00</td><td>14</td></tr><tr><td>2026-11-04</td><td>B</td><td class="runlog-time" data-utc="2026-11-04T22:52:35+00:00">2026-11-04T22:52:35+00:00</td><td>5</td></tr><tr><td>2026-11-05</td><td>A</td><td class="runlog-time" data-utc="2026-11-05T21:36:01+00:00">2026-11-05T21:36:01+00:00</td><td>27</td></tr><tr><td>2026-11-05</td><td>B</td><td class="runlog-time" data-utc="2026-11-05T22:52:57+00:00">2026-11-05T22:52:57+00:00</td><td>9</td></tr><tr><td>2026-11-05</td><td>C</td><td class="runlog-time" data-utc="2026-11-06T00:35:50+00:00">2026-11-06T00:35:50+00:00</td><td>1</td></tr></tbody></table>
+  </div>
+
 <script>
 (function() {
   var DEFAULT_FILTERS = {"min_roi": null, "max_roi": null, "min_pe": 999, "max_pe": null, "min_dte_entry": null, "max_dte_entry": null, "base_investment": 200, "min_put_strike": 9.5, "max_put_strike": null, "expiry_filter": "monthly"};
@@ -28778,6 +28790,24 @@
       closedToggleBtn.textContent = collapsed ? 'Collapse' : 'Expand';
     });
   }
+
+  var runLogToggleBtn = document.getElementById('runLogToggle');
+  var runLogWrap = document.getElementById('runLogWrap');
+  if (runLogToggleBtn && runLogWrap) {
+    runLogToggleBtn.addEventListener('click', function() {
+      var collapsed = runLogWrap.style.display === 'none';
+      runLogWrap.style.display = collapsed ? '' : 'none';
+      runLogToggleBtn.textContent = collapsed ? 'Collapse' : 'Expand';
+    });
+  }
+  // Server renders UTC timestamps (it doesn't know the viewer's timezone) -
+  // swap each one to the viewer's own local time/zone once, on load.
+  document.querySelectorAll('.runlog-time').forEach(function(el) {
+    var utc = el.getAttribute('data-utc');
+    if (!utc) return;
+    var d = new Date(utc);
+    if (!isNaN(d.getTime())) el.textContent = d.toLocaleString();
+  });
 
   // Long puts are the actual strategy here - short/CSP-seller figures are
   // hidden everywhere (totals boxes, every card) by default via the
