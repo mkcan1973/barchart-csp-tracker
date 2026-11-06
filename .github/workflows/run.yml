@@ -2,30 +2,39 @@ name: Run Barchart CSP Tracker
 
 on:
   schedule:
-    # Three runs per weekday, 2 hours apart, all within market hours:
-    # 15:30 UTC = 11:30am EDT / 10:30am EST
-    # 17:30 UTC = 1:30pm EDT / 12:30pm EST
-    # 19:30 UTC = 3:30pm EDT / 2:30pm EST
-    # Plus one evening run, well after the close, for an end-of-day status
-    # check and to settle anything expiring that same day (the script
-    # itself only allows same-day settlement once it's past 4pm ET, via
-    # same_day_settle_ok in main() - see settle_expired_positions()):
-    # 00:00 UTC = 5:00pm PDT/8:00pm EDT (most of the year) or 4:00pm PST/
-    # 7:00pm EST during US winter (GitHub cron doesn't follow DST, so this
-    # drifts an hour during standard time - still safely after close).
-    # Note the weekday field below is shifted a day later (Tue-Sat) than
-    # the other three crons, since 00:00 UTC has already rolled into the
-    # next UTC calendar day while still being the same US trading evening.
-    # The script itself checks the NYSE calendar and exits immediately on
-    # market holidays, so all four just no-op on non-trading days.
-    - cron: "30 15 * * 1-5"
-    - cron: "30 17 * * 1-5"
-    - cron: "30 19 * * 1-5"
-    - cron: "0 0 * * 2-6"
+    # GitHub's scheduled (cron) triggers are best-effort and, in practice,
+    # get delayed by hours or dropped entirely during busy periods on
+    # GitHub's infrastructure - confirmed via run_log.json's own history,
+    # where only 3 of 4 fixed daily cron times (15:30/17:30/19:30/00:00
+    # UTC) were actually firing most days, and the ones that did were
+    # landing 2+ hours late. A handful of fixed times has no redundancy
+    # against that, so this now fires every 30 minutes across the whole
+    # window instead - any individual trigger can still be delayed or
+    # dropped, but with ~20 scheduled attempts spread through the day
+    # instead of 4, actual executions land throughout market hours in
+    # practice. This repo is public, so GitHub Actions minutes are free -
+    # there's no cost tradeoff to running this often.
+    #
+    # 13:00-22:00 UTC covers 9:00am-6:00pm EDT (summer) and 8:00am-5:00pm
+    # EST (winter) - bracketing the 9:30am-4:00pm ET trading session with
+    # margin in both seasons, including after the close so same-day
+    # settlement (same_day_settle_ok in main(), gated on now_et.hour >= 16)
+    # still reliably gets a run. The script itself checks the NYSE
+    # calendar and exits immediately on weekends/holidays, so the extra
+    # attempts just no-op on non-trading days instead of wasting a scrape.
+    - cron: "*/30 13-22 * * 1-5"
   workflow_dispatch: {}  # lets you trigger a run manually from the Actions tab
 
 permissions:
   contents: write
+
+# Running every 30 minutes means a delayed trigger can occasionally still
+# be mid-run when the next one would otherwise start - queue them instead
+# of letting two runs push to the same branch at once (which the push step
+# below has no retry logic for).
+concurrency:
+  group: tracker-run
+  cancel-in-progress: false
 
 jobs:
   run:
@@ -51,8 +60,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for f in barchart_csp_positions.json barchart_csp_summary.csv index.html barchart_csp_realized_pnl.png; do
+          for f in barchart_csp_positions.json barchart_csp_summary.csv index.html barchart_csp_realized_pnl.png run_log.json; do
             [ -f "$f" ] && git add "$f"
           done
           git diff --staged --quiet || git commit -m "Run: $(date -u +%Y-%m-%dT%H:%M)Z"
+          git pull --rebase origin master
           git push
