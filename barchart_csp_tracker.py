@@ -1756,6 +1756,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       if (e.target.getAttribute('data-action') !== 'remove') return;
       var card = e.target.closest('.portfolio-card');
       var key = card.getAttribute('data-key');
+      if (!confirm('Remove ' + key.replace(/\\|/g, ' ') + ' from your portfolio? Everything entered for it (qty, prices, exit info) will be deleted.')) {{
+        return;
+      }}
       delete portfolio[key];
       savePortfolio();
       var cb = document.querySelector('.portfolio-check[data-key="' + CSS.escape(key) + '"]');
@@ -1776,6 +1779,10 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
           }};
         }}
       }} else {{
+        if (!confirm('Remove ' + key.replace(/\\|/g, ' ') + ' from your portfolio? Everything entered for it (qty, prices, exit info) will be deleted.')) {{
+          cb.checked = true;  // user backed out - undo the uncheck
+          return;
+        }}
         delete portfolio[key];
       }}
       savePortfolio();
