@@ -974,7 +974,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
                 f'data-ann-as="{attr(r["ANNUALIZED ROI % (ACTUAL) IF SOLD (CSP)"])}" data-ann-ab="{attr(r["ANNUALIZED ROI % (ACTUAL) IF BOUGHT (long put)"])}" '
                 f'data-norm-ms="{attr(r[mid_norm_seller_key])}" data-norm-mb="{attr(r[mid_norm_buyer_key])}" '
                 f'data-stock-long="{attr(r["STOCK LONG P/L"])}" data-stock-short="{attr(r["STOCK SHORT P/L"])}" '
-                f'data-stock-pct="{attr(r["STOCK PCT CHANGE"])}" data-stock-pct-ann="{attr(r["STOCK PCT CHANGE ANN"])}"'
+                f'data-stock-pct="{attr(r["STOCK PCT CHANGE"])}" data-stock-pct-ann="{attr(r["STOCK PCT CHANGE ANN"])}" '
+                f'data-cur-stock="{attr(r["CURRENT STOCK PRICE"])}" data-cur-bid="{attr(r["CURRENT OPTION BID"])}" '
+                f'data-cur-ask="{attr(r["CURRENT OPTION ASK"])}" data-buyer-mid-exercise="{"1" if buyer_mid_is_exercise else "0"}"'
             )
 
         ann_return = r.get('BARCHART ANNUALIZED RETURN % (at selection)')
@@ -1068,6 +1070,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   .portfolio-card .pf-sold-field, .portfolio-card .pf-exercised-field {{ display: none !important; }}
   .portfolio-card[data-exit-type="sold"] .pf-sold-field {{ display: flex !important; }}
   .portfolio-card[data-exit-type="exercised"] .pf-exercised-field {{ display: flex !important; }}
+  .portfolio-card .pf-live-field {{ display: none !important; margin-top: 10px; }}
+  .portfolio-card[data-exit-type=""] .pf-live-field {{ display: block !important; }}
   .portfolio-card .pf-pnl {{ margin-top: 10px; font-size: 0.95rem; font-weight: 700; }}
   .portfolio-card .pf-remove {{ margin-top: 10px; }}
   .sub {{ color: #9aa4b2; font-size: 0.82rem; margin-top: 4px; }}
@@ -1151,6 +1155,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
         <div class="label">PORTFOLIO TOTALS</div>
         <div class="val" id="portfolioRealizedTotal">--</div>
         <div class="sub2">Realized P&amp;L (sold + exercised positions)</div>
+        <div class="val" id="portfolioUnrealizedTotal">--</div>
+        <div class="sub2">Unrealized P&amp;L (live est., still-open positions)</div>
         <div class="val" id="portfolioOpenCost">--</div>
         <div class="sub2">Cost basis of still-open positions (qty &times; purchase price &times; 100)</div>
       </div>
@@ -1731,9 +1737,47 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
           '<label class="pf-sold-field">Sell price $/put <input type="number" step="any" data-field="exit_price" value="' + numAttr(entry.exit_price) + '" placeholder="e.g. 2.10"></label>' +
           '<label class="pf-exercised-field">Stock buy price $/share <input type="number" step="any" data-field="stock_buy_price" value="' + numAttr(entry.stock_buy_price) + '" placeholder="e.g. 14.50"></label>' +
         '</div>' +
-        '<div class="pf-pnl">P&amp;L: <span class="pf-pnl-val">--</span></div>' +
+        '<div class="sub2 pf-live-field">Now (stock): <span class="pf-cur-stock">--</span> &middot; put bid/ask: <span class="pf-cur-bid">--</span>/<span class="pf-cur-ask">--</span></div>' +
+        '<div class="pf-pnl"><span class="pf-pnl-label">Unrealized P&amp;L (live est.)</span>: <span class="pf-pnl-val">--</span></div>' +
         '<button type="button" class="expandbtn pf-remove" data-action="remove">Remove from portfolio</button>' +
       '</div>';
+  }}
+
+  // Reuses the SAME live quote data already fetched server-side for this
+  // exact contract's own open/closed card (data-cur-stock/-bid/-ask,
+  // added alongside the portfolio checkbox) - no separate live fetch
+  // needed, since a portfolio entry's key always matches one real card.
+  function findOriginalCard(key) {{
+    var cb = document.querySelector('.portfolio-check[data-key="' + CSS.escape(key) + '"]');
+    return cb ? cb.closest('.card') : null;
+  }}
+
+  // Live unrealized estimate for a still-open entry, reusing the SAME
+  // live quote data already fetched server-side for this exact contract's
+  // own open card (data-cur-stock/-bid/-ask) - no separate fetch needed.
+  // Mirrors the non-portfolio ACTUAL-vs-exercise logic: sell now at the
+  // current bid unless exercising (intrinsic value) is actually better,
+  // just computed against YOUR purchase price and quantity instead of the
+  // simulated entry/normalized figures. Returns null fields when the
+  // underlying card has no live quote (or is itself already closed).
+  function portfolioLiveEstimate(key, entry, strike) {{
+    var orig = findOriginalCard(key);
+    var out = {{curStock: null, curBid: null, curAsk: null, pnl: null, useExercise: false}};
+    if (!orig || orig.getAttribute('data-kind') !== 'open') return out;
+    var curStockRaw = orig.getAttribute('data-cur-stock');
+    var curBidRaw = orig.getAttribute('data-cur-bid');
+    var curAskRaw = orig.getAttribute('data-cur-ask');
+    out.curStock = curStockRaw ? parseFloat(curStockRaw) : null;
+    out.curBid = curBidRaw ? parseFloat(curBidRaw) : null;
+    out.curAsk = curAskRaw ? parseFloat(curAskRaw) : null;
+    var qty = entry.qty, pp = entry.purchase_price;
+    if (!qty || pp === null || pp === undefined) return out;
+    var actualPnl = out.curBid === null ? null : (out.curBid - pp) * 100 * qty;
+    var fictPnl = out.curStock === null ? null : (Math.max(strike - out.curStock, 0) - pp) * 100 * qty;
+    var useExercise = fictPnl !== null && fictPnl > 0 && (actualPnl === null || fictPnl > actualPnl);
+    out.pnl = useExercise ? fictPnl : actualPnl;
+    out.useExercise = useExercise;
+    return out;
   }}
 
   function updatePortfolioCardPnl(card) {{
@@ -1741,25 +1785,47 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     var kp = keyParts(key);
     var entry = portfolio[key];
     if (!entry) return;
-    var pnl = portfolioPnl(entry, kp.strike);
+    var labelEl = card.querySelector('.pf-pnl-label');
     var el = card.querySelector('.pf-pnl-val');
     if (!el) return;
-    el.textContent = pnl === null ? '--' : fmtMoney(Math.round(pnl * 100) / 100);
-    el.className = 'pf-pnl-val ' + (pnl === null ? '' : pnlClass(pnl));
+
+    if (entry.exit_type) {{
+      if (labelEl) labelEl.textContent = 'Realized P&L';
+      var pnl = portfolioPnl(entry, kp.strike);
+      el.textContent = pnl === null ? '--' : fmtMoney(Math.round(pnl * 100) / 100);
+      el.className = 'pf-pnl-val ' + (pnl === null ? '' : pnlClass(pnl));
+      return;
+    }}
+
+    if (labelEl) labelEl.textContent = 'Unrealized P&L (live est.)';
+    var est = portfolioLiveEstimate(key, entry, kp.strike);
+    var curStockEl = card.querySelector('.pf-cur-stock');
+    var curBidEl = card.querySelector('.pf-cur-bid');
+    var curAskEl = card.querySelector('.pf-cur-ask');
+    if (curStockEl) curStockEl.textContent = est.curStock === null ? '--' : est.curStock.toFixed(2);
+    if (curBidEl) curBidEl.textContent = est.curBid === null ? '--' : est.curBid.toFixed(2);
+    if (curAskEl) curAskEl.textContent = est.curAsk === null ? '--' : est.curAsk.toFixed(2);
+    el.textContent = est.pnl === null ? '--' : fmtMoney(Math.round(est.pnl * 100) / 100) + (est.useExercise ? ' (exe)' : ' (sell now)');
+    el.className = 'pf-pnl-val ' + (est.pnl === null ? '' : pnlClass(est.pnl));
   }}
 
   function updatePortfolioTotals() {{
     var totalRealized = 0, anyRealized = false;
     var totalOpenCost = 0, anyOpen = false;
+    var totalUnrealized = 0, anyUnrealized = false;
     Object.keys(portfolio).forEach(function(key) {{
       var kp = keyParts(key);
       var entry = portfolio[key];
       var pnl = portfolioPnl(entry, kp.strike);
       if (pnl !== null) {{
         totalRealized += pnl; anyRealized = true;
-      }} else if (entry.qty && entry.purchase_price !== null && entry.purchase_price !== undefined) {{
+        return;
+      }}
+      if (entry.qty && entry.purchase_price !== null && entry.purchase_price !== undefined) {{
         totalOpenCost += entry.qty * entry.purchase_price * 100; anyOpen = true;
       }}
+      var est = portfolioLiveEstimate(key, entry, kp.strike);
+      if (est.pnl !== null) {{ totalUnrealized += est.pnl; anyUnrealized = true; }}
     }});
     var realizedEl = document.getElementById('portfolioRealizedTotal');
     if (realizedEl) {{
@@ -1768,6 +1834,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     }}
     var costEl = document.getElementById('portfolioOpenCost');
     if (costEl) costEl.textContent = anyOpen ? fmtMoney(Math.round(totalOpenCost * 100) / 100) : '--';
+    var unrealizedEl = document.getElementById('portfolioUnrealizedTotal');
+    if (unrealizedEl) {{
+      unrealizedEl.textContent = anyUnrealized ? fmtMoney(Math.round(totalUnrealized * 100) / 100) : '--';
+      unrealizedEl.className = 'val' + (anyUnrealized ? ' ' + pnlClass(totalUnrealized) : '');
+    }}
     var countEl = document.getElementById('portfolioCount');
     if (countEl) countEl.textContent = Object.keys(portfolio).length;
   }}
