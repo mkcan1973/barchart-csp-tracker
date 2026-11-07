@@ -9923,7 +9923,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-21",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 1.7400000095367432,
+    "settled_seller_pnl": 9.0,
+    "settled_buyer_pnl": -12.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CRWV",
@@ -10459,7 +10464,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-21",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 4.960000038146973,
+    "settled_seller_pnl": -70.0,
+    "settled_buyer_pnl": 65.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "BMNR",
@@ -11228,7 +11238,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-22",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 2.880000114440918,
+    "settled_seller_pnl": 15.0,
+    "settled_buyer_pnl": -25.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "MRNA",
@@ -11697,7 +11712,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-22",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 8.609999656677246,
+    "settled_seller_pnl": 43.0,
+    "settled_buyer_pnl": -58.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "JBLU",
@@ -12576,7 +12596,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-23",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 1.6649999618530273,
+    "settled_seller_pnl": -68.5,
+    "settled_buyer_pnl": 63.5,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "IMXI",
@@ -12791,7 +12816,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-23",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 1.8700000047683716,
+    "settled_seller_pnl": -4.0,
+    "settled_buyer_pnl": -4.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "PCT",
@@ -13770,7 +13800,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-27",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 2.390000104904175,
+    "settled_seller_pnl": -41.0,
+    "settled_buyer_pnl": 21.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CIFR",
@@ -14345,7 +14380,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-27",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 3.6700000762939453,
+    "settled_seller_pnl": 11.0,
+    "settled_buyer_pnl": -14.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "USAR",
@@ -14383,7 +14423,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-27",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 3.2899999618530273,
+    "settled_seller_pnl": 8.0,
+    "settled_buyer_pnl": -12.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "USAR",
@@ -14641,7 +14686,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-28",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 9.979999542236328,
+    "settled_seller_pnl": 39.0,
+    "settled_buyer_pnl": -40.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CRWV",
@@ -15492,7 +15542,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-29",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 8.609999656677246,
+    "settled_seller_pnl": 11.0,
+    "settled_buyer_pnl": -20.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CRWV",
@@ -15970,7 +16025,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-29",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 1.6649999618530273,
+    "settled_seller_pnl": -118.5,
+    "settled_buyer_pnl": 108.5,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CBRS",
@@ -16185,7 +16245,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-29",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 4.960000038146973,
+    "settled_seller_pnl": -23.0,
+    "settled_buyer_pnl": 17.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "RDDT",
@@ -16361,7 +16426,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 50.130001068115234,
+    "settled_seller_pnl": -1087.0,
+    "settled_buyer_pnl": 1037.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "IREN",
@@ -16380,7 +16450,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 21.639999389648438,
+    "settled_seller_pnl": -48.0,
+    "settled_buyer_pnl": 45.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CIFR",
@@ -16399,7 +16474,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 6.545000076293945,
+    "settled_seller_pnl": -4.5,
+    "settled_buyer_pnl": 0.5,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "WULF",
@@ -16418,7 +16498,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 11.369999885559082,
+    "settled_seller_pnl": 52.0,
+    "settled_buyer_pnl": -55.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "RIOT",
@@ -16437,7 +16522,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 16.709999084472656,
+    "settled_seller_pnl": 57.0,
+    "settled_buyer_pnl": -64.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CRWV",
@@ -16456,7 +16546,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 46.400001525878906,
+    "settled_seller_pnl": -476.0,
+    "settled_buyer_pnl": 474.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "APLD",
@@ -16475,7 +16570,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 15.550000190734863,
+    "settled_seller_pnl": -105.0,
+    "settled_buyer_pnl": 99.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "NBIS",
@@ -16494,7 +16594,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 129.49000549316406,
+    "settled_seller_pnl": -1851.0,
+    "settled_buyer_pnl": 1806.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HUT",
@@ -16513,7 +16618,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 52.650001525878906,
+    "settled_seller_pnl": -163.0,
+    "settled_buyer_pnl": 100.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "AXTI",
@@ -16532,7 +16642,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 38.880001068115234,
+    "settled_seller_pnl": -1032.0,
+    "settled_buyer_pnl": 1002.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "ENVX",
@@ -16551,7 +16666,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 2.759999990463257,
+    "settled_seller_pnl": -16.0,
+    "settled_buyer_pnl": 14.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "SMCI",
@@ -16570,7 +16690,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 28.760000228881836,
+    "settled_seller_pnl": -115.0,
+    "settled_buyer_pnl": 112.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "LITE",
@@ -16589,7 +16714,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 538.5900268554688,
+    "settled_seller_pnl": -24111.0,
+    "settled_buyer_pnl": 23981.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CRCL",
@@ -16608,7 +16738,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 67.87999725341797,
+    "settled_seller_pnl": -62.0,
+    "settled_buyer_pnl": 32.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "MARA",
@@ -16627,7 +16762,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 6.349999904632568,
+    "settled_seller_pnl": 20.0,
+    "settled_buyer_pnl": -21.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "SLS",
@@ -16836,7 +16976,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 8.420000076293945,
+    "settled_seller_pnl": -48.0,
+    "settled_buyer_pnl": 38.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "AAOI",
@@ -16855,7 +17000,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 50.130001068115234,
+    "settled_seller_pnl": -1027.0,
+    "settled_buyer_pnl": 1007.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "IREN",
@@ -16874,7 +17024,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 21.639999389648438,
+    "settled_seller_pnl": 61.0,
+    "settled_buyer_pnl": -64.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "NBIS",
@@ -16893,7 +17048,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 129.49000549316406,
+    "settled_seller_pnl": -1246.0,
+    "settled_buyer_pnl": 1226.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "AXTI",
@@ -16912,7 +17072,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 38.880001068115234,
+    "settled_seller_pnl": -937.0,
+    "settled_buyer_pnl": 902.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "QBTS",
@@ -16950,7 +17115,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 192.80999755859375,
+    "settled_seller_pnl": -79.0,
+    "settled_buyer_pnl": -121.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "MARA",
@@ -16969,7 +17139,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 6.349999904632568,
+    "settled_seller_pnl": 20.0,
+    "settled_buyer_pnl": -21.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HIMS",
@@ -17064,7 +17239,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 21.639999389648438,
+    "settled_seller_pnl": 7.0,
+    "settled_buyer_pnl": -11.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "AAOI",
@@ -17083,7 +17263,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 50.130001068115234,
+    "settled_seller_pnl": -1137.0,
+    "settled_buyer_pnl": 1077.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CRWV",
@@ -17102,7 +17287,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 46.400001525878906,
+    "settled_seller_pnl": -390.0,
+    "settled_buyer_pnl": 387.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "RIOT",
@@ -17121,7 +17311,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 16.709999084472656,
+    "settled_seller_pnl": 87.0,
+    "settled_buyer_pnl": -92.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "NBIS",
@@ -17140,7 +17335,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 129.49000549316406,
+    "settled_seller_pnl": -1426.0,
+    "settled_buyer_pnl": 1401.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "APP",
@@ -17159,7 +17359,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 391.2200012207031,
+    "settled_seller_pnl": 1890.0,
+    "settled_buyer_pnl": -2040.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "ZETA",
@@ -17235,7 +17440,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-10-30",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 8.420000076293945,
+    "settled_seller_pnl": -18.0,
+    "settled_buyer_pnl": 8.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "FPS",
@@ -17406,7 +17616,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 46.400001525878906,
+    "settled_seller_pnl": -308.0,
+    "settled_buyer_pnl": 303.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "RUN",
@@ -17425,7 +17640,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 9.979999542236328,
+    "settled_seller_pnl": 47.0,
+    "settled_buyer_pnl": -51.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CBRS",
@@ -17444,7 +17664,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 89.68000030517578,
+    "settled_seller_pnl": -572.0,
+    "settled_buyer_pnl": 482.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "LUNR",
@@ -17463,7 +17688,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 10.470000267028809,
+    "settled_seller_pnl": 37.0,
+    "settled_buyer_pnl": -40.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "IOVA",
@@ -17482,7 +17712,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 8.039999961853027,
+    "settled_seller_pnl": 35.0,
+    "settled_buyer_pnl": -50.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "BE",
@@ -17501,7 +17736,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 173.24000549316406,
+    "settled_seller_pnl": -2301.0,
+    "settled_buyer_pnl": 2286.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "ONDS",
@@ -17520,7 +17760,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 5.335000038146973,
+    "settled_seller_pnl": -52.5,
+    "settled_buyer_pnl": 51.5,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CIFR",
@@ -17672,7 +17917,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 8.420000076293945,
+    "settled_seller_pnl": 27.0,
+    "settled_buyer_pnl": -42.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "IREN",
@@ -17691,7 +17941,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 21.639999389648438,
+    "settled_seller_pnl": 95.0,
+    "settled_buyer_pnl": -99.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CIFR",
@@ -17710,7 +17965,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 6.545000076293945,
+    "settled_seller_pnl": 33.0,
+    "settled_buyer_pnl": -38.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "NBIS",
@@ -17729,7 +17989,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 129.49000549316406,
+    "settled_seller_pnl": -936.0,
+    "settled_buyer_pnl": 906.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "WULF",
@@ -17748,7 +18013,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 11.369999885559082,
+    "settled_seller_pnl": 73.0,
+    "settled_buyer_pnl": -76.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "LUNR",
@@ -17767,7 +18037,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 10.470000267028809,
+    "settled_seller_pnl": 28.0,
+    "settled_buyer_pnl": -33.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CLSK",
@@ -17786,7 +18061,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 6.159999847412109,
+    "settled_seller_pnl": -61.0,
+    "settled_buyer_pnl": 58.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "APLD",
@@ -17805,7 +18085,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 15.550000190734863,
+    "settled_seller_pnl": -31.0,
+    "settled_buyer_pnl": 26.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HIMS",
@@ -17824,7 +18109,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 26.0,
+    "settled_seller_pnl": 26.0,
+    "settled_buyer_pnl": -32.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CBRS",
@@ -17843,7 +18133,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 89.68000030517578,
+    "settled_seller_pnl": -362.0,
+    "settled_buyer_pnl": 272.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HELP",
@@ -17995,7 +18290,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 21.639999389648438,
+    "settled_seller_pnl": 156.0,
+    "settled_buyer_pnl": -158.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "AAOI",
@@ -18014,7 +18314,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 50.130001068115234,
+    "settled_seller_pnl": -737.0,
+    "settled_buyer_pnl": 707.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CRWV",
@@ -18033,7 +18338,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 46.400001525878906,
+    "settled_seller_pnl": -89.0,
+    "settled_buyer_pnl": 81.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "NBIS",
@@ -18052,7 +18362,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 129.49000549316406,
+    "settled_seller_pnl": -601.0,
+    "settled_buyer_pnl": 536.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "RIOT",
@@ -18071,7 +18386,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 16.709999084472656,
+    "settled_seller_pnl": 77.0,
+    "settled_buyer_pnl": -85.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "ASTS",
@@ -18090,7 +18410,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 32.33000183105469,
+    "settled_seller_pnl": -262.0,
+    "settled_buyer_pnl": 253.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CBRS",
@@ -18109,7 +18434,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 89.68000030517578,
+    "settled_seller_pnl": -162.0,
+    "settled_buyer_pnl": 82.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HUT",
@@ -18185,7 +18515,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 50.130001068115234,
+    "settled_seller_pnl": -627.0,
+    "settled_buyer_pnl": 587.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "WULF",
@@ -18204,7 +18539,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 11.369999885559082,
+    "settled_seller_pnl": 68.0,
+    "settled_buyer_pnl": -71.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "NBIS",
@@ -18223,7 +18563,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 129.49000549316406,
+    "settled_seller_pnl": -391.0,
+    "settled_buyer_pnl": 341.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "ASTS",
@@ -18242,7 +18587,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 32.33000183105469,
+    "settled_seller_pnl": -197.0,
+    "settled_buyer_pnl": 186.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HUT",
@@ -18261,7 +18611,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 52.650001525878906,
+    "settled_seller_pnl": 200.0,
+    "settled_buyer_pnl": -240.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "APP",
@@ -18280,7 +18635,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-02",
     "expiry_type": "weekly",
-    "run_label": "D"
+    "run_label": "D",
+    "settled": true,
+    "final_stock_px": 391.2200012207031,
+    "settled_seller_pnl": 1730.0,
+    "settled_buyer_pnl": -2050.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "WYFI",
@@ -18318,7 +18678,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-03",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 16.709999084472656,
+    "settled_seller_pnl": 129.0,
+    "settled_buyer_pnl": -135.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HUT",
@@ -18337,7 +18702,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-03",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 52.650001525878906,
+    "settled_seller_pnl": -620.0,
+    "settled_buyer_pnl": 570.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HTZ",
@@ -18356,7 +18726,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-03",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 1.6399999856948853,
+    "settled_seller_pnl": -18.0,
+    "settled_buyer_pnl": 17.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "WULF",
@@ -18375,7 +18750,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-03",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 11.369999885559082,
+    "settled_seller_pnl": -25.0,
+    "settled_buyer_pnl": 22.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CIFR",
@@ -18394,7 +18774,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-03",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 6.545000076293945,
+    "settled_seller_pnl": -86.5,
+    "settled_buyer_pnl": 84.5,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CAPR",
@@ -18603,7 +18988,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-04",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 21.639999389648438,
+    "settled_seller_pnl": 165.0,
+    "settled_buyer_pnl": -167.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "EOSE",
@@ -18622,7 +19012,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-04",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 1.7400000095367432,
+    "settled_seller_pnl": -18.0,
+    "settled_buyer_pnl": 16.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CRWV",
@@ -18641,7 +19036,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-04",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 46.400001525878906,
+    "settled_seller_pnl": 18.0,
+    "settled_buyer_pnl": -25.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "AAOI",
@@ -18660,7 +19060,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-04",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 50.130001068115234,
+    "settled_seller_pnl": -427.0,
+    "settled_buyer_pnl": 387.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HUT",
@@ -18679,7 +19084,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-04",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 52.650001525878906,
+    "settled_seller_pnl": 219.0,
+    "settled_buyer_pnl": -249.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "RKLB",
@@ -18698,7 +19108,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-04",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 53.06999969482422,
+    "settled_seller_pnl": 126.0,
+    "settled_buyer_pnl": -143.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CGON",
@@ -18774,7 +19189,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-04",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 6.545000076293945,
+    "settled_seller_pnl": 15.0,
+    "settled_buyer_pnl": -19.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CORZ",
@@ -18793,7 +19213,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-04",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 11.760000228881836,
+    "settled_seller_pnl": -17.0,
+    "settled_buyer_pnl": 5.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "IREN",
@@ -19135,7 +19560,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 21.639999389648438,
+    "settled_seller_pnl": 135.0,
+    "settled_buyer_pnl": -137.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CRWV",
@@ -19154,7 +19584,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 46.400001525878906,
+    "settled_seller_pnl": 172.0,
+    "settled_buyer_pnl": -187.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "NBIS",
@@ -19173,7 +19608,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 129.49000549316406,
+    "settled_seller_pnl": 485.0,
+    "settled_buyer_pnl": -500.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "HUT",
@@ -19192,7 +19632,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 52.650001525878906,
+    "settled_seller_pnl": 107.0,
+    "settled_buyer_pnl": -227.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "WULF",
@@ -19211,7 +19656,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 11.369999885559082,
+    "settled_seller_pnl": 63.0,
+    "settled_buyer_pnl": -72.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "BE",
@@ -19230,7 +19680,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 173.24000549316406,
+    "settled_seller_pnl": 690.0,
+    "settled_buyer_pnl": -705.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "SNDK",
@@ -19249,7 +19704,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 835.0599975585938,
+    "settled_seller_pnl": 1820.0,
+    "settled_buyer_pnl": -1850.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "CIFR",
@@ -19268,7 +19728,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 6.545000076293945,
+    "settled_seller_pnl": 13.0,
+    "settled_buyer_pnl": -30.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "USAR",
@@ -19306,7 +19771,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 120.51000213623047,
+    "settled_seller_pnl": 380.0,
+    "settled_buyer_pnl": -490.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "FPS",
@@ -19439,7 +19909,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 38.880001068115234,
+    "settled_seller_pnl": 75.0,
+    "settled_buyer_pnl": -110.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "GLXY",
@@ -19458,7 +19933,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 13.65999984741211,
+    "settled_seller_pnl": 12.0,
+    "settled_buyer_pnl": -32.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "MARA",
@@ -19477,7 +19957,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-05",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 6.349999904632568,
+    "settled_seller_pnl": 8.0,
+    "settled_buyer_pnl": -9.0,
+    "settled_at": "2026-11-07"
   },
   {
     "symbol": "BE",
