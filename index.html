@@ -30524,15 +30524,27 @@
   }
   var portfolio = loadPortfolio();
 
-  // Casual edit lock - NOT real security. This whole page's source
-  // (including this exact check) is publicly visible on a public GitHub
-  // repo, so anyone who views source or opens dev tools can trivially see
-  // the password or just remove the disabled attributes themselves. This
-  // only deters someone from idly clicking around on a shared link - it
-  // keeps the portfolio viewable (unlocked or not) while gating edits.
+  // Casual edit lock - NOT real security. The password is only kept as a
+  // SHA-256 hash (via the browser's own crypto.subtle, no library needed)
+  // so it isn't sitting in the page as plain text for a quick glance at
+  // view-source to reveal - but this whole page's source, including this
+  // exact check and hash, is still publicly visible on a public GitHub
+  // repo, so anyone willing to hash a few guesses (or just read the code
+  // and remove the disabled attributes themselves) can still get past it.
+  // This only deters someone from idly clicking around on a shared link -
+  // it keeps the portfolio viewable (unlocked or not) while gating edits.
   var PORTFOLIO_UNLOCK_KEY = 'csp_portfolio_unlocked';
-  var PORTFOLIO_EDIT_PASSWORD = 'admin';
+  var PORTFOLIO_EDIT_PASSWORD_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
   var portfolioUnlocked = sessionStorage.getItem(PORTFOLIO_UNLOCK_KEY) === '1';
+
+  function sha256Hex(text) {
+    var data = new TextEncoder().encode(text);
+    return crypto.subtle.digest('SHA-256', data).then(function(buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    });
+  }
 
   function applyPortfolioLockState() {
     var locked = !portfolioUnlocked;
@@ -30557,13 +30569,15 @@
       }
       var entered = prompt('Enter the edit password:');
       if (entered === null) return;  // cancelled
-      if (entered === PORTFOLIO_EDIT_PASSWORD) {
-        portfolioUnlocked = true;
-        sessionStorage.setItem(PORTFOLIO_UNLOCK_KEY, '1');
-        applyPortfolioLockState();
-      } else {
-        alert('Incorrect password.');
-      }
+      sha256Hex(entered).then(function(hash) {
+        if (hash === PORTFOLIO_EDIT_PASSWORD_HASH) {
+          portfolioUnlocked = true;
+          sessionStorage.setItem(PORTFOLIO_UNLOCK_KEY, '1');
+          applyPortfolioLockState();
+        } else {
+          alert('Incorrect password.');
+        }
+      });
     });
   }
 
