@@ -990,6 +990,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
                      if run_label and not closed and r['ADDED'] == today.isoformat() else '')
         expiry_type = r.get('EXPIRY TYPE', 'monthly')
         weekly_badge = '<span class="weekly-badge">weekly</span>' if expiry_type == 'weekly' else ''
+        portfolio_key = f"{r['SYMBOL']}|{attr(r['STRIKE'])}|{r['EXPIRATION']}"
         return f"""
         <div class="card" data-ann-return="{attr(ann_return)}" data-pe="{attr(pe)}" data-dte-entry="{attr(dte_entry)}" data-ask="{attr(r.get('ASK'))}" data-strike="{attr(r['STRIKE'])}" data-symbol="{_html_escape(r['SYMBOL'])}" data-added="{attr(r['ADDED'])}" data-expiry-type="{expiry_type}" {data_attrs}>
           <div class="card-head">
@@ -1003,6 +1004,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
             &middot; bid {r['BID']:.2f}/{r['BID SOURCE']} &middot; ask {r['ASK']:.2f}/{r['ASK SOURCE']}</div>
           <div class="sub">Barchart ann. return at selection: {_fmt_pct(ann_return)} &middot; PE at entry: {pe_text} ({r.get('PE SOURCE', '')}) &middot; DTE at entry: {dte_entry if dte_entry is not None else '--'}</div>
           {rows_html}
+          <label class="pf-check-label"><input type="checkbox" class="portfolio-check" data-key="{_html_escape(portfolio_key)}"> Add to my portfolio</label>
         </div>"""
 
     # Newest day first, and within the same day newest RUN first (C before
@@ -1055,6 +1057,19 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     border-radius: 50%; background: #2563eb; color: #fff; font-size: 0.8rem; font-weight: 700; }}
   .weekly-badge {{ display: inline-flex; align-items: center; padding: 1px 7px; border-radius: 10px;
     background: #7c3aed; color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; }}
+  .pf-check-label {{ display: flex; align-items: center; gap: 6px; margin-top: 10px;
+    font-size: 0.78rem; color: #9aa4b2; cursor: pointer; }}
+  .portfolio-card .portfolio-fields {{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }}
+  .portfolio-card .portfolio-fields label {{ display: flex; flex-direction: column; gap: 3px;
+    font-size: 0.72rem; color: #9aa4b2; }}
+  .portfolio-card .portfolio-fields input, .portfolio-card .portfolio-fields select {{
+    padding: 6px 8px; border-radius: 6px; border: 1px solid #333a47; background: #0f131b;
+    color: inherit; font-size: 0.9rem; }}
+  .portfolio-card .pf-sold-field, .portfolio-card .pf-exercised-field {{ display: none !important; }}
+  .portfolio-card[data-exit-type="sold"] .pf-sold-field {{ display: flex !important; }}
+  .portfolio-card[data-exit-type="exercised"] .pf-exercised-field {{ display: flex !important; }}
+  .portfolio-card .pf-pnl {{ margin-top: 10px; font-size: 0.95rem; font-weight: 700; }}
+  .portfolio-card .pf-remove {{ margin-top: 10px; }}
   .sub {{ color: #9aa4b2; font-size: 0.82rem; margin-top: 4px; }}
   .sub2 {{ color: #9aa4b2; font-size: 0.78rem; margin-top: 2px; }}
   .rowlabel {{ font-size: 0.72rem; letter-spacing: 0.03em; color: #9aa4b2; margin-top: 10px; }}
@@ -1119,6 +1134,28 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   <div class="updated" style="margin-top:-6px;">ROI filters on Barchart's annualized return at selection; PE filters on trailing P/E at entry (both frozen at entry, always available)</div>
   <div class="updated" style="margin-top:-6px;">Below = option position, NOT shares. Long = bought the put (bearish - same side as shorting stock)<span class="short-inline">. Short = sold the CSP (bullish - same side as owning stock)</span>.</div>
   <button type="button" id="shortToggle" class="expandbtn" style="margin-bottom:12px;">Show seller/short (bullish) view</button>
+
+  <h2 style="margin-top:0;">My portfolio (<span id="portfolioCount">0</span>)
+    <button type="button" id="portfolioToggle" class="expandbtn">Expand</button>
+  </h2>
+  <div id="portfolioWrap" style="display:none;">
+    <div class="updated" style="margin-top:0;">Your actual real-money long-put trades - separate from the simulated/live-quote figures below. Check the box on any open or closed card to add it here. Stored only in this browser's local storage, so nothing here is backed up automatically - use Export to save a copy, and Import to restore it or move it to another browser/device.</div>
+    <div style="margin-bottom:14px;">
+      <button type="button" id="portfolioExport" class="expandbtn">Export portfolio (JSON)</button>
+      <button type="button" id="portfolioImportBtn" class="expandbtn">Import portfolio (JSON)</button>
+      <input type="file" id="portfolioImportFile" accept="application/json" style="display:none;">
+    </div>
+    <div class="totals" style="margin-bottom:14px;">
+      <div class="box">
+        <div class="label">PORTFOLIO TOTALS</div>
+        <div class="val" id="portfolioRealizedTotal">--</div>
+        <div class="sub2">Realized P&amp;L (sold + exercised positions)</div>
+        <div class="val" id="portfolioOpenCost">--</div>
+        <div class="sub2">Cost basis of still-open positions (qty &times; purchase price &times; 100)</div>
+      </div>
+    </div>
+    <div class="cards" id="portfolioCards"></div>
+  </div>
 
   <div class="totals">
     <div class="box">
@@ -1575,6 +1612,231 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       shortToggleBtn.textContent = showing ? 'Hide seller/short (bullish) view' : 'Show seller/short (bullish) view';
     }});
   }}
+
+  // --- My portfolio: YOUR actual real-money trades, entered by hand -
+  // entirely separate from the simulated/live-quote figures elsewhere on
+  // the page. No backend exists (this is a static GitHub Pages site), so
+  // this can only live in this browser's own localStorage - Export/Import
+  // below are the only backup/cross-device path. Keyed by
+  // "symbol|strike|expiration" so a checkbox on any card (open or closed)
+  // maps straight to one portfolio entry.
+  var PORTFOLIO_KEY = 'csp_portfolio_v1';
+  function loadPortfolio() {{
+    try {{
+      var raw = localStorage.getItem(PORTFOLIO_KEY);
+      return raw ? JSON.parse(raw) : {{}};
+    }} catch (e) {{ return {{}}; }}
+  }}
+  function savePortfolio() {{
+    try {{ localStorage.setItem(PORTFOLIO_KEY, JSON.stringify(portfolio)); }} catch (e) {{}}
+  }}
+  var portfolio = loadPortfolio();
+
+  function portfolioPnl(entry, strike) {{
+    var qty = entry.qty;
+    var pp = entry.purchase_price;
+    if (!qty || pp === null || pp === undefined) return null;
+    if (entry.exit_type === 'sold') {{
+      if (entry.exit_price === null || entry.exit_price === undefined) return null;
+      return (entry.exit_price - pp) * 100 * qty;
+    }}
+    if (entry.exit_type === 'exercised') {{
+      if (entry.stock_buy_price === null || entry.stock_buy_price === undefined) return null;
+      return (strike - entry.stock_buy_price - pp) * 100 * qty;
+    }}
+    return null;  // still open - no realized P&L yet
+  }}
+
+  function keyParts(key) {{
+    var parts = key.split('|');
+    return {{ symbol: parts[0], strike: parseFloat(parts[1]), expiration: parts[2] }};
+  }}
+
+  function renderPortfolioCard(key, entry) {{
+    var kp = keyParts(key);
+    var exitType = entry.exit_type || '';
+    function numAttr(v) {{ return (v === null || v === undefined) ? '' : v; }}
+    return '' +
+      '<div class="card portfolio-card" data-key="' + key + '" data-exit-type="' + exitType + '">' +
+        '<div class="card-head"><span class="sym">' + kp.symbol + '</span>' +
+        '<span class="strike">$' + kp.strike + 'P</span>' +
+        '<span class="exp">' + kp.expiration + '</span></div>' +
+        '<div class="portfolio-fields">' +
+          '<label>Qty (contracts) <input type="number" min="0" step="1" data-field="qty" value="' + numAttr(entry.qty) + '"></label>' +
+          '<label>Purchase price $/put <input type="number" step="any" data-field="purchase_price" value="' + numAttr(entry.purchase_price) + '" placeholder="e.g. 1.25"></label>' +
+          '<label>Status <select data-field="exit_type">' +
+            '<option value=""' + (exitType === '' ? ' selected' : '') + '>Still open</option>' +
+            '<option value="sold"' + (exitType === 'sold' ? ' selected' : '') + '>Sold the put</option>' +
+            '<option value="exercised"' + (exitType === 'exercised' ? ' selected' : '') + '>Exercised</option>' +
+          '</select></label>' +
+          '<label>Exit date <input type="date" data-field="exit_date" value="' + (entry.exit_date || '') + '"></label>' +
+          '<label class="pf-sold-field">Sell price $/put <input type="number" step="any" data-field="exit_price" value="' + numAttr(entry.exit_price) + '" placeholder="e.g. 2.10"></label>' +
+          '<label class="pf-exercised-field">Stock buy price $/share <input type="number" step="any" data-field="stock_buy_price" value="' + numAttr(entry.stock_buy_price) + '" placeholder="e.g. 14.50"></label>' +
+        '</div>' +
+        '<div class="pf-pnl">P&amp;L: <span class="pf-pnl-val">--</span></div>' +
+        '<button type="button" class="expandbtn pf-remove" data-action="remove">Remove from portfolio</button>' +
+      '</div>';
+  }}
+
+  function updatePortfolioCardPnl(card) {{
+    var key = card.getAttribute('data-key');
+    var kp = keyParts(key);
+    var entry = portfolio[key];
+    if (!entry) return;
+    var pnl = portfolioPnl(entry, kp.strike);
+    var el = card.querySelector('.pf-pnl-val');
+    if (!el) return;
+    el.textContent = pnl === null ? '--' : fmtMoney(Math.round(pnl * 100) / 100);
+    el.className = 'pf-pnl-val ' + (pnl === null ? '' : pnlClass(pnl));
+  }}
+
+  function updatePortfolioTotals() {{
+    var totalRealized = 0, anyRealized = false;
+    var totalOpenCost = 0, anyOpen = false;
+    Object.keys(portfolio).forEach(function(key) {{
+      var kp = keyParts(key);
+      var entry = portfolio[key];
+      var pnl = portfolioPnl(entry, kp.strike);
+      if (pnl !== null) {{
+        totalRealized += pnl; anyRealized = true;
+      }} else if (entry.qty && entry.purchase_price !== null && entry.purchase_price !== undefined) {{
+        totalOpenCost += entry.qty * entry.purchase_price * 100; anyOpen = true;
+      }}
+    }});
+    var realizedEl = document.getElementById('portfolioRealizedTotal');
+    if (realizedEl) {{
+      realizedEl.textContent = anyRealized ? fmtMoney(Math.round(totalRealized * 100) / 100) : '--';
+      realizedEl.className = 'val' + (anyRealized ? ' ' + pnlClass(totalRealized) : '');
+    }}
+    var costEl = document.getElementById('portfolioOpenCost');
+    if (costEl) costEl.textContent = anyOpen ? fmtMoney(Math.round(totalOpenCost * 100) / 100) : '--';
+    var countEl = document.getElementById('portfolioCount');
+    if (countEl) countEl.textContent = Object.keys(portfolio).length;
+  }}
+
+  function renderPortfolio() {{
+    var wrap = document.getElementById('portfolioCards');
+    if (!wrap) return;
+    var keys = Object.keys(portfolio).sort();
+    wrap.innerHTML = keys.length
+      ? keys.map(function(k) {{ return renderPortfolioCard(k, portfolio[k]); }}).join('')
+      : '<p class="empty">No positions added yet - check the box on any open or closed card below to add it here.</p>';
+    keys.forEach(function(k) {{
+      var card = wrap.querySelector('.portfolio-card[data-key="' + CSS.escape(k) + '"]');
+      if (card) updatePortfolioCardPnl(card);
+    }});
+    updatePortfolioTotals();
+  }}
+
+  var portfolioWrap = document.getElementById('portfolioCards');
+  if (portfolioWrap) {{
+    ['input', 'change'].forEach(function(evt) {{
+      portfolioWrap.addEventListener(evt, function(e) {{
+        var field = e.target.getAttribute('data-field');
+        if (!field) return;
+        var card = e.target.closest('.portfolio-card');
+        var key = card.getAttribute('data-key');
+        var entry = portfolio[key];
+        if (!entry) return;
+        var raw = e.target.value;
+        if (field === 'qty' || field === 'purchase_price' || field === 'exit_price' || field === 'stock_buy_price') {{
+          entry[field] = raw === '' ? null : parseFloat(raw);
+        }} else {{
+          entry[field] = raw || null;
+        }}
+        if (field === 'exit_type') {{
+          card.setAttribute('data-exit-type', raw || '');
+        }}
+        savePortfolio();
+        updatePortfolioCardPnl(card);
+        updatePortfolioTotals();
+      }});
+    }});
+    portfolioWrap.addEventListener('click', function(e) {{
+      if (e.target.getAttribute('data-action') !== 'remove') return;
+      var card = e.target.closest('.portfolio-card');
+      var key = card.getAttribute('data-key');
+      delete portfolio[key];
+      savePortfolio();
+      var cb = document.querySelector('.portfolio-check[data-key="' + CSS.escape(key) + '"]');
+      if (cb) cb.checked = false;
+      renderPortfolio();
+    }});
+  }}
+
+  document.querySelectorAll('.portfolio-check').forEach(function(cb) {{
+    var key = cb.getAttribute('data-key');
+    cb.checked = !!portfolio[key];
+    cb.addEventListener('change', function() {{
+      if (cb.checked) {{
+        if (!portfolio[key]) {{
+          portfolio[key] = {{
+            qty: 1, purchase_price: null, exit_type: null,
+            exit_price: null, stock_buy_price: null, exit_date: null,
+          }};
+        }}
+      }} else {{
+        delete portfolio[key];
+      }}
+      savePortfolio();
+      renderPortfolio();
+    }});
+  }});
+
+  var portfolioToggleBtn = document.getElementById('portfolioToggle');
+  var portfolioSectionWrap = document.getElementById('portfolioWrap');
+  if (portfolioToggleBtn && portfolioSectionWrap) {{
+    portfolioToggleBtn.addEventListener('click', function() {{
+      var collapsed = portfolioSectionWrap.style.display === 'none';
+      portfolioSectionWrap.style.display = collapsed ? '' : 'none';
+      portfolioToggleBtn.textContent = collapsed ? 'Collapse' : 'Expand';
+    }});
+  }}
+
+  var portfolioExportBtn = document.getElementById('portfolioExport');
+  if (portfolioExportBtn) {{
+    portfolioExportBtn.addEventListener('click', function() {{
+      var blob = new Blob([JSON.stringify(portfolio, null, 2)], {{type: 'application/json'}});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'csp_portfolio_' + new Date().toISOString().slice(0, 10) + '.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }});
+  }}
+  var portfolioImportBtn = document.getElementById('portfolioImportBtn');
+  var portfolioImportFile = document.getElementById('portfolioImportFile');
+  if (portfolioImportBtn && portfolioImportFile) {{
+    portfolioImportBtn.addEventListener('click', function() {{ portfolioImportFile.click(); }});
+    portfolioImportFile.addEventListener('change', function() {{
+      var file = portfolioImportFile.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function() {{
+        try {{
+          var imported = JSON.parse(reader.result);
+          if (imported && typeof imported === 'object') {{
+            Object.keys(imported).forEach(function(k) {{ portfolio[k] = imported[k]; }});
+            savePortfolio();
+            document.querySelectorAll('.portfolio-check').forEach(function(cb) {{
+              cb.checked = !!portfolio[cb.getAttribute('data-key')];
+            }});
+            renderPortfolio();
+            alert('Portfolio imported (' + Object.keys(imported).length + ' entries merged in).');
+          }}
+        }} catch (e) {{
+          alert('Could not read that file as portfolio JSON: ' + e.message);
+        }}
+      }};
+      reader.readAsText(file);
+      portfolioImportFile.value = '';
+    }});
+  }}
+
+  renderPortfolio();
 
   var btn = document.getElementById('applyFilter');
   if (btn) btn.addEventListener('click', applyFilter);
