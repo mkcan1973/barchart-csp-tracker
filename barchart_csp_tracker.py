@@ -1141,6 +1141,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   <div id="portfolioWrap" style="display:none;">
     <div class="updated" style="margin-top:0;">Your actual real-money long-put trades - separate from the simulated/live-quote figures below. Check the box on any open or closed card to add it here. Stored only in this browser's local storage, so nothing here is backed up automatically - use Export to save a copy, and Import to restore it or move it to another browser/device.</div>
     <div style="margin-bottom:14px;">
+      <button type="button" id="portfolioUnlockBtn" class="expandbtn">Unlock editing</button>
       <button type="button" id="portfolioExport" class="expandbtn">Export portfolio (JSON)</button>
       <button type="button" id="portfolioImportBtn" class="expandbtn">Import portfolio (JSON)</button>
       <input type="file" id="portfolioImportFile" accept="application/json" style="display:none;">
@@ -1632,6 +1633,49 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   }}
   var portfolio = loadPortfolio();
 
+  // Casual edit lock - NOT real security. This whole page's source
+  // (including this exact check) is publicly visible on a public GitHub
+  // repo, so anyone who views source or opens dev tools can trivially see
+  // the password or just remove the disabled attributes themselves. This
+  // only deters someone from idly clicking around on a shared link - it
+  // keeps the portfolio viewable (unlocked or not) while gating edits.
+  var PORTFOLIO_UNLOCK_KEY = 'csp_portfolio_unlocked';
+  var PORTFOLIO_EDIT_PASSWORD = 'admin';
+  var portfolioUnlocked = sessionStorage.getItem(PORTFOLIO_UNLOCK_KEY) === '1';
+
+  function applyPortfolioLockState() {{
+    var locked = !portfolioUnlocked;
+    document.querySelectorAll('.portfolio-check').forEach(function(cb) {{ cb.disabled = locked; }});
+    document.querySelectorAll('#portfolioCards input, #portfolioCards select, #portfolioCards button').forEach(function(el) {{
+      el.disabled = locked;
+    }});
+    var importBtn = document.getElementById('portfolioImportBtn');
+    if (importBtn) importBtn.disabled = locked;
+    var unlockBtn = document.getElementById('portfolioUnlockBtn');
+    if (unlockBtn) unlockBtn.textContent = locked ? 'Unlock editing' : 'Lock editing';
+  }}
+
+  var portfolioUnlockBtn = document.getElementById('portfolioUnlockBtn');
+  if (portfolioUnlockBtn) {{
+    portfolioUnlockBtn.addEventListener('click', function() {{
+      if (portfolioUnlocked) {{
+        portfolioUnlocked = false;
+        sessionStorage.removeItem(PORTFOLIO_UNLOCK_KEY);
+        applyPortfolioLockState();
+        return;
+      }}
+      var entered = prompt('Enter the edit password:');
+      if (entered === null) return;  // cancelled
+      if (entered === PORTFOLIO_EDIT_PASSWORD) {{
+        portfolioUnlocked = true;
+        sessionStorage.setItem(PORTFOLIO_UNLOCK_KEY, '1');
+        applyPortfolioLockState();
+      }} else {{
+        alert('Incorrect password.');
+      }}
+    }});
+  }}
+
   function portfolioPnl(entry, strike) {{
     var qty = entry.qty;
     var pp = entry.purchase_price;
@@ -1726,6 +1770,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       if (card) updatePortfolioCardPnl(card);
     }});
     updatePortfolioTotals();
+    applyPortfolioLockState();  // re-render rebuilds the cards from scratch - reapply disabled state
   }}
 
   var portfolioWrap = document.getElementById('portfolioCards');
