@@ -1706,7 +1706,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   // Actions (read/write) - nothing else - so a leaked token (same caveat
   // as the password: this page's source is public) can only trigger or
   // read workflow runs here, not touch code, data, or any other repo.
-  var GITHUB_ACTIONS_TOKEN = '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';
+  var GITHUB_ACTIONS_TOKEN = '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';
   var updateScreenerBtn = document.getElementById('updateScreenerBtn');
   if (updateScreenerBtn) {{
     updateScreenerBtn.addEventListener('click', function() {{
