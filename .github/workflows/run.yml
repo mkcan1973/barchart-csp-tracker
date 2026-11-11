@@ -71,5 +71,14 @@ jobs:
             [ -f "$f" ] && git add "$f"
           done
           git diff --staged --quiet || git commit -m "Run: $(date -u +%Y-%m-%dT%H:%M)Z"
-          git pull --rebase origin master
+          # Merge (not rebase) with -X ours: if two runs land close enough
+          # together that the concurrency group above doesn't fully keep
+          # them apart, a plain rebase can hit a genuine content conflict
+          # on these files (seen in practice from two near-simultaneous
+          # manual triggers) and abort the whole push with nothing
+          # resolved. Every file here is machine-generated with nothing
+          # hand-authored to carefully preserve, so on a conflicting hunk
+          # just keep this run's own freshly-generated version rather than
+          # fail outright.
+          git pull --no-rebase -X ours origin master
           git push
