@@ -22,9 +22,14 @@ on:
     # wide. For anything time-sensitive, use the page's own "Update
     # screener now" button instead of waiting on cron.
     #
-    # 15:07/17:07/19:07 UTC = 11:07am/1:07pm/3:07pm EDT or 10:07am/
-    # 12:07pm/2:07pm EST, all within market hours in both seasons. The
-    # 00:07 UTC evening run is for an end-of-day status check and to
+    # Times requested in Vancouver local (Pacific) clock: 8:07am, 9:37am,
+    # 11:07am, 4:07pm. Converted to fixed UTC at PST (UTC-8): 16:07, 17:37,
+    # 19:07, 00:07. Cron itself has no concept of time zones or DST, so
+    # this UTC schedule stays fixed - once Vancouver switches to PDT
+    # (UTC-7) these runs will land an hour earlier on the local clock
+    # (7:07am/8:37am/10:07am/3:07pm PDT) until the cron times here are
+    # manually shifted back by an hour for the summer half of the year.
+    # The 00:07 UTC evening run is for an end-of-day status check and to
     # settle anything expiring that day - same_day_settle_ok in main() only
     # allows that once it's past 4pm ET, so it stays safe regardless of
     # which exact minute this lands. Weekday field on that one is shifted
@@ -32,8 +37,8 @@ on:
     # next UTC calendar day while still the same US trading evening. The
     # script itself checks the NYSE calendar and no-ops on weekends/
     # holidays either way.
-    - cron: "7 15 * * 1-5"
-    - cron: "7 17 * * 1-5"
+    - cron: "7 16 * * 1-5"
+    - cron: "37 17 * * 1-5"
     - cron: "7 19 * * 1-5"
     - cron: "7 0 * * 2-6"
   workflow_dispatch: {}  # lets you trigger a run manually from the Actions tab
