@@ -2,43 +2,48 @@ name: Run Barchart CSP Tracker
 
 on:
   schedule:
-    # GitHub's scheduled (cron) triggers are best-effort and, in practice,
-    # get delayed by hours or dropped entirely during busy periods on
-    # GitHub's infrastructure - confirmed via run_log.json's own history,
-    # where only 3 of 4 fixed daily cron times (15:30/17:30/19:30/00:00
-    # UTC) were actually firing most days, and the ones that did were
-    # landing 2+ hours late.
+    # Back to 4 fixed times/day (the original cadence, Oct 16 - Nov 2,
+    # which fired reliably for weeks). The scheduling reliability problem
+    # that showed up starting Nov 3 predates every change made to this
+    # file - run_log.json shows the EXACT SAME 4-time schedule firing
+    # cleanly every day through Nov 2, then degrading under that same
+    # unchanged config from Nov 3 on. That rules out anything in this repo
+    # as the cause; it's a change on GitHub's own scheduling side.
     #
-    # First attempt at a fix used "*/30" (i.e. firing exactly on :00/:30),
-    # which backfired: GitHub's own docs warn that the top of every hour
-    # (and, by extension, every round half-hour) is the single busiest
-    # moment for Actions scheduling across ALL of GitHub, since countless
-    # other repos' crons fire at those exact same instants - confirmed
-    # here too, where only 1 of ~19 expected :00/:30 slots actually fired
-    # on the first day this ran. Offsetting to :07/:37 avoids that exact
-    # congestion spike, per GitHub's own recommendation.
+    # Two tuning attempts since then (a dense every-30-min schedule, then
+    # offsetting off the exact :00/:30 marks) didn't help - if anything,
+    # the hit rate got worse with more attempts/day, not better, which
+    # points at GitHub deprioritizing a noisier schedule rather than
+    # rewarding one. So: revert to the simple, known-good cadence instead
+    # of continuing to throw more scheduled attempts at a problem that
+    # isn't ours to fix. Kept the one piece that still seems reasonable -
+    # :07 instead of :00/:30, since GitHub's own docs flag the exact clock
+    # boundaries as the busiest moments for Actions scheduling platform-
+    # wide. For anything time-sensitive, use the page's own "Update
+    # screener now" button instead of waiting on cron.
     #
-    # Still every 30 minutes, same 13:00-22:00 UTC window (9:00am-6:00pm
-    # EDT / 8:00am-5:00pm EST, bracketing the 9:30am-4:00pm ET session
-    # with margin in both seasons, including after the close so same-day
-    # settlement - same_day_settle_ok in main(), gated on now_et.hour >= 16
-    # - still reliably gets a run). Any individual trigger can still be
-    # delayed or dropped, but ~19 scheduled attempts instead of 4 gives
-    # real redundancy. This repo is public, so Actions minutes are free -
-    # no cost tradeoff to running this often. The script itself checks the
-    # NYSE calendar and exits immediately on weekends/holidays, so the
-    # extra attempts just no-op on non-trading days instead of wasting a
-    # scrape.
-    - cron: "7,37 13-22 * * 1-5"
+    # 15:07/17:07/19:07 UTC = 11:07am/1:07pm/3:07pm EDT or 10:07am/
+    # 12:07pm/2:07pm EST, all within market hours in both seasons. The
+    # 00:07 UTC evening run is for an end-of-day status check and to
+    # settle anything expiring that day - same_day_settle_ok in main() only
+    # allows that once it's past 4pm ET, so it stays safe regardless of
+    # which exact minute this lands. Weekday field on that one is shifted
+    # a day later (Tue-Sat) since 00:07 UTC has already rolled into the
+    # next UTC calendar day while still the same US trading evening. The
+    # script itself checks the NYSE calendar and no-ops on weekends/
+    # holidays either way.
+    - cron: "7 15 * * 1-5"
+    - cron: "7 17 * * 1-5"
+    - cron: "7 19 * * 1-5"
+    - cron: "7 0 * * 2-6"
   workflow_dispatch: {}  # lets you trigger a run manually from the Actions tab
 
 permissions:
   contents: write
 
-# Running every 30 minutes means a delayed trigger can occasionally still
-# be mid-run when the next one would otherwise start - queue them instead
-# of letting two runs push to the same branch at once (which the push step
-# below has no retry logic for).
+# A delayed scheduled trigger, or the page's own "Update screener now"
+# button firing close to a scheduled run, can still occasionally overlap -
+# queue them instead of letting two runs push to the same branch at once.
 concurrency:
   group: tracker-run
   cancel-in-progress: false
