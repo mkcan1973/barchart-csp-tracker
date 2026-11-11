@@ -1,47 +1,23 @@
 name: Run Barchart CSP Tracker
 
 on:
-  schedule:
-    # Back to 4 fixed times/day (the original cadence, Oct 16 - Nov 2,
-    # which fired reliably for weeks). The scheduling reliability problem
-    # that showed up starting Nov 3 predates every change made to this
-    # file - run_log.json shows the EXACT SAME 4-time schedule firing
-    # cleanly every day through Nov 2, then degrading under that same
-    # unchanged config from Nov 3 on. That rules out anything in this repo
-    # as the cause; it's a change on GitHub's own scheduling side.
-    #
-    # Two tuning attempts since then (a dense every-30-min schedule, then
-    # offsetting off the exact :00/:30 marks) didn't help - if anything,
-    # the hit rate got worse with more attempts/day, not better, which
-    # points at GitHub deprioritizing a noisier schedule rather than
-    # rewarding one. So: revert to the simple, known-good cadence instead
-    # of continuing to throw more scheduled attempts at a problem that
-    # isn't ours to fix. Kept the one piece that still seems reasonable -
-    # :07 instead of :00/:30, since GitHub's own docs flag the exact clock
-    # boundaries as the busiest moments for Actions scheduling platform-
-    # wide. For anything time-sensitive, use the page's own "Update
-    # screener now" button instead of waiting on cron.
-    #
-    # Times requested in Vancouver local (Pacific) clock: 8:07am, 9:37am,
-    # 11:07am, 4:07pm. Converted to fixed UTC at PST (UTC-8): 16:07, 17:37,
-    # 19:07, 00:07. Cron itself has no concept of time zones or DST, so
-    # this UTC schedule stays fixed - once Vancouver switches to PDT
-    # (UTC-7) these runs will land an hour earlier on the local clock
-    # (7:07am/8:37am/10:07am/3:07pm PDT) until the cron times here are
-    # manually shifted back by an hour for the summer half of the year.
-    # The 00:07 UTC evening run is for an end-of-day status check and to
-    # settle anything expiring that day - same_day_settle_ok in main() only
-    # allows that once it's past 4pm ET, so it stays safe regardless of
-    # which exact minute this lands. Weekday field on that one is shifted
-    # a day later (Tue-Sat) since 00:07 UTC has already rolled into the
-    # next UTC calendar day while still the same US trading evening. The
-    # script itself checks the NYSE calendar and no-ops on weekends/
-    # holidays either way.
-    - cron: "7 16 * * 1-5"
-    - cron: "37 17 * * 1-5"
-    - cron: "7 19 * * 1-5"
-    - cron: "7 0 * * 2-6"
-  workflow_dispatch: {}  # lets you trigger a run manually from the Actions tab
+  # GitHub's own scheduled (cron) trigger was removed from here. It proved
+  # unreliable - run_log.json showed most configured daily slots simply
+  # never firing, and neither a denser schedule nor offset minutes fixed
+  # it (if anything, both made the hit rate worse). Scheduling now lives
+  # entirely in an external cron service (cron-job.org) that calls the
+  # workflow_dispatch API below at the desired times - dispatch-triggered
+  # runs aren't subject to the delay/drop behavior GitHub documents for
+  # the schedule: event specifically. The token that service uses is kept
+  # private in its own job config, never embedded in this repo or the
+  # public page, so it won't be caught and auto-revoked by GitHub's
+  # secret scanning the way a page-embedded token was (twice).
+  #
+  # For an ad-hoc manual run, use the Actions tab on GitHub directly
+  # ("Run Barchart CSP Tracker" -> "Run workflow") rather than a button
+  # on the public page - no token needed since you're already logged in,
+  # and it can't be triggered by anyone else who just has the page URL.
+  workflow_dispatch: {}
 
 permissions:
   contents: write
