@@ -1119,6 +1119,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
 <body>
   <h1>Barchart CSP Tracker</h1>
   <div class="updated">Last updated {today.isoformat()} &middot; {len(open_rows)} open &middot; {len(closed_rows)} closed</div>
+  <button type="button" id="updateScreenerBtn" class="expandbtn" style="margin-bottom:12px;">Update screener now</button>
 
   <div class="filterbar">
     <label>Min ROI % <input type="number" id="minRoi" step="any" placeholder="-&infin;" inputmode="decimal"></label>
@@ -1684,7 +1685,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       }}
       var entered = prompt('Enter the edit password:');
       if (entered === null) return;  // cancelled
-      sha256Hex(entered).then(function(hash) {{
+      sha256Hex(entered.toLowerCase()).then(function(hash) {{
         if (hash === PORTFOLIO_EDIT_PASSWORD_HASH) {{
           portfolioUnlocked = true;
           sessionStorage.setItem(PORTFOLIO_UNLOCK_KEY, '1');
@@ -1692,6 +1693,55 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
         }} else {{
           alert('Incorrect password.');
         }}
+      }});
+    }});
+  }}
+
+  // Manual "update now" trigger, since GitHub's own scheduled cron for
+  // this repo has proven unreliable (see run_log.json - most scheduled
+  // slots on a given day simply never fire). Same password as portfolio
+  // editing, re-checked on every click (no persistent unlock) since this
+  // is a one-shot privileged action, not an ongoing editing session. The
+  // embedded token is a fine-grained PAT scoped to ONLY this repo's
+  // Actions (read/write) - nothing else - so a leaked token (same caveat
+  // as the password: this page's source is public) can only trigger or
+  // read workflow runs here, not touch code, data, or any other repo.
+  var GITHUB_ACTIONS_TOKEN = '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';
+  var updateScreenerBtn = document.getElementById('updateScreenerBtn');
+  if (updateScreenerBtn) {{
+    updateScreenerBtn.addEventListener('click', function() {{
+      var entered = prompt('Enter the password to trigger an update:');
+      if (entered === null) return;
+      sha256Hex(entered.toLowerCase()).then(function(hash) {{
+        if (hash !== PORTFOLIO_EDIT_PASSWORD_HASH) {{
+          alert('Incorrect password.');
+          return;
+        }}
+        updateScreenerBtn.disabled = true;
+        updateScreenerBtn.textContent = 'Triggering...';
+        fetch('https://api.github.com/repos/mkcan1973/barchart-csp-tracker/actions/workflows/run.yml/dispatches', {{
+          method: 'POST',
+          headers: {{
+            'Authorization': 'Bearer ' + GITHUB_ACTIONS_TOKEN,
+            'Accept': 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28',
+            'Content-Type': 'application/json',
+          }},
+          body: JSON.stringify({{ ref: 'master' }}),
+        }}).then(function(resp) {{
+          if (resp.status === 204) {{
+            alert('Update triggered - it usually takes a few minutes. Refresh this page after that to see new data.');
+          }} else {{
+            return resp.text().then(function(text) {{
+              alert('Could not trigger the update (HTTP ' + resp.status + '): ' + text);
+            }});
+          }}
+        }}).catch(function(err) {{
+          alert('Network error triggering the update: ' + err.message);
+        }}).finally(function() {{
+          updateScreenerBtn.disabled = false;
+          updateScreenerBtn.textContent = 'Update screener now';
+        }});
       }});
     }});
   }}
