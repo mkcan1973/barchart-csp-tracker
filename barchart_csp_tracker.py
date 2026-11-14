@@ -2484,12 +2484,16 @@ def main():
                   f"({src_label} bid {candidate['barchart_bid']:.2f}, annualized return "
                   f"{candidate.get('potential_return_annual_pct') or 0:.1f}%)")
             # Was this symbol ALREADY good enough to notify on, via any
-            # earlier position (same run or a prior day)? If so this new
-            # contract isn't a fresh signal - same philosophy as the
-            # dashboard's own "first instance to qualify per symbol" filter,
-            # just applied to the notification trigger instead of display.
+            # still-OPEN earlier position (same run or a prior day)? Mirrors
+            # the webpage's own per-(symbol, open/closed-bucket) dedup
+            # exactly: a settled position no longer occupies the open
+            # bucket's "first qualifying instance" slot, so once an earlier
+            # qualifier on this symbol closes out, a new one is a fresh
+            # signal again and should notify - same as it'd newly appear as
+            # the visible card under a filter on the page.
             symbol_already_qualified = any(
-                p["symbol"] == candidate["symbol"] and position_passes_filter_config(p, filter_cfg)
+                p["symbol"] == candidate["symbol"] and not p.get("settled")
+                and position_passes_filter_config(p, filter_cfg)
                 for p in positions
             )
             position = add_new_position(candidate, today)
