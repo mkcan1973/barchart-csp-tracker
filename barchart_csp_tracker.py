@@ -829,6 +829,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
                 label = _html_escape(e.get("run_label") or "--")
                 if e.get("note") == "scrape_failed":
                     n_text = "Barchart scrape failed"
+                elif e.get("note") == "eod_update_only":
+                    n_text = "End-of-day update (no new candidates scanned)"
                 else:
                     n = e.get("new_candidates")
                     n_text = "--" if n is None else str(n)
@@ -2427,96 +2429,113 @@ def main():
         return
 
     run_log = load_run_log()
-
-    print("-- Scraping Barchart top naked puts --------------------------------------")
-    barchart_rows = scrape_barchart_top20()
-    if not barchart_rows:
-        print("  No rows scraped - aborting.")
-        run_log.append({
-            "date": today.isoformat(),
-            "time_utc": now_et.astimezone(ZoneInfo("UTC")).isoformat(),
-            "run_label": None,
-            "new_candidates": None,
-            "note": "scrape_failed",
-        })
-        save_run_log(run_log)
-        return
-    print(f"  Scraped {len(barchart_rows)} candidates (ranked by annualized potential return desc)")
-
-    print("-- Scanning Yahoo for earlier (non-monthly) expirations on those symbols --")
-    yahoo_weekly_rows = scrape_yahoo_weeklies(barchart_rows, today)
-    print(f"  Found {len(yahoo_weekly_rows)} additional weekly candidate(s)")
-    all_rows = barchart_rows + yahoo_weekly_rows
-
     positions = load_positions()
     filter_cfg = load_filter_config()
 
     if ensure_pe_at_entry(positions):
         save_positions(positions)
 
-    # Markets run this script up to 3x/day - label each run's additions
-    # A, B, C (next unused letter among today's existing positions) purely
-    # so a same-day Discord message and its webpage card can be visually
-    # matched to "which of today's screening passes" produced it. Only
-    # meaningful for today - once a position is no longer today's, the
-    # card stops showing its letter (see position_card()).
-    todays_run_labels = sorted(set(
-        p.get("run_label") for p in positions
-        if p.get("added_date") == today.isoformat() and p.get("run_label")
-    ))
-    run_label = chr(ord("A") + len(todays_run_labels))
-
-    candidates = pick_new_candidates(all_rows, positions, today)
-    run_log.append({
-        "date": today.isoformat(),
-        "time_utc": now_et.astimezone(ZoneInfo("UTC")).isoformat(),
-        "run_label": run_label if candidates else None,
-        "new_candidates": len(candidates),
-    })
-    save_run_log(run_log)
-    if not candidates:
-        print("\n  All of Barchart's top candidates are already open positions - nothing new to add.")
+    # The evening run (well after the 4:00pm ET close) is an end-of-day
+    # true-up only: markets are shut, so there's nothing new to screen for
+    # - just settle anything that expired today and refresh every open
+    # position's live data. No new positions are added and no Discord
+    # notifications are sent on this run; those only happen on the
+    # daytime runs while the screener's data actually reflects a
+    # tradable market.
+    if same_day_settle_ok:
+        print("-- End-of-day run: updating existing positions only, no new candidates --")
+        run_log.append({
+            "date": today.isoformat(),
+            "time_utc": now_et.astimezone(ZoneInfo("UTC")).isoformat(),
+            "run_label": None,
+            "new_candidates": 0,
+            "note": "eod_update_only",
+        })
+        save_run_log(run_log)
     else:
-        print(f"\n  Adding {len(candidates)} new candidate(s) (run {run_label}):")
-        for candidate in candidates:
-            src_label = "yahoo weekly" if candidate.get("expiry_type") == "weekly" else "barchart"
-            print(f"    {candidate['symbol']} ${candidate['strike']}P exp {candidate['expiration']} "
-                  f"({src_label} bid {candidate['barchart_bid']:.2f}, annualized return "
-                  f"{candidate.get('potential_return_annual_pct') or 0:.1f}%)")
-            # Was this symbol ALREADY good enough to notify on, via any
-            # still-OPEN earlier position (same run or a prior day)? Mirrors
-            # the webpage's own per-(symbol, open/closed-bucket) dedup
-            # exactly: a settled position no longer occupies the open
-            # bucket's "first qualifying instance" slot, so once an earlier
-            # qualifier on this symbol closes out, a new one is a fresh
-            # signal again and should notify - same as it'd newly appear as
-            # the visible card under a filter on the page.
-            symbol_already_qualified = any(
-                p["symbol"] == candidate["symbol"] and not p.get("settled")
-                and position_passes_filter_config(p, filter_cfg)
-                for p in positions
-            )
-            position = add_new_position(candidate, today)
-            position["run_label"] = run_label
-            bid_source = "approx (barchart)" if position["bid_is_approx"] else "yahoo"
-            ask_source = "approx (bid x 1.2)" if position["ask_is_approx"] else "yahoo"
-            print(f"      bid: {position['bid']:.2f} ({bid_source})   ask: {position['ask']:.2f} ({ask_source})")
-            positions.append(position)
-            save_positions(positions)
-            ann_return = candidate.get("potential_return_annual_pct") or 0
-            if position_passes_filter_config(position, filter_cfg) and not symbol_already_qualified:
-                pe = position.get("pe_at_entry")
-                pe_text = f"{pe:.1f}" if pe is not None else "n/a"
-                mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
-                weekly_tag = " [weekly]" if position.get("expiry_type") == "weekly" else ""
-                notify_discord(
-                    f"**[{run_label}]{weekly_tag} New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
-                    f"{src_label.capitalize()} ann. return: {ann_return:.1f}% "
-                    f"· PE: {pe_text} · Entry stock px {position['entry_stock_px']:.2f}\n"
-                    f"Bid {position['bid']:.2f} ({bid_source})\n"
-                    f"```diff\n+ Ask {position['ask']:.2f} ({ask_source})  (mid, buy: {mid_entry:.2f})\n```\n"
-                    f"<{SUMMARY_HTML_URL}>"
+        print("-- Scraping Barchart top naked puts --------------------------------------")
+        barchart_rows = scrape_barchart_top20()
+        if not barchart_rows:
+            print("  No rows scraped - aborting.")
+            run_log.append({
+                "date": today.isoformat(),
+                "time_utc": now_et.astimezone(ZoneInfo("UTC")).isoformat(),
+                "run_label": None,
+                "new_candidates": None,
+                "note": "scrape_failed",
+            })
+            save_run_log(run_log)
+            return
+        print(f"  Scraped {len(barchart_rows)} candidates (ranked by annualized potential return desc)")
+
+        print("-- Scanning Yahoo for earlier (non-monthly) expirations on those symbols --")
+        yahoo_weekly_rows = scrape_yahoo_weeklies(barchart_rows, today)
+        print(f"  Found {len(yahoo_weekly_rows)} additional weekly candidate(s)")
+        all_rows = barchart_rows + yahoo_weekly_rows
+
+        # Markets run this script up to 3x/day - label each run's additions
+        # A, B, C (next unused letter among today's existing positions) purely
+        # so a same-day Discord message and its webpage card can be visually
+        # matched to "which of today's screening passes" produced it. Only
+        # meaningful for today - once a position is no longer today's, the
+        # card stops showing its letter (see position_card()).
+        todays_run_labels = sorted(set(
+            p.get("run_label") for p in positions
+            if p.get("added_date") == today.isoformat() and p.get("run_label")
+        ))
+        run_label = chr(ord("A") + len(todays_run_labels))
+
+        candidates = pick_new_candidates(all_rows, positions, today)
+        run_log.append({
+            "date": today.isoformat(),
+            "time_utc": now_et.astimezone(ZoneInfo("UTC")).isoformat(),
+            "run_label": run_label if candidates else None,
+            "new_candidates": len(candidates),
+        })
+        save_run_log(run_log)
+        if not candidates:
+            print("\n  All of Barchart's top candidates are already open positions - nothing new to add.")
+        else:
+            print(f"\n  Adding {len(candidates)} new candidate(s) (run {run_label}):")
+            for candidate in candidates:
+                src_label = "yahoo weekly" if candidate.get("expiry_type") == "weekly" else "barchart"
+                print(f"    {candidate['symbol']} ${candidate['strike']}P exp {candidate['expiration']} "
+                      f"({src_label} bid {candidate['barchart_bid']:.2f}, annualized return "
+                      f"{candidate.get('potential_return_annual_pct') or 0:.1f}%)")
+                # Was this symbol ALREADY good enough to notify on, via any
+                # still-OPEN earlier position (same run or a prior day)? Mirrors
+                # the webpage's own per-(symbol, open/closed-bucket) dedup
+                # exactly: a settled position no longer occupies the open
+                # bucket's "first qualifying instance" slot, so once an earlier
+                # qualifier on this symbol closes out, a new one is a fresh
+                # signal again and should notify - same as it'd newly appear as
+                # the visible card under a filter on the page.
+                symbol_already_qualified = any(
+                    p["symbol"] == candidate["symbol"] and not p.get("settled")
+                    and position_passes_filter_config(p, filter_cfg)
+                    for p in positions
                 )
+                position = add_new_position(candidate, today)
+                position["run_label"] = run_label
+                bid_source = "approx (barchart)" if position["bid_is_approx"] else "yahoo"
+                ask_source = "approx (bid x 1.2)" if position["ask_is_approx"] else "yahoo"
+                print(f"      bid: {position['bid']:.2f} ({bid_source})   ask: {position['ask']:.2f} ({ask_source})")
+                positions.append(position)
+                save_positions(positions)
+                ann_return = candidate.get("potential_return_annual_pct") or 0
+                if position_passes_filter_config(position, filter_cfg) and not symbol_already_qualified:
+                    pe = position.get("pe_at_entry")
+                    pe_text = f"{pe:.1f}" if pe is not None else "n/a"
+                    mid_entry = round((position["bid"] + position["ask"]) / 2, 2)
+                    weekly_tag = " [weekly]" if position.get("expiry_type") == "weekly" else ""
+                    notify_discord(
+                        f"**[{run_label}]{weekly_tag} New CSP candidate: {position['symbol']} ${position['strike']:g}P exp {position['expiration']}**\n"
+                        f"{src_label.capitalize()} ann. return: {ann_return:.1f}% "
+                        f"· PE: {pe_text} · Entry stock px {position['entry_stock_px']:.2f}\n"
+                        f"Bid {position['bid']:.2f} ({bid_source})\n"
+                        f"```diff\n+ Ask {position['ask']:.2f} ({ask_source})  (mid, buy: {mid_entry:.2f})\n```\n"
+                        f"<{SUMMARY_HTML_URL}>"
+                    )
 
     if settle_expired_positions(positions, today, same_day_ok=same_day_settle_ok):
         save_positions(positions)
