@@ -431,5 +431,11 @@
     "time_utc": "2026-11-18T16:37:42.454448+00:00",
     "run_label": "B",
     "new_candidates": 9
+  },
+  {
+    "date": "2026-11-18",
+    "time_utc": "2026-11-18T18:07:37.539099+00:00",
+    "run_label": "C",
+    "new_candidates": 2
   }
 ]
