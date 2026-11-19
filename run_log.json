@@ -437,5 +437,12 @@
     "time_utc": "2026-11-18T18:07:37.539099+00:00",
     "run_label": "C",
     "new_candidates": 2
+  },
+  {
+    "date": "2026-11-18",
+    "time_utc": "2026-11-19T01:07:42.244172+00:00",
+    "run_label": null,
+    "new_candidates": 0,
+    "note": "eod_update_only"
   }
 ]
