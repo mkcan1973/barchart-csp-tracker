@@ -418,7 +418,10 @@ def scrape_yahoo_weeklies(barchart_rows, today):
 # A separate, complementary bearish strategy that reuses the SAME symbols the
 # naked-puts screen above already surfaced, rather than its own screen. Simple
 # candidates-only - no cross-run position tracking, no Discord notifications,
-# just a fresh snapshot of today's qualifying spreads on every run.
+# just a fresh snapshot of today's spreads on every run. All three thresholds
+# below are filtered LIVE in the browser (same pattern as the CSP filter bar),
+# not baked into the scan - these are just the values the page's inputs start
+# from on load, editable via "Edit thresholds on GitHub" without a code change.
 
 BEAR_CALL_CONFIG_FILE = Path("bear_call_spread_config.json")
 DEFAULT_BEAR_CALL_CONFIG = {
@@ -430,6 +433,10 @@ DEFAULT_BEAR_CALL_CONFIG = {
     # skipped - same idea as the CSP side's base_investment cap. None means
     # no cap.
     "max_collateral": None,
+    # Trailing P/E floor on the underlying - None means no PE filtering.
+    # Missing/undefined PE is treated as infinite, same convention as the
+    # CSP side's own min-PE filter (passes a min-only filter, fails a cap).
+    "min_pe": None,
 }
 
 
@@ -461,15 +468,17 @@ def save_bear_call_cache(data):
     BEAR_CALL_CACHE_FILE.write_text(json.dumps(data, indent=2))
 
 
-def scan_bear_call_spreads(all_rows, today, cfg):
+def scan_bear_call_spreads(all_rows, today):
     """For each distinct (symbol, expiration) the naked-puts screen (plus its
     weekly extension) surfaced: sell the nearest call strike above the
     current stock price at its bid, buy the next strike above that at its
-    ask - a defined-risk bear call credit spread. Kept only if the net
-    credit is at least cfg['min_credit_pct'] of the strike width, and
-    (optionally) the width x 100 collateral doesn't exceed
-    cfg['max_collateral']. Sorted richest-credit-first."""
+    ask - a defined-risk bear call credit spread. Every structurally valid
+    spread (positive width, positive net credit) is returned - the
+    credit%/collateral/PE thresholds are filtered live in the browser, not
+    here, same as the CSP side's own filter bar. Sorted richest-credit-
+    first (the default sort before any filter is applied)."""
     seen = set()
+    pe_cache = {}
     out = []
     for row in all_rows:
         symbol, expiration = row["symbol"], row["expiration"]
@@ -519,10 +528,10 @@ def scan_bear_call_spreads(all_rows, today, cfg):
         credit_pct = round(net_credit / width * 100, 2)
         collateral = round(width * 100, 2)
 
-        if credit_pct < cfg["min_credit_pct"]:
-            continue
-        if cfg["max_collateral"] is not None and collateral > cfg["max_collateral"]:
-            continue
+        if symbol not in pe_cache:
+            pe, _eps = get_trailing_pe_and_eps(symbol)
+            pe_cache[symbol] = pe
+        pe = pe_cache[symbol]
 
         dte = (datetime.strptime(expiration, "%Y-%m-%d").date() - today).days
         out.append({
@@ -530,6 +539,7 @@ def scan_bear_call_spreads(all_rows, today, cfg):
             "expiration": expiration,
             "dte": dte,
             "stock_px": round(stock_px, 2),
+            "pe": pe,
             "short_strike": short_strike,
             "short_bid": short_bid,
             "long_strike": long_strike,
@@ -979,41 +989,44 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
 
     def bear_call_html():
         """Today's bear call spread candidates - a fresh snapshot each run,
-        not a tracked position list like the CSP side. Only candidates that
-        already passed the credit%/collateral filter are included, so this
-        shows every row it's handed as-is."""
+        not a tracked position list like the CSP side. Every structurally
+        valid spread found is rendered; the credit%/collateral/PE
+        thresholds are applied LIVE in the browser (same pattern as the CSP
+        filter bar), not baked into which rows appear here."""
         data = bear_call_data or {}
         candidates = data.get("candidates") or []
         as_of = data.get("as_of")
-        cfg = data.get("config") or DEFAULT_BEAR_CALL_CONFIG
-
-        note = (
-            f'Sell the nearest call strike above the current price (at its bid), buy the next strike up '
-            f'(at its ask) - kept only if the net credit is at least {cfg.get("min_credit_pct")}% of the '
-            f'strike width'
-            + (f', and collateral (width &times; 100) is at most ${cfg.get("max_collateral"):g}' if cfg.get("max_collateral") is not None else '')
-            + '. Reuses the same symbols as the naked-puts screen above - a separate, complementary bearish '
-              'strategy, not tracked across runs like the CSP positions are.'
-        )
         as_of_text = f'As of {_html_escape(as_of)}' if as_of else 'Not yet computed'
 
+        def bc_attr(x):
+            return "" if x is None else str(x)
+
         if not candidates:
-            cards_html = '<div class="updated">No qualifying bear call spreads in the latest scan.</div>'
+            cards_html = '<div class="cards" id="bearCallCards"></div>'
         else:
             cards = []
             for c in candidates:
+                pe_text = f'{c["pe"]:.1f}' if c["pe"] is not None else 'n/a'
                 cards.append(f'''
-    <div class="card">
+    <div class="card" data-credit-pct="{bc_attr(c["credit_pct"])}" data-collateral="{bc_attr(c["collateral"])}" data-pe="{bc_attr(c["pe"])}">
       <div class="card-title">{_html_escape(c["symbol"])} &middot; exp {_html_escape(c["expiration"])} ({c["dte"]}d) &middot; stock ${c["stock_px"]:g}</div>
       <div>Sell ${c["short_strike"]:g}C @ bid {c["short_bid"]:.2f} &nbsp;/&nbsp; Buy ${c["long_strike"]:g}C @ ask {c["long_ask"]:.2f}</div>
       <div>Net credit: <strong>${c["net_credit"]:.2f}</strong> ({c["credit_pct"]:.1f}% of ${c["width"]:g} width)</div>
-      <div class="sub2">Max profit ${c["max_profit"]:.2f} &middot; Max loss ${c["max_loss"]:.2f} &middot; Collateral ${c["collateral"]:.2f}</div>
+      <div class="sub2">Max profit ${c["max_profit"]:.2f} &middot; Max loss ${c["max_loss"]:.2f} &middot; Collateral ${c["collateral"]:.2f} &middot; PE {pe_text}</div>
     </div>''')
-            cards_html = f'<div class="cards">{"".join(cards)}</div>'
+            cards_html = f'<div class="cards" id="bearCallCards">{"".join(cards)}</div>'
 
         return f'''
-  <div class="updated" style="margin-top:0;">{note}</div>
-  <div class="updated" style="margin-top:-6px;">{as_of_text} &middot; {len(candidates)} qualifying spread(s)</div>
+  <div class="updated" style="margin-top:0;">Sell the nearest call strike above the current price (at its bid), buy the next strike up (at its ask) - a defined-risk bear call credit spread. Reuses the same symbols as the naked-puts screen above - a separate, complementary bearish strategy, not tracked across runs like the CSP positions are.</div>
+  <div class="filterbar">
+    <label>Min credit % of width <input type="number" id="bcMinCreditPct" step="any" placeholder="-&infin;" inputmode="decimal"></label>
+    <label>Max collateral $ <input type="number" id="bcMaxCollateral" step="any" placeholder="&infin;" inputmode="decimal"></label>
+    <label>Min PE <input type="number" id="bcMinPe" step="any" placeholder="-&infin;" inputmode="decimal"></label>
+    <button id="bcApplyFilter" type="button">Filter</button>
+    <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/bear_call_spread_config.json" target="_blank" rel="noopener">Edit defaults on GitHub</a>
+    <span class="count" id="bcFilterCount"></span>
+  </div>
+  <div class="updated" style="margin-top:-6px;">{as_of_text} &middot; {len(candidates)} spread(s) scanned</div>
   {cards_html}
 '''
 
@@ -1410,6 +1423,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
 <script>
 (function() {{
   var DEFAULT_FILTERS = {json.dumps(filter_cfg or DEFAULT_FILTER_CONFIG)};
+  var DEFAULT_BEAR_CALL_FILTERS = {json.dumps((bear_call_data or {}).get("config") or DEFAULT_BEAR_CALL_CONFIG)};
   function fmtMoney(x) {{
     return x === null ? '--' : '$' + x.toLocaleString('en-US', {{minimumFractionDigits: 2, maximumFractionDigits: 2}});
   }}
@@ -2221,6 +2235,43 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   }}
   if (tabBtnCsp) tabBtnCsp.addEventListener('click', function() {{ showTab('csp'); }});
   if (tabBtnBearCall) tabBtnBearCall.addEventListener('click', function() {{ showTab('bearcall'); }});
+
+  function applyBearCallFilter() {{
+    var cards = document.querySelectorAll('#bearCallCards .card');
+    var minCreditRaw = document.getElementById('bcMinCreditPct').value.trim();
+    var maxCollateralRaw = document.getElementById('bcMaxCollateral').value.trim();
+    var minPeRaw = document.getElementById('bcMinPe').value.trim();
+    var minCredit = minCreditRaw === '' ? -Infinity : parseFloat(minCreditRaw);
+    var maxCollateral = maxCollateralRaw === '' ? Infinity : parseFloat(maxCollateralRaw);
+    var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
+    var shown = 0;
+    cards.forEach(function(card) {{
+      var creditVal = parseFloat(card.getAttribute('data-credit-pct'));
+      var collateralVal = parseFloat(card.getAttribute('data-collateral'));
+      var peRaw = card.getAttribute('data-pe');
+      // Missing PE ("n/a" on the card) means undefined, not zero - treat as
+      // infinite so it still passes a min-only filter, same convention as
+      // the CSP tab's own PE filter.
+      var peVal = peRaw === '' ? Infinity : parseFloat(peRaw);
+      var ok = creditVal >= minCredit && collateralVal <= maxCollateral && peVal >= minPe;
+      card.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    }});
+    var countEl = document.getElementById('bcFilterCount');
+    if (countEl) countEl.textContent = shown + ' of ' + cards.length + ' shown';
+  }}
+  var bcBtn = document.getElementById('bcApplyFilter');
+  if (bcBtn) bcBtn.addEventListener('click', applyBearCallFilter);
+  ['bcMinCreditPct', 'bcMaxCollateral', 'bcMinPe'].forEach(function(id) {{
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyBearCallFilter(); }});
+  }});
+  var bcFieldToCfgKey = {{ bcMinCreditPct: 'min_credit_pct', bcMaxCollateral: 'max_collateral', bcMinPe: 'min_pe' }};
+  Object.keys(bcFieldToCfgKey).forEach(function(id) {{
+    var cfgVal = DEFAULT_BEAR_CALL_FILTERS[bcFieldToCfgKey[id]];
+    if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
+  }});
+  applyBearCallFilter();
 }})();
 </script>
 </body>
@@ -2679,8 +2730,8 @@ def main():
 
         print("-- Scanning the same symbols for bear call spread candidates --")
         bear_call_cfg = load_bear_call_config()
-        bear_call_candidates = scan_bear_call_spreads(all_rows, today, bear_call_cfg)
-        print(f"  Found {len(bear_call_candidates)} qualifying bear call spread(s)")
+        bear_call_candidates = scan_bear_call_spreads(all_rows, today)
+        print(f"  Found {len(bear_call_candidates)} structurally valid bear call spread(s)")
         save_bear_call_cache({
             "as_of": now_et.isoformat(),
             "config": bear_call_cfg,
