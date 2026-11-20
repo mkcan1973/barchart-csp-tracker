@@ -23190,7 +23190,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-13",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 150.9600067138672,
+    "settled_seller_pnl": -239.0,
+    "settled_buyer_pnl": 234.0,
+    "settled_at": "2026-11-20"
   },
   {
     "symbol": "MU",
@@ -23209,7 +23214,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-13",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 705.27001953125,
+    "settled_seller_pnl": -4038.0,
+    "settled_buyer_pnl": 4008.0,
+    "settled_at": "2026-11-20"
   },
   {
     "symbol": "SPCX",
@@ -23252,7 +23262,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-13",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 383.7200012207031,
+    "settled_seller_pnl": 217.0,
+    "settled_buyer_pnl": -252.0,
+    "settled_at": "2026-11-20"
   },
   {
     "symbol": "CRWV",
@@ -23936,7 +23951,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-16",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 150.9600067138672,
+    "settled_seller_pnl": -119.0,
+    "settled_buyer_pnl": 114.0,
+    "settled_at": "2026-11-20"
   },
   {
     "symbol": "AMD",
@@ -23955,7 +23975,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-16",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 530.1400146484375,
+    "settled_seller_pnl": 1015.0,
+    "settled_buyer_pnl": -1080.0,
+    "settled_at": "2026-11-20"
   },
   {
     "symbol": "MU",
@@ -23974,7 +23999,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-16",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 705.27001953125,
+    "settled_seller_pnl": 167.0,
+    "settled_buyer_pnl": -227.0,
+    "settled_at": "2026-11-20"
   },
   {
     "symbol": "RCAT",
@@ -24183,7 +24213,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-16",
     "expiry_type": "weekly",
-    "run_label": "C"
+    "run_label": "C",
+    "settled": true,
+    "final_stock_px": 150.9600067138672,
+    "settled_seller_pnl": 181.0,
+    "settled_buyer_pnl": -191.0,
+    "settled_at": "2026-11-20"
   },
   {
     "symbol": "OMER",

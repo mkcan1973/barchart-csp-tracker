@@ -414,6 +414,137 @@ def scrape_yahoo_weeklies(barchart_rows, today):
             rows_out.append(best)
     return rows_out
 
+# --- Bear call spread scanner -------------------------------------------------
+# A separate, complementary bearish strategy that reuses the SAME symbols the
+# naked-puts screen above already surfaced, rather than its own screen. Simple
+# candidates-only - no cross-run position tracking, no Discord notifications,
+# just a fresh snapshot of today's qualifying spreads on every run.
+
+BEAR_CALL_CONFIG_FILE = Path("bear_call_spread_config.json")
+DEFAULT_BEAR_CALL_CONFIG = {
+    # Net credit as a percentage of the strike width - e.g. 30 means the
+    # upfront credit must be at least 30% of the width (so at most 70% of
+    # the width is at risk as the max loss).
+    "min_credit_pct": 30.0,
+    # Collateral per spread (width x 100) above which a candidate is
+    # skipped - same idea as the CSP side's base_investment cap. None means
+    # no cap.
+    "max_collateral": None,
+}
+
+
+def load_bear_call_config():
+    if BEAR_CALL_CONFIG_FILE.exists():
+        try:
+            cfg = json.loads(BEAR_CALL_CONFIG_FILE.read_text())
+            return {**DEFAULT_BEAR_CALL_CONFIG, **cfg}
+        except Exception:
+            pass
+    return dict(DEFAULT_BEAR_CALL_CONFIG)
+
+
+# Cache of the latest scan, re-rendered as-is on runs that don't rescan (the
+# end-of-day run) instead of re-fetching stale after-hours quotes.
+BEAR_CALL_CACHE_FILE = Path("bear_call_spread_candidates.json")
+
+
+def load_bear_call_cache():
+    if BEAR_CALL_CACHE_FILE.exists():
+        try:
+            return json.loads(BEAR_CALL_CACHE_FILE.read_text())
+        except Exception:
+            pass
+    return {"as_of": None, "candidates": []}
+
+
+def save_bear_call_cache(data):
+    BEAR_CALL_CACHE_FILE.write_text(json.dumps(data, indent=2))
+
+
+def scan_bear_call_spreads(all_rows, today, cfg):
+    """For each distinct (symbol, expiration) the naked-puts screen (plus its
+    weekly extension) surfaced: sell the nearest call strike above the
+    current stock price at its bid, buy the next strike above that at its
+    ask - a defined-risk bear call credit spread. Kept only if the net
+    credit is at least cfg['min_credit_pct'] of the strike width, and
+    (optionally) the width x 100 collateral doesn't exceed
+    cfg['max_collateral']. Sorted richest-credit-first."""
+    seen = set()
+    out = []
+    for row in all_rows:
+        symbol, expiration = row["symbol"], row["expiration"]
+        key = (symbol, expiration)
+        if key in seen:
+            continue
+        seen.add(key)
+
+        stock_px = get_current_stock_price(symbol)
+        if stock_px is None:
+            continue
+
+        _yf_rate_limiter.wait()
+        try:
+            t = yf.Ticker(symbol)
+            if expiration not in t.options:
+                continue
+            calls = t.option_chain(expiration).calls
+        except Exception:
+            continue
+
+        strikes = sorted(set(
+            float(s) for s in calls["strike"].tolist()
+            if s is not None and not pd.isna(s)
+        ))
+        above = [s for s in strikes if s > stock_px]
+        if len(above) < 2:
+            continue
+        short_strike, long_strike = above[0], above[1]
+
+        short_row = calls[abs(calls["strike"] - short_strike) < 0.01]
+        long_row = calls[abs(calls["strike"] - long_strike) < 0.01]
+        if short_row.empty or long_row.empty:
+            continue
+        short_bid = short_row.iloc[0].get("bid")
+        long_ask = long_row.iloc[0].get("ask")
+        if short_bid is None or long_ask is None or pd.isna(short_bid) or pd.isna(long_ask):
+            continue
+        short_bid, long_ask = float(short_bid), float(long_ask)
+        if short_bid <= 0 or long_ask <= 0:
+            continue
+
+        width = round(long_strike - short_strike, 4)
+        net_credit = round(short_bid - long_ask, 4)
+        if width <= 0 or net_credit <= 0:
+            continue
+        credit_pct = round(net_credit / width * 100, 2)
+        collateral = round(width * 100, 2)
+
+        if credit_pct < cfg["min_credit_pct"]:
+            continue
+        if cfg["max_collateral"] is not None and collateral > cfg["max_collateral"]:
+            continue
+
+        dte = (datetime.strptime(expiration, "%Y-%m-%d").date() - today).days
+        out.append({
+            "symbol": symbol,
+            "expiration": expiration,
+            "dte": dte,
+            "stock_px": round(stock_px, 2),
+            "short_strike": short_strike,
+            "short_bid": short_bid,
+            "long_strike": long_strike,
+            "long_ask": long_ask,
+            "width": width,
+            "net_credit": net_credit,
+            "credit_pct": credit_pct,
+            "collateral": collateral,
+            "max_profit": round(net_credit * 100, 2),
+            "max_loss": round((width - net_credit) * 100, 2),
+        })
+
+    out.sort(key=lambda c: c["credit_pct"], reverse=True)
+    return out
+
 # --- yfinance quote for the exact contract ----------------------------------------
 
 def get_yahoo_quote(symbol, expiration, strike):
@@ -788,7 +919,7 @@ def _fmt_money_paren(x, label="mid"):
     return f" ({label}: {_fmt_money(x)})" if x is not None else ""
 
 
-def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None, run_log=None):
+def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None, run_log=None, bear_call_data=None):
     """Single self-contained HTML file - a card per position (readable on a
     phone, unlike the 20+ column CSV) plus the totals and the realized P&L
     chart if one exists. No build step, no external assets - just open it in
@@ -845,6 +976,46 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
             '<th>Time (your local)</th><th>New candidates</th></tr></thead>'
             f'<tbody>{"".join(rows)}</tbody></table>'
         )
+
+    def bear_call_html():
+        """Today's bear call spread candidates - a fresh snapshot each run,
+        not a tracked position list like the CSP side. Only candidates that
+        already passed the credit%/collateral filter are included, so this
+        shows every row it's handed as-is."""
+        data = bear_call_data or {}
+        candidates = data.get("candidates") or []
+        as_of = data.get("as_of")
+        cfg = data.get("config") or DEFAULT_BEAR_CALL_CONFIG
+
+        note = (
+            f'Sell the nearest call strike above the current price (at its bid), buy the next strike up '
+            f'(at its ask) - kept only if the net credit is at least {cfg.get("min_credit_pct")}% of the '
+            f'strike width'
+            + (f', and collateral (width &times; 100) is at most ${cfg.get("max_collateral"):g}' if cfg.get("max_collateral") is not None else '')
+            + '. Reuses the same symbols as the naked-puts screen above - a separate, complementary bearish '
+              'strategy, not tracked across runs like the CSP positions are.'
+        )
+        as_of_text = f'As of {_html_escape(as_of)}' if as_of else 'Not yet computed'
+
+        if not candidates:
+            cards_html = '<div class="updated">No qualifying bear call spreads in the latest scan.</div>'
+        else:
+            cards = []
+            for c in candidates:
+                cards.append(f'''
+    <div class="card">
+      <div class="card-title">{_html_escape(c["symbol"])} &middot; exp {_html_escape(c["expiration"])} ({c["dte"]}d) &middot; stock ${c["stock_px"]:g}</div>
+      <div>Sell ${c["short_strike"]:g}C @ bid {c["short_bid"]:.2f} &nbsp;/&nbsp; Buy ${c["long_strike"]:g}C @ ask {c["long_ask"]:.2f}</div>
+      <div>Net credit: <strong>${c["net_credit"]:.2f}</strong> ({c["credit_pct"]:.1f}% of ${c["width"]:g} width)</div>
+      <div class="sub2">Max profit ${c["max_profit"]:.2f} &middot; Max loss ${c["max_loss"]:.2f} &middot; Collateral ${c["collateral"]:.2f}</div>
+    </div>''')
+            cards_html = f'<div class="cards">{"".join(cards)}</div>'
+
+        return f'''
+  <div class="updated" style="margin-top:0;">{note}</div>
+  <div class="updated" style="margin-top:-6px;">{as_of_text} &middot; {len(candidates)} qualifying spread(s)</div>
+  {cards_html}
+'''
 
     def pnl_row(label, seller_pnl, buyer_pnl, seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi, norm_seller, norm_buyer,
                 norm_seller_key, norm_buyer_key,
@@ -1045,6 +1216,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
         display: flex; align-items: center; gap: 10px; }}
   .expandbtn {{ padding: 4px 12px; border-radius: 6px; border: 1px solid #3ddc84; background: transparent;
                 color: #3ddc84; font-weight: 700; font-size: 0.78rem; cursor: pointer; }}
+  .tabbar {{ display: flex; gap: 8px; margin: 10px 0 18px; }}
+  .tabbtn {{ padding: 6px 16px; border-radius: 8px 8px 0 0; border: 1px solid #2a2f3a; border-bottom: none;
+             background: #161b25; color: #9aa4b2; font-weight: 700; font-size: 0.85rem; cursor: pointer; }}
+  .tabbtn-active {{ background: #0b0e14; color: #3ddc84; border-color: #3ddc84; }}
+  .card-title {{ font-weight: 600; margin-bottom: 6px; }}
   .updated {{ color: #9aa4b2; font-size: 0.85rem; margin-top: 2px; margin-bottom: 20px; }}
   table.runlog {{ width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 8px; }}
   table.runlog th, table.runlog td {{ text-align: left; padding: 5px 8px; border-bottom: 1px solid #2a2f3a; }}
@@ -1115,11 +1291,18 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     .expandbtn {{ border-color: #0969da; color: #0969da; }}
     .filterbar .count {{ color: #6b7280; }}
     table.runlog th, table.runlog td {{ border-bottom-color: #e0e3e8; }}
+    .tabbtn {{ background: #ffffff; border-color: #d0d5dd; color: #6b7280; }}
+    .tabbtn-active {{ background: #f5f6f8; color: #0969da; border-color: #0969da; }}
   }}
 </style>
 </head>
 <body>
   <h1>Barchart CSP Tracker</h1>
+  <div class="tabbar">
+    <button type="button" id="tabBtnCsp" class="tabbtn tabbtn-active">CSP</button>
+    <button type="button" id="tabBtnBearCall" class="tabbtn">Bear Call Spread</button>
+  </div>
+  <div id="cspTabContent">
   <div class="updated">Last updated {today.isoformat()} &middot; {len(open_rows)} open &middot; {len(closed_rows)} closed</div>
 
   <div class="filterbar">
@@ -1215,6 +1398,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   <div id="runLogWrap" style="display:none;">
     <div class="updated" style="margin-top:0;">One row per actual script execution that passed the market-open check - a day with no rows means the scheduled trigger never ran that day (see GitHub Actions), not that nothing new was found.</div>
     {run_log_html()}
+  </div>
+  </div>
+
+  <div id="bearCallTabContent" style="display:none;">
+  <h2 style="margin-top:0;">Bear Call Spread candidates</h2>
+  <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/bear_call_spread_config.json" target="_blank" rel="noopener">Edit thresholds on GitHub</a>
+  {bear_call_html()}
   </div>
 
 <script>
@@ -2017,6 +2207,20 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   }});
   setExpiryState(DEFAULT_FILTERS.expiry_filter || 'monthly');
   applyFilter();
+
+  var tabBtnCsp = document.getElementById('tabBtnCsp');
+  var tabBtnBearCall = document.getElementById('tabBtnBearCall');
+  var cspTab = document.getElementById('cspTabContent');
+  var bearCallTab = document.getElementById('bearCallTabContent');
+  function showTab(which) {{
+    var csp = which === 'csp';
+    if (cspTab) cspTab.style.display = csp ? '' : 'none';
+    if (bearCallTab) bearCallTab.style.display = csp ? 'none' : '';
+    if (tabBtnCsp) tabBtnCsp.className = 'tabbtn' + (csp ? ' tabbtn-active' : '');
+    if (tabBtnBearCall) tabBtnBearCall.className = 'tabbtn' + (csp ? '' : ' tabbtn-active');
+  }}
+  if (tabBtnCsp) tabBtnCsp.addEventListener('click', function() {{ showTab('csp'); }});
+  if (tabBtnBearCall) tabBtnBearCall.addEventListener('click', function() {{ showTab('bearcall'); }});
 }})();
 </script>
 </body>
@@ -2026,7 +2230,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     return SUMMARY_HTML
 
 
-def build_summary(positions, today, filter_cfg=None, run_log=None):
+def build_summary(positions, today, filter_cfg=None, run_log=None, bear_call_data=None):
     open_rows = []
     open_roi_fict = []    # (seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi) per open position
     open_roi_actual = []  # same, for the "actual" (live requote) side
@@ -2402,7 +2606,7 @@ def build_summary(positions, today, filter_cfg=None, run_log=None):
         "settled_count": len(settled),
         "png_path": png_path,
     }
-    html_path = generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg, run_log)
+    html_path = generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg, run_log, bear_call_data)
     totals["html_path"] = html_path
 
     return open_rows, closed_rows, totals
@@ -2473,6 +2677,16 @@ def main():
         print(f"  Found {len(yahoo_weekly_rows)} additional weekly candidate(s)")
         all_rows = barchart_rows + yahoo_weekly_rows
 
+        print("-- Scanning the same symbols for bear call spread candidates --")
+        bear_call_cfg = load_bear_call_config()
+        bear_call_candidates = scan_bear_call_spreads(all_rows, today, bear_call_cfg)
+        print(f"  Found {len(bear_call_candidates)} qualifying bear call spread(s)")
+        save_bear_call_cache({
+            "as_of": now_et.isoformat(),
+            "config": bear_call_cfg,
+            "candidates": bear_call_candidates,
+        })
+
         # Markets run this script up to 3x/day - label each run's additions
         # A, B, C (next unused letter among today's existing positions) purely
         # so a same-day Discord message and its webpage card can be visually
@@ -2541,7 +2755,8 @@ def main():
         save_positions(positions)
 
     print("\n-- Rebuilding summary for all open positions -----------------------------")
-    open_rows, closed_rows, totals = build_summary(positions, today, filter_cfg, run_log)
+    bear_call_data = load_bear_call_cache()
+    open_rows, closed_rows, totals = build_summary(positions, today, filter_cfg, run_log, bear_call_data)
     if not open_rows and not totals["settled_count"]:
         print("  No positions to summarize.")
         return
