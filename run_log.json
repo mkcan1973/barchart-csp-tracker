@@ -394,5 +394,98 @@
     "time_utc": "2026-11-17T01:08:01.959713+00:00",
     "run_label": "D",
     "new_candidates": 8
+  },
+  {
+    "date": "2026-11-17",
+    "time_utc": "2026-11-17T15:07:46.906779+00:00",
+    "run_label": "A",
+    "new_candidates": 11
+  },
+  {
+    "date": "2026-11-17",
+    "time_utc": "2026-11-17T16:37:49.708341+00:00",
+    "run_label": "B",
+    "new_candidates": 12
+  },
+  {
+    "date": "2026-11-17",
+    "time_utc": "2026-11-17T18:07:46.078909+00:00",
+    "run_label": "C",
+    "new_candidates": 5
+  },
+  {
+    "date": "2026-11-17",
+    "time_utc": "2026-11-18T01:08:01.409447+00:00",
+    "run_label": null,
+    "new_candidates": 0,
+    "note": "eod_update_only"
+  },
+  {
+    "date": "2026-11-18",
+    "time_utc": "2026-11-18T15:07:53.500695+00:00",
+    "run_label": "A",
+    "new_candidates": 9
+  },
+  {
+    "date": "2026-11-18",
+    "time_utc": "2026-11-18T16:37:42.454448+00:00",
+    "run_label": "B",
+    "new_candidates": 9
+  },
+  {
+    "date": "2026-11-18",
+    "time_utc": "2026-11-18T18:07:37.539099+00:00",
+    "run_label": "C",
+    "new_candidates": 2
+  },
+  {
+    "date": "2026-11-18",
+    "time_utc": "2026-11-19T01:07:42.244172+00:00",
+    "run_label": null,
+    "new_candidates": 0,
+    "note": "eod_update_only"
+  },
+  {
+    "date": "2026-11-19",
+    "time_utc": "2026-11-19T15:07:50.058696+00:00",
+    "run_label": "A",
+    "new_candidates": 9
+  },
+  {
+    "date": "2026-11-19",
+    "time_utc": "2026-11-19T16:37:39.956679+00:00",
+    "run_label": "B",
+    "new_candidates": 11
+  },
+  {
+    "date": "2026-11-19",
+    "time_utc": "2026-11-19T18:07:52.308090+00:00",
+    "run_label": "C",
+    "new_candidates": 10
+  },
+  {
+    "date": "2026-11-19",
+    "time_utc": "2026-11-20T01:07:40.455654+00:00",
+    "run_label": null,
+    "new_candidates": 0,
+    "note": "eod_update_only"
+  },
+  {
+    "date": "2026-11-20",
+    "time_utc": "2026-11-20T15:08:00.259352+00:00",
+    "run_label": "A",
+    "new_candidates": 34
+  },
+  {
+    "date": "2026-11-20",
+    "time_utc": "2026-11-20T16:37:45.186827+00:00",
+    "run_label": "B",
+    "new_candidates": 27
+  },
+  {
+    "date": "2026-11-20",
+    "time_utc": "2026-11-20T18:07:46.371459+00:00",
+    "run_label": "C",
+    "new_candidates": 11
   }
 ]
