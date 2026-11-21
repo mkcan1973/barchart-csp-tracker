@@ -511,24 +511,6 @@ def load_bear_call_config():
     return dict(DEFAULT_BEAR_CALL_CONFIG)
 
 
-# Cache of the latest scan, re-rendered as-is on runs that don't rescan (the
-# end-of-day run) instead of re-fetching stale after-hours quotes.
-BEAR_CALL_CACHE_FILE = Path("bear_call_spread_candidates.json")
-
-
-def load_bear_call_cache():
-    if BEAR_CALL_CACHE_FILE.exists():
-        try:
-            return json.loads(BEAR_CALL_CACHE_FILE.read_text())
-        except Exception:
-            pass
-    return {"as_of": None, "candidates": []}
-
-
-def save_bear_call_cache(data):
-    BEAR_CALL_CACHE_FILE.write_text(json.dumps(data, indent=2))
-
-
 def scan_bear_call_spreads(all_rows, today, cfg):
     """For each distinct (symbol, expiration) the naked-puts screen (plus its
     weekly extension) surfaced: pick a short call strike targeting
@@ -636,6 +618,28 @@ def get_yahoo_quote(symbol, expiration, strike):
             return None, None
         chain = t.option_chain(expiration)
         match = chain.puts[abs(chain.puts["strike"] - strike) < 0.01]
+        if match.empty:
+            return None, None
+        r = match.iloc[0]
+        bid = r.get("bid")
+        ask = r.get("ask")
+        bid = float(bid) if bid is not None and not pd.isna(bid) and bid > 0 else None
+        ask = float(ask) if ask is not None and not pd.isna(ask) and ask > 0 else None
+        return bid, ask
+    except Exception:
+        return None, None
+
+
+def get_yahoo_call_quote(symbol, expiration, strike):
+    """Same as get_yahoo_quote but for a CALL contract - used to live-
+    requote both legs of a tracked bear call spread."""
+    _yf_rate_limiter.wait()
+    try:
+        t = yf.Ticker(symbol)
+        if expiration not in t.options:
+            return None, None
+        chain = t.option_chain(expiration)
+        match = chain.calls[abs(chain.calls["strike"] - strike) < 0.01]
         if match.empty:
             return None, None
         r = match.iloc[0]
@@ -783,6 +787,39 @@ def calc_mid_close_pnl(entry_bid, entry_ask, current_bid, current_ask):
     return seller_pnl, buyer_pnl
 
 
+# --- Bear call spread P&L -------------------------------------------------------
+
+def spread_intrinsic_value(short_strike, long_strike, price):
+    """What a (short_strike, long_strike) call vertical is worth at a given
+    stock price - 0 if price is at/below the short strike (both legs
+    worthless), the full width if price is at/above the long strike (both
+    legs fully ITM), linear in between. This is what it would cost to close
+    the spread at that price, or what it settles for at expiration."""
+    width = long_strike - short_strike
+    return max(0.0, min(width, price - short_strike))
+
+
+def calc_bear_call_pnl_at_price(short_strike, long_strike, net_credit, price):
+    """Fictional (intrinsic-only) P&L per spread at a given stock price -
+    what you entered as credit minus what the spread is worth at that
+    price. Positive while the stock stays at/below the short strike (you
+    keep the full credit); shrinks, then goes negative, as price rises
+    through the width."""
+    return round((net_credit - spread_intrinsic_value(short_strike, long_strike, price)) * 100, 2)
+
+
+def calc_bear_call_actual_close_pnl(net_credit, current_short_ask, current_long_bid):
+    """What closing the spread today would really net - buy back the short
+    call at its current ask, sell the long call at its current bid. None if
+    either leg has no live quote (illiquid contract) - same convention as
+    calc_actual_close_pnl: callers should fall back to the intrinsic
+    ("fictional") estimate rather than let a missing quote read as $0."""
+    if current_short_ask is None or current_long_bid is None:
+        return None
+    cost_to_close = current_short_ask - current_long_bid
+    return round((net_credit - cost_to_close) * 100, 2)
+
+
 def calc_stock_equivalent(entry_px, other_px):
     """P&L (and % price change) from simply buying NORMALIZED_RISK_USD worth
     of SHARES at entry and marking to other_px (current price for an open
@@ -908,6 +945,94 @@ def add_new_position(candidate, today):
         "expiry_type": candidate.get("expiry_type", "monthly"),
     }
     return position
+
+# --- Bear call spread position tracking -----------------------------------------
+# Same tracking philosophy as the CSP side above: every structurally valid
+# spread the scan finds gets tracked as a position (open until settled), and
+# the page's filter bar decides what's shown/counted - the scan itself
+# doesn't gate on the credit%/collateral/PE thresholds.
+
+BEAR_CALL_POSITIONS_FILE = Path("bear_call_spread_positions.json")
+
+
+def load_bear_call_positions():
+    if BEAR_CALL_POSITIONS_FILE.exists():
+        return json.loads(BEAR_CALL_POSITIONS_FILE.read_text())
+    return []
+
+
+def save_bear_call_positions(positions):
+    BEAR_CALL_POSITIONS_FILE.write_text(json.dumps(positions, indent=2))
+
+
+def is_bear_call_already_open(positions, symbol, short_strike, long_strike, expiration, today):
+    """Same per-contract dedup as is_already_open, keyed on the whole spread
+    (both strikes) instead of a single strike."""
+    for p in positions:
+        if (p["symbol"] == symbol and abs(p["short_strike"] - short_strike) < 0.01
+                and abs(p["long_strike"] - long_strike) < 0.01 and p["expiration"] == expiration
+                and datetime.strptime(p["expiration"], "%Y-%m-%d").date() >= today):
+            return True
+    return False
+
+
+def settle_expired_bear_call_positions(positions, today, same_day_ok=False):
+    """Same settlement timing rules as settle_expired_positions - lock in
+    final P&L using the stock price at expiration, keep settled positions
+    permanently rather than dropping them."""
+    changed = False
+    for p in positions:
+        if p.get("settled"):
+            continue
+        exp_date = datetime.strptime(p["expiration"], "%Y-%m-%d").date()
+        if exp_date > today or (exp_date == today and not same_day_ok):
+            continue
+        final_px = get_price_at(p["symbol"], p["expiration"])
+        if final_px is None:
+            continue  # no price yet (e.g. data lag) - retry next run
+        pnl = calc_bear_call_pnl_at_price(p["short_strike"], p["long_strike"], p["net_credit"], final_px)
+        p["settled"] = True
+        p["final_stock_px"] = final_px
+        p["settled_pnl"] = pnl
+        p["settled_at"] = today.isoformat()
+        changed = True
+    return changed
+
+
+def pick_new_bear_call_candidates(candidates, positions, today):
+    """Every scanned spread whose exact (symbol, short strike, long strike,
+    expiration) isn't already an open position."""
+    picked = []
+    staged = set()
+    for c in candidates:
+        key = (c["symbol"], c["short_strike"], c["long_strike"], c["expiration"])
+        if is_bear_call_already_open(positions, c["symbol"], c["short_strike"], c["long_strike"],
+                                      c["expiration"], today) or key in staged:
+            continue
+        picked.append(c)
+        staged.add(key)
+    return picked
+
+
+def add_new_bear_call_position(candidate, today):
+    """The scan already pulled a live quote for both legs plus the
+    underlying's stock price/PE for this exact spread, so just capture it
+    as-is rather than re-fetching (unlike the CSP side, whose candidate rows
+    only carry Barchart's own reference bid, not a real quote)."""
+    return {
+        "symbol": candidate["symbol"],
+        "short_strike": candidate["short_strike"],
+        "long_strike": candidate["long_strike"],
+        "expiration": candidate["expiration"],
+        "short_bid": candidate["short_bid"],
+        "long_ask": candidate["long_ask"],
+        "net_credit": candidate["net_credit"],
+        "width": candidate["width"],
+        "collateral": candidate["collateral"],
+        "entry_stock_px": candidate["stock_px"],
+        "pe_at_entry": candidate["pe"],
+        "added_date": today.isoformat(),
+    }
 
 # --- realized P&L chart --------------------------------------------------------
 
@@ -1056,38 +1181,66 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
         )
 
     def bear_call_html():
-        """Today's bear call spread candidates - a fresh snapshot each run,
-        not a tracked position list like the CSP side. Every structurally
-        valid spread found is rendered; the credit%/collateral/PE
-        thresholds are applied LIVE in the browser (same pattern as the CSP
-        filter bar), not baked into which rows appear here."""
+        """Open and closed bear call spread positions - the same two-pass
+        P&L presentation as the CSP tab (fictional intrinsic-value mark vs.
+        actual live requote for open positions; locked-in P&L for closed
+        ones), just single-valued instead of CSP's seller/buyer duality,
+        since this is one strategy as actually entered, not two
+        interpretations of the same contract. Every scanned spread gets
+        tracked regardless of the credit%/collateral/PE thresholds - those
+        are applied LIVE in the browser (same pattern as the CSP filter
+        bar), not baked into what gets tracked."""
         data = bear_call_data or {}
-        candidates = data.get("candidates") or []
-        as_of = data.get("as_of")
-        as_of_text = f'As of {_html_escape(as_of)}' if as_of else 'Not yet computed'
-        target_delta = (data.get("config") or DEFAULT_BEAR_CALL_CONFIG).get("target_short_delta",
-                        DEFAULT_BEAR_CALL_CONFIG["target_short_delta"])
+        open_rows = data.get("open_rows") or []
+        closed_rows = data.get("closed_rows") or []
+        totals = data.get("totals") or {}
+        cfg = data.get("config") or DEFAULT_BEAR_CALL_CONFIG
+        target_delta = cfg.get("target_short_delta", DEFAULT_BEAR_CALL_CONFIG["target_short_delta"])
 
         def bc_attr(x):
             return "" if x is None else str(x)
 
-        if not candidates:
-            cards_html = '<div class="cards" id="bearCallCards"></div>'
-        else:
-            cards = []
-            for c in candidates:
-                pe_text = f'{c["pe"]:.1f}' if c["pe"] is not None else 'n/a'
-                cards.append(f'''
-    <div class="card" data-credit-pct="{bc_attr(c["credit_pct"])}" data-collateral="{bc_attr(c["collateral"])}" data-pe="{bc_attr(c["pe"])}">
-      <div class="card-title">{_html_escape(c["symbol"])} &middot; exp {_html_escape(c["expiration"])} ({c["dte"]}d) &middot; stock ${c["stock_px"]:g}</div>
-      <div>Sell ${c["short_strike"]:g}C @ bid {c["short_bid"]:.2f} &nbsp;/&nbsp; Buy ${c["long_strike"]:g}C @ ask {c["long_ask"]:.2f}</div>
-      <div>Net credit: <strong>${c["net_credit"]:.2f}</strong> ({c["credit_pct"]:.1f}% of ${c["width"]:g} width)</div>
-      <div class="sub2">Max profit ${c["max_profit"]:.2f} &middot; Max loss ${c["max_loss"]:.2f} &middot; Collateral ${c["collateral"]:.2f} &middot; PE {pe_text}</div>
-    </div>''')
-            cards_html = f'<div class="cards" id="bearCallCards">{"".join(cards)}</div>'
+        fict_norm_col = f"NORM P/L (FICTIONAL) (${NORMALIZED_RISK_USD:.0f} risk)"
+        actual_norm_col = f"NORM P/L (ACTUAL) (${NORMALIZED_RISK_USD:.0f} risk)"
+        realized_norm_col = f"NORM P/L (${NORMALIZED_RISK_USD:.0f} risk)"
+
+        def bc_open_card(r):
+            pe = r.get("PE AT ENTRY")
+            pe_text = f'{pe:.1f}' if pe is not None else 'n/a'
+            run_label = r.get("RUN LABEL")
+            run_badge = f'<span class="run-badge">{_html_escape(run_label)}</span> ' if run_label else ''
+            fict_norm = r[fict_norm_col]
+            actual_norm = r[actual_norm_col]
+            approx_tag = ' <span class="weekly-badge">approx</span>' if r["ACTUAL IS APPROX"] else ''
+            return f'''
+    <div class="card" data-kind="open" data-credit-pct="{bc_attr(r["CREDIT % OF WIDTH (entry)"])}" data-collateral="{bc_attr(r["COLLATERAL"])}" data-pe="{bc_attr(pe)}" data-stock-pct="{bc_attr(r["STOCK PCT CHANGE"])}" data-norm-fict="{bc_attr(fict_norm)}" data-norm-actual="{bc_attr(actual_norm)}" data-roi-fict="{bc_attr(r["ROI % (FICTIONAL)"])}" data-roi-actual="{bc_attr(r["ROI % (ACTUAL)"])}" data-ann-fict="{bc_attr(r["ANNUALIZED ROI % (FICTIONAL)"])}" data-ann-actual="{bc_attr(r["ANNUALIZED ROI % (ACTUAL)"])}">
+      <div class="card-title">{run_badge}{_html_escape(r["SYMBOL"])} &middot; exp {_html_escape(r["EXPIRATION"])} ({r["DAYS LEFT"]}d left)</div>
+      <div>Stock ${r["CURRENT STOCK PRICE"]:.2f} (entry ${r["ENTRY STOCK PRICE"]:.2f}, {r["STOCK PCT CHANGE"]:+.1f}%)</div>
+      <div>Short ${r["SHORT STRIKE"]:g}C (entry bid {r["SHORT BID (entry)"]:.2f}) &nbsp;/&nbsp; Long ${r["LONG STRIKE"]:g}C (entry ask {r["LONG ASK (entry)"]:.2f})</div>
+      <div>Entry credit: <strong>${r["NET CREDIT (entry)"]:.2f}</strong> ({r["CREDIT % OF WIDTH (entry)"]:.1f}% of ${r["WIDTH"]:g} width) &middot; Collateral ${r["COLLATERAL"]:.2f} &middot; PE {pe_text}</div>
+      <div class="{_pnl_class(fict_norm)}">Unrealized (fictional): {_fmt_money(fict_norm)} &middot; ROI {_fmt_pct(r["ROI % (FICTIONAL)"])} (ann. {_fmt_pct(r["ANNUALIZED ROI % (FICTIONAL)"])})</div>
+      <div class="{_pnl_class(actual_norm)}">Unrealized (actual, live requote{approx_tag}): {_fmt_money(actual_norm)} &middot; ROI {_fmt_pct(r["ROI % (ACTUAL)"])} (ann. {_fmt_pct(r["ANNUALIZED ROI % (ACTUAL)"])})</div>
+    </div>'''
+
+        def bc_closed_card(r):
+            pe = r.get("PE AT ENTRY")
+            pe_text = f'{pe:.1f}' if pe is not None else 'n/a'
+            norm = r[realized_norm_col]
+            return f'''
+    <div class="card" data-kind="closed" data-credit-pct="{bc_attr(r["CREDIT % OF WIDTH (entry)"])}" data-collateral="{bc_attr(r["COLLATERAL"])}" data-pe="{bc_attr(pe)}" data-stock-pct="{bc_attr(r["STOCK PCT CHANGE"])}" data-norm-realized="{bc_attr(norm)}" data-roi-realized="{bc_attr(r["ROI %"])}" data-ann-realized="{bc_attr(r["ANNUALIZED ROI %"])}">
+      <div class="card-title">{_html_escape(r["SYMBOL"])} &middot; exp {_html_escape(r["EXPIRATION"])}</div>
+      <div>Final stock ${r["FINAL STOCK PRICE"]:.2f} (entry ${r["ENTRY STOCK PRICE"]:.2f}, {r["STOCK PCT CHANGE"]:+.1f}%)</div>
+      <div>Short ${r["SHORT STRIKE"]:g}C &nbsp;/&nbsp; Long ${r["LONG STRIKE"]:g}C &middot; width ${r["WIDTH"]:g}</div>
+      <div>Entry credit: <strong>${r["NET CREDIT (entry)"]:.2f}</strong> ({r["CREDIT % OF WIDTH (entry)"]:.1f}% of width) &middot; Collateral ${r["COLLATERAL"]:.2f} &middot; PE {pe_text}</div>
+      <div class="{_pnl_class(norm)}">Realized: {_fmt_money(norm)} &middot; ROI {_fmt_pct(r["ROI %"])} (ann. {_fmt_pct(r["ANNUALIZED ROI %"])})</div>
+      <div class="sub2">Added {r["ADDED"]} &middot; settled {r["SETTLED AT"]}</div>
+    </div>'''
+
+        open_cards_html = ''.join(bc_open_card(r) for r in open_rows)
+        closed_cards_html = ''.join(bc_closed_card(r) for r in closed_rows)
 
         return f'''
-  <div class="updated" style="margin-top:0;">Sell the call strike closest to {target_delta:g} delta (at its bid), buy the very next strike up (at its ask) - a defined-risk bear call credit spread. The short strike is chosen by probability (delta), not just "the nearest strike above price," so it adapts to each stock's own volatility and strike spacing; the long strike is always the adjacent one above it. Reuses the same symbols as the naked-puts screen above - a separate, complementary bearish strategy, not tracked across runs like the CSP positions are.</div>
+  <div class="updated" style="margin-top:0;">Sell the call strike closest to {target_delta:g} delta (at its bid), buy the very next strike up (at its ask) - a defined-risk bear call credit spread. The short strike is chosen by probability (delta), not just "the nearest strike above price," so it adapts to each stock's own volatility and strike spacing; the long strike is always the adjacent one above it. Reuses the same symbols as the naked-puts screen above - a separate, complementary bearish strategy with its own open/closed tracking.</div>
   <div class="filterbar">
     <label>Min credit % of width <input type="number" id="bcMinCreditPct" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max collateral $ <input type="number" id="bcMaxCollateral" step="any" placeholder="&infin;" inputmode="decimal"></label>
@@ -1096,8 +1249,36 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/bear_call_spread_config.json" target="_blank" rel="noopener">Edit defaults on GitHub</a>
     <span class="count" id="bcFilterCount"></span>
   </div>
-  <div class="updated" style="margin-top:-6px;">{as_of_text} &middot; {len(candidates)} spread(s) scanned</div>
-  {cards_html}
+
+  <div class="totals">
+    <div class="box">
+      <div class="label">UNREALIZED (<span id="bcOpenCount">{len(open_rows)}</span> open, normalized $<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span>/spread)</div>
+      <div class="val {_pnl_class(totals.get("unrealized_fict_total"))}" id="bcTotalFict">Fictional <span id="bcTotalFictAmt">{_fmt_money(totals.get("unrealized_fict_total"))}</span></div>
+      <div class="sub2">avg ROI <span id="bcAvgFictRoi">{_fmt_pct(totals.get("avg_unrealized_fict_roi"))}</span> &middot; avg ann. ROI <span id="bcAvgFictAnn">{_fmt_pct(totals.get("avg_unrealized_fict_ann_roi"))}</span></div>
+      <div class="val {_pnl_class(totals.get("unrealized_actual_total"))}" id="bcTotalActual">Actual (live requote) <span id="bcTotalActualAmt">{_fmt_money(totals.get("unrealized_actual_total"))}</span></div>
+      <div class="sub2">avg ROI <span id="bcAvgActualRoi">{_fmt_pct(totals.get("avg_unrealized_actual_roi"))}</span> &middot; avg ann. ROI <span id="bcAvgActualAnn">{_fmt_pct(totals.get("avg_unrealized_actual_ann_roi"))}</span></div>
+      <div class="sub2">Stock dropped from entry: <span id="bcStockDownOpen">{totals.get("stock_down_open", 0)} of {len(open_rows)} open</span></div>
+    </div>
+    <div class="box">
+      <div class="label">REALIZED (<span id="bcRealizedCount">{totals.get("settled_count", 0)}</span> settled, normalized $<span class="norm-base-num">{NORMALIZED_RISK_USD:.0f}</span>/spread)</div>
+      <div class="val {_pnl_class(totals.get("realized_total"))}" id="bcTotalRealized">Realized <span id="bcTotalRealizedAmt">{_fmt_money(totals.get("realized_total"))}</span></div>
+      <div class="sub2">avg ROI <span id="bcAvgRealizedRoi">{_fmt_pct(totals.get("avg_realized_roi"))}</span> &middot; avg ann. ROI <span id="bcAvgRealizedAnn">{_fmt_pct(totals.get("avg_realized_ann_roi"))}</span></div>
+      <div class="sub2">Stock dropped from entry: <span id="bcStockDownClosed">{totals.get("stock_down_closed", 0)} of {len(closed_rows)} closed</span></div>
+    </div>
+  </div>
+  <div class="updated" id="bcFilterNote" style="display:none;">Totals above reflect only the positions currently passing the filter.</div>
+
+  <h2 style="margin-top:0;">Open bear call spreads (<span id="bcOpenSectionCount">{len(open_rows)}</span>)</h2>
+  <div class="cards" id="bcOpenCards">
+  {open_cards_html}
+  </div>
+
+  <h2>Closed bear call spreads (<span id="bcClosedSectionCount">{len(closed_rows)}</span>)
+    <button type="button" id="bcClosedToggle" class="expandbtn">Expand</button>
+  </h2>
+  <div class="cards" id="bcClosedCardsWrap" style="display:none;">
+  {closed_cards_html}
+  </div>
 '''
 
     def pnl_row(label, seller_pnl, buyer_pnl, seller_roi, buyer_roi, ann_seller_roi, ann_buyer_roi, norm_seller, norm_buyer,
@@ -2321,15 +2502,20 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   if (tabBtnBearCall) tabBtnBearCall.addEventListener('click', function() {{ showTab('bearcall'); }});
 
   function applyBearCallFilter() {{
-    var cards = document.querySelectorAll('#bearCallCards .card');
     var minCreditRaw = document.getElementById('bcMinCreditPct').value.trim();
     var maxCollateralRaw = document.getElementById('bcMaxCollateral').value.trim();
     var minPeRaw = document.getElementById('bcMinPe').value.trim();
+    var noBcFilter = minCreditRaw === '' && maxCollateralRaw === '' && minPeRaw === '';
     var minCredit = minCreditRaw === '' ? -Infinity : parseFloat(minCreditRaw);
     var maxCollateral = maxCollateralRaw === '' ? Infinity : parseFloat(maxCollateralRaw);
     var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
-    var shown = 0;
-    cards.forEach(function(card) {{
+
+    var allCards = document.querySelectorAll('#bearCallTabContent .card');
+    var openVisible = [], closedVisible = [];
+    var totalCount = 0;
+    allCards.forEach(function(card) {{
+      totalCount++;
+      var isOpen = card.getAttribute('data-kind') === 'open';
       var creditVal = parseFloat(card.getAttribute('data-credit-pct'));
       var collateralVal = parseFloat(card.getAttribute('data-collateral'));
       var peRaw = card.getAttribute('data-pe');
@@ -2337,12 +2523,47 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       // infinite so it still passes a min-only filter, same convention as
       // the CSP tab's own PE filter.
       var peVal = peRaw === '' ? Infinity : parseFloat(peRaw);
-      var ok = creditVal >= minCredit && collateralVal <= maxCollateral && peVal >= minPe;
+      var ok = noBcFilter || (creditVal >= minCredit && collateralVal <= maxCollateral && peVal >= minPe);
       card.style.display = ok ? '' : 'none';
-      if (ok) shown++;
+      if (ok) {{ (isOpen ? openVisible : closedVisible).push(card); }}
     }});
+
     var countEl = document.getElementById('bcFilterCount');
-    if (countEl) countEl.textContent = shown + ' of ' + cards.length + ' shown';
+    if (countEl) countEl.textContent = (openVisible.length + closedVisible.length) + ' of ' + totalCount + ' shown';
+    var noteEl = document.getElementById('bcFilterNote');
+    if (noteEl) noteEl.style.display = noBcFilter ? 'none' : '';
+
+    var bcOpenCountEl = document.getElementById('bcOpenCount');
+    if (bcOpenCountEl) bcOpenCountEl.textContent = openVisible.length;
+    var bcOpenSectionCountEl = document.getElementById('bcOpenSectionCount');
+    if (bcOpenSectionCountEl) bcOpenSectionCountEl.textContent = openVisible.length;
+    var bcRealizedCountEl = document.getElementById('bcRealizedCount');
+    if (bcRealizedCountEl) bcRealizedCountEl.textContent = closedVisible.length;
+    var bcClosedSectionCountEl = document.getElementById('bcClosedSectionCount');
+    if (bcClosedSectionCountEl) bcClosedSectionCountEl.textContent = closedVisible.length;
+
+    setMoney('bcTotalFict', 'bcTotalFictAmt', sumAttr(openVisible, 'data-norm-fict'));
+    setPct('bcAvgFictRoi', avgAttr(openVisible, 'data-roi-fict'));
+    setPct('bcAvgFictAnn', avgAttr(openVisible, 'data-ann-fict'));
+    setMoney('bcTotalActual', 'bcTotalActualAmt', sumAttr(openVisible, 'data-norm-actual'));
+    setPct('bcAvgActualRoi', avgAttr(openVisible, 'data-roi-actual'));
+    setPct('bcAvgActualAnn', avgAttr(openVisible, 'data-ann-actual'));
+    setMoney('bcTotalRealized', 'bcTotalRealizedAmt', sumAttr(closedVisible, 'data-norm-realized'));
+    setPct('bcAvgRealizedRoi', avgAttr(closedVisible, 'data-roi-realized'));
+    setPct('bcAvgRealizedAnn', avgAttr(closedVisible, 'data-ann-realized'));
+
+    function countStockDown(cards) {{
+      var n = 0;
+      cards.forEach(function(card) {{
+        var v = parseFloat(card.getAttribute('data-stock-pct'));
+        if (!isNaN(v) && v < 0) n++;
+      }});
+      return n;
+    }}
+    var bcStockDownOpenEl = document.getElementById('bcStockDownOpen');
+    if (bcStockDownOpenEl) bcStockDownOpenEl.textContent = countStockDown(openVisible) + ' of ' + openVisible.length + ' open';
+    var bcStockDownClosedEl = document.getElementById('bcStockDownClosed');
+    if (bcStockDownClosedEl) bcStockDownClosedEl.textContent = countStockDown(closedVisible) + ' of ' + closedVisible.length + ' closed';
   }}
   var bcBtn = document.getElementById('bcApplyFilter');
   if (bcBtn) bcBtn.addEventListener('click', applyBearCallFilter);
@@ -2356,6 +2577,16 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
   }});
   applyBearCallFilter();
+
+  var bcClosedToggleBtn = document.getElementById('bcClosedToggle');
+  var bcClosedWrap = document.getElementById('bcClosedCardsWrap');
+  if (bcClosedToggleBtn && bcClosedWrap) {{
+    bcClosedToggleBtn.addEventListener('click', function() {{
+      var collapsed = bcClosedWrap.style.display === 'none';
+      bcClosedWrap.style.display = collapsed ? '' : 'none';
+      bcClosedToggleBtn.textContent = collapsed ? 'Collapse' : 'Expand';
+    }});
+  }}
 }})();
 </script>
 </body>
@@ -2363,6 +2594,147 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
 """
     SUMMARY_HTML.write_text(html, encoding="utf-8")
     return SUMMARY_HTML
+
+
+def build_bear_call_summary(positions, today):
+    """Same two-pass approach as build_summary (open positions marked to
+    market two ways, closed positions locked at settlement) but for a
+    single-valued credit spread instead of CSP's seller/buyer duality on one
+    contract - there's no "other side" being tracked here, just the one
+    strategy as actually entered."""
+    open_rows = []
+    for p in positions:
+        if p.get("settled"):
+            continue
+        exp_date = datetime.strptime(p["expiration"], "%Y-%m-%d").date()
+        if exp_date < today:
+            continue  # expired but not yet settled (price data lag)
+        added_date_obj = datetime.strptime(p["added_date"], "%Y-%m-%d").date()
+        days_held = (today - added_date_obj).days
+        dte_at_entry = (exp_date - added_date_obj).days
+        current_px = get_current_stock_price(p["symbol"])
+
+        fict_pnl = fict_norm = fict_roi = fict_ann_roi = None
+        if current_px is not None:
+            fict_pnl = calc_bear_call_pnl_at_price(p["short_strike"], p["long_strike"], p["net_credit"], current_px)
+            fict_norm = round(fict_pnl * (NORMALIZED_RISK_USD / p["collateral"]), 2) if p["collateral"] > 0 else None
+            fict_roi = calc_roi_pct(fict_pnl, p["collateral"])
+            fict_ann_roi = annualize_roi_pct(fict_roi, days_held)
+
+        current_short_bid, current_short_ask = get_yahoo_call_quote(p["symbol"], p["expiration"], p["short_strike"])
+        current_long_bid, current_long_ask = get_yahoo_call_quote(p["symbol"], p["expiration"], p["long_strike"])
+        actual_pnl = calc_bear_call_actual_close_pnl(p["net_credit"], current_short_ask, current_long_bid)
+        actual_is_approx = actual_pnl is None and fict_pnl is not None
+        if actual_is_approx:
+            actual_pnl = fict_pnl
+        actual_norm = round(actual_pnl * (NORMALIZED_RISK_USD / p["collateral"]), 2) if actual_pnl is not None and p["collateral"] > 0 else None
+        actual_roi = calc_roi_pct(actual_pnl, p["collateral"])
+        actual_ann_roi = annualize_roi_pct(actual_roi, days_held)
+
+        stock_pnl, stock_pct_change = calc_stock_equivalent(p["entry_stock_px"], current_px)
+        stock_pct_change_ann = annualize_roi_pct(stock_pct_change, days_held)
+
+        open_rows.append({
+            "SYMBOL": p["symbol"],
+            "SHORT STRIKE": p["short_strike"],
+            "LONG STRIKE": p["long_strike"],
+            "EXPIRATION": p["expiration"],
+            "DAYS LEFT": (exp_date - today).days,
+            "DTE AT ENTRY": dte_at_entry,
+            "RUN LABEL": p.get("run_label"),
+            "ENTRY STOCK PRICE": p["entry_stock_px"],
+            "CURRENT STOCK PRICE": current_px,
+            "STOCK PCT CHANGE": stock_pct_change,
+            "STOCK PCT CHANGE ANN": stock_pct_change_ann,
+            "PE AT ENTRY": p.get("pe_at_entry"),
+            "SHORT BID (entry)": p["short_bid"],
+            "LONG ASK (entry)": p["long_ask"],
+            "NET CREDIT (entry)": p["net_credit"],
+            "WIDTH": p["width"],
+            "COLLATERAL": p["collateral"],
+            "CREDIT % OF WIDTH (entry)": round(p["net_credit"] / p["width"] * 100, 2) if p["width"] else None,
+            "CURRENT SHORT BID": current_short_bid,
+            "CURRENT SHORT ASK": current_short_ask,
+            "CURRENT LONG BID": current_long_bid,
+            "CURRENT LONG ASK": current_long_ask,
+            "ACTUAL IS APPROX": actual_is_approx,
+            "UNREALIZED P/L (FICTIONAL)": fict_pnl,
+            f"NORM P/L (FICTIONAL) (${NORMALIZED_RISK_USD:.0f} risk)": fict_norm,
+            "ROI % (FICTIONAL)": fict_roi,
+            "ANNUALIZED ROI % (FICTIONAL)": fict_ann_roi,
+            "UNREALIZED P/L (ACTUAL)": actual_pnl,
+            f"NORM P/L (ACTUAL) (${NORMALIZED_RISK_USD:.0f} risk)": actual_norm,
+            "ROI % (ACTUAL)": actual_roi,
+            "ANNUALIZED ROI % (ACTUAL)": actual_ann_roi,
+            "ADDED": p["added_date"],
+        })
+
+    settled = [p for p in positions if p.get("settled")]
+    closed_rows = []
+    cum_pnl = 0.0
+    for i, p in enumerate(settled, start=1):
+        pnl = p["settled_pnl"]
+        norm = round(pnl * (NORMALIZED_RISK_USD / p["collateral"]), 2) if p["collateral"] > 0 else None
+        cum_pnl = round(cum_pnl + (norm or 0), 2)
+        roi = calc_roi_pct(pnl, p["collateral"])
+        holding_days = (datetime.strptime(p["expiration"], "%Y-%m-%d").date()
+                        - datetime.strptime(p["added_date"], "%Y-%m-%d").date()).days
+        ann_roi = annualize_roi_pct(roi, holding_days)
+        cum_roi = round(cum_pnl / (i * NORMALIZED_RISK_USD) * 100, 2)
+
+        stock_pnl, stock_pct_change = calc_stock_equivalent(p["entry_stock_px"], p["final_stock_px"])
+        stock_pct_change_ann = annualize_roi_pct(stock_pct_change, holding_days)
+
+        closed_rows.append({
+            "SYMBOL": p["symbol"],
+            "SHORT STRIKE": p["short_strike"],
+            "LONG STRIKE": p["long_strike"],
+            "EXPIRATION": p["expiration"],
+            "DTE AT ENTRY": holding_days,
+            "ENTRY STOCK PRICE": p["entry_stock_px"],
+            "FINAL STOCK PRICE": p["final_stock_px"],
+            "STOCK PCT CHANGE": stock_pct_change,
+            "STOCK PCT CHANGE ANN": stock_pct_change_ann,
+            "PE AT ENTRY": p.get("pe_at_entry"),
+            "NET CREDIT (entry)": p["net_credit"],
+            "WIDTH": p["width"],
+            "COLLATERAL": p["collateral"],
+            "CREDIT % OF WIDTH (entry)": round(p["net_credit"] / p["width"] * 100, 2) if p["width"] else None,
+            "REALIZED P/L": pnl,
+            f"NORM P/L (${NORMALIZED_RISK_USD:.0f} risk)": norm,
+            "ROI %": roi,
+            "ANNUALIZED ROI %": ann_roi,
+            "CUMULATIVE P/L": cum_pnl,
+            "CUMULATIVE ROI %": cum_roi,
+            "ADDED": p["added_date"],
+            "SETTLED AT": p["settled_at"],
+        })
+
+    def avg(vals):
+        vals = [v for v in vals if v is not None]
+        return round(sum(vals) / len(vals), 2) if vals else None
+
+    fict_norm_col = f"NORM P/L (FICTIONAL) (${NORMALIZED_RISK_USD:.0f} risk)"
+    actual_norm_col = f"NORM P/L (ACTUAL) (${NORMALIZED_RISK_USD:.0f} risk)"
+    realized_norm_col = f"NORM P/L (${NORMALIZED_RISK_USD:.0f} risk)"
+
+    totals = {
+        "unrealized_fict_total": round(sum(r[fict_norm_col] or 0 for r in open_rows), 2),
+        "unrealized_actual_total": round(sum(r[actual_norm_col] or 0 for r in open_rows), 2),
+        "avg_unrealized_fict_roi": avg(r["ROI % (FICTIONAL)"] for r in open_rows),
+        "avg_unrealized_actual_roi": avg(r["ROI % (ACTUAL)"] for r in open_rows),
+        "avg_unrealized_fict_ann_roi": avg(r["ANNUALIZED ROI % (FICTIONAL)"] for r in open_rows),
+        "avg_unrealized_actual_ann_roi": avg(r["ANNUALIZED ROI % (ACTUAL)"] for r in open_rows),
+        "realized_total": round(sum(r[realized_norm_col] or 0 for r in closed_rows), 2),
+        "avg_realized_roi": avg(r["ROI %"] for r in closed_rows),
+        "avg_realized_ann_roi": avg(r["ANNUALIZED ROI %"] for r in closed_rows),
+        "settled_count": len(settled),
+        "avg_stock_unrealized_pct": avg(r["STOCK PCT CHANGE"] for r in open_rows),
+        "avg_stock_realized_pct": avg(r["STOCK PCT CHANGE"] for r in closed_rows),
+        "stock_down_open": sum(1 for r in open_rows if r["STOCK PCT CHANGE"] is not None and r["STOCK PCT CHANGE"] < 0),
+        "stock_down_closed": sum(1 for r in closed_rows if r["STOCK PCT CHANGE"] is not None and r["STOCK PCT CHANGE"] < 0),
+    }
+    return open_rows, closed_rows, totals
 
 
 def build_summary(positions, today, filter_cfg=None, run_log=None, bear_call_data=None):
@@ -2779,6 +3151,8 @@ def main():
     run_log = load_run_log()
     positions = load_positions()
     filter_cfg = load_filter_config()
+    bear_call_positions = load_bear_call_positions()
+    bear_call_cfg = load_bear_call_config()
 
     if ensure_pe_at_entry(positions):
         save_positions(positions)
@@ -2822,14 +3196,8 @@ def main():
         all_rows = barchart_rows + yahoo_weekly_rows
 
         print("-- Scanning the same symbols for bear call spread candidates --")
-        bear_call_cfg = load_bear_call_config()
         bear_call_candidates = scan_bear_call_spreads(all_rows, today, bear_call_cfg)
         print(f"  Found {len(bear_call_candidates)} structurally valid bear call spread(s)")
-        save_bear_call_cache({
-            "as_of": now_et.isoformat(),
-            "config": bear_call_cfg,
-            "candidates": bear_call_candidates,
-        })
 
         # Markets run this script up to 3x/day - label each run's additions
         # A, B, C (next unused letter among today's existing positions) purely
@@ -2842,6 +3210,19 @@ def main():
             if p.get("added_date") == today.isoformat() and p.get("run_label")
         ))
         run_label = chr(ord("A") + len(todays_run_labels))
+
+        new_bear_call_candidates = pick_new_bear_call_candidates(bear_call_candidates, bear_call_positions, today)
+        if new_bear_call_candidates:
+            print(f"  Adding {len(new_bear_call_candidates)} new bear call spread position(s):")
+            for c in new_bear_call_candidates:
+                print(f"    {c['symbol']} short ${c['short_strike']:g}C / long ${c['long_strike']:g}C "
+                      f"exp {c['expiration']} (credit {c['credit_pct']:.1f}% of ${c['width']:g} width)")
+                bc_position = add_new_bear_call_position(c, today)
+                bc_position["run_label"] = run_label
+                bear_call_positions.append(bc_position)
+            save_bear_call_positions(bear_call_positions)
+        else:
+            print("  No new bear call spread positions (all already tracked).")
 
         candidates = pick_new_candidates(all_rows, positions, today)
         run_log.append({
@@ -2897,9 +3278,18 @@ def main():
 
     if settle_expired_positions(positions, today, same_day_ok=same_day_settle_ok):
         save_positions(positions)
+    if settle_expired_bear_call_positions(bear_call_positions, today, same_day_ok=same_day_settle_ok):
+        save_bear_call_positions(bear_call_positions)
 
     print("\n-- Rebuilding summary for all open positions -----------------------------")
-    bear_call_data = load_bear_call_cache()
+    bc_open_rows, bc_closed_rows, bc_totals = build_bear_call_summary(bear_call_positions, today)
+    bear_call_data = {
+        "open_rows": bc_open_rows,
+        "closed_rows": bc_closed_rows,
+        "totals": bc_totals,
+        "config": bear_call_cfg,
+    }
+    print(f"  Bear call spreads: {len(bc_open_rows)} open, {bc_totals['settled_count']} closed")
     open_rows, closed_rows, totals = build_summary(positions, today, filter_cfg, run_log, bear_call_data)
     if not open_rows and not totals["settled_count"]:
         print("  No positions to summarize.")
