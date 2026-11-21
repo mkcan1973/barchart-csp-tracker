@@ -40788,6 +40788,11 @@
     <span class="count" id="bcFilterCount"></span>
   </div>
 
+  <div class="updated" style="margin-top:0;">
+    Assumed fill quality for <strong>open</strong> positions' "actual" P&amp;L (does not change entry credit, closed positions, or the fictional figures): <span id="bcFillPctLabel">0</span>% &middot; 0 = pessimistic (cross the full bid-ask spread), 100 = optimistic, 50 = mid for both legs<br>
+    <input type="range" id="bcFillPct" min="0" max="100" step="1" value="0" style="width:100%; max-width:420px;">
+  </div>
+
   <div class="totals">
     <div class="box">
       <div class="label">UNREALIZED (<span id="bcOpenCount">0</span> open, normalized $<span class="norm-base-num">1000</span>/spread)</div>
@@ -40823,7 +40828,7 @@
 <script>
 (function() {
   var DEFAULT_FILTERS = {"min_roi": null, "max_roi": null, "min_pe": 999, "max_pe": null, "min_dte_entry": null, "max_dte_entry": null, "base_investment": 200, "min_put_strike": 9.5, "max_put_strike": null, "expiry_filter": "monthly"};
-  var DEFAULT_BEAR_CALL_FILTERS = {"min_credit_pct": 30.0, "max_collateral": null, "min_pe": null, "target_short_delta": 0.3};
+  var DEFAULT_BEAR_CALL_FILTERS = {"min_credit_pct": 30.0, "max_collateral": null, "min_pe": null, "target_short_delta": 0.3, "fill_pct": 0};
   function fmtMoney(x) {
     return x === null ? '--' : '$' + x.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
   }
@@ -41733,6 +41738,62 @@
       var collapsed = bcClosedWrap.style.display === 'none';
       bcClosedWrap.style.display = collapsed ? '' : 'none';
       bcClosedToggleBtn.textContent = collapsed ? 'Collapse' : 'Expand';
+    });
+  }
+
+  // Live "what if" fill-quality slider for OPEN bear call spreads' "actual"
+  // (live-requote) P&L - 0 = pessimistic (cross the full bid-ask spread on
+  // both legs, the same assumption entry credit uses by default), 100 =
+  // optimistic, 50 = mid for both legs. Recomputes from each card's own raw
+  // current bid/ask (already fetched server-side) - no new network calls,
+  // purely a client-side "what if" exploration. Entry credit and closed/
+  // realized P&L are NOT affected - only this unrealized figure.
+  function bcCreditLegFill(bid, ask, pct) { return bid + (pct / 100) * (ask - bid); }
+  function bcDebitLegFill(bid, ask, pct) { return ask - (pct / 100) * (ask - bid); }
+  function recomputeBearCallActual(pct) {
+    document.querySelectorAll('#bcOpenCards .card').forEach(function(card) {
+      var netCredit = readAttr(card, 'data-net-credit');
+      var collateral = readAttr(card, 'data-collateral');
+      var shortBid = readAttr(card, 'data-cur-short-bid');
+      var shortAsk = readAttr(card, 'data-cur-short-ask');
+      var longBid = readAttr(card, 'data-cur-long-bid');
+      var longAsk = readAttr(card, 'data-cur-long-ask');
+      var daysHeld = readAttr(card, 'data-days-held');
+      var pnl = null;
+      if (netCredit !== null && shortBid !== null && shortAsk !== null && longBid !== null && longAsk !== null) {
+        var closeShortCost = bcDebitLegFill(shortBid, shortAsk, pct);
+        var closeLongProceeds = bcCreditLegFill(longBid, longAsk, pct);
+        pnl = Math.round((netCredit - (closeShortCost - closeLongProceeds)) * 100 * 100) / 100;
+      }
+      var norm = (pnl !== null && collateral > 0) ? Math.round(pnl * (1000 / collateral) * 100) / 100 : null;
+      var roi = (pnl !== null && collateral > 0) ? Math.round(pnl / collateral * 100 * 100) / 100 : null;
+      var ann = (roi !== null && daysHeld && daysHeld > 0) ? Math.round(roi * (365 / daysHeld) * 100) / 100 : null;
+      card.setAttribute('data-norm-actual', norm === null ? '' : norm);
+      card.setAttribute('data-roi-actual', roi === null ? '' : roi);
+      card.setAttribute('data-ann-actual', ann === null ? '' : ann);
+      var amtEl = card.querySelector('.bc-actual-amt');
+      if (amtEl) amtEl.textContent = fmtMoney(norm);
+      var roiEl = card.querySelector('.bc-actual-roi');
+      if (roiEl) roiEl.textContent = fmtPct(roi);
+      var annEl = card.querySelector('.bc-actual-ann');
+      if (annEl) annEl.textContent = fmtPct(ann);
+      var lineEl = card.querySelector('.bc-actual-line');
+      if (lineEl) {
+        var keep = lineEl.className.split(' ').filter(function(c) { return c !== 'pos' && c !== 'neg' && c !== ''; });
+        var cls = pnlClass(norm);
+        if (cls) keep.push(cls);
+        lineEl.className = keep.join(' ');
+      }
+    });
+    applyBearCallFilter();
+  }
+  var bcFillPctEl = document.getElementById('bcFillPct');
+  var bcFillPctLabelEl = document.getElementById('bcFillPctLabel');
+  if (bcFillPctEl) {
+    bcFillPctEl.addEventListener('input', function() {
+      var pct = parseFloat(bcFillPctEl.value);
+      if (bcFillPctLabelEl) bcFillPctLabelEl.textContent = pct;
+      recomputeBearCallActual(pct);
     });
   }
 })();

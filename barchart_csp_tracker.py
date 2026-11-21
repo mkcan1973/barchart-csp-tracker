@@ -445,6 +445,16 @@ DEFAULT_BEAR_CALL_CONFIG = {
     # filters above it isn't something the page's filter bar can change
     # after the fact - it has to be applied at scan time.
     "target_short_delta": 0.30,
+    # Assumed fill quality, 0-100, for both entry pricing and the "actual"
+    # unrealized P&L (see credit_leg_fill_price/debit_leg_fill_price) - 0 is
+    # pessimistic (crossing the full bid-ask spread both ways, the original
+    # behavior), 100 is optimistic (the opposite extreme), 50 is the mid for
+    # both legs. Defaults to 0 (unchanged, conservative behavior) since this
+    # directly drives what gets locked in as a new position's entry credit -
+    # dial it up once you have a sense of your own realistic fill quality.
+    # The page also has a live slider over this same range for exploring
+    # "what if" on already-open positions without waiting for a new run.
+    "fill_pct": 0,
 }
 
 # Flat assumption for Black-Scholes delta - near-term option delta is not
@@ -528,6 +538,9 @@ def scan_bear_call_spreads(all_rows, today, cfg):
     pe_cache = {}
     out = []
     target_delta = cfg.get("target_short_delta") or DEFAULT_BEAR_CALL_CONFIG["target_short_delta"]
+    fill_pct = cfg.get("fill_pct")
+    if fill_pct is None:
+        fill_pct = DEFAULT_BEAR_CALL_CONFIG["fill_pct"]
     for row in all_rows:
         symbol, expiration = row["symbol"], row["expiration"]
         key = (symbol, expiration)
@@ -565,15 +578,23 @@ def scan_bear_call_spreads(all_rows, today, cfg):
         if short_row.empty or long_row.empty:
             continue
         short_bid = short_row.iloc[0].get("bid")
+        short_ask = short_row.iloc[0].get("ask")
+        long_bid = long_row.iloc[0].get("bid")
         long_ask = long_row.iloc[0].get("ask")
-        if short_bid is None or long_ask is None or pd.isna(short_bid) or pd.isna(long_ask):
+        if (short_bid is None or short_ask is None or long_bid is None or long_ask is None
+                or pd.isna(short_bid) or pd.isna(short_ask) or pd.isna(long_bid) or pd.isna(long_ask)):
             continue
-        short_bid, long_ask = float(short_bid), float(long_ask)
+        short_bid, short_ask = float(short_bid), float(short_ask)
+        long_bid, long_ask = float(long_bid), float(long_ask)
         if short_bid <= 0 or long_ask <= 0:
             continue
 
         width = round(long_strike - short_strike, 4)
-        net_credit = round(short_bid - long_ask, 4)
+        # fill_pct=0 reduces to short_bid - long_ask, the original
+        # always-cross-the-spread assumption.
+        net_credit = round(
+            credit_leg_fill_price(short_bid, short_ask, fill_pct)
+            - debit_leg_fill_price(long_bid, long_ask, fill_pct), 4)
         if width <= 0 or net_credit <= 0:
             continue
         credit_pct = round(net_credit / width * 100, 2)
@@ -592,12 +613,15 @@ def scan_bear_call_spreads(all_rows, today, cfg):
             "pe": pe,
             "short_strike": short_strike,
             "short_bid": short_bid,
+            "short_ask": short_ask,
             "long_strike": long_strike,
+            "long_bid": long_bid,
             "long_ask": long_ask,
             "width": width,
             "net_credit": net_credit,
             "credit_pct": credit_pct,
             "collateral": collateral,
+            "fill_pct_at_entry": fill_pct,
             "max_profit": round(net_credit * 100, 2),
             "max_loss": round((width - net_credit) * 100, 2),
         })
@@ -808,15 +832,41 @@ def calc_bear_call_pnl_at_price(short_strike, long_strike, net_credit, price):
     return round((net_credit - spread_intrinsic_value(short_strike, long_strike, price)) * 100, 2)
 
 
-def calc_bear_call_actual_close_pnl(net_credit, current_short_ask, current_long_bid):
-    """What closing the spread today would really net - buy back the short
-    call at its current ask, sell the long call at its current bid. None if
-    either leg has no live quote (illiquid contract) - same convention as
+def credit_leg_fill_price(bid, ask, fill_pct):
+    """Price for a leg you're SELLING (short call at entry, long call at
+    close) at a given fill quality - fill_pct=0 is the pessimistic/
+    guaranteed-fill price (the bid), fill_pct=100 the optimistic one (the
+    ask), fill_pct=50 the mid. Always crossing the spread (fill_pct=0) is
+    the safe/conservative assumption but can overstate real trading costs,
+    since a resting limit order between bid and ask often does fill -
+    this just makes "how much of that you assume you capture" a dial
+    instead of a fixed all-or-nothing choice."""
+    return bid + (fill_pct / 100.0) * (ask - bid)
+
+
+def debit_leg_fill_price(bid, ask, fill_pct):
+    """Price for a leg you're BUYING (long call at entry, short call at
+    close) at a given fill quality - mirror of credit_leg_fill_price:
+    fill_pct=0 is pessimistic (the ask), fill_pct=100 optimistic (the bid),
+    fill_pct=50 the mid."""
+    return ask - (fill_pct / 100.0) * (ask - bid)
+
+
+def calc_bear_call_actual_close_pnl(net_credit, current_short_bid, current_short_ask,
+                                     current_long_bid, current_long_ask, fill_pct=0):
+    """What closing the spread today would really net, at a given fill
+    quality (see credit_leg_fill_price/debit_leg_fill_price) - buying back
+    the short call (a debit leg) and selling the long call (a credit leg).
+    fill_pct=0 reduces to the old always-cross-the-spread assumption
+    (pay the short's ask, receive the long's bid). None if either leg has
+    no live quote (illiquid contract) - same convention as
     calc_actual_close_pnl: callers should fall back to the intrinsic
     ("fictional") estimate rather than let a missing quote read as $0."""
-    if current_short_ask is None or current_long_bid is None:
+    if current_short_bid is None or current_short_ask is None or current_long_bid is None or current_long_ask is None:
         return None
-    cost_to_close = current_short_ask - current_long_bid
+    close_short_cost = debit_leg_fill_price(current_short_bid, current_short_ask, fill_pct)
+    close_long_proceeds = credit_leg_fill_price(current_long_bid, current_long_ask, fill_pct)
+    cost_to_close = close_short_cost - close_long_proceeds
     return round((net_credit - cost_to_close) * 100, 2)
 
 
@@ -1025,10 +1075,13 @@ def add_new_bear_call_position(candidate, today):
         "long_strike": candidate["long_strike"],
         "expiration": candidate["expiration"],
         "short_bid": candidate["short_bid"],
+        "short_ask": candidate["short_ask"],
+        "long_bid": candidate["long_bid"],
         "long_ask": candidate["long_ask"],
         "net_credit": candidate["net_credit"],
         "width": candidate["width"],
         "collateral": candidate["collateral"],
+        "fill_pct_at_entry": candidate.get("fill_pct_at_entry", 0),
         "entry_stock_px": candidate["stock_px"],
         "pe_at_entry": candidate["pe"],
         "added_date": today.isoformat(),
@@ -1213,13 +1266,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
             actual_norm = r[actual_norm_col]
             approx_tag = ' <span class="weekly-badge">approx</span>' if r["ACTUAL IS APPROX"] else ''
             return f'''
-    <div class="card" data-kind="open" data-credit-pct="{bc_attr(r["CREDIT % OF WIDTH (entry)"])}" data-collateral="{bc_attr(r["COLLATERAL"])}" data-pe="{bc_attr(pe)}" data-stock-pct="{bc_attr(r["STOCK PCT CHANGE"])}" data-norm-fict="{bc_attr(fict_norm)}" data-norm-actual="{bc_attr(actual_norm)}" data-roi-fict="{bc_attr(r["ROI % (FICTIONAL)"])}" data-roi-actual="{bc_attr(r["ROI % (ACTUAL)"])}" data-ann-fict="{bc_attr(r["ANNUALIZED ROI % (FICTIONAL)"])}" data-ann-actual="{bc_attr(r["ANNUALIZED ROI % (ACTUAL)"])}">
+    <div class="card" data-kind="open" data-credit-pct="{bc_attr(r["CREDIT % OF WIDTH (entry)"])}" data-collateral="{bc_attr(r["COLLATERAL"])}" data-pe="{bc_attr(pe)}" data-stock-pct="{bc_attr(r["STOCK PCT CHANGE"])}" data-norm-fict="{bc_attr(fict_norm)}" data-norm-actual="{bc_attr(actual_norm)}" data-roi-fict="{bc_attr(r["ROI % (FICTIONAL)"])}" data-roi-actual="{bc_attr(r["ROI % (ACTUAL)"])}" data-ann-fict="{bc_attr(r["ANNUALIZED ROI % (FICTIONAL)"])}" data-ann-actual="{bc_attr(r["ANNUALIZED ROI % (ACTUAL)"])}" data-net-credit="{bc_attr(r["NET CREDIT (entry)"])}" data-cur-short-bid="{bc_attr(r["CURRENT SHORT BID"])}" data-cur-short-ask="{bc_attr(r["CURRENT SHORT ASK"])}" data-cur-long-bid="{bc_attr(r["CURRENT LONG BID"])}" data-cur-long-ask="{bc_attr(r["CURRENT LONG ASK"])}" data-days-held="{bc_attr(r["DAYS HELD"])}">
       <div class="card-title">{run_badge}{_html_escape(r["SYMBOL"])} &middot; exp {_html_escape(r["EXPIRATION"])} ({r["DAYS LEFT"]}d left)</div>
       <div>Stock ${r["CURRENT STOCK PRICE"]:.2f} (entry ${r["ENTRY STOCK PRICE"]:.2f}, {r["STOCK PCT CHANGE"]:+.1f}%)</div>
       <div>Short ${r["SHORT STRIKE"]:g}C (entry bid {r["SHORT BID (entry)"]:.2f}) &nbsp;/&nbsp; Long ${r["LONG STRIKE"]:g}C (entry ask {r["LONG ASK (entry)"]:.2f})</div>
       <div>Entry credit: <strong>${r["NET CREDIT (entry)"]:.2f}</strong> ({r["CREDIT % OF WIDTH (entry)"]:.1f}% of ${r["WIDTH"]:g} width) &middot; Collateral ${r["COLLATERAL"]:.2f} &middot; PE {pe_text}</div>
       <div class="{_pnl_class(fict_norm)}">Unrealized (fictional): {_fmt_money(fict_norm)} &middot; ROI {_fmt_pct(r["ROI % (FICTIONAL)"])} (ann. {_fmt_pct(r["ANNUALIZED ROI % (FICTIONAL)"])})</div>
-      <div class="{_pnl_class(actual_norm)}">Unrealized (actual, live requote{approx_tag}): {_fmt_money(actual_norm)} &middot; ROI {_fmt_pct(r["ROI % (ACTUAL)"])} (ann. {_fmt_pct(r["ANNUALIZED ROI % (ACTUAL)"])})</div>
+      <div class="{_pnl_class(actual_norm)} bc-actual-line">Unrealized (actual, live requote{approx_tag}): <span class="bc-actual-amt">{_fmt_money(actual_norm)}</span> &middot; ROI <span class="bc-actual-roi">{_fmt_pct(r["ROI % (ACTUAL)"])}</span> (ann. <span class="bc-actual-ann">{_fmt_pct(r["ANNUALIZED ROI % (ACTUAL)"])}</span>)</div>
     </div>'''
 
         def bc_closed_card(r):
@@ -1248,6 +1301,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     <button id="bcApplyFilter" type="button">Filter</button>
     <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/bear_call_spread_config.json" target="_blank" rel="noopener">Edit defaults on GitHub</a>
     <span class="count" id="bcFilterCount"></span>
+  </div>
+
+  <div class="updated" style="margin-top:0;">
+    Assumed fill quality for <strong>open</strong> positions' "actual" P&amp;L (does not change entry credit, closed positions, or the fictional figures): <span id="bcFillPctLabel">{int(cfg.get("fill_pct") or 0)}</span>% &middot; 0 = pessimistic (cross the full bid-ask spread), 100 = optimistic, 50 = mid for both legs<br>
+    <input type="range" id="bcFillPct" min="0" max="100" step="1" value="{int(cfg.get("fill_pct") or 0)}" style="width:100%; max-width:420px;">
   </div>
 
   <div class="totals">
@@ -2587,6 +2645,62 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       bcClosedToggleBtn.textContent = collapsed ? 'Collapse' : 'Expand';
     }});
   }}
+
+  // Live "what if" fill-quality slider for OPEN bear call spreads' "actual"
+  // (live-requote) P&L - 0 = pessimistic (cross the full bid-ask spread on
+  // both legs, the same assumption entry credit uses by default), 100 =
+  // optimistic, 50 = mid for both legs. Recomputes from each card's own raw
+  // current bid/ask (already fetched server-side) - no new network calls,
+  // purely a client-side "what if" exploration. Entry credit and closed/
+  // realized P&L are NOT affected - only this unrealized figure.
+  function bcCreditLegFill(bid, ask, pct) {{ return bid + (pct / 100) * (ask - bid); }}
+  function bcDebitLegFill(bid, ask, pct) {{ return ask - (pct / 100) * (ask - bid); }}
+  function recomputeBearCallActual(pct) {{
+    document.querySelectorAll('#bcOpenCards .card').forEach(function(card) {{
+      var netCredit = readAttr(card, 'data-net-credit');
+      var collateral = readAttr(card, 'data-collateral');
+      var shortBid = readAttr(card, 'data-cur-short-bid');
+      var shortAsk = readAttr(card, 'data-cur-short-ask');
+      var longBid = readAttr(card, 'data-cur-long-bid');
+      var longAsk = readAttr(card, 'data-cur-long-ask');
+      var daysHeld = readAttr(card, 'data-days-held');
+      var pnl = null;
+      if (netCredit !== null && shortBid !== null && shortAsk !== null && longBid !== null && longAsk !== null) {{
+        var closeShortCost = bcDebitLegFill(shortBid, shortAsk, pct);
+        var closeLongProceeds = bcCreditLegFill(longBid, longAsk, pct);
+        pnl = Math.round((netCredit - (closeShortCost - closeLongProceeds)) * 100 * 100) / 100;
+      }}
+      var norm = (pnl !== null && collateral > 0) ? Math.round(pnl * ({NORMALIZED_RISK_USD:.0f} / collateral) * 100) / 100 : null;
+      var roi = (pnl !== null && collateral > 0) ? Math.round(pnl / collateral * 100 * 100) / 100 : null;
+      var ann = (roi !== null && daysHeld && daysHeld > 0) ? Math.round(roi * (365 / daysHeld) * 100) / 100 : null;
+      card.setAttribute('data-norm-actual', norm === null ? '' : norm);
+      card.setAttribute('data-roi-actual', roi === null ? '' : roi);
+      card.setAttribute('data-ann-actual', ann === null ? '' : ann);
+      var amtEl = card.querySelector('.bc-actual-amt');
+      if (amtEl) amtEl.textContent = fmtMoney(norm);
+      var roiEl = card.querySelector('.bc-actual-roi');
+      if (roiEl) roiEl.textContent = fmtPct(roi);
+      var annEl = card.querySelector('.bc-actual-ann');
+      if (annEl) annEl.textContent = fmtPct(ann);
+      var lineEl = card.querySelector('.bc-actual-line');
+      if (lineEl) {{
+        var keep = lineEl.className.split(' ').filter(function(c) {{ return c !== 'pos' && c !== 'neg' && c !== ''; }});
+        var cls = pnlClass(norm);
+        if (cls) keep.push(cls);
+        lineEl.className = keep.join(' ');
+      }}
+    }});
+    applyBearCallFilter();
+  }}
+  var bcFillPctEl = document.getElementById('bcFillPct');
+  var bcFillPctLabelEl = document.getElementById('bcFillPctLabel');
+  if (bcFillPctEl) {{
+    bcFillPctEl.addEventListener('input', function() {{
+      var pct = parseFloat(bcFillPctEl.value);
+      if (bcFillPctLabelEl) bcFillPctLabelEl.textContent = pct;
+      recomputeBearCallActual(pct);
+    }});
+  }}
 }})();
 </script>
 </body>
@@ -2596,12 +2710,19 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     return SUMMARY_HTML
 
 
-def build_bear_call_summary(positions, today):
+def build_bear_call_summary(positions, today, fill_pct=0):
     """Same two-pass approach as build_summary (open positions marked to
     market two ways, closed positions locked at settlement) but for a
     single-valued credit spread instead of CSP's seller/buyer duality on one
     contract - there's no "other side" being tracked here, just the one
-    strategy as actually entered."""
+    strategy as actually entered.
+
+    fill_pct (0=pessimistic/cross the spread, 100=optimistic, 50=mid) only
+    affects the "actual" (live requote) unrealized P&L here - it does NOT
+    change ENTRY pricing for already-tracked positions (that's locked in
+    at add time using whatever fill_pct was configured then) and doesn't
+    apply to closed positions at all (settlement is pure intrinsic value,
+    no bid/ask involved)."""
     open_rows = []
     for p in positions:
         if p.get("settled"):
@@ -2623,7 +2744,8 @@ def build_bear_call_summary(positions, today):
 
         current_short_bid, current_short_ask = get_yahoo_call_quote(p["symbol"], p["expiration"], p["short_strike"])
         current_long_bid, current_long_ask = get_yahoo_call_quote(p["symbol"], p["expiration"], p["long_strike"])
-        actual_pnl = calc_bear_call_actual_close_pnl(p["net_credit"], current_short_ask, current_long_bid)
+        actual_pnl = calc_bear_call_actual_close_pnl(
+            p["net_credit"], current_short_bid, current_short_ask, current_long_bid, current_long_ask, fill_pct)
         actual_is_approx = actual_pnl is None and fict_pnl is not None
         if actual_is_approx:
             actual_pnl = fict_pnl
@@ -2640,6 +2762,7 @@ def build_bear_call_summary(positions, today):
             "LONG STRIKE": p["long_strike"],
             "EXPIRATION": p["expiration"],
             "DAYS LEFT": (exp_date - today).days,
+            "DAYS HELD": days_held,
             "DTE AT ENTRY": dte_at_entry,
             "RUN LABEL": p.get("run_label"),
             "ENTRY STOCK PRICE": p["entry_stock_px"],
@@ -3282,7 +3405,8 @@ def main():
         save_bear_call_positions(bear_call_positions)
 
     print("\n-- Rebuilding summary for all open positions -----------------------------")
-    bc_open_rows, bc_closed_rows, bc_totals = build_bear_call_summary(bear_call_positions, today)
+    bc_open_rows, bc_closed_rows, bc_totals = build_bear_call_summary(
+        bear_call_positions, today, fill_pct=bear_call_cfg.get("fill_pct") or 0)
     bear_call_data = {
         "open_rows": bc_open_rows,
         "closed_rows": bc_closed_rows,
