@@ -47,6 +47,7 @@ import subprocess
 import sys
 import time
 import json
+import math
 import os
 import urllib.request
 from datetime import datetime, date, timedelta
@@ -437,7 +438,67 @@ DEFAULT_BEAR_CALL_CONFIG = {
     # Missing/undefined PE is treated as infinite, same convention as the
     # CSP side's own min-PE filter (passes a min-only filter, fails a cap).
     "min_pe": None,
+    # Delta the short call strike is chosen to target (see
+    # _bs_call_delta/pick_short_call_strike below) - 0.30 is a common
+    # credit-spread convention (~70% rough probability of expiring OTM).
+    # This picks WHICH strike pair gets used at all, so unlike the three
+    # filters above it isn't something the page's filter bar can change
+    # after the fact - it has to be applied at scan time.
+    "target_short_delta": 0.30,
 }
+
+# Flat assumption for Black-Scholes delta - near-term option delta is not
+# very sensitive to the risk-free rate, so a fixed, roughly-current rate is
+# fine here rather than fetching a live treasury yield.
+_BS_RISK_FREE_RATE = 0.045
+
+
+def _norm_cdf(x):
+    return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
+
+
+def _bs_call_delta(stock_px, strike, dte_days, iv):
+    """Black-Scholes call delta (N(d1)) - used to pick the short strike by
+    probability-of-finishing-ITM instead of raw dollar distance from price,
+    since "the next strike up" lands very differently depending on a
+    stock's own strike spacing and volatility. None if the inputs aren't
+    usable (missing/zero IV, non-positive DTE, bad prices)."""
+    if iv is None or iv <= 0 or dte_days <= 0 or stock_px <= 0 or strike <= 0:
+        return None
+    t = dte_days / 365.0
+    try:
+        d1 = (math.log(stock_px / strike) + (_BS_RISK_FREE_RATE + 0.5 * iv * iv) * t) / (iv * math.sqrt(t))
+    except (ValueError, ZeroDivisionError):
+        return None
+    return _norm_cdf(d1)
+
+
+def pick_short_call_strike(calls, stock_px, dte_days, target_delta):
+    """Among the OTM call strikes, pick whichever one's Black-Scholes delta
+    is closest to target_delta, rather than always taking the literal
+    nearest-OTM strike - lets strike selection adapt to each stock's own
+    volatility instead of being thrown off by wide/narrow strike spacing.
+    Falls back to the plain nearest-OTM strike if usable IV data isn't
+    available for any OTM strike (thin/illiquid chains). Returns None if
+    there's no OTM strike at all."""
+    otm = calls[calls["strike"] > stock_px].sort_values("strike")
+    if otm.empty:
+        return None
+
+    best_strike, best_diff = None, None
+    for _, r in otm.iterrows():
+        iv = r.get("impliedVolatility")
+        iv = float(iv) if iv is not None and not pd.isna(iv) else None
+        delta = _bs_call_delta(stock_px, float(r["strike"]), dte_days, iv)
+        if delta is None:
+            continue
+        diff = abs(delta - target_delta)
+        if best_diff is None or diff < best_diff:
+            best_strike, best_diff = float(r["strike"]), diff
+
+    if best_strike is not None:
+        return best_strike
+    return float(otm.iloc[0]["strike"])  # fallback: plain nearest-OTM
 
 
 def load_bear_call_config():
@@ -468,18 +529,23 @@ def save_bear_call_cache(data):
     BEAR_CALL_CACHE_FILE.write_text(json.dumps(data, indent=2))
 
 
-def scan_bear_call_spreads(all_rows, today):
+def scan_bear_call_spreads(all_rows, today, cfg):
     """For each distinct (symbol, expiration) the naked-puts screen (plus its
-    weekly extension) surfaced: sell the nearest call strike above the
-    current stock price at its bid, buy the next strike above that at its
-    ask - a defined-risk bear call credit spread. Every structurally valid
-    spread (positive width, positive net credit) is returned - the
-    credit%/collateral/PE thresholds are filtered live in the browser, not
-    here, same as the CSP side's own filter bar. Sorted richest-credit-
-    first (the default sort before any filter is applied)."""
+    weekly extension) surfaced: pick a short call strike targeting
+    cfg['target_short_delta'] (see pick_short_call_strike), buy the very
+    next strike above that as the long leg - keeping them adjacent, just
+    choosing WHICH adjacent pair by probability instead of raw distance -
+    a defined-risk bear call credit spread. Every structurally valid spread
+    (positive width, positive net credit) is returned - the credit%/
+    collateral/PE thresholds are filtered live in the browser, not here,
+    same as the CSP side's own filter bar (target_short_delta is the one
+    exception - it decides which strikes get used at all, so it has to be
+    applied here at scan time). Sorted richest-credit-first (the default
+    sort before any filter is applied)."""
     seen = set()
     pe_cache = {}
     out = []
+    target_delta = cfg.get("target_short_delta") or DEFAULT_BEAR_CALL_CONFIG["target_short_delta"]
     for row in all_rows:
         symbol, expiration = row["symbol"], row["expiration"]
         key = (symbol, expiration)
@@ -500,14 +566,17 @@ def scan_bear_call_spreads(all_rows, today):
         except Exception:
             continue
 
-        strikes = sorted(set(
-            float(s) for s in calls["strike"].tolist()
-            if s is not None and not pd.isna(s)
-        ))
-        above = [s for s in strikes if s > stock_px]
-        if len(above) < 2:
+        dte = (datetime.strptime(expiration, "%Y-%m-%d").date() - today).days
+        short_strike = pick_short_call_strike(calls, stock_px, dte, target_delta)
+        if short_strike is None:
             continue
-        short_strike, long_strike = above[0], above[1]
+        strikes_above_short = sorted(set(
+            float(s) for s in calls["strike"].tolist()
+            if s is not None and not pd.isna(s) and s > short_strike
+        ))
+        if not strikes_above_short:
+            continue
+        long_strike = strikes_above_short[0]
 
         short_row = calls[abs(calls["strike"] - short_strike) < 0.01]
         long_row = calls[abs(calls["strike"] - long_strike) < 0.01]
@@ -533,7 +602,6 @@ def scan_bear_call_spreads(all_rows, today):
             pe_cache[symbol] = pe
         pe = pe_cache[symbol]
 
-        dte = (datetime.strptime(expiration, "%Y-%m-%d").date() - today).days
         out.append({
             "symbol": symbol,
             "expiration": expiration,
@@ -997,6 +1065,8 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
         candidates = data.get("candidates") or []
         as_of = data.get("as_of")
         as_of_text = f'As of {_html_escape(as_of)}' if as_of else 'Not yet computed'
+        target_delta = (data.get("config") or DEFAULT_BEAR_CALL_CONFIG).get("target_short_delta",
+                        DEFAULT_BEAR_CALL_CONFIG["target_short_delta"])
 
         def bc_attr(x):
             return "" if x is None else str(x)
@@ -1017,7 +1087,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
             cards_html = f'<div class="cards" id="bearCallCards">{"".join(cards)}</div>'
 
         return f'''
-  <div class="updated" style="margin-top:0;">Sell the nearest call strike above the current price (at its bid), buy the next strike up (at its ask) - a defined-risk bear call credit spread. Reuses the same symbols as the naked-puts screen above - a separate, complementary bearish strategy, not tracked across runs like the CSP positions are.</div>
+  <div class="updated" style="margin-top:0;">Sell the call strike closest to {target_delta:g} delta (at its bid), buy the very next strike up (at its ask) - a defined-risk bear call credit spread. The short strike is chosen by probability (delta), not just "the nearest strike above price," so it adapts to each stock's own volatility and strike spacing; the long strike is always the adjacent one above it. Reuses the same symbols as the naked-puts screen above - a separate, complementary bearish strategy, not tracked across runs like the CSP positions are.</div>
   <div class="filterbar">
     <label>Min credit % of width <input type="number" id="bcMinCreditPct" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max collateral $ <input type="number" id="bcMaxCollateral" step="any" placeholder="&infin;" inputmode="decimal"></label>
@@ -1386,6 +1456,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       <div class="val {_pnl_class(totals['stock_realized_short_total'])}" id="totalStockRealShort">Closed, Short <span id="totalStockRealShortAmt">{_fmt_money(totals['stock_realized_short_total'])}</span></div>
       <div class="val short-block {_pnl_class(totals['stock_realized_long_total'])}" id="totalStockRealLong">Closed, Long <span id="totalStockRealLongAmt">{_fmt_money(totals['stock_realized_long_total'])}</span></div>
       <div class="sub2">avg price change (closed): <span id="avgStockRealPct">{_fmt_pct(totals['avg_stock_realized_pct'])}</span> &middot; avg ann. ROI: <span id="avgStockRealAnn">{_fmt_pct(totals['avg_stock_realized_ann_roi'])}</span></div>
+      <div class="sub2">Stock actually dropped from entry: <span id="stockDownOpen">{totals['stock_down_open']} of {len(open_rows)} open</span> &middot; <span id="stockDownClosed">{totals['stock_down_closed']} of {len(closed_rows)} closed</span></div>
       <div class="sub2">Indicator only - short assumes unlimited-risk shorting is actually available.</div>
     </div>
   </div>
@@ -1662,6 +1733,19 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     setMoney('totalStockRealShort', 'totalStockRealShortAmt', sumAttr(closedVisible, 'data-stock-short') * normScale);
     setPct('avgStockRealPct', avgAttr(closedVisible, 'data-stock-pct'));
     setPct('avgStockRealAnn', avgAttr(closedVisible, 'data-stock-pct-ann'));
+
+    function countStockDown(cards) {{
+      var n = 0;
+      cards.forEach(function(card) {{
+        var v = parseFloat(card.getAttribute('data-stock-pct'));
+        if (!isNaN(v) && v < 0) n++;
+      }});
+      return n;
+    }}
+    var stockDownOpenEl = document.getElementById('stockDownOpen');
+    if (stockDownOpenEl) stockDownOpenEl.textContent = countStockDown(openVisible) + ' of ' + openVisible.length + ' open';
+    var stockDownClosedEl = document.getElementById('stockDownClosed');
+    if (stockDownClosedEl) stockDownClosedEl.textContent = countStockDown(closedVisible) + ' of ' + closedVisible.length + ' closed';
 
     var openCountEl = document.getElementById('openCount');
     if (openCountEl) openCountEl.textContent = openVisible.length;
@@ -2540,6 +2624,13 @@ def build_summary(positions, today, filter_cfg=None, run_log=None, bear_call_dat
     avg_stock_unrealized_ann_roi = avg(r["STOCK PCT CHANGE ANN"] for r in open_rows)
     avg_stock_realized_ann_roi = avg(r["STOCK PCT CHANGE ANN"] for r in closed_rows)
 
+    # How many of these screened "crappy stock" picks actually dropped from
+    # entry - a sanity check on the short-biased thesis itself (long puts/
+    # bear call spreads both only profit if the stock stays flat or falls),
+    # independent of the options P&L math above.
+    stock_down_open = sum(1 for r in open_rows if r["STOCK PCT CHANGE"] is not None and r["STOCK PCT CHANGE"] < 0)
+    stock_down_closed = sum(1 for r in closed_rows if r["STOCK PCT CHANGE"] is not None and r["STOCK PCT CHANGE"] < 0)
+
     if open_rows or closed_rows:
         blank = pd.DataFrame([{}])
         sections = []
@@ -2654,6 +2745,8 @@ def build_summary(positions, today, filter_cfg=None, run_log=None, bear_call_dat
         "avg_stock_realized_pct": avg_stock_realized_pct,
         "avg_stock_unrealized_ann_roi": avg_stock_unrealized_ann_roi,
         "avg_stock_realized_ann_roi": avg_stock_realized_ann_roi,
+        "stock_down_open": stock_down_open,
+        "stock_down_closed": stock_down_closed,
         "settled_count": len(settled),
         "png_path": png_path,
     }
@@ -2730,7 +2823,7 @@ def main():
 
         print("-- Scanning the same symbols for bear call spread candidates --")
         bear_call_cfg = load_bear_call_config()
-        bear_call_candidates = scan_bear_call_spreads(all_rows, today)
+        bear_call_candidates = scan_bear_call_spreads(all_rows, today, bear_call_cfg)
         print(f"  Found {len(bear_call_candidates)} structurally valid bear call spread(s)")
         save_bear_call_cache({
             "as_of": now_et.isoformat(),
