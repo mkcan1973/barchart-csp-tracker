@@ -160,5 +160,23 @@
     "pe_at_entry": null,
     "added_date": "2026-11-25",
     "run_label": "B"
+  },
+  {
+    "symbol": "ASTS",
+    "short_strike": 28.0,
+    "long_strike": 28.5,
+    "expiration": "2026-12-18",
+    "short_bid": 1.16,
+    "short_ask": 1.24,
+    "long_bid": 1.07,
+    "long_ask": 1.15,
+    "net_credit": 0.01,
+    "width": 0.5,
+    "collateral": 50.0,
+    "fill_pct_at_entry": 0,
+    "entry_stock_px": 22.96,
+    "pe_at_entry": null,
+    "added_date": "2026-11-25",
+    "run_label": "C"
   }
 ]
