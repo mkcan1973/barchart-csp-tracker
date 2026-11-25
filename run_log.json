@@ -544,5 +544,11 @@
     "run_label": null,
     "new_candidates": 0,
     "note": "eod_update_only"
+  },
+  {
+    "date": "2026-11-25",
+    "time_utc": "2026-11-25T05:25:26.224677+00:00",
+    "run_label": "A",
+    "new_candidates": 9
   }
 ]
