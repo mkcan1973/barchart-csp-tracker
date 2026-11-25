@@ -434,7 +434,9 @@ DEFAULT_BEAR_CALL_CONFIG = {
     # skipped - same idea as the CSP side's base_investment cap. This is
     # the capital a broker actually holds (and your real max possible loss)
     # for a defined-risk spread, regardless of the credit received. None
-    # means no cap.
+    # means no cap. Dual-purpose on the page, same as base_investment is
+    # for CSP: it both filters AND becomes what every "norm ($X risk)"
+    # figure on this tab rescales against.
     "max_collateral": None,
     # No PE filter here by design - the symbol universe scanned for bear
     # call spreads is already restricted to symbols whose CSP position
@@ -1275,7 +1277,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       <div>Stock ${r["CURRENT STOCK PRICE"]:.2f} (entry ${r["ENTRY STOCK PRICE"]:.2f}, {r["STOCK PCT CHANGE"]:+.1f}%)</div>
       <div>Short ${r["SHORT STRIKE"]:g}C (entry bid {r["SHORT BID (entry)"]:.2f}) &nbsp;/&nbsp; Long ${r["LONG STRIKE"]:g}C (entry ask {r["LONG ASK (entry)"]:.2f})</div>
       <div>Entry credit: <strong>${r["NET CREDIT (entry)"]:.2f}</strong> ({r["CREDIT % OF WIDTH (entry)"]:.1f}% of ${r["WIDTH"]:g} width) &middot; Collateral ${r["COLLATERAL"]:.2f} &middot; PE {pe_text}</div>
-      <div class="{_pnl_class(fict_norm)}">Unrealized (fictional): {_fmt_money(fict_norm)} &middot; ROI {_fmt_pct(r["ROI % (FICTIONAL)"])} (ann. {_fmt_pct(r["ANNUALIZED ROI % (FICTIONAL)"])})</div>
+      <div class="{_pnl_class(fict_norm)} bc-fict-line">Unrealized (fictional): <span class="bc-fict-amt">{_fmt_money(fict_norm)}</span> &middot; ROI {_fmt_pct(r["ROI % (FICTIONAL)"])} (ann. {_fmt_pct(r["ANNUALIZED ROI % (FICTIONAL)"])})</div>
       <div class="{_pnl_class(actual_norm)} bc-actual-line">Unrealized (actual, live requote{approx_tag}): <span class="bc-actual-amt">{_fmt_money(actual_norm)}</span> &middot; ROI <span class="bc-actual-roi">{_fmt_pct(r["ROI % (ACTUAL)"])}</span> (ann. <span class="bc-actual-ann">{_fmt_pct(r["ANNUALIZED ROI % (ACTUAL)"])}</span>)</div>
     </div>'''
 
@@ -1289,7 +1291,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       <div>Final stock ${r["FINAL STOCK PRICE"]:.2f} (entry ${r["ENTRY STOCK PRICE"]:.2f}, {r["STOCK PCT CHANGE"]:+.1f}%)</div>
       <div>Short ${r["SHORT STRIKE"]:g}C &nbsp;/&nbsp; Long ${r["LONG STRIKE"]:g}C &middot; width ${r["WIDTH"]:g}</div>
       <div>Entry credit: <strong>${r["NET CREDIT (entry)"]:.2f}</strong> ({r["CREDIT % OF WIDTH (entry)"]:.1f}% of width) &middot; Collateral ${r["COLLATERAL"]:.2f} &middot; PE {pe_text}</div>
-      <div class="{_pnl_class(norm)}">Realized: {_fmt_money(norm)} &middot; ROI {_fmt_pct(r["ROI %"])} (ann. {_fmt_pct(r["ANNUALIZED ROI %"])})</div>
+      <div class="{_pnl_class(norm)}">Realized: <span class="bc-realized-amt">{_fmt_money(norm)}</span> &middot; ROI {_fmt_pct(r["ROI %"])} (ann. {_fmt_pct(r["ANNUALIZED ROI %"])})</div>
       <div class="sub2">Added {r["ADDED"]} &middot; settled {r["SETTLED AT"]}</div>
     </div>'''
 
@@ -1925,7 +1927,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     // baselines) to normBase - these are tagged with data-src pointing at
     // the card's own $NORMALIZED_RISK_USD-basis data-norm-* attribute, so
     // the underlying P&L math never needs re-deriving in JS, just scaled.
-    document.querySelectorAll('.norm-base-num').forEach(function(el) {{
+    // Scoped to this tab only - the Bear Call tab has its own independent
+    // normBase/normScale and shares this same CSS class for its labels.
+    document.querySelectorAll('#cspTabContent .norm-base-num').forEach(function(el) {{
       el.textContent = Math.round(normBase);
     }});
     cards.forEach(function(card) {{
@@ -2568,6 +2572,15 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     var noBcFilter = minCreditRaw === '' && maxCollateralRaw === '';
     var minCredit = minCreditRaw === '' ? -Infinity : parseFloat(minCreditRaw);
     var maxCollateral = maxCollateralRaw === '' ? Infinity : parseFloat(maxCollateralRaw);
+    // Dual-purpose, same as the CSP tab's own "Base investment $": maxCollateral
+    // both filters AND becomes what every "norm ($X risk)" figure on this tab
+    // rescales against - defaults to the server's own $NORMALIZED_RISK_USD
+    // baseline when the box is empty.
+    var bcNormBase = maxCollateralRaw === '' ? {NORMALIZED_RISK_USD:.0f} : parseFloat(maxCollateralRaw);
+    var bcNormScale = bcNormBase / {NORMALIZED_RISK_USD:.0f};
+    document.querySelectorAll('#bearCallTabContent .norm-base-num').forEach(function(el) {{
+      el.textContent = Math.round(bcNormBase);
+    }});
 
     var allCards = document.querySelectorAll('#bearCallTabContent .card');
     var openVisible = [], closedVisible = [];
@@ -2580,6 +2593,18 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       var ok = noBcFilter || (creditVal >= minCredit && collateralVal <= maxCollateral);
       card.style.display = ok ? '' : 'none';
       if (ok) {{ (isOpen ? openVisible : closedVisible).push(card); }}
+
+      // Rescale this card's own displayed $ amount(s) too, regardless of
+      // visibility, same as the CSP tab does for its own cards. null stays
+      // null (not 0) through the scale so a missing figure still renders
+      // as "--" instead of a misleading $0.00.
+      function scaleOrNull(raw) {{ return raw === null ? null : raw * bcNormScale; }}
+      var fictAmtEl = card.querySelector('.bc-fict-amt');
+      if (fictAmtEl) fictAmtEl.textContent = fmtMoney(scaleOrNull(readAttr(card, 'data-norm-fict')));
+      var actualAmtEl = card.querySelector('.bc-actual-amt');
+      if (actualAmtEl) actualAmtEl.textContent = fmtMoney(scaleOrNull(readAttr(card, 'data-norm-actual')));
+      var realizedAmtEl = card.querySelector('.bc-realized-amt');
+      if (realizedAmtEl) realizedAmtEl.textContent = fmtMoney(scaleOrNull(readAttr(card, 'data-norm-realized')));
     }});
 
     var countEl = document.getElementById('bcFilterCount');
@@ -2596,13 +2621,13 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
     var bcClosedSectionCountEl = document.getElementById('bcClosedSectionCount');
     if (bcClosedSectionCountEl) bcClosedSectionCountEl.textContent = closedVisible.length;
 
-    setMoney('bcTotalFict', 'bcTotalFictAmt', sumAttr(openVisible, 'data-norm-fict'));
+    setMoney('bcTotalFict', 'bcTotalFictAmt', sumAttr(openVisible, 'data-norm-fict') * bcNormScale);
     setPct('bcAvgFictRoi', avgAttr(openVisible, 'data-roi-fict'));
     setPct('bcAvgFictAnn', avgAttr(openVisible, 'data-ann-fict'));
-    setMoney('bcTotalActual', 'bcTotalActualAmt', sumAttr(openVisible, 'data-norm-actual'));
+    setMoney('bcTotalActual', 'bcTotalActualAmt', sumAttr(openVisible, 'data-norm-actual') * bcNormScale);
     setPct('bcAvgActualRoi', avgAttr(openVisible, 'data-roi-actual'));
     setPct('bcAvgActualAnn', avgAttr(openVisible, 'data-ann-actual'));
-    setMoney('bcTotalRealized', 'bcTotalRealizedAmt', sumAttr(closedVisible, 'data-norm-realized'));
+    setMoney('bcTotalRealized', 'bcTotalRealizedAmt', sumAttr(closedVisible, 'data-norm-realized') * bcNormScale);
     setPct('bcAvgRealizedRoi', avgAttr(closedVisible, 'data-roi-realized'));
     setPct('bcAvgRealizedAnn', avgAttr(closedVisible, 'data-ann-realized'));
 
@@ -2672,8 +2697,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       card.setAttribute('data-norm-actual', norm === null ? '' : norm);
       card.setAttribute('data-roi-actual', roi === null ? '' : roi);
       card.setAttribute('data-ann-actual', ann === null ? '' : ann);
-      var amtEl = card.querySelector('.bc-actual-amt');
-      if (amtEl) amtEl.textContent = fmtMoney(norm);
+      // Not setting the $ amount text here - applyBearCallFilter() below
+      // re-renders it from this updated attribute, properly rescaled by
+      // whatever max-collateral normalization basis is currently active.
       var roiEl = card.querySelector('.bc-actual-roi');
       if (roiEl) roiEl.textContent = fmtPct(roi);
       var annEl = card.querySelector('.bc-actual-ann');
