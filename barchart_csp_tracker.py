@@ -431,19 +431,23 @@ DEFAULT_BEAR_CALL_CONFIG = {
     # the width is at risk as the max loss).
     "min_credit_pct": 30.0,
     # Collateral per spread (width x 100) above which a candidate is
-    # skipped - same idea as the CSP side's base_investment cap. None means
-    # no cap.
+    # skipped - same idea as the CSP side's base_investment cap. This is
+    # the capital a broker actually holds (and your real max possible loss)
+    # for a defined-risk spread, regardless of the credit received. None
+    # means no cap.
     "max_collateral": None,
-    # Trailing P/E floor on the underlying - None means no PE filtering.
-    # Missing/undefined PE is treated as infinite, same convention as the
-    # CSP side's own min-PE filter (passes a min-only filter, fails a cap).
-    "min_pe": None,
+    # No PE filter here by design - the symbol universe scanned for bear
+    # call spreads is already restricted to symbols whose CSP position
+    # passes filter_cfg (see main()), which already applied CSP's own PE
+    # filter (whatever min_pe/max_pe it's set to). A second one here would
+    # just be redundant.
     # Delta the short call strike is chosen to target (see
     # _bs_call_delta/pick_short_call_strike below) - 0.30 is a common
     # credit-spread convention (~70% rough probability of expiring OTM).
-    # This picks WHICH strike pair gets used at all, so unlike the three
-    # filters above it isn't something the page's filter bar can change
-    # after the fact - it has to be applied at scan time.
+    # This picks WHICH strike pair gets used at all, so unlike
+    # min_credit_pct/max_collateral above it isn't something the page's
+    # filter bar can change after the fact - it has to be applied at scan
+    # time.
     "target_short_delta": 0.30,
     # Assumed fill quality, 0-100, for both entry pricing and the "actual"
     # unrealized P&L (see credit_leg_fill_price/debit_leg_fill_price) - 0 is
@@ -1266,7 +1270,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
             actual_norm = r[actual_norm_col]
             approx_tag = ' <span class="weekly-badge">approx</span>' if r["ACTUAL IS APPROX"] else ''
             return f'''
-    <div class="card" data-kind="open" data-credit-pct="{bc_attr(r["CREDIT % OF WIDTH (entry)"])}" data-collateral="{bc_attr(r["COLLATERAL"])}" data-pe="{bc_attr(pe)}" data-stock-pct="{bc_attr(r["STOCK PCT CHANGE"])}" data-norm-fict="{bc_attr(fict_norm)}" data-norm-actual="{bc_attr(actual_norm)}" data-roi-fict="{bc_attr(r["ROI % (FICTIONAL)"])}" data-roi-actual="{bc_attr(r["ROI % (ACTUAL)"])}" data-ann-fict="{bc_attr(r["ANNUALIZED ROI % (FICTIONAL)"])}" data-ann-actual="{bc_attr(r["ANNUALIZED ROI % (ACTUAL)"])}" data-net-credit="{bc_attr(r["NET CREDIT (entry)"])}" data-cur-short-bid="{bc_attr(r["CURRENT SHORT BID"])}" data-cur-short-ask="{bc_attr(r["CURRENT SHORT ASK"])}" data-cur-long-bid="{bc_attr(r["CURRENT LONG BID"])}" data-cur-long-ask="{bc_attr(r["CURRENT LONG ASK"])}" data-days-held="{bc_attr(r["DAYS HELD"])}">
+    <div class="card" data-kind="open" data-credit-pct="{bc_attr(r["CREDIT % OF WIDTH (entry)"])}" data-collateral="{bc_attr(r["COLLATERAL"])}" data-stock-pct="{bc_attr(r["STOCK PCT CHANGE"])}" data-norm-fict="{bc_attr(fict_norm)}" data-norm-actual="{bc_attr(actual_norm)}" data-roi-fict="{bc_attr(r["ROI % (FICTIONAL)"])}" data-roi-actual="{bc_attr(r["ROI % (ACTUAL)"])}" data-ann-fict="{bc_attr(r["ANNUALIZED ROI % (FICTIONAL)"])}" data-ann-actual="{bc_attr(r["ANNUALIZED ROI % (ACTUAL)"])}" data-net-credit="{bc_attr(r["NET CREDIT (entry)"])}" data-cur-short-bid="{bc_attr(r["CURRENT SHORT BID"])}" data-cur-short-ask="{bc_attr(r["CURRENT SHORT ASK"])}" data-cur-long-bid="{bc_attr(r["CURRENT LONG BID"])}" data-cur-long-ask="{bc_attr(r["CURRENT LONG ASK"])}" data-days-held="{bc_attr(r["DAYS HELD"])}">
       <div class="card-title">{run_badge}{_html_escape(r["SYMBOL"])} &middot; exp {_html_escape(r["EXPIRATION"])} ({r["DAYS LEFT"]}d left)</div>
       <div>Stock ${r["CURRENT STOCK PRICE"]:.2f} (entry ${r["ENTRY STOCK PRICE"]:.2f}, {r["STOCK PCT CHANGE"]:+.1f}%)</div>
       <div>Short ${r["SHORT STRIKE"]:g}C (entry bid {r["SHORT BID (entry)"]:.2f}) &nbsp;/&nbsp; Long ${r["LONG STRIKE"]:g}C (entry ask {r["LONG ASK (entry)"]:.2f})</div>
@@ -1280,7 +1284,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
             pe_text = f'{pe:.1f}' if pe is not None else 'n/a'
             norm = r[realized_norm_col]
             return f'''
-    <div class="card" data-kind="closed" data-credit-pct="{bc_attr(r["CREDIT % OF WIDTH (entry)"])}" data-collateral="{bc_attr(r["COLLATERAL"])}" data-pe="{bc_attr(pe)}" data-stock-pct="{bc_attr(r["STOCK PCT CHANGE"])}" data-norm-realized="{bc_attr(norm)}" data-roi-realized="{bc_attr(r["ROI %"])}" data-ann-realized="{bc_attr(r["ANNUALIZED ROI %"])}">
+    <div class="card" data-kind="closed" data-credit-pct="{bc_attr(r["CREDIT % OF WIDTH (entry)"])}" data-collateral="{bc_attr(r["COLLATERAL"])}" data-stock-pct="{bc_attr(r["STOCK PCT CHANGE"])}" data-norm-realized="{bc_attr(norm)}" data-roi-realized="{bc_attr(r["ROI %"])}" data-ann-realized="{bc_attr(r["ANNUALIZED ROI %"])}">
       <div class="card-title">{_html_escape(r["SYMBOL"])} &middot; exp {_html_escape(r["EXPIRATION"])}</div>
       <div>Final stock ${r["FINAL STOCK PRICE"]:.2f} (entry ${r["ENTRY STOCK PRICE"]:.2f}, {r["STOCK PCT CHANGE"]:+.1f}%)</div>
       <div>Short ${r["SHORT STRIKE"]:g}C &nbsp;/&nbsp; Long ${r["LONG STRIKE"]:g}C &middot; width ${r["WIDTH"]:g}</div>
@@ -1293,11 +1297,10 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
         closed_cards_html = ''.join(bc_closed_card(r) for r in closed_rows)
 
         return f'''
-  <div class="updated" style="margin-top:0;">Sell the call strike closest to {target_delta:g} delta (at its bid), buy the very next strike up (at its ask) - a defined-risk bear call credit spread. The short strike is chosen by probability (delta), not just "the nearest strike above price," so it adapts to each stock's own volatility and strike spacing; the long strike is always the adjacent one above it. Reuses the same symbols as the naked-puts screen above - a separate, complementary bearish strategy with its own open/closed tracking.</div>
+  <div class="updated" style="margin-top:0;">Sell the call strike closest to {target_delta:g} delta (at its bid), buy the very next strike up (at its ask) - a defined-risk bear call credit spread. The short strike is chosen by probability (delta), not just "the nearest strike above price," so it adapts to each stock's own volatility and strike spacing; the long strike is always the adjacent one above it. Only considers symbols whose CSP position currently passes the CSP tab's own filter above (so no separate PE filter here - that's already been applied) - a separate, complementary bearish strategy with its own open/closed tracking.</div>
   <div class="filterbar">
     <label>Min credit % of width <input type="number" id="bcMinCreditPct" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <label>Max collateral $ <input type="number" id="bcMaxCollateral" step="any" placeholder="&infin;" inputmode="decimal"></label>
-    <label>Min PE <input type="number" id="bcMinPe" step="any" placeholder="-&infin;" inputmode="decimal"></label>
     <button id="bcApplyFilter" type="button">Filter</button>
     <a class="editlink" href="https://github.com/mkcan1973/barchart-csp-tracker/edit/master/bear_call_spread_config.json" target="_blank" rel="noopener">Edit defaults on GitHub</a>
     <span class="count" id="bcFilterCount"></span>
@@ -2562,11 +2565,9 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   function applyBearCallFilter() {{
     var minCreditRaw = document.getElementById('bcMinCreditPct').value.trim();
     var maxCollateralRaw = document.getElementById('bcMaxCollateral').value.trim();
-    var minPeRaw = document.getElementById('bcMinPe').value.trim();
-    var noBcFilter = minCreditRaw === '' && maxCollateralRaw === '' && minPeRaw === '';
+    var noBcFilter = minCreditRaw === '' && maxCollateralRaw === '';
     var minCredit = minCreditRaw === '' ? -Infinity : parseFloat(minCreditRaw);
     var maxCollateral = maxCollateralRaw === '' ? Infinity : parseFloat(maxCollateralRaw);
-    var minPe = minPeRaw === '' ? -Infinity : parseFloat(minPeRaw);
 
     var allCards = document.querySelectorAll('#bearCallTabContent .card');
     var openVisible = [], closedVisible = [];
@@ -2576,12 +2577,7 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
       var isOpen = card.getAttribute('data-kind') === 'open';
       var creditVal = parseFloat(card.getAttribute('data-credit-pct'));
       var collateralVal = parseFloat(card.getAttribute('data-collateral'));
-      var peRaw = card.getAttribute('data-pe');
-      // Missing PE ("n/a" on the card) means undefined, not zero - treat as
-      // infinite so it still passes a min-only filter, same convention as
-      // the CSP tab's own PE filter.
-      var peVal = peRaw === '' ? Infinity : parseFloat(peRaw);
-      var ok = noBcFilter || (creditVal >= minCredit && collateralVal <= maxCollateral && peVal >= minPe);
+      var ok = noBcFilter || (creditVal >= minCredit && collateralVal <= maxCollateral);
       card.style.display = ok ? '' : 'none';
       if (ok) {{ (isOpen ? openVisible : closedVisible).push(card); }}
     }});
@@ -2625,11 +2621,11 @@ def generate_html_summary(open_rows, closed_rows, totals, today, filter_cfg=None
   }}
   var bcBtn = document.getElementById('bcApplyFilter');
   if (bcBtn) bcBtn.addEventListener('click', applyBearCallFilter);
-  ['bcMinCreditPct', 'bcMaxCollateral', 'bcMinPe'].forEach(function(id) {{
+  ['bcMinCreditPct', 'bcMaxCollateral'].forEach(function(id) {{
     var el = document.getElementById(id);
     if (el) el.addEventListener('keydown', function(e) {{ if (e.key === 'Enter') applyBearCallFilter(); }});
   }});
-  var bcFieldToCfgKey = {{ bcMinCreditPct: 'min_credit_pct', bcMaxCollateral: 'max_collateral', bcMinPe: 'min_pe' }};
+  var bcFieldToCfgKey = {{ bcMinCreditPct: 'min_credit_pct', bcMaxCollateral: 'max_collateral' }};
   Object.keys(bcFieldToCfgKey).forEach(function(id) {{
     var cfgVal = DEFAULT_BEAR_CALL_FILTERS[bcFieldToCfgKey[id]];
     if (cfgVal !== null && cfgVal !== undefined) document.getElementById(id).value = cfgVal;
@@ -3318,10 +3314,6 @@ def main():
         print(f"  Found {len(yahoo_weekly_rows)} additional weekly candidate(s)")
         all_rows = barchart_rows + yahoo_weekly_rows
 
-        print("-- Scanning the same symbols for bear call spread candidates --")
-        bear_call_candidates = scan_bear_call_spreads(all_rows, today, bear_call_cfg)
-        print(f"  Found {len(bear_call_candidates)} structurally valid bear call spread(s)")
-
         # Markets run this script up to 3x/day - label each run's additions
         # A, B, C (next unused letter among today's existing positions) purely
         # so a same-day Discord message and its webpage card can be visually
@@ -3333,19 +3325,6 @@ def main():
             if p.get("added_date") == today.isoformat() and p.get("run_label")
         ))
         run_label = chr(ord("A") + len(todays_run_labels))
-
-        new_bear_call_candidates = pick_new_bear_call_candidates(bear_call_candidates, bear_call_positions, today)
-        if new_bear_call_candidates:
-            print(f"  Adding {len(new_bear_call_candidates)} new bear call spread position(s):")
-            for c in new_bear_call_candidates:
-                print(f"    {c['symbol']} short ${c['short_strike']:g}C / long ${c['long_strike']:g}C "
-                      f"exp {c['expiration']} (credit {c['credit_pct']:.1f}% of ${c['width']:g} width)")
-                bc_position = add_new_bear_call_position(c, today)
-                bc_position["run_label"] = run_label
-                bear_call_positions.append(bc_position)
-            save_bear_call_positions(bear_call_positions)
-        else:
-            print("  No new bear call spread positions (all already tracked).")
 
         candidates = pick_new_candidates(all_rows, positions, today)
         run_log.append({
@@ -3398,6 +3377,41 @@ def main():
                         f"```diff\n+ Ask {position['ask']:.2f} ({ask_source})  (mid, buy: {mid_entry:.2f})\n```\n"
                         f"<{SUMMARY_HTML_URL}>"
                     )
+
+        # Bear call spreads only consider symbols that already passed the CSP
+        # side's own filter_cfg (position_passes_filter_config) - i.e. the
+        # same stocks currently visible on the CSP tab, not the raw
+        # unfiltered screen. That's also why bear_call_spread_config.json
+        # has no PE filter of its own: CSP's filter_cfg already applied one
+        # (whatever min_pe/max_pe it's set to) before a symbol ever reaches
+        # here, so a second one would just be redundant.
+        bc_universe_seen = set()
+        bc_universe_rows = []
+        for p in positions:
+            if p.get("settled") or not position_passes_filter_config(p, filter_cfg):
+                continue
+            key = (p["symbol"], p["expiration"])
+            if key in bc_universe_seen:
+                continue
+            bc_universe_seen.add(key)
+            bc_universe_rows.append({"symbol": p["symbol"], "expiration": p["expiration"]})
+
+        print(f"-- Scanning {len(bc_universe_rows)} CSP-filter-passing symbol/expiration(s) for bear call spreads --")
+        bear_call_candidates = scan_bear_call_spreads(bc_universe_rows, today, bear_call_cfg)
+        print(f"  Found {len(bear_call_candidates)} structurally valid bear call spread(s)")
+
+        new_bear_call_candidates = pick_new_bear_call_candidates(bear_call_candidates, bear_call_positions, today)
+        if new_bear_call_candidates:
+            print(f"  Adding {len(new_bear_call_candidates)} new bear call spread position(s):")
+            for c in new_bear_call_candidates:
+                print(f"    {c['symbol']} short ${c['short_strike']:g}C / long ${c['long_strike']:g}C "
+                      f"exp {c['expiration']} (credit {c['credit_pct']:.1f}% of ${c['width']:g} width)")
+                bc_position = add_new_bear_call_position(c, today)
+                bc_position["run_label"] = run_label
+                bear_call_positions.append(bc_position)
+            save_bear_call_positions(bear_call_positions)
+        else:
+            print("  No new bear call spread positions (all already tracked).")
 
     if settle_expired_positions(positions, today, same_day_ok=same_day_settle_ok):
         save_positions(positions)

@@ -28627,7 +28627,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-20",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 707.7000122070312,
+    "settled_seller_pnl": 2200.0,
+    "settled_buyer_pnl": -2250.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "HIMS",
@@ -28741,7 +28746,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-20",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 453.4599914550781,
+    "settled_seller_pnl": 196.0,
+    "settled_buyer_pnl": -306.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "IONQ",
