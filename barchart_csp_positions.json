@@ -29948,7 +29948,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-23",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 601.25,
+    "settled_seller_pnl": -5815.0,
+    "settled_buyer_pnl": 5690.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "MSTR",
@@ -30024,7 +30029,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-23",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 406.0299987792969,
+    "settled_seller_pnl": -1867.0,
+    "settled_buyer_pnl": 1752.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "SPCX",
@@ -30043,7 +30053,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-23",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 127.44000244140625,
+    "settled_seller_pnl": -836.0,
+    "settled_buyer_pnl": 831.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "MARA",
@@ -30138,7 +30153,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-23",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 149.3000030517578,
+    "settled_seller_pnl": -985.0,
+    "settled_buyer_pnl": 965.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "INTC",
@@ -30632,7 +30652,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-23",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 601.25,
+    "settled_seller_pnl": -7930.0,
+    "settled_buyer_pnl": 7910.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "ONDS",
@@ -31373,7 +31398,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-24",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 149.3000030517578,
+    "settled_seller_pnl": -88.0,
+    "settled_buyer_pnl": 87.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "WDC",
@@ -31411,7 +31441,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-24",
     "expiry_type": "weekly",
-    "run_label": "A"
+    "run_label": "A",
+    "settled": true,
+    "final_stock_px": 601.25,
+    "settled_seller_pnl": -2495.0,
+    "settled_buyer_pnl": 2460.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "WULF",
@@ -31677,7 +31712,12 @@
     "pe_at_entry_is_approx": false,
     "added_date": "2026-11-24",
     "expiry_type": "weekly",
-    "run_label": "B"
+    "run_label": "B",
+    "settled": true,
+    "final_stock_px": 601.25,
+    "settled_seller_pnl": -740.0,
+    "settled_buyer_pnl": 705.0,
+    "settled_at": "2026-11-25"
   },
   {
     "symbol": "GRRR",
